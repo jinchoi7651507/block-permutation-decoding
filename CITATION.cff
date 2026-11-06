@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this code or these outputs, please cite the paper (reference to be added) and this repository."
+message: "If you use this code or these outputs, please cite the preprint below and this repository."
 title: "Block permutation tests for decoders when training and test trials share recording blocks: code, designs and outputs"
 authors:
   - family-names: Choi
@@ -9,3 +9,15 @@ authors:
 license: MIT
 doi: "10.5281/zenodo.24008938"
 repository-code: "https://github.com/jinchoi7651507/block-permutation-decoding"
+preferred-citation:
+  type: article
+  title: "Common decoding tests fail when training and test trials share recording blocks"
+  authors:
+    - family-names: Choi
+      given-names: Dongjin
+      orcid: "https://orcid.org/0009-0002-1147-0393"
+  year: 2026
+  publisher:
+    name: Zenodo
+  doi: "10.5281/zenodo.24012190"
+  notes: "Preprint"

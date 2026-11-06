@@ -1,8 +1,8 @@
-*First timestamp: Bitcoin block 971261 (2026-10-13 15:18 UTC), for `analyses/trackA-std/PREREG-trackA.md`, before any new mouse session was downloaded. Check all 17 proofs with `python prereg/ots_verify_public.py $(find analyses -name '*.ots')`. Copied on 2026-11-06 from the authors' working repository. Archived at https://doi.org/10.5281/zenodo.24008938. Preprint DOI to be added soon. Timestamped files are byte-identical, and `PROVENANCE.md` lists the changes to other files.*
+*First timestamp: Bitcoin block 971261 (2026-10-13 15:18 UTC), for `analyses/trackA-std/PREREG-trackA.md`, before any new mouse session was downloaded. Check all 17 proofs with `python prereg/ots_verify_public.py $(find analyses -name '*.ots')`. Copied on 2026-11-06 from the authors' working repository. Archived at https://doi.org/10.5281/zenodo.24008938. Preprint: https://doi.org/10.5281/zenodo.24012190. Timestamped files are byte-identical, and `PROVENANCE.md` lists the changes to other files.*
 
 # Block permutation tests for decoders when training and test trials share recording blocks
 
-This repository holds the code, the timestamped designs and the outputs behind the preprint "Common decoding tests fail when training and test trials share recording blocks" (preprint to be posted within days). Nothing here has been peer reviewed yet.
+This repository holds the code, the timestamped designs and the outputs behind the preprint "Common decoding tests fail when training and test trials share recording blocks" (preprint, Zenodo, https://doi.org/10.5281/zenodo.24012190). Nothing here has been peer reviewed yet.
 
 **In short.** When training and test trials come from the same recording blocks, the permutation rules that decoding toolboxes ship and teach call labels that carry no information decodable in most tests, and the toolboxes run as shipped call about one in five decodable in balanced runs. Permuting the labels of all trials together, block by block, and refitting the decoder keeps the nominal 5% when conditions are assigned to blocks at random. The test is provided as a function in `blockperm/`.
 
