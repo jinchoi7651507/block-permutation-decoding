@@ -12,6 +12,9 @@ authors = [{name = "Dongjin Choi"}]
 requires-python = ">=3.12"
 dependencies = ["numpy>=2.0", "scikit-learn>=1.4"]
 
+[project.urls]
+Repository = "https://github.com/jinchoi7651507/block-permutation-decoding"
+
 [project.optional-dependencies]
 test = ["pytest"]
 
