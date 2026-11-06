@@ -1,0 +1,19 @@
+{
+ "machine": "c2d-highmem-56 (56 vCPU, 448 GiB), us-east4-a, on-demand STANDARD",
+ "price_KRW_per_h": 5247.17,
+ "price_source": "Cloud Billing Catalog API 2026-10-26 11:48 UTC (C2D core + RAM SKUs, us-east4); market 1,323.9 KRW/USD recorded beside it",
+ "cap_KRW": 60000,
+ "cap_machine_hours": 11.435,
+ "t_rs_vcpu_s": 837.4,
+ "r": 4.2167,
+ "W_disk": 47,
+ "W_ram": 56,
+ "workers": 47,
+ "C_workers_vcpu_h": 537.4,
+ "sessions_formula": 547,
+ "sessions": 459,
+ "mice_in_prefix": 139,
+ "time_cap_minutes": 754,
+ "expected_hours_whole_order": 9.58,
+ "expected_KRW_whole_order": 50261
+}

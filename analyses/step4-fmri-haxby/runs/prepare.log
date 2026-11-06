@@ -1,0 +1,6 @@
+{"subject": "subj1", "dropped_runs": [], "labels_in_dropped_runs": {}, "n_blocks": 96, "n_voxels": 577, "runs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "included": true, "m": 9}
+{"subject": "subj2", "dropped_runs": [], "labels_in_dropped_runs": {}, "n_blocks": 96, "n_voxels": 464, "runs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "included": true, "m": 9}
+{"subject": "subj3", "dropped_runs": [], "labels_in_dropped_runs": {}, "n_blocks": 96, "n_voxels": 307, "runs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "included": true, "m": 9}
+{"subject": "subj4", "dropped_runs": [], "labels_in_dropped_runs": {}, "n_blocks": 96, "n_voxels": 675, "runs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "included": true, "m": 9}
+{"subject": "subj5", "dropped_runs": [8], "labels_in_dropped_runs": {"rest": 121}, "n_blocks": 88, "n_voxels": 422, "runs": [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11], "included": true, "m": 9}
+{"subject": "subj6", "dropped_runs": [], "labels_in_dropped_runs": {}, "n_blocks": 96, "n_voxels": 348, "runs": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "included": true, "m": 9}

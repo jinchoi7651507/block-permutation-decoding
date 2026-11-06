@@ -1,0 +1,3 @@
+Wed Oct 21 13:18:37 KST 2026
+    verify BitcoinBlockHeaderAttestation(972412)
+Wed Oct 21 13:23:23 KST 2026

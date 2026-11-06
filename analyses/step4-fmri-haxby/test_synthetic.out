@@ -1,0 +1,8 @@
+1 Haxby build, subj5 drop, exclusion: OK
+2 assignments, P5 draw, block folds: OK
+3 no drift, 12 datasets, hits per rule: {'P1': 0, 'P2': 0, 'P3': 0, 'P4': 0, 'P5': 0}
+4 slow drift, 8 datasets, hits per rule: {'P1': 8, 'P2': 7, 'P3': 8, 'P4': 8, 'P5': 0}
+5 PAMAP2 build, gaps, exclusion: OK
+6 end to end (both runners, controls, resume): OK
+7 summary checks (steps 4 and 5): counts, key sets, refusals: OK
+ALL OK

@@ -1,0 +1,44 @@
+| cell | rule | identical to cloud | identical to laptop |
+|---|---|---|---|
+| c009_random_B24_tau7_d0_t0_block | P1 | 20/20 | 0/20 |
+| c009_random_B24_tau7_d0_t0_block | P2 | 20/20 | 5/20 |
+| c009_random_B24_tau7_d0_t0_block | P3 | 20/20 | 8/20 |
+| c009_random_B24_tau7_d0_t0_block | P4 | 20/20 | 0/20 |
+| c009_random_B24_tau7_d0_t0_block | P5 | 20/20 | 0/20 |
+| c018_random_B24_tau7_d1_t0_block | P1 | 20/20 | 2/20 |
+| c018_random_B24_tau7_d1_t0_block | P2 | 20/20 | 3/20 |
+| c018_random_B24_tau7_d1_t0_block | P3 | 20/20 | 3/20 |
+| c018_random_B24_tau7_d1_t0_block | P4 | 20/20 | 1/20 |
+| c018_random_B24_tau7_d1_t0_block | P5 | 20/20 | 0/20 |
+| c027_random_B24_tau7_d2_t0_block | P1 | 20/20 | 0/20 |
+| c027_random_B24_tau7_d2_t0_block | P2 | 20/20 | 2/20 |
+| c027_random_B24_tau7_d2_t0_block | P3 | 20/20 | 2/20 |
+| c027_random_B24_tau7_d2_t0_block | P4 | 20/20 | 2/20 |
+| c027_random_B24_tau7_d2_t0_block | P5 | 20/20 | 1/20 |
+| c036_random_B24_tau20_d0_t0_block | P1 | 20/20 | 2/20 |
+| c036_random_B24_tau20_d0_t0_block | P2 | 20/20 | 7/20 |
+| c036_random_B24_tau20_d0_t0_block | P3 | 20/20 | 6/20 |
+| c036_random_B24_tau20_d0_t0_block | P4 | 20/20 | 1/20 |
+| c036_random_B24_tau20_d0_t0_block | P5 | 20/20 | 2/20 |
+| c044_random_B24_tau20_d1_t0_block | P1 | 20/20 | 2/20 |
+| c044_random_B24_tau20_d1_t0_block | P2 | 20/20 | 5/20 |
+| c044_random_B24_tau20_d1_t0_block | P3 | 20/20 | 9/20 |
+| c044_random_B24_tau20_d1_t0_block | P4 | 20/20 | 2/20 |
+| c044_random_B24_tau20_d1_t0_block | P5 | 20/20 | 0/20 |
+| c053_random_B24_tau20_d2_t0_block | P1 | 20/20 | 1/20 |
+| c053_random_B24_tau20_d2_t0_block | P2 | 20/20 | 8/20 |
+| c053_random_B24_tau20_d2_t0_block | P3 | 20/20 | 9/20 |
+| c053_random_B24_tau20_d2_t0_block | P4 | 20/20 | 3/20 |
+| c053_random_B24_tau20_d2_t0_block | P5 | 20/20 | 1/20 |
+| c062_random_B24_tau67_d0_t0_block | P1 | 20/20 | 1/20 |
+| c062_random_B24_tau67_d0_t0_block | P2 | 20/20 | 5/20 |
+| c062_random_B24_tau67_d0_t0_block | P3 | 20/20 | 4/20 |
+| c062_random_B24_tau67_d0_t0_block | P4 | 20/20 | 0/20 |
+| c062_random_B24_tau67_d0_t0_block | P5 | 20/20 | 1/20 |
+| c071_random_B24_tau67_d1_t0_block | P1 | 20/20 | 0/20 |
+| c071_random_B24_tau67_d1_t0_block | P2 | 20/20 | 5/20 |
+| c071_random_B24_tau67_d1_t0_block | P3 | 20/20 | 11/20 |
+| c071_random_B24_tau67_d1_t0_block | P4 | 20/20 | 1/20 |
+| c071_random_B24_tau67_d1_t0_block | P5 | 20/20 | 1/20 |
+total identical to cloud: 800/800
+total identical to laptop: 116/800

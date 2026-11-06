@@ -1,0 +1,12 @@
+# Step 2 simulation summary (summarize_sim.py)
+
+Q3 primary cell c136_interleaved_B12_tau20_d1_t0_main: P2 3.4% (99% band of 5%: 2.6–7.6)
+Primary cell c000_random_B12_tau20_d1_t0_main: contrast M (rate of Pk minus P5, paired by replicate, 95% bootstrap)
+
+- P3(errors as non-rejections)-P5: 46.7 points (43.0 to 50.4), n = 1000
+- P1-P5: 94.3 points (92.8 to 95.7), n = 1000
+- P2-P5: 94.3 points (92.8 to 95.7), n = 1000
+- P3-P5: 96.7 points (95.2 to 98.1), n = 539
+- P4-P5: 94.3 points (92.8 to 95.7), n = 1000
+
+| cell | reps | P1 | P2 | P3 (err) | P4 | P5 | P1−base | P4−base |

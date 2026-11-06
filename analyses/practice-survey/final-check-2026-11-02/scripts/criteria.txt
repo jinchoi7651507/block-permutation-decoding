@@ -1,0 +1,6 @@
+Inclusion criteria of a survey of published studies (all four required):
+1. Primary research with recordings of neural activity in animals (spikes or calcium imaging; fMRI/EEG/MEG excluded here).
+2. A decoder or classifier predicts a task variable from population activity, with accuracy evaluated on held-out trials (cross-validation or train/test split).
+3. The decoded variable is constant within blocks of consecutive trials (block design, task context or rule blocks, prior blocks, sessions or epochs as conditions), stated in Methods.
+4. Statistical significance of decoding is reported.
+Record the first failing criterion for each excluded record.

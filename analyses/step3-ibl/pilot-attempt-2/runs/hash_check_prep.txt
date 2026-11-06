@@ -1,0 +1,8 @@
+DESIGN.md: OK
+DESIGN-v1-CODE-ADDENDUM.md: OK
+code/ibl_core.py: OK
+code/run_ibl.py: OK
+code/prep_ibl.py: OK
+code/test_synthetic.py: OK
+DESIGN-v1-CODE-ADDENDUM-2.md: OK
+code/summarize_ibl.py: OK

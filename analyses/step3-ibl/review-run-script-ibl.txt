@@ -1,0 +1,16 @@
+Review of working-archive/2026-10-26/gcp/vm_ibl_run.sh (draft 1), 2026-10-26 23:4x KST. Persona: IBL data user / research-computing engineer (Opus agent, read-only). Saved by Claude from the returned report (condensed).
+
+Verdict: ready after MUST fixes.
+MUST 1 (budget figures): the reviewer used the 40,000 KRW draft (highmem 7.62 h, cap 503 min, N 435). Claude's check: REJECTED as stated, because the author raised X to 60,000 KRW (22:16): 11.43 h, cap 754 min, formula 652 sessions -> all 459. ACCEPTED in part: the script now reads W, N and the cap from the stamped budget/BUDGET-OUTCOME.json instead of arguments.
+MUST 2 (restart branch nearly dead: wait for all workers, survivors run to the cap): accepted; draft 2 polls every 60 s, stops all workers at the first dead one (requeue also frees claims of in-flight sessions), cleans rows, requeues, restarts.
+MUST 3 (line clean-up on every path, atomic rewrite): accepted (cleanup_rows in finish() and before restart; temp file + os.replace).
+MUST 4 (partial sessions: rows of a session without a final row would count): accepted (moved to partial_lines.txt).
+MUST 5 (check requeue result, log started workers): accepted.
+MUST 6 (BUDGET-OUTCOME.sha256 must exist; keep runs_prep.sha check and ORDER cmp): accepted.
+MUST 7 (stop if rows files exist at first start): accepted.
+MUST 8 (log OOM kernel lines, times, exit codes, released claims, restart decision, final rows and prefix as indices, peaks, runner hash): accepted.
+SHOULD: anchored pgrep pattern (timeout parents), per-process max RSS, kill the logger before tar, schedule shutdown after END, setsid nohup launch, W <= nproc, empty dead workers' cache folders, restart size stated (W/2): all accepted.
+Exposure: none in the script; partial_lines.txt and rows files hold p values and are not printed.
+
+Claude's test of draft 2: bash -n ok; cleanup_rows on synthetic files (one complete session, one session without a final row, one truncated line) moved exactly the two bad lines and kept the rest.
+Re-review of draft 2 (same reviewer): fixes for MUST 2-8 correct; two new MUST: (1) finish() ran cleanup_rows on the first-start guard exits (would rewrite an old run's rows) -> STARTED flag, clean-up only after workers started; (2) BUDGET-OUTCOME.sha256 must list budget/BUDGET-OUTCOME.json (paths relative to step3-ibl) and the values are read with int(), N checked against the order length. Both applied (draft 3). SHOULD (kill -0 PID reuse; prefix printout without N bound) noted, not changed (pid_max 4M; harmless).

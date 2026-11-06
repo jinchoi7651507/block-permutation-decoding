@@ -1,0 +1,63 @@
+sub-010228 16 EC bads [] ica [0]
+sub-010261 16 EC bads ['F7', 'F3'] ica [0]
+sub-010264 16 EC bads ['Fp1'] ica [0]
+sub-010301 16 EC bads [] ica [3]
+sub-010307 16 EC bads [] ica [0]
+sub-010265 16 EC bads [] ica [2]
+sub-010269 16 EC bads [] ica [0]
+sub-010083 16 EC bads ['Fp2'] ica [0]
+sub-010036 16 EC bads [] ica [0]
+sub-010080 16 EC bads ['Fp1'] ica [0]
+sub-010027 16 EC bads [] ica [0]
+sub-010010 16 EC bads [] ica [0]
+sub-010155 16 EC bads ['Fp1', 'Fp2', 'AF7', 'AF8'] ica [0]
+sub-010073 16 EC bads ['Fp2'] ica [0]
+sub-010053 16 EC bads [] ica [1, 4]
+sub-010183 16 EC bads ['Fp2'] ica [0]
+sub-010201 16 EC bads [] ica [0]
+sub-010060 16 EC bads [] ica [2]
+sub-010241 16 EC bads [] ica [0]
+sub-010031 16 EC bads ['Fp1', 'Fp2'] ica [0]
+sub-010076 16 EC bads ['Fp1', 'Fp2', 'AF7', 'AF8'] ica [0]
+sub-010197 16 EC bads ['Fp1', 'Fp2'] ica [0]
+sub-010165 16 EC bads [] ica [0]
+sub-010029 16 EC bads [] ica [2]
+sub-010319 16 EC bads [] ica [8]
+sub-010202 16 EC bads ['Fp1', 'Fp2'] ica [0]
+sub-010049 16 EC bads ['Fp1', 'AF7'] ica [0]
+sub-010085 16 EC bads [] ica [0]
+sub-010288 16 EC bads [] ica [0]
+sub-010287 16 EC bads ['Fp1', 'Fp2'] ica [0]
+sub-010234 16 EC bads ['Fp1', 'AF7'] ica [0]
+sub-010047 16 EC bads ['F8', 'AF8'] ica [2]
+sub-010267 16 EC bads ['Fp1', 'F7'] ica [0]
+sub-010222 16 EC bads ['Fp2'] ica [0]
+Traceback (most recent call last):
+  File "<repo>/results/step2b-eeg/code/preprocess.py", line 230, in <module>
+    main()
+  File "<repo>/results/step2b-eeg/code/preprocess.py", line 225, in main
+    qc = preprocess(s, out)
+         ^^^^^^^^^^^^^^^^^^
+  File "<repo>/results/step2b-eeg/code/preprocess.py", line 108, in preprocess
+    raw = mne.io.read_raw_brainvision(vhdr, preload=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<home>/Downloads/trackA-school/venv-2b/lib/python3.12/site-packages/mne/io/brainvision/brainvision.py", line 1216, in read_raw_brainvision
+    return RawBrainVision(
+           ^^^^^^^^^^^^^^^
+  File "<decorator-gen-177>", line 12, in __init__
+  File "<home>/Downloads/trackA-school/venv-2b/lib/python3.12/site-packages/mne/io/brainvision/brainvision.py", line 127, in __init__
+    with open(data_fname, "rb") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '<home>/Downloads/trackA-school/lemon/raw/sub-010044eeg.eeg'
+sub-010134 16 EC bads ['Fp1', 'Fp2', 'AF7'] ica [0]
+sub-010207 16 EC bads [] ica [0]
+sub-010308 16 EC bads ['Fp1', 'Fp2'] ica [0]
+sub-010037 16 EC bads [] ica [1]
+sub-010006 16 EC bads ['Fp1'] ica [0]
+sub-010044 16 EC bads ['Fp1', 'Fp2', 'AF7'] ica [0]
+sub-010012 16 EC bads ['Fp1', 'Fp2', 'AF7'] ica [0]
+sub-010007 16 EC bads [] ica [0]
+sub-010004 16 EC bads ['Fp1'] ica [0]
+sub-010093 16 EC bads [] ica [0]
+sub-010284 16 EC bads ['Fp1'] ica [0]
+{'R1': 1.0, 'R2': 0.9, 'R4': 0.97, 'R3': 0.84, 'R5': 0.85, 'Q30': 0.0, 'Q35': 0.0, 'Q40': 0.0, 'Q45': 0.0, 'Q48': 0.0} chosen not achieved

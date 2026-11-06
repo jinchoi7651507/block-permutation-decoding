@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+message: "If you use this code or these outputs, please cite the paper (reference to be added) and this repository."
+title: "Block permutation tests for decoders when training and test trials share recording blocks: code, designs and outputs"
+authors:
+  - family-names: Choi
+    given-names: Dongjin
+    affiliation: "Independent Researcher, South Korea"
+license: MIT

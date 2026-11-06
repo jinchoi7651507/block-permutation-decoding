@@ -1,0 +1,3 @@
+adam_first.m (not redistributed: ADAM is licensed under GPL-3.0)
+Upstream: https://github.com/fahrenfort/ADAM, commit 27fefb9e19, file qsub/adam_MVPA_firstlevel.m
+TOOLBOX-DEFAULTS.md quotes its lines 290-292 (the cfg.randompermutations description).

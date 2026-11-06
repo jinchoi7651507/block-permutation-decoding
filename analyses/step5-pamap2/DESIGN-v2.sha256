@@ -1,0 +1,10 @@
+ec5f416b73e501804caca7a40965bc498d097f04bb5124c08847293cecd489b9  DESIGN.md
+d13b2bf84ccfe8ac256ec26a4a921fc2a308100d3f4a4aad91f1c56c1157e645  requirements.txt
+a5c4514f467db331de9f17450feaa38e8540355011232530eb316790d7f776b8  code/fetch_pamap2.py
+6363546f7888ba45308428147eeabfbc0bc0df078f459bc0859bf893f9394cd6  code/prepare_pamap2.py
+3937aaef23a77bd713d89209d74a09a12ec0162b2849cd39a36581b177d7ee1c  code/run_pamap2.py
+184a5b221433531a39ba774d439f7993f705b6c16810b34df498c0606ba5ebe8  ../step4-fmri-haxby/code/engine.py
+191e4982739d5b41becdaccd07899528cc7c310a8b1464568b702b21ed1c8e7a  ../step4-fmri-haxby/code/summarize.py
+ced835cfc97d64be0c0e6ef1290c192390a7f832500f1891ec08d21938ff87fc  ../step4-fmri-haxby/code/test_synthetic.py
+71cca9c8e160d733a24e0205c340f1eae8f8a97f5f98df3ff12d9d405c892fb4  ../step4-fmri-haxby/test_synthetic.out
+6a288fe11130aa889ef5f1ddafff95227383c7ebdd9fe0f7702407b4868446b9  ../step2-comparison/code/sim.py

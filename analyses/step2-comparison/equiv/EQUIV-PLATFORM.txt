@@ -1,0 +1,22 @@
+laptop runs: 38431 simulation-cell rows (0 unreadable lines); cloud runs_cloud: 89000 rows (0 unreadable lines)
+[simulation cells] matched replicates 38431; only laptop 0; only cloud 50569; cells matched 76
+  n_units identical 38431/38431; P3 error flag identical 38431/38431
+  P1: replicates 38431; identical p 22214 (0.5780); largest |p difference| 0.9732; None on one machine only 0; cells with any difference 71
+  P2: replicates 38431; identical p 35538 (0.9247); largest |p difference| 0.9453; None on one machine only 0; cells with any difference 8
+  P3: replicates 38431; identical p 35885 (0.9338); largest |p difference| 0.9254; None on one machine only 0; cells with any difference 8
+  P4: replicates 38431; identical p 34765 (0.9046); largest |p difference| 0.8905; None on one machine only 0; cells with any difference 8
+  P5: replicates 38431; identical p 34525 (0.8984); largest |p difference| 0.7562; None on one machine only 0; cells with any difference 8
+laptop delta choice: none
+cloud delta choice: {
+ "power": {
+  "0.1": 0.0,
+  "0.2": 0.1,
+  "0.3": 0.1,
+  "0.5": 0.64,
+  "0.8": 0.98
+ },
+ "d_mid": 0.2,
+ "d_large": 0.5,
+ "same_delta": false
+}
+power: not compared (laptop has no power rows)

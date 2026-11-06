@@ -1,0 +1,1 @@
+avx2 Model name:                              AMD EPYC 7B13

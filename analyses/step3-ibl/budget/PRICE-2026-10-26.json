@@ -1,0 +1,45 @@
+{
+ "retrieved_utc": "2026-10-26 11:48",
+ "source": "Cloud Billing Catalog API, services/6F81-5844-456A/skus (Compute Engine), currencyCode USD and KRW",
+ "machine": "c2d-highcpu-56 (56 vCPU, 112 GiB), us-east4, on-demand",
+ "skus": [
+  {
+   "currency": "USD",
+   "skuId": "23B5-B451-5151",
+   "description": "C2D AMD Instance Ram running in Virginia",
+   "unit": "GiBy.h",
+   "price": 0.004458,
+   "effectiveTime": "2026-10-26T07:00:00Z"
+  },
+  {
+   "currency": "USD",
+   "skuId": "D276-7CD3-D61E",
+   "description": "C2D AMD Instance Core running in Virginia",
+   "unit": "h",
+   "price": 0.033296,
+   "effectiveTime": "2026-10-26T07:00:00Z"
+  },
+  {
+   "currency": "KRW",
+   "skuId": "23B5-B451-5151",
+   "description": "C2D AMD Instance Ram running in Virginia",
+   "unit": "GiBy.h",
+   "price": 6.057307501,
+   "effectiveTime": "2026-10-26T07:00:00Z"
+  },
+  {
+   "currency": "KRW",
+   "skuId": "D276-7CD3-D61E",
+   "description": "C2D AMD Instance Core running in Virginia",
+   "unit": "h",
+   "price": 45.24094001,
+   "effectiveTime": "2026-10-26T07:00:00Z"
+  }
+ ],
+ "hourly_USD": 2.363872,
+ "hourly_KRW": 3211.911080672,
+ "implied_KRW_per_USD": 1358.7500002842792,
+ "cap_KRW": 40000,
+ "machine_hours_for_cap": 12.453644884724254,
+ "C_vCPU_hours": 697.4041135445582
+}

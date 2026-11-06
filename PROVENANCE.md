@@ -1,0 +1,68 @@
+# Provenance
+
+This repository was assembled from the authors' working repository by an explicit list of files. Timestamped files are byte-identical copies; the public copies of some other files differ only as listed below. Every hash list in `analyses/` checks against the copies here (`REPRODUCE.md` §1).
+
+## Timestamped files
+
+The design documents, the code they fix and the hash lists are copied byte for byte. Their proofs and block times are in `prereg/README.md`. The hash lists name files by paths relative to their step folder, so the folder names of the working repository (`step1-decomposition`, `step2-comparison`, `step2b-eeg`, `step3-ibl`, `trackA-std`) are kept. Two lists point outside their folder:
+- `step2b-eeg/DESIGN-v2-ADDENDUM.sha256` names `../step2-comparison/code/sim.py`, the simulator that the EEG analysis shares with step 2.
+- `step3-ibl/BUDGET-OUTCOME.sha256` names seven cloud scripts as `../../working-archive/2026-10-26/gcp/<file>`; they are copied to `step3-ibl/gcp/`, and the check reads them there.
+
+Wording that cannot be edited without breaking a hash:
+- Some timestamped notes name the AI assistant used in the work (Claude): one heading of `step2-comparison/DESIGN.md` §14, `step3-ibl/RUNNOTE.md`, and three design reviews in `step3-ibl/`. The reviews were persona reviews by AI agents before the stamp; they are included because the budget hash list names them.
+- `trackA-std/PREREG-trackA.md` mentions the conference abstract for which the mouse analysis was first run.
+- `step2b-eeg/code/preprocess.py` and `download_pilot.sh` contain a default data path of the authors' machine; set `LEMON_DIR` (`REPRODUCE.md` §3).
+- Logs of the IBL timing pilot in `step3-ibl/pilot-attempt-2/runs/` contain the cloud machine's user name in paths.
+- `step3-ibl/runs_ibl.sha` and `runs_pilot.sha` were written on the cloud machine and name the archive by its path there; the check compares the hash with the archive here.
+
+The run archives (`*.tgz`) are byte-identical to the archives the machines wrote, so the logs inside them keep the paths and user names of those machines.
+
+## Track A: pre-registered run and rerun
+
+`trackA-std/` holds the outputs of a rerun of the pre-registered Track A analysis on 2026-10-18, which selects the drifting-grating table by name in two scripts (`trackA-std/RERUN.md`). The rerun is a stated deviation from the pre-registration (§4, "script unchanged"), decided after the pre-registered outputs had been seen; the outputs of the pre-registered run are in `trackA-std/prereg-run/results/`. Step 1 and the numbers of the paper use the rerun. The header lines of `trackA-std/results/results.md` (commit, block, deviations) are the summary script's unfilled blanks; the proof is listed in `prereg/README.md` and the deviation in `trackA-std/RERUN.md`. Two notes name folders of the working repository: `../../code-package/foldmap/` in the step 2 results note is `foldmap/` here, and `results/trackA/` in `trackA-std/RERUN.md` is `trackA-std/prereg-run/`.
+
+## Public copies of other files
+
+The following files are not under any timestamp. Their public copies differ from the originals only by these replacements; the SHA-256 of each original is in `PUBLIC-COPIES.json`.
+- Paths of the authors' machines: `/Users/<user>/…/paper-experiment` → `<repo>`, other home folders → `<home>`, the temporary folder → `<tmp>`.
+- Notes signed by the assistant: "(Claude's reading; author to decide)" and "(Claude's reading)" → "(reading)"; "## Reading (Claude)" → "## Reading"; "## Notes (Claude, …" → "## Notes (…"; "(Claude, 2026-…" → "(analysis note, 2026-…"; "summary (2026-10-20, Claude;" → "summary (2026-10-20;"; "Missed by both reviews and by Claude." → "Missed by both reviews and by the analyst."; "(design v1 §2, written by Claude)" → "(design v1 §2)"; "## Extrapolation (Claude, before the design is finalised)" → "## Extrapolation (before the design was finalized)".
+
+| Files | Replacements |
+|---|---|
+| `step1-decomposition/RESULTS-NOTE.md`, `step2-comparison/DESIGN-v2-ADDENDUM-3-RUNNOTE.md`, `step2-comparison/{calib,calib_v2,gate,pilot,validate}/*.md`, `step2b-eeg/eligibility/v1-marker-check/ELIGIBILITY-NOTE.md`, `practice-survey/SUMMARY.md` | notes signed by the assistant |
+| `foldmap/RESULT.md`, `practice-survey/PROTOCOL.md` | references to files of the working repository: a machine record now in `runs_cloud.tgz`, an internal code review, a log not included, the step 1 note |
+| `step1-decomposition/runs/log_*.txt`, `step2-comparison/validate_run.log`, `step2-comparison/code/chain_after_grid.sh`, `validate_runner.sh`, `step2b-eeg/code/download_eeg.sh`, `step2b-eeg/runs/MACHINE.txt`, `prep.out`, `step3-ibl/pilot-attempt-1/discarded-pilot1/*`, `step3-ibl/pilot-attempt-2/runs/{pilot_err.w*,prep.log}` | paths |
+
+`foldmap/replicate_check.py` and `vm_replicate_check.sh` are copied unchanged and keep the layout of the working repository: a step 2 folder `results/step2-comparison/` with the cloud rows in `runs_cloud/` and the laptop rows in `runs/` (set `STEP2_DIR`). The laptop rows of step 2 are not shipped, so the replicate comparison is given as its outputs (`replicate_*_compare.txt`, `replicate_*_rows/`).
+
+`yaron-panel/` (Extended Data Fig. 3) was written for this repository on 2026-10-28 and is not under any timestamp. The comparison it runs was first run on 2026-10-06, after the block-permutation tests of those data, and is post hoc; the rerun gives the same values with the same permutations (its results note).
+
+The practice survey states that its two coders and its third pass were AI agents (Claude), because that is part of the method.
+
+Added on 2026-11-02 (not under any timestamp): `figures/` (the two figure scripts of the manuscript with their input folder set to `analyses/` and the Extended Data Fig. 3 input renamed to `yaron-panel/results/fixed_vs_repeated.json`; the PDFs they draw are byte-identical to the manuscript's figure files); `requirements/` (package lists taken from the `pip freeze` in each run's machine record); the cloud set-up scripts of addendum 3 (`step2-comparison/gcp/`) and of step 2b with its two laptop chains (`step2b-eeg/gcp/`, paths replaced as above); `practice-survey/final-check-2026-11-02/` (an independent check of the 40 audited exclusions; the record texts it read were built from Europe PMC full texts and are not redistributed).
+
+Added on 2026-11-03: the two post hoc steps, `analyses/step4-fmri-haxby/` and `analyses/step5-pamap2/`. Their designs, hash lists and proofs are byte-identical copies. The code, rows, summaries and results notes are copied as they are, and the run logs have their paths rewritten as above. Also added: the quote check of the practice survey and `MODEL-RECORD.md`, which names the model used in each survey step. `check_quotes.py` was written before it was run. `check_quotes_alnum.py` is a second pass, written after the first pass had been seen. Their output is in `quote_check.md` and `quote_check.csv`. The quote check reads the full texts in `fulltext/`, which are not redistributed (they can be fetched from Europe PMC by the identifiers in `screening.csv`). The persona reviews of the steps 4–5 designs and results notes are not included, as for the other steps.
+
+Added on 2026-11-06: `analyses/practice-survey/final-check-2026-11-04/`, the pre-submission recheck of the survey codes that recoded one study (protocol, prompts, raw outputs, result), copied byte for byte. `REPRODUCE.md` and `NUMBERS.md` already named it. As in the rest of the survey, the checker and the first reading of its output were AI agents (Claude), and the file says so.
+
+`step4-fmri-haxby/code/chain_45.sh` is the run record of steps 4 and 5 and keeps the working-repository layout; `REPRODUCE.md` §3 gives the same steps for this layout. The cloud scripts in `step2-comparison/gcp/`, `step2b-eeg/gcp/` and `step3-ibl/gcp/` are run records as well: they expect the step folders under `~/pe/results/` on the cloud machine, so with this repository place `analyses/<step>` there or change their `cd` lines. The laptop chain records of steps 2 and 2b (`step2-comparison/code/chain_after_grid.sh`, `validate_runner.sh`, `step2b-eeg/gcp/chain2b.sh`, `chain2b_add2.sh`) are records too and point to the authors' working folders. The prompts given to the language-model assistants of the practice survey are not included; the models are named in `practice-survey/MODEL-RECORD.md`. The author's hand checks of the survey are recorded in `practice-survey/AUTHOR-CHECK.md`; the full texts are fetched by `practice-survey/fetch_fulltext.py`.
+
+Not included: the authors' working notes, drafts and reviews other than the three named in a hash list; the unpacked run folders (the archives are shipped); the first step 2b cloud archive (`runs_cloud_2b.tgz`; the shipped `runs_cloud_2b_rerun49.tgz` is the whole cloud `runs/` folder after the reviewed rerun of sensitivity worker 49, and the results note uses only it); the full texts of the surveyed papers; the practice-survey coder notes (working notes in Korean; their codes are in `coding_A.csv` and `coding_B.csv`); the ADAM source file (GPL-3.0; `THIRD-PARTY.md`). Nothing needed to check a number of the paper is among them. Results notes and run notes, several of them timestamped and therefore unchanged, name these files:
+- statistician reviews of the results notes (`review-results-note-statistician.txt` in steps 2, 2b and 3) and the persona reviews named in the design documents, except the three step 3 reviews that a hash list names;
+- step 3: `runs/SUMMARY-attempt1-incomplete.md`, `runs/SUMMARY-env-freeze.txt`, the commit `4b66184` of the earlier note text, and `vm_ibl_prep.sh` (`RUNNOTE.md`);
+- step 2: `runs_cloud/COMPLETION.txt` (results note, `RUN-PLATFORM-ADDENDUM-1.md`; the archive unpacks into `runs/`); step 2b: `runs_cloud_2b.tgz` and its hash file (`runs/COMPLETION-2b.txt`);
+- `foldmap/`: the cloud logs `vm_foldmap.log` and `vm_replicate_check.log`;
+- practice survey: the audit scripts `draw.py`, `fetch.py`, `meth.py`, `prof.py`, `sn.py` (`AUDIT-AUTO-EXCLUSIONS.md`);
+- files outside these folders in the working repository: the composition plan of the paper (`step1-decomposition/DESIGN.md`), the conference-abstract folder (`trackA-std/PREREG-trackA.md`), `working-archive/` (step 3 code addenda; its scripts that a hash list names are in `step3-ibl/gcp/`), and `results/trackA-std/` (step 1 logs; the shipped folder is `trackA-std/`).
+
+The user name of the authors' machines remains in seven files that cannot be rewritten or that are byte copies of machine records: `step2b-eeg/code/preprocess.py` and `download_pilot.sh` (timestamped), `step3-ibl/runs_ibl.sha`, `runs_pilot.sha` and three timing-pilot logs (written on the cloud machine). It also remains inside the run archives (`*.tgz`, including the laptop archive `runs_allen.tgz`), and `<home>` in the rewritten copies stands for the same user.
+
+## Deviations
+
+Each deviation is stated, with its date, in the run note or the results note of its step.
+- **Correction (2026-11-06), ADAM.** The timestamped designs of steps 1 (training-label addendum), 2, 3, 4 and 5, the step 1 and step 3 results notes and `step2-comparison/TOOLBOX-DEFAULTS.md`, and comments in `step2-comparison/code/sim.py` and `step3-ibl/code/ibl_core.py`, name ADAM beside PyMVPA for the training-label rule (P4). ADAM's `cfg.randompermutations` option permutes all trial labels before the folds are made (ADAM commit 27fefb9e19, `classify_RAW_eeglab_data.m` lines 383–391), so it is a trial-level rule. ADAM itself was not run. These files are kept as written; the paper and this repository's README, NUMBERS and REPRODUCE no longer name ADAM for P4.
+- **Track A.** The rerun above.
+- **Step 1.** Both runs started a few minutes before the Bitcoin block of their proof; no result was opened before it (`prereg/README.md`). The step 1 results note first read the addendum's attestation as block 972315; the earliest is 972271, and its correction line of 2026-10-28 gives the right order.
+- **Step 2.** The run-platform decision was committed two minutes before the cloud run started; its reviewed text and hash list a few minutes after (`prereg/README.md`). Addendum 3: a driver path defect at the first start, fixed in the environment without a code change (`DESIGN-v2-ADDENDUM-3-RUNNOTE.md`). The timestamped `run_grid.py` docstring says "all balanced assignments" for the block permutation test, while the code draws 200. The laptop run was paused, and a second laptop chain started by a quoting error was stopped (`RUN-PLATFORM-ADDENDUM-1.md`). The GroupKFold fold map for 24 equal blocks differs between platforms; the cloud rows are the result (`ENVIRONMENT.md`). The power-pilot rates and one replicate were seen on 10-23, before the main results (step 2 results note §0).
+- **Step 2b.** Sensitivity worker 49 crashed on an empty variant and was rerun with a reviewed wrapper. The bootstrap interval of the timestamped group-null summary is not valid and is not interpreted (results note §3). The alpha-slope analysis was defined when the results were written and is labeled post hoc.
+- **Step 3.** Set-up of the IBL data client; the timing pilot read `PILOT-ORDER.json` instead of the first two sessions, which the runner skipped; machine c2d-highmem-56 instead of the example c2d-highcpu-56; cost cap raised from 40,000 to 60,000 KRW after the pilot and before any result; the budget formula read as workers' vCPU-hours; the disk-size estimate in its second version (results note §6). The run note entry of the main run was first appended to the timestamped `RUNNOTE.md`, caught by the hash check, restored byte for byte and moved to `RUNNOTE-2.md`.

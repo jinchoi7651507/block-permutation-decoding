@@ -1,0 +1,19 @@
+internal/
+__pycache__/
+*.pyc
+.DS_Store
+# unpacked run archives (each .tgz in analyses/ is the shipped form)
+analyses/step2-comparison/runs/*
+!analyses/step2-comparison/runs/CELLS.json
+analyses/step2-comparison/runs_allen/
+analyses/step2-comparison/runs_add3/*
+!analyses/step2-comparison/runs_add3/CELLS-ADD3.json
+!analyses/step2-comparison/runs_add3/tools/
+analyses/step2-comparison/runs_add3/tools/*
+!analyses/step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md
+.venv/
+*.egg-info/
+blockperm/build/
+# downloaded recordings
+analyses/yaron-panel/data/raw/
+analyses/yaron-panel/data/MANIFEST.local.sha256

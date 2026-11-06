@@ -1,0 +1,876 @@
+{
+ "r": 4.216666666666667,
+ "sessions": [
+  {
+   "eid": "56956777-dca5-468c-87cb-78150432cc57",
+   "region_sessions": 6,
+   "units": {
+    "COAp": 8,
+    "PA": 3,
+    "root": 72,
+    "BMA": 46,
+    "IA": 10,
+    "CEA": 42,
+    "GPe": 13,
+    "VPM": 13,
+    "LGd": 37,
+    "CA3": 6,
+    "CA2": 1,
+    "CA1": 6,
+    "SSp-bfd": 2,
+    "SSp-tr": 3,
+    "VISa": 2
+   }
+  },
+  {
+   "eid": "a34b4013-414b-42ed-9318-e93fbbc71e7b",
+   "region_sessions": 0,
+   "units": {
+    "PH": 5,
+    "root": 1,
+    "VM": 2,
+    "VPMpc": 1,
+    "PCN": 9,
+    "MD": 2,
+    "CL": 1,
+    "LP": 9,
+    "DG": 2
+   }
+  },
+  {
+   "eid": "64e3fb86-928c-4079-865c-b364205b502e",
+   "region_sessions": 2,
+   "units": {
+    "AIp": 10,
+    "GU": 1,
+    "VISC": 4,
+    "SSs": 10
+   }
+  },
+  {
+   "eid": "75b6b132-d998-4fba-8482-961418ac957d",
+   "region_sessions": 3,
+   "units": {
+    "GRN": 3,
+    "PGRN": 6,
+    "CENT2": 1,
+    "CENT3": 3,
+    "IC": 3,
+    "root": 7,
+    "P5": 14,
+    "V": 9,
+    "SUT": 17,
+    "PB": 11,
+    "CUL4 5": 2
+   }
+  },
+  {
+   "eid": "fece187f-b47f-4870-a1d6-619afe942a7d",
+   "region_sessions": 6,
+   "units": {
+    "VII": 14,
+    "IRN": 47,
+    "root": 102,
+    "PRNc": 75,
+    "PAG": 12,
+    "RT": 36,
+    "SSp-bfd": 20
+   }
+  },
+  {
+   "eid": "493170a6-fd94-4ee4-884f-cc018c17eeb9",
+   "region_sessions": 4,
+   "units": {
+    "PIR": 55,
+    "root": 34,
+    "ORBl": 16,
+    "AId": 5,
+    "MOs": 4,
+    "OT": 1,
+    "SI": 1,
+    "ACB": 14,
+    "CP": 68
+   }
+  },
+  {
+   "eid": "0cbeae00-e229-4b7d-bdcc-1b0569d7e0c3",
+   "region_sessions": 5,
+   "units": {
+    "ZI": 5,
+    "VPL": 20,
+    "VPM": 21,
+    "root": 19,
+    "LGd": 7,
+    "CA3": 8,
+    "CA2": 2,
+    "CA1": 13,
+    "SSp-bfd": 19,
+    "VISrl": 7,
+    "EPv": 2,
+    "LA": 5,
+    "CP": 43
+   }
+  },
+  {
+   "eid": "111c1762-7908-47e0-9f40-2f2ee55b6505",
+   "region_sessions": 9,
+   "units": {
+    "MRN": 53,
+    "root": 30,
+    "SCm": 53,
+    "DG": 6,
+    "CA1": 24,
+    "VISp": 32,
+    "RN": 25,
+    "PPT": 9,
+    "NOT": 11,
+    "SUB": 59,
+    "ProS": 16,
+    "VISam": 40
+   }
+  },
+  {
+   "eid": "c02e5155-8e8f-427e-873d-d61490bbb9c3",
+   "region_sessions": 0,
+   "units": {
+    "SOC": 5,
+    "root": 15,
+    "PC5": 5,
+    "PB": 1,
+    "PAR": 1
+   }
+  },
+  {
+   "eid": "37bbc17f-8dec-4fa8-97fd-e23a5c6bad1f",
+   "region_sessions": 1,
+   "units": {
+    "root": 120,
+    "NLL": 35,
+    "SAG": 3,
+    "NB": 1
+   }
+  },
+  {
+   "eid": "a405053a-eb13-4aa4-850c-5a337e5dc7fd",
+   "region_sessions": 3,
+   "units": {
+    "ACB": 4,
+    "CP": 7,
+    "root": 2,
+    "MOs": 7,
+    "ENTm": 25,
+    "ENTl": 10,
+    "VISpor": 3,
+    "VISl": 21
+   }
+  },
+  {
+   "eid": "a2ec6341-c55f-48a0-a23b-0ef2f5b1d71e",
+   "region_sessions": 6,
+   "units": {
+    "VPLpc": 1,
+    "PO": 18,
+    "Eth": 5,
+    "LP": 34,
+    "DG": 10,
+    "CA1": 12,
+    "VISam": 3,
+    "root": 13,
+    "XII": 4,
+    "NTS": 3,
+    "AP": 3,
+    "UVU": 42,
+    "PYR": 25,
+    "FOTU": 3,
+    "DEC": 7
+   }
+  },
+  {
+   "eid": "91bac580-76ed-41ab-ac07-89051f8d7f6e",
+   "region_sessions": 3,
+   "units": {
+    "RR": 2,
+    "MRN": 26,
+    "root": 7,
+    "SCm": 7,
+    "DG": 6,
+    "CA1": 13,
+    "VISp": 17
+   }
+  },
+  {
+   "eid": "0cc486c3-8c7b-494d-aa04-b70e2690bcba",
+   "region_sessions": 3,
+   "units": {
+    "GPe": 20,
+    "CP": 67,
+    "root": 12,
+    "SSp-n": 2,
+    "SSp-un": 12,
+    "SSp-bfd": 7,
+    "SUM": 2,
+    "PH": 6,
+    "SPF": 3,
+    "PF": 2,
+    "LH": 2
+   }
+  },
+  {
+   "eid": "e6594a5b-552c-421a-b376-1a1baa9dc4fd",
+   "region_sessions": 2,
+   "units": {
+    "SNc": 1,
+    "root": 14,
+    "MRN": 6,
+    "SCm": 10,
+    "SUB": 39
+   }
+  },
+  {
+   "eid": "90c61c38-b9fd-4cc3-9795-29160d2f8e55",
+   "region_sessions": 4,
+   "units": {
+    "MRN": 36,
+    "PAG": 16,
+    "root": 5,
+    "SCm": 20,
+    "SCs": 7,
+    "RSPv": 2,
+    "RSPd": 9,
+    "VISp": 20,
+    "RSPagl": 1
+   }
+  },
+  {
+   "eid": "6c6b0d06-6039-4525-a74b-58cfaa1d3a60",
+   "region_sessions": 4,
+   "units": {
+    "RN": 4,
+    "MRN": 34,
+    "APN": 48,
+    "root": 14,
+    "DG": 13,
+    "CA1": 9,
+    "VISam": 11,
+    "LP": 1,
+    "VISa": 3
+   }
+  },
+  {
+   "eid": "19b44992-d527-4a12-8bda-aa11379cb08c",
+   "region_sessions": 7,
+   "units": {
+    "NDB": 22,
+    "root": 99,
+    "CP": 6,
+    "NLL": 55,
+    "SAG": 30,
+    "MRN": 12,
+    "IC": 18,
+    "SCm": 29,
+    "SCs": 15,
+    "void": 7
+   }
+  },
+  {
+   "eid": "91e04f86-89df-4dec-a8f8-fa915c9a5f1a",
+   "region_sessions": 4,
+   "units": {
+    "COPY": 17,
+    "root": 14,
+    "ANcr2": 11,
+    "ANcr1": 54,
+    "SIM": 12,
+    "void": 1
+   }
+  },
+  {
+   "eid": "2bdf206a-820f-402f-920a-9e86cd5388a4",
+   "region_sessions": 8,
+   "units": {
+    "MRN": 45,
+    "APN": 63,
+    "root": 30,
+    "DG": 32,
+    "CA1": 32,
+    "VISa": 51,
+    "SPF": 11,
+    "PoT": 5,
+    "Eth": 55,
+    "LP": 52
+   }
+  },
+  {
+   "eid": "f56194bc-8215-4ae8-bc6a-89781ad8e050",
+   "region_sessions": 8,
+   "units": {
+    "DG": 32,
+    "CA3": 11,
+    "CA1": 29,
+    "VISp": 11,
+    "CLI": 8,
+    "RL": 7,
+    "root": 13,
+    "PAG": 51,
+    "SCm": 42,
+    "SCs": 19,
+    "RSPv": 43
+   }
+  },
+  {
+   "eid": "51e53aff-1d5d-4182-a684-aba783d50ae5",
+   "region_sessions": 7,
+   "units": {
+    "COAp": 1,
+    "CA3": 2,
+    "SNr": 36,
+    "SNc": 21,
+    "root": 16,
+    "PIL": 5,
+    "PoT": 11,
+    "POL": 5,
+    "APN": 33,
+    "PPT": 14,
+    "NOT": 4,
+    "VPM": 4,
+    "PO": 56,
+    "LP": 34,
+    "DG": 8,
+    "CA1": 9,
+    "VISa": 6
+   }
+  },
+  {
+   "eid": "12dc8b34-b18e-4cdd-90a9-da134a9be79c",
+   "region_sessions": 1,
+   "units": {
+    "CA1": 3,
+    "root": 12,
+    "RSPv": 6,
+    "RSPd": 10,
+    "PVT": 1
+   }
+  },
+  {
+   "eid": "dfd8e7df-dc51-4589-b6ca-7baccfeb94b4",
+   "region_sessions": 2,
+   "units": {
+    "MEA": 22,
+    "root": 35,
+    "SI": 2,
+    "GPi": 3,
+    "RT": 29
+   }
+  },
+  {
+   "eid": "642c97ea-fe89-4ec9-8629-5e492ea4019d",
+   "region_sessions": 4,
+   "units": {
+    "CA1": 67,
+    "DG": 54,
+    "CA3": 45,
+    "root": 18,
+    "VISp": 20
+   }
+  },
+  {
+   "eid": "5adab0b7-dfd0-467d-b09d-43cb7ca5d59c",
+   "region_sessions": 8,
+   "units": {
+    "root": 12,
+    "ZI": 10,
+    "VAL": 44,
+    "VPL": 5,
+    "VPM": 48,
+    "PO": 4,
+    "LD": 16,
+    "MOp": 93,
+    "MD": 50,
+    "LH": 13,
+    "DG": 2,
+    "CA3": 21
+   }
+  },
+  {
+   "eid": "16c3667b-e0ea-43fb-9ad4-8dcd1e6c40e1",
+   "region_sessions": 4,
+   "units": {
+    "PRNr": 21,
+    "MRN": 36,
+    "PAG": 17,
+    "SCm": 19,
+    "SCs": 1,
+    "CS": 9,
+    "root": 4
+   }
+  },
+  {
+   "eid": "1425bd6f-c625-4f6a-b237-dc5bcfc42c87",
+   "region_sessions": 2,
+   "units": {
+    "MV": 13,
+    "root": 8,
+    "CENT3": 7,
+    "CUL4 5": 31
+   }
+  },
+  {
+   "eid": "d57df551-6dcb-4242-9c72-b806cff5613a",
+   "region_sessions": 3,
+   "units": {
+    "MRN": 20,
+    "APN": 11,
+    "root": 8,
+    "DG": 1,
+    "ProS": 12,
+    "CA1": 1
+   }
+  },
+  {
+   "eid": "2c44a360-5a56-4971-8009-f469fb59de98",
+   "region_sessions": 9,
+   "units": {
+    "OT": 1,
+    "SI": 10,
+    "ACB": 81,
+    "root": 14,
+    "LSr": 13,
+    "TTd": 3,
+    "DP": 2,
+    "ILA": 36,
+    "void": 2,
+    "PL": 11,
+    "AM": 2,
+    "IAD": 10,
+    "CM": 5,
+    "MD": 16,
+    "PVT": 23,
+    "DG": 4,
+    "CA3": 4,
+    "ACAv": 6,
+    "ACAd": 4,
+    "MOs": 31,
+    "MOp": 8
+   }
+  },
+  {
+   "eid": "3537d970-f515-4786-853f-23de525e110f",
+   "region_sessions": 5,
+   "units": {
+    "ZI": 25,
+    "VPL": 40,
+    "VPM": 3,
+    "root": 32,
+    "LGd": 57,
+    "LGv": 1,
+    "CA3": 35,
+    "SSp-bfd": 52,
+    "IGL": 1
+   }
+  },
+  {
+   "eid": "3f71aa98-08c6-4e79-b4c8-00eae4f03eff",
+   "region_sessions": 1,
+   "units": {
+    "ENTm": 142,
+    "void": 5
+   }
+  },
+  {
+   "eid": "934dd7a4-fbdc-459c-8830-04fe9033bc28",
+   "region_sessions": 4,
+   "units": {
+    "root": 34,
+    "SPA": 1,
+    "FC": 1,
+    "CA1": 7,
+    "RSPv": 7,
+    "RSPd": 26,
+    "LHA": 21,
+    "BST": 3,
+    "TRS": 17,
+    "SF": 11
+   }
+  },
+  {
+   "eid": "14127fdb-2e66-4823-b124-f49c128ba94d",
+   "region_sessions": 5,
+   "units": {
+    "TRN": 19,
+    "PRNr": 68,
+    "root": 36,
+    "RR": 8,
+    "MRN": 24,
+    "RN": 15,
+    "SCm": 15,
+    "DG": 1
+   }
+  },
+  {
+   "eid": "f84045b0-ce09-4ace-9d11-5ea491620707",
+   "region_sessions": 3,
+   "units": {
+    "root": 15,
+    "VTA": 3,
+    "PAG": 10,
+    "NPC": 2,
+    "PRM": 11,
+    "ANcr2": 23
+   }
+  },
+  {
+   "eid": "d33baf74-263c-4b37-a0d0-b79dcb80a764",
+   "region_sessions": 10,
+   "units": {
+    "ACB": 2,
+    "AON": 51,
+    "root": 8,
+    "DP": 20,
+    "ORBm": 53,
+    "ORBvl": 82,
+    "PL": 16,
+    "MOs": 72,
+    "LHA": 3,
+    "ZI": 5,
+    "VAL": 3,
+    "VPM": 31,
+    "PO": 89,
+    "LD": 68,
+    "DG": 21
+   }
+  },
+  {
+   "eid": "e12fbe11-8a6b-4bf6-a955-e5f6cec31ef1",
+   "region_sessions": 5,
+   "units": {
+    "root": 35,
+    "PGRN": 24,
+    "GRN": 15,
+    "IRN": 73,
+    "NTS": 5,
+    "MV": 47,
+    "SPIV": 4,
+    "VeCB": 13,
+    "ICB": 5,
+    "IP": 7
+   }
+  },
+  {
+   "eid": "3bb54985-77b2-421d-9d1f-46185be51216",
+   "region_sessions": 0,
+   "units": {
+    "STN": 1,
+    "VPM": 5,
+    "PO": 1,
+    "VPL": 2,
+    "LD": 1
+   }
+  },
+  {
+   "eid": "193fe7a8-4eb5-4f3e-815a-0c45864ddd77",
+   "region_sessions": 2,
+   "units": {
+    "SPF": 2,
+    "SPA": 20,
+    "root": 19,
+    "PAG": 1,
+    "CA1": 15,
+    "RSPv": 8,
+    "RSPd": 4
+   }
+  },
+  {
+   "eid": "a4747ac8-6a75-444f-b99b-696fff0243fd",
+   "region_sessions": 0,
+   "units": {
+    "ENTl": 2,
+    "EPd": 1,
+    "CA1": 5,
+    "CA2": 1
+   }
+  },
+  {
+   "eid": "72982282-e493-45ee-87ce-aa45cb3a3ec1",
+   "region_sessions": 4,
+   "units": {
+    "CP": 13,
+    "SSp-n": 27,
+    "PFL": 21,
+    "root": 5,
+    "ANcr1": 15
+   }
+  },
+  {
+   "eid": "872ce8ff-9fb3-485c-be00-bc5479e0095b",
+   "region_sessions": 6,
+   "units": {
+    "ENTl": 25,
+    "SUB": 209,
+    "root": 1,
+    "VISpor": 23,
+    "VISli": 32,
+    "VISl": 12,
+    "ENTm": 24
+   }
+  },
+  {
+   "eid": "f8041c1e-5ef4-4ae6-afec-ed82d7a74dc1",
+   "region_sessions": 1,
+   "units": {
+    "ORBm": 13,
+    "PL": 1,
+    "ILA": 2
+   }
+  },
+  {
+   "eid": "037d75ca-c90a-43f2-aca6-e86611916779",
+   "region_sessions": 5,
+   "units": {
+    "root": 14,
+    "PGRN": 16,
+    "IRN": 25,
+    "PARN": 18,
+    "NTS": 5,
+    "SPIV": 31,
+    "LAV": 5,
+    "SUV": 13,
+    "IP": 7
+   }
+  },
+  {
+   "eid": "73918ae1-e4fd-4c18-b132-00cb555b1ad2",
+   "region_sessions": 5,
+   "units": {
+    "Eth": 4,
+    "root": 22,
+    "POL": 10,
+    "DG": 16,
+    "CA1": 8,
+    "VISam": 9,
+    "COAp": 2,
+    "PA": 8,
+    "CA3": 22,
+    "ZI": 2,
+    "IntG": 6,
+    "MG": 14,
+    "LGd": 39
+   }
+  },
+  {
+   "eid": "21e16736-fd59-44c7-b938-9b1333d25da8",
+   "region_sessions": 4,
+   "units": {
+    "COAp": 11,
+    "BMA": 17,
+    "root": 42,
+    "MEA": 4,
+    "RT": 1,
+    "VPL": 14,
+    "VPM": 43
+   }
+  },
+  {
+   "eid": "bd456d8f-d36e-434a-8051-ff3997253802",
+   "region_sessions": 6,
+   "units": {
+    "SMT": 23,
+    "root": 7,
+    "PCN": 19,
+    "MD": 34,
+    "RSPv": 13,
+    "MH": 1,
+    "ACB": 7,
+    "CP": 67,
+    "MOp": 57
+   }
+  },
+  {
+   "eid": "46794e05-3f6a-4d35-afb3-9165091a5a74",
+   "region_sessions": 3,
+   "units": {
+    "GRN": 28,
+    "root": 52,
+    "PRP": 27,
+    "NOD": 20,
+    "CUL4 5": 4
+   }
+  },
+  {
+   "eid": "1f095590-6669-46c9-986b-ccaf0620c5e9",
+   "region_sessions": 4,
+   "units": {
+    "VM": 6,
+    "VPMpc": 8,
+    "PF": 21,
+    "Eth": 21,
+    "PO": 28,
+    "LP": 14
+   }
+  },
+  {
+   "eid": "cef05f87-161b-4031-932c-6f47daf89698",
+   "region_sessions": 5,
+   "units": {
+    "BST": 21,
+    "TRS": 8,
+    "SF": 29,
+    "LSr": 11,
+    "LSc": 28,
+    "root": 2,
+    "MOs": 15
+   }
+  },
+  {
+   "eid": "63c70ae8-4dfb-418b-b21b-f0b1e5fba6c9",
+   "region_sessions": 6,
+   "units": {
+    "LHA": 7,
+    "ZI": 16,
+    "VM": 14,
+    "VAL": 15,
+    "VPM": 80,
+    "VPL": 64,
+    "RT": 3,
+    "root": 2,
+    "SSp-bfd": 2,
+    "SSp-un": 5,
+    "SSp-ul": 30,
+    "SSp-ll": 4
+   }
+  },
+  {
+   "eid": "ffef0311-8ffa-49e3-a857-b3adf6d86e12",
+   "region_sessions": 2,
+   "units": {
+    "PIR": 6,
+    "root": 9,
+    "CP": 57,
+    "SSp-m": 18
+   }
+  },
+  {
+   "eid": "6f36868f-5cc1-450c-82fa-6b9829ce0cfe",
+   "region_sessions": 3,
+   "units": {
+    "root": 4,
+    "RSPv": 1,
+    "RSPd": 17,
+    "void": 1,
+    "CP": 51,
+    "MOp": 66
+   }
+  },
+  {
+   "eid": "1191f865-b10a-45c8-9c48-24a980fd9402",
+   "region_sessions": 4,
+   "units": {
+    "root": 9,
+    "TTd": 13,
+    "DP": 20,
+    "ORBm": 10,
+    "ORBvl": 160,
+    "FRP": 9,
+    "MOs": 3,
+    "XII": 8,
+    "DMX": 2,
+    "NTS": 1,
+    "NOD": 6,
+    "UVU": 9,
+    "FN": 1,
+    "RO": 1
+   }
+  },
+  {
+   "eid": "6a601cc5-7b79-4c75-b0e8-552246532f82",
+   "region_sessions": 7,
+   "units": {
+    "PRNc": 8,
+    "TRN": 16,
+    "root": 79,
+    "CS": 46,
+    "PAG": 18,
+    "RN": 7,
+    "MRN": 27,
+    "APN": 18,
+    "NOT": 2,
+    "CA1": 36,
+    "VISam": 11
+   }
+  },
+  {
+   "eid": "09b2c4d1-058d-4c84-9fd4-97530f85baf6",
+   "region_sessions": 7,
+   "units": {
+    "PSV": 21,
+    "PARN": 51,
+    "I5": 1,
+    "root": 70,
+    "PB": 35,
+    "CENT3": 9,
+    "MG": 10,
+    "DG": 2,
+    "ProS": 45,
+    "CA1": 20,
+    "VISp": 51
+   }
+  },
+  {
+   "eid": "ff96bfe1-d925-4553-94b5-bf8297adf259",
+   "region_sessions": 6,
+   "units": {
+    "VPM": 32,
+    "PO": 25,
+    "LP": 39,
+    "CA3": 2,
+    "CA2": 1,
+    "CA1": 4,
+    "SSp-tr": 1,
+    "root": 15,
+    "SPVI": 35,
+    "SPVC": 4,
+    "Pa5": 4,
+    "COPY": 5,
+    "PRM": 23,
+    "ANcr2": 43
+   }
+  },
+  {
+   "eid": "9a6e127b-bb07-4be2-92e2-53dd858c2762",
+   "region_sessions": 3,
+   "units": {
+    "ENTl": 25,
+    "root": 7,
+    "CA1": 62,
+    "VISal": 13
+   }
+  },
+  {
+   "eid": "810b1e07-009e-4ebe-930a-915e4cd8ece4",
+   "region_sessions": 6,
+   "units": {
+    "SPIV": 15,
+    "LAV": 1,
+    "root": 110,
+    "SUV": 28,
+    "IP": 58,
+    "CENT3": 93,
+    "IC": 37,
+    "SPVI": 3,
+    "NTS": 2,
+    "x": 9,
+    "DCO": 4,
+    "SIM": 51
+   }
+  },
+  {
+   "eid": "f5591ac5-311d-4fa8-9bad-029d7be9c491",
+   "region_sessions": 3,
+   "units": {
+    "BLA": 10,
+    "LA": 10,
+    "CP": 10,
+    "SSp-bfd": 3
+   }
+  }
+ ]
+}

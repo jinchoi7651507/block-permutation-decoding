@@ -1,0 +1,97 @@
+# Step 3 results note: decoding the block side in the IBL brain-wide map with the common tests
+
+## 0. Status (written 2026-10-27 02:35 KST, while the main run is in progress and before any run row exists on this machine)
+This section is written and committed before the run archive (`runs_ibl.tgz`) is copied back, extracted or opened, and before `code/summarize_ibl.py` is run on any study row. Sections 1 onward are filled in afterwards, in the order of section 0b, and report every pre-specified quantity whatever it shows.
+
+**What governs.** `DESIGN.md` v1 (stamped, `DESIGN-v1.sha256`, attested); `DESIGN-v1-CODE-ADDENDUM.md` (code addendum 1: runner, preparation, machine and budget rule, summary content items i–xiii; stamped, attested); `DESIGN-v1-CODE-ADDENDUM-2.md` (code addendum 2: `code/summarize_ibl.py`; stamped, attested); `budget/BUDGET-OUTCOME.md` + `.json` (stamped 2026-10-27 00:33 KST with its inputs in `BUDGET-OUTCOME.sha256`; Bitcoin block 973255); `RUNNOTE.md` (environment notes and stated deviations).
+
+**Seen before this note (all disclosed in the governing files; no p value, accuracy or rate of any study row):**
+- Preparation outputs, label-free or labels-only: `runs/ORDER.json` (699 insertions, 459 sessions, 139 mice), `runs/STIM-REGIONS.json` (the two-column extract: counts of stimulus-significant regions and regions without a value), `runs/BUDGET-META.json` (unit counts per region-session for the first 60 sessions), `runs/REALISM.json` (pre-set realism check on trials tables only: pooled KS of block lengths 0.06, permutation p 0.1409, response "none", RUNNOTE), `runs/DISK-SIZES.json` and `DISK-SIZES-v1.json` (dataset sizes only).
+- Timing pilot (attempt 2): session timings, memory and disk logs; every p value in the pilot rows is None by construction (RUNNOTE; pilot rows are ignored by the summary). Pilot attempt 1: skip rows (kept-trial counts 200 and 231, no p value).
+- Run logs during the main run: counts, worker exits and time stamps only (`runs/run.log`, `runs/run_mem.log` lines read by the laptop launcher and watcher).
+- `meta/region_info.csv`: downloaded 2026-10-27 02:34 KST from the pinned repository commit (int-brain-lab/paper-brain-wide-map 118fc36cb3602934466ad2c6087c2b3b441f9f1f, `brainwidemap/meta/region_info.csv`), SHA-256 03f3db63aec6650a051d768b633b45cde32b854bf714e745bbacf704256c40b3, identical to the copy installed on the run machine (hash compared on the VM; file not opened). Reason: the summary needs this file and the run machine is deleted after the copy. Only its `Beryl` column is read, by the stamped summary script.
+
+### 0a. Pre-specified quantities and decision rules (copied from the governing files; nothing added)
+1. **Completed prefix and denominators** (addendum 1 §4 i–iii; addendum 2): rows deduplicated by (eid, region, label, row type), first occurrence kept; pilot rows ignored; completed prefix = the largest m with sessions 0..m−1 finished, skipped or errored, later sessions dropped; the planned count (459 sessions, budget outcome) and the realised prefix both reported; NaN/None p excluded per cell with denominators (mice, region-sessions, usable p, NaN/None p); region-sessions with fewer than 20 usable fake draws counted; excluded region-sessions and skipped sessions with reasons.
+2. **Aggregation and intervals** (DESIGN §7; addendum 2): per region-session (share over its usable draws), then mean per mouse, then mean over mice; paired contrasts the same way on per-draw differences with both values usable; mouse-cluster BCa bootstrap, B = 20,000, seed 20261023, one generator in output order, acceleration from the mouse jackknife; 95% interval for every quantity, Bonferroni 98.3% for F, V, S only; region-session-weighted rates also reported. Rejection = p < 0.05 strictly.
+3. **F (Q1, primary):** fake labels, S-main, main decoder: rate of P2 minus the realised rate of PS-refit, paired at (region-session, draw). "Positive" = 95% lower bound above 0.
+4. **V (Q2, primary):** real labels, S-main, main decoder: share of region-sessions significant under P2 minus share under PS-refit; 2 × 2 verdict table (both, P2 only, PS-refit only, neither) of region-sessions with both verdicts, discordant counts with an exact two-sided binomial p (descriptive); cross-tab of P2-only against all other real-label region-sessions by their own fake-label P2 share (> 10%, ≤ 10%, no fake value). Decision as F, **except that V gets no decision if the realism response makes Q2 descriptive**; the realism response is "none" (`REALISM.json`), so V keeps its decision rule. Q2 rates mouse-weighted with intervals and region-session-weighted.
+5. **S (Q3, primary):** fake labels: rate of SEL-fixed minus rate of SEL-repeat, all region-sessions, paired at (region-session, draw); beside it the same contrast in the i.i.d. control (IID-SEL-fixed minus IID-SEL-repeat). Decision as F.
+6. **"Inflated"** = 95% lower bound of a rate above 10%.
+7. **Secondary contrasts** (DESIGN §7; addendum 2; same pairing and interval; no decision): P1, P4 and PS-fixed minus PS-refit (S-main, fake labels); S-block: P2-block minus P2 (fake labels); P1 minus IID-P1.
+8. **Sanity check:** the realised PS-refit rate on fake labels (exact by construction; labelled as the sanity check).
+9. **Monte Carlo:** share of p values in 0.03–0.07 for the Q1 and Q2 rows.
+10. **Positive control:** stimulus side, 0–100 ms, PS-refit only; 2 × 2 table of significant region-sessions in regions marked stimulus-significant in `region_info.csv` versus the others, plus the no-value row, with mice per group; a pipeline check, not a test of the BWM map; region-sessions without a usable p counted.
+11. **Extended Data:** region counts for regions with at least 3 sessions, over usable p only; descriptive.
+12. **Predictions** of DESIGN §8 (fixed before running; may be wrong), each marked held / not held / not tested: Q1: P1, P2, P4 under S-main above 10%; PS-refit about 5%; PS-fixed above PS-refit; S-block P2 lower than S-main P2. Q2: more region-sessions significant under P2 than under PS-refit; P2-only region-sessions have higher fake-label P2 rates than the others. Q3: SEL-fixed above SEL-repeat on fake labels, and near SEL-repeat in the i.i.d. control.
+13. **Wording limits** (DESIGN §1, §10): Q2 verdict changes are "changed verdicts under a simplified binary decoder on a sample of sessions", not false positives and not comparable with the region maps of the papers; nothing here re-tests Findling et al. 2025 or IBL 2025; not done: WFI, choice and feedback variables, the continuous prior, the papers' 1,000 × 10 protocol, any re-analysis of their region maps.
+14. **Deviations to restate** (RUNNOTE, budget outcome): ONE username set-up (environment); pilot input PILOT-ORDER.json (option A); machine c2d-highmem-56 instead of the example c2d-highcpu-56; cost cap raised from 40,000 to 60,000 KRW after the pilot (no result seen); workers' vCPU-hours reading of the budget formula; disk-limit count version 2; the time cap and the realised prefix.
+
+### 0b. Order of work
+(1) commit this section; (2) after the launcher has copied `runs_ibl.tgz` and `.sha` and checked the hash, record the run in RUNNOTE (end lines of `run.log` with counts only, worker exits, restart if any, kernel OOM lines, the completed prefix printed by the run script) and delete the VM (resources 0 checked); (3) extract the archive into `runs/` and check `BUDGET-OUTCOME.sha256`, `DESIGN-v1*.sha256` and the summary script hash; (4) run the stamped summary unchanged: `python code/summarize_ibl.py --rows runs --order runs/ORDER.json --stim runs/STIM-REGIONS.json --realism runs/REALISM.json --region-info meta/region_info.csv > runs/SUMMARY.md` (B = 20,000; pinned environment as the step 2 venv, numpy/scipy versions printed); (5) fill sections 1 onward from `runs/SUMMARY.md` only, every number traced to it; (6) statistician review and re-review before the note is used in any manuscript.
+
+## Sections 1–6 (written 2026-10-27 09:05–09:08 KST, revised 09:13 and 09:15 after the statistician review and re-review `review-results-note-statistician.txt`; earlier text in git 4b66184)
+Sources: rates, intervals, contrasts and counts from `runs/SUMMARY.md` (the stamped `code/summarize_ibl.py`, run unchanged); error types and session counts from the rows `runs/rows.w*.jsonl` (keys only); run facts from `RUNNOTE-2.md`. Before the summary (0b step 3): `BUDGET-OUTCOME.sha256` 33/33 OK, `DESIGN-v1.sha256`, `DESIGN-v1-CODE-ADDENDUM.sha256`, `DESIGN-v1-CODE-ADDENDUM-2.sha256` all OK (summary script ee5c58…). **Deviation from 0b(4):** attempt 1 ran in the step 2 environment (`trackA-school/venv-step2`: Python 3.12.3, numpy 2.5.4, scipy 1.18.1, no pandas) and stopped at the pandas import of the positive-control step (`runs/SUMMARY-attempt1-incomplete.md`, `.err`); the rerun used a new environment with the run machine's versions (numpy 2.5.4, scipy 1.18.1, pandas 2.3.3; `MACHINE.txt`), `pip freeze` in `runs/SUMMARY-env-freeze.txt`; rc 0, empty stderr; its first 72 lines are identical to attempt 1's. The script prints no versions. **Deviation from 0b(2):** the run record is in `RUNNOTE-2.md` because `RUNNOTE.md` is in the stamped hash list; `RUNNOTE.md` was restored from fcb682f (hash verified). B = 20,000, seed 20261023. Rates are mouse-weighted means with mouse-cluster BCa 95% intervals unless stated.
+
+## 1. Prefix and denominators
+Completed prefix: 459 of 459 sessions (139 mice in the order). Finished 335, skipped 106 (fewer than 250 kept trials, the stamped rule), errored 18. **The 18 session errors all occurred when `load_good_units` built the Allen atlas (`AllenAtlas()` inside `SpikeSortingLoader`), at each worker's first or second session (order positions 2–55).** They look like a start-up race on one atlas file shared by the workers; they are unrelated to the sessions' own data and probably would not recur. The stamped rule counts errors as final, so they were not rerun. The 18 had passed the trial gate (5.1% of 353 gate-passing sessions; 17 mice, 4 of them with no other analysed session). Because the order is random and the failure depends on worker start timing, their loss is unlikely to bias the rates. Region-sessions excluded: 1,140 with fewer than 10 units, 324 void/root. **Analysed: 1,359 region-sessions of 325 sessions and 118 mice** (10 finished sessions had no region-session with at least 10 units); every region-session has 20 usable fake draws (27,180 usable p per Q1 row); no NaN or None p in any Q1 or Q2 row. Mice contribute 1 to 38 region-sessions; mouse- and region-session-weighted rates differ by at most 2.6 points.
+
+## 2. Q1: labels with no information (fake block-side labels from the task generator)
+| row | rate (95%) | inflated | region-session-weighted | p in 0.03–0.07 |
+|---|---|---|---|---|
+| P1 binomial-type z test | 77.3% (74.5–79.5) | yes | 78.5% | 6.3% |
+| P2 scikit-learn `permutation_test_score` | 70.4% (67.5–72.9) | yes | 71.7% | 8.7% |
+| P4 training labels only (PyMVPA/ADAM rule) | 75.8% (72.9–78.0) | yes | 76.8% | 7.4% |
+| PS-refit (sanity check, exact by construction) | 4.9% (4.6–5.3) | no | 4.8% | 4.0% |
+| PS-fixed (decoder fitted once; invalid by construction, DESIGN §5) | 57.7% (55.0–60.0) | yes | 58.6% | 15.9% |
+| P2 under S-block | 1.0% (0.8–1.3) | no | 0.8% | 0.3% |
+| PS-refit under S-block | 5.0% (4.6–5.4) | no | 4.9% | 3.8% |
+| SEL-repeat | 4.9% (4.6–5.3) | no | 4.8% | 4.0% |
+| SEL-fixed | 6.1% (5.6–6.6) | no | 6.0% | 4.8% |
+| IID-SEL-repeat | 5.2% (4.9–5.5) | no | 5.2% | 3.9% |
+| IID-SEL-fixed | 5.2% (4.8–5.5) | no | 5.2% | 4.2% |
+| IID-P1 | 9.0% (8.5–9.5) | no | 9.0% | 5.4% |
+| IID-P2 | 4.8% (4.5–5.2) | no | 5.0% | 4.2% |
+| IID-P4 | 9.2% (8.7–9.7) | no | 9.2% | 5.6% |
+- **F (primary) = P2 − PS-refit, S-main: 65.6 points (95% 62.6 to 68.0; Bonferroni 98.3% 61.9 to 68.5): positive.**
+- Secondary (no decision): P1 − PS-refit 72.4 (69.7 to 74.6); P4 − PS-refit 70.9 (68.0 to 73.1); PS-fixed − PS-refit 52.8 (50.2 to 55.1); S-block (P2-block − P2) −69.4 (−72.0 to −66.4); P1 − IID-P1 68.4 (65.6 to 70.5).
+- The sanity row PS-refit is at 4.9% as it must be. P2 under S-block (whole blocks held out, trial-level permutation on fixed folds) is far below nominal (1.0%): conservative, not calibrated, and with little power; the pseudosession null under the same split stays at 5.0%. P1 and P4 exceed 5% also with i.i.d. labels (9.0%, 9.2%), as in step 2; P1 is 68.4 points above its i.i.d. rate (paired), P4 about 67 points from the two rates (75.8 − 9.2; no paired contrast). IID-P2 is 4.8%, so P2's inflation needs the block structure.
+
+## 3. Q2: the real block side
+- Realism check (pre-set, before the run): pooled KS of block lengths 0.060, permutation p 0.141 → response "none", so Q2 is not downgraded to descriptive and V keeps its decision rule.
+- **V (primary) = share significant under P2 − share under PS-refit: 64.8 points (95% 60.3 to 68.9; Bonferroni 98.3% 59.3 to 69.8): positive.** V is about the size of F (65.6): on real labels P2's extra rejections are what its fake-label inflation predicts, so V counts mostly changed verdicts, not detected signal (P2's real-label rate, 74.6%, is a little above its fake-label rate, 70.4%).
+- Verdict table (1,359 region-sessions with both verdicts): both significant 146; **P2 only 884**; PS-refit only 0; neither 329. Discordant 884 vs 0 (exact binomial p < 0.0001, descriptive; region-sessions are not independent).
+- Cross-tab (§8): of the 884 P2-only region-sessions, 883 have their own fake-label P2 share above 10% (99.9%); of the 475 others, 466 (98.1%). The pre-set 10% cut is uninformative here, because almost every region-session exceeds it; "others" pools "both" (146) and "neither" (329).
+| row (real labels) | rate (95%) | region-session-weighted | p in 0.03–0.07 |
+|---|---|---|---|
+| P1 | 80.3% (76.5–83.4) | 82.0% | 5.2% |
+| P2 | 74.6% (70.2–78.5) | 75.8% | 8.1% |
+| P4 | 79.5% (75.7–82.7) | 80.9% | 7.0% |
+| PS-refit | 9.8% (7.7–12.9) | 10.7% | 6.9% |
+| PS-fixed | 63.8% (58.9–68.3) | 66.4% | 11.8% |
+| P1 under S-block | 1.9% (1.1–3.6) | 2.2% | 0.6% |
+| P2 under S-block | 1.6% (0.9–3.3) | 1.8% | 0.7% |
+| P4 under S-block | 1.3% (0.6–3.0) | 1.3% | 0.4% |
+| PS-refit under S-block | 6.8% (5.0–9.3) | 6.6% | 5.9% |
+| PS-fixed under S-block | 1.1% (0.5–2.8) | 1.1% | 0.3% |
+| SEL-repeat | 8.0% (6.2–11.1) | 8.5% | 5.5% |
+| SEL-fixed | 10.6% (8.3–13.9) | 11.0% | 7.2% |
+- The P1, P2, P4 and PS-fixed S-block rows on real labels (1.1–1.9%) are close to the 1.0% that P2 gives under S-block on fake labels; P1, P4 and PS-fixed were not run under S-block on fake labels. These low rates therefore cannot be read as an absence of signal.
+- PS-refit rejects in 9.8% of real-label region-sessions (95% 7.7–12.9), above the 5% expected with no block information. This can reflect block-related activity, choice history (not separated, DESIGN §10), or real blocks departing from the generator; the realism check covered only the first 30 sessions, and its p of 0.14 shows no detected departure, not conformity.
+- Wording (DESIGN §1): these are changed verdicts under a simplified binary decoder on the analysed region-sessions, not false positives, and they are not comparable with the region maps of Findling et al. 2025 or IBL 2025.
+
+## 4. Q3: unit selection inside the pseudosession null
+- **S (primary) = SEL-fixed − SEL-repeat on fake labels: 1.2 points (95% 0.8 to 1.5; Bonferroni 98.3% 0.8 to 1.6): positive**; the same contrast in the i.i.d. control: −0.0 (95% −0.3 to 0.2), not detected. SEL-fixed 6.1% (lower bound 5.6%) is not "inflated" by the pre-set 10% rule.
+- Reading: keeping the selected units fixed inside the pseudosession null raises the rate, as predicted, but only slightly in this pipeline (KS selection on the first half of each block, decoding on the second half); much smaller than PS-fixed's 57.7%, which fixes the whole fit under a different split (not a like-for-like comparison).
+
+## 5. Positive control and region counts
+- Stimulus side (0–100 ms, PS-refit): significant in 221 of 544 region-sessions (41%) of regions marked stimulus-significant in `region_info.csv` (108 mice), 96 of 803 (12%) of the other regions (112 mice), 1 of 12 of regions without a value (9 mice); no region-session without a usable p. The pipeline is significant more often in regions the published map marks as stimulus-significant (41% vs 12%; 12% is also above 5%). The published map comes from the same recordings, so this is a consistency check of the pipeline, not independent validation.
+- Extended Data region counts (regions with ≥ 3 sessions, real labels, descriptive, usable p only): `runs/SUMMARY.md` (e.g. CA1 P2 27/47 vs PS-refit 1/47; MRN 48/57 vs 10/57; VISp 13/17 vs 0/17).
+
+## 6. Predictions (DESIGN §8), deviations, limits
+- Q1: P1, P2, P4 under S-main above 10% — **held** (77%, 70%, 76%); PS-refit about 5% — **held** (4.9%); PS-fixed above PS-refit — **held** (57.7%); S-block P2 lower than S-main P2 — **held** (1.0%, below nominal).
+- Q2: more region-sessions significant under P2 than under PS-refit — **held** (884 vs 0 discordant); P2-only region-sessions have higher fake-label P2 rates than the others — **held in direction** (99.9% vs 98.1% above 10%); the pre-set cut is uninformative.
+- Q3: SEL-fixed above SEL-repeat on fake labels, near SEL-repeat in the i.i.d. control — **held** (1.2 points vs −0.0), small.
+- Deviations (restated, item 14): ONE username set-up; pilot input PILOT-ORDER.json; machine c2d-highmem-56 instead of the example c2d-highcpu-56; cost cap raised from 40,000 to 60,000 KRW after the pilot, before any result (at 40,000 KRW the plan would have been 365 sessions, so the raise is what let all 459 run); workers' vCPU-hours reading; disk-limit count version 2; time cap 754 minutes, workers used 368; billed cost to be read from the billing console (RUNNOTE-2); the run record in RUNNOTE-2 (0b(2)); the summary environment (0b(4)).
+- Limits (for the paper): one decoder: L2 logistic regression (C = 1) after univariate F-test selection of up to 20 units, 5-fold cross-validation once, 200 pseudosessions per null, against the papers' L1 decoders refit under 1,000 pseudosessions × 10; a sample of the brain-wide map (the completed prefix of a random session order, region-sessions with at least 10 good units, 18 gate-passing sessions lost to the atlas start-up errors); choice history is not separated from the block prior (DESIGN §10), so the real-label verdicts under PS-refit may partly reflect choice history; regions of a session share its fake draws: the mouse-cluster bootstrap allows for this, the discordant binomial p and the Extended Data counts do not; Bonferroni applies to F, V and S only, the "inflated" flags are uncorrected; a correction could only remove flags, and every flagged row has a lower bound of 55.0% or more; the secondary contrasts carry no decision; P2 rejects on real labels also wherever its fake-label rate is high, so a P2 verdict on real labels carries little information about the block prior. Nothing here re-tests Findling et al. 2025 or IBL 2025. Not done: WFI data, choice and feedback variables, the continuous prior, the papers' 1,000 × 10 protocol, any re-analysis of their region maps.
+- **Review:** statistician review (`review-results-note-statistician.txt`): 4 MUST and 11 SHOULD, all applied; re-review: ready after one MUST (S-block sentence) and two SHOULD (multiplicity sentence, "mostly"), applied.

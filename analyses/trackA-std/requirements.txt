@@ -1,0 +1,6 @@
+# Pinned to the versions that produced expected/ (gate 2 compares outputs exactly). Python 3.12.
+numpy==2.4.6
+scipy==1.18.1
+h5py==3.16.0
+# only for step 2 (timestamping); can be in a separate venv
+opentimestamps-client>=0.7

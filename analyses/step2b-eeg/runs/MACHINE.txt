@@ -1,0 +1,169 @@
+written: 2026-10-23 14:27:46 UTC
+instance: c2d-highcpu-56  zone: us-east4-a  scheduling: <!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}
+  </style>
+  <a href=//www.google.com/><span id=logo aria-label=Google></span></a>
+  <p><b>404.</b> <ins>That’s an error.</ins>
+  <p>The requested URL <code>/computeMetadata/v1/instance/scheduling/provisioning-model</code> was not found on this server.  <ins>That’s all we know.</ins>
+cpu: AMD EPYC 7B13  vCPU: 1
+os: Ubuntu 24.04.5 LTS  kernel: 7.0.0-1014-gcp
+git commit: 826b955a0b7dacbf16023c59e1acd313750bc725
+threads: OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1; workers: 56
+== code sha256
+1965c282714dfedad5df476ceb6906a208f7675a6628607b7248fb1ffa3dbe32  step2b-eeg/code/compare_equiv.py
+a70da1acbd1bc71187ca9dec381933600da43667a0811503fcfc89785395148f  step2b-eeg/code/eligibility.py
+2cb744c43a9d9954b75670d4ef7b316989d10a266a5df46c56130f80184a2983  step2b-eeg/code/equiv_check.py
+b3137381f916b03c6be0baedf89406b3f5f262ea7185ff1938666445086cb598  step2b-eeg/code/graded2.py
+1a31c2fe7194c0c45bf058dfb856a09408ebd2928be3db4c0345438c9a509873  step2b-eeg/code/graded_pilot.py
+89663dbfc97f185cf3f85a523a875582e3643655574425d433f5607b6e268ef9  step2b-eeg/code/graded_pilot2.py
+b05524e1624c545ba22b6799008b3904e18497e56987c5cc08270c6462f16195  step2b-eeg/code/preprocess.py
+609c5dcc854db4e602810decc5f60872c37a1b8a565330e635dda71b2f1471f6  step2b-eeg/code/qc_summary.py
+a41fa73db36597858c3f4a971619614f7be4b25493f024dac5c96d4b197aa565  step2b-eeg/code/run_2b.py
+bee519f6bef548cfab1df13abc1114847acdb8e95bf77eef41e00dc815064d44  step2b-eeg/code/run_graded2.py
+383c3bbab15180b50666cceddd39ef7156519a2f0f98486b0cfb07cce5ed25ba  step2b-eeg/code/summarize_2b.py
+b88e89e0f9f182e129bb1d05972ec1a192e83c3a938378bd1b5a248f88eb974b  step2b-eeg/code/download_eeg.sh
+4ba76ef61378cdd875cd2bb864dc8149c63e33351a056ca24a9e75d31775f723  step2b-eeg/code/download_pilot.sh
+16f210f18082c4218c7fb1100450431848d8b11d40935cdabc2630caf3106aff  step2b-eeg/code/download_pilot2.sh
+6a288fe11130aa889ef5f1ddafff95227383c7ebdd9fe0f7702407b4868446b9  step2-comparison/code/sim.py
+== pip freeze
+certifi==2026.10.19
+charset-normalizer==3.5.2
+cloudpickle==3.1.2
+contourpy==1.4.0
+cycler==0.12.1
+decorator==5.3.1
+fonttools==4.67.0
+idna==3.20
+Jinja2==3.1.6
+joblib==1.6.0
+kiwisolver==1.5.1
+lazy-loader==0.6
+MarkupSafe==3.0.4
+matplotlib==3.11.2
+mne==1.13.2
+numpy==2.5.4
+packaging==26.3
+pillow==13.0.0
+platformdirs==4.13.5
+pooch==1.9.0
+pyparsing==3.3.3
+python-dateutil==2.9.0.post0
+requests==2.34.2
+scikit-learn==1.7.2
+scipy==1.18.1
+six==1.17.0
+threadpoolctl==3.7.0
+tqdm==4.70.1
+urllib3==2.8.0
+== numpy.show_config()
+{
+  "Compilers": {
+    "c": {
+      "name": "gcc",
+      "linker": "ld.bfd",
+      "version": "14.2.1",
+      "commands": "cc"
+    },
+    "cython": {
+      "name": "cython",
+      "linker": "cython",
+      "version": "3.3.0",
+      "commands": "cython"
+    },
+    "c++": {
+      "name": "gcc",
+      "linker": "ld.bfd",
+      "version": "14.2.1",
+      "commands": "c++"
+    }
+  },
+  "Machine Information": {
+    "host": {
+      "cpu": "x86_64",
+      "family": "x86_64",
+      "endian": "little",
+      "system": "linux"
+    },
+    "build": {
+      "cpu": "x86_64",
+      "family": "x86_64",
+      "endian": "little",
+      "system": "linux"
+    }
+  },
+  "Build Dependencies": {
+    "blas": {
+      "name": "scipy-openblas",
+      "found": true,
+      "version": "0.3.34.106.0",
+      "detection method": "pkgconfig",
+      "include directory": "/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/include",
+      "lib directory": "/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/lib",
+      "openblas configuration": "OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY SkylakeX MAX_THREADS=64",
+      "pc file directory": "/project/.openblas"
+    },
+    "lapack": {
+      "name": "scipy-openblas",
+      "found": true,
+      "version": "0.3.34.106.0",
+      "detection method": "pkgconfig",
+      "include directory": "/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/include",
+      "lib directory": "/opt/_internal/cpython-3.12.13/lib/python3.12/site-packages/scipy_openblas64/lib",
+      "openblas configuration": "OpenBLAS 0.3.34.106.0  USE64BITINT DYNAMIC_ARCH NO_AFFINITY SkylakeX MAX_THREADS=64",
+      "pc file directory": "/project/.openblas"
+    }
+  },
+  "Python Information": {
+    "path": "/tmp/build-env-ptu49_tp/bin/python",
+    "version": "3.12"
+  },
+  "SIMD Extensions": {
+    "baseline": [
+      "X86_V2"
+    ],
+    "found": [
+      "X86_V3"
+    ],
+    "not found": [
+      "X86_V4",
+      "AVX512_ICL",
+      "AVX512_SPR"
+    ]
+  }
+}
+== threadpoolctl
+[
+ {
+  "user_api": "blas",
+  "internal_api": "openblas",
+  "num_threads": 1,
+  "prefix": "libscipy_openblas",
+  "filepath": "<home>/venv-2b/lib/python3.12/site-packages/scipy.libs/libscipy_openblas-5f890258.so",
+  "version": "0.3.31.dev",
+  "threading_layer": "pthreads",
+  "architecture": "Haswell"
+ },
+ {
+  "user_api": "openmp",
+  "internal_api": "openmp",
+  "num_threads": 1,
+  "prefix": "libgomp",
+  "filepath": "<home>/venv-2b/lib/python3.12/site-packages/scikit_learn.libs/libgomp-a34b3233.so.1.0.0",
+  "version": null
+ },
+ {
+  "user_api": "blas",
+  "internal_api": "openblas",
+  "num_threads": 1,
+  "prefix": "libscipy_openblas",
+  "filepath": "<home>/venv-2b/lib/python3.12/site-packages/numpy.libs/libscipy_openblas64_-f48b354e.so",
+  "version": "0.3.34.106.0",
+  "threading_layer": "pthreads",
+  "architecture": "Haswell"
+ }
+]

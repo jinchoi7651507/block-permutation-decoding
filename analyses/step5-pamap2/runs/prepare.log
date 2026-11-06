@@ -1,0 +1,9 @@
+{"windows_total": 1882, "windows_kept": 1882, "windows_dropped": {"gap": 0, "imu": 0, "hr": 0}, "included": true, "windows_per_block": 78, "n_features": 55, "subject": "subject101"}
+{"windows_total": 2235, "windows_kept": 2235, "windows_dropped": {"gap": 0, "imu": 0, "hr": 0}, "included": true, "windows_per_block": 93, "n_features": 55, "subject": "subject102"}
+{"windows_total": 1264, "windows_kept": 1264, "windows_dropped": {"gap": 0, "imu": 0, "hr": 0}, "included": true, "windows_per_block": 52, "n_features": 55, "subject": "subject103"}
+{"windows_total": 1647, "windows_kept": 1647, "windows_dropped": {"gap": 0, "imu": 0, "hr": 0}, "included": true, "windows_per_block": 68, "n_features": 55, "subject": "subject104"}
+{"windows_total": 1873, "windows_kept": 1873, "windows_dropped": {"gap": 0, "imu": 0, "hr": 0}, "included": true, "windows_per_block": 78, "n_features": 55, "subject": "subject105"}
+{"windows_total": 1809, "windows_kept": 1808, "windows_dropped": {"gap": 0, "imu": 1, "hr": 0}, "included": true, "windows_per_block": 75, "n_features": 55, "subject": "subject106"}
+{"windows_total": 1567, "windows_kept": 1567, "windows_dropped": {"gap": 0, "imu": 0, "hr": 0}, "included": true, "windows_per_block": 65, "n_features": 55, "subject": "subject107"}
+{"windows_total": 2040, "windows_kept": 2040, "windows_dropped": {"gap": 0, "imu": 0, "hr": 0}, "included": true, "windows_per_block": 85, "n_features": 55, "subject": "subject108"}
+{"windows_total": 42, "windows_kept": 42, "windows_dropped": {"gap": 0, "imu": 0, "hr": 0}, "included": false, "reason": "42 windows retained, fewer than 480", "subject": "subject109"}

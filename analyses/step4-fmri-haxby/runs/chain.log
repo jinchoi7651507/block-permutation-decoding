@@ -1,0 +1,32 @@
+2026-11-02 18:50:51 KST chain start
+2026-11-02 20:32:24 KST attested: <repo>/results/step4-fmri-haxby
+    verify BitcoinBlockHeaderAttestation(974245)
+DESIGN.md: OK
+requirements.txt: OK
+test_synthetic.out: OK
+code/engine.py: OK
+code/fetch_haxby.py: OK
+code/prepare_haxby.py: OK
+code/run_haxby.py: OK
+code/summarize.py: OK
+code/test_synthetic.py: OK
+../step2-comparison/code/sim.py: OK
+2026-11-02 20:32:27 KST attested: <repo>/results/step5-pamap2
+    verify BitcoinBlockHeaderAttestation(974245)
+DESIGN.md: OK
+requirements.txt: OK
+code/fetch_pamap2.py: OK
+code/prepare_pamap2.py: OK
+code/run_pamap2.py: OK
+../step4-fmri-haxby/code/engine.py: OK
+../step4-fmri-haxby/code/summarize.py: OK
+../step4-fmri-haxby/code/test_synthetic.py: OK
+../step4-fmri-haxby/test_synthetic.out: OK
+../step2-comparison/code/sim.py: OK
+2026-11-02 20:32:27 KST step 4 fetch
+2026-11-02 20:37:12 KST step 4 prepared
+2026-11-03 01:31:44 KST step 4 runs finished
+2026-11-03 01:31:44 KST step 5 fetch
+2026-11-03 01:34:58 KST step 5 prepared
+2026-11-03 03:38:43 KST step 5 runs finished
+2026-11-03 03:38:43 KST chain done

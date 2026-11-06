@@ -1,0 +1,12 @@
+{
+ "windows_total": 42,
+ "windows_kept": 42,
+ "windows_dropped": {
+  "gap": 0,
+  "imu": 0,
+  "hr": 0
+ },
+ "included": false,
+ "reason": "42 windows retained, fewer than 480",
+ "subject": "subject109"
+}

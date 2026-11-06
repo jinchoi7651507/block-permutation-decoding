@@ -1,0 +1,12 @@
+2026-10-26 10:16:34 UTC pilot start; watchdog power-off in 360 min
+2026-10-26 10:16:34 UTC hash check ok (stamped files, prep archive, ORDER.json)
+2026-10-26 10:16:36 UTC ONE username set and login checked: intbrainlab (RUNNOTE)
+2026-10-26 10:16:38 UTC machine record written
+2026-10-26 10:16:38 UTC nproc 1; free -g: 110 total, 2 used
+2026-10-26 10:16:38 UTC -1 dummy-load processes started (W = 1); dummies are 400 x 30 synthetic region-sessions (understate memory contention)
+2026-10-26 10:16:38 UTC pilot process 0 started (pid 3555)
+2026-10-26 10:16:38 UTC pilot process 1 started (pid 3558)
+2026-10-26 10:16:47 UTC pilot process pid 3555 ended rc 0 (124 = 330-min timeout)
+2026-10-26 10:16:47 UTC pilot process pid 3558 ended rc 0 (124 = 330-min timeout)
+2026-10-26 10:16:47 UTC pilot.w0: session_seconds rows 0, skipped 1, error 0, region_error 0
+2026-10-26 10:16:47 UTC pilot.w1: session_seconds rows 0, skipped 1, error 0, region_error 0

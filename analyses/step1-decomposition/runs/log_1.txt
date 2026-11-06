@@ -1,0 +1,62 @@
+  719161530 VISal: 55.4 s
+  719161530 VISam: 108.3 s
+  719161530 VISl: 107.3 s
+  719161530 VISp: 153.2 s
+  719161530 VISpm: 73.3 s
+<repo>/results/trackA-std/code/ephys-matched-null.py:114: RuntimeWarning: Degrees of freedom <= 0 for slice
+  va, vb = a.var(ddof=1), b.var(ddof=1)
+<home>/.pyenv/versions/3.12.3/lib/python3.12/site-packages/numpy/_core/_methods.py:178: RuntimeWarning: invalid value encountered in divide
+  arrmean = um.true_divide(arrmean, div, out=arrmean,
+<home>/.pyenv/versions/3.12.3/lib/python3.12/site-packages/numpy/_core/_methods.py:211: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+<repo>/results/trackA-std/code/ephys-matched-null.py:118: RuntimeWarning: Mean of empty slice
+  return float((a.mean() - b.mean()) / pooled)
+<home>/.pyenv/versions/3.12.3/lib/python3.12/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+<repo>/results/trackA-std/code/ephys-matched-null.py:141: RuntimeWarning: Mean of empty slice
+  hi_is_class0 = diff[cal][labels[cal] == 0].mean() > diff[cal][labels[cal] == 1].mean()
+<repo>/results/step1-decomposition/code/decompose.py:59: RuntimeWarning: Mean of empty slice
+  hi0 = sign if sign is not None else diff[cal][labels[cal] == 0].mean() > diff[cal][labels[cal] == 1].mean()
+  719161530 VISrl: 48.6 s
+SESSION 719161530: DONE in 558 s
+  739448407 VISam: 200.7 s
+  739448407 VISl: 207.0 s
+  739448407 VISp: 81.9 s
+  739448407 VISrl: 318.1 s
+SESSION 739448407: DONE in 808 s
+  746083955 VISal: 132.6 s
+  746083955 VISl: 159.8 s
+  746083955 VISp: 85.8 s
+  746083955 VISpm: 524.5 s
+  746083955 VISrl: 165.8 s
+SESSION 746083955: DONE in 1069 s
+  754312389 VISal: 121.7 s
+  754312389 VISam: 204.1 s
+  754312389 VISl: 55.7 s
+  754312389 VISp: 352.3 s
+  754312389 VISpm: 84.4 s
+  754312389 VISrl: 147.9 s
+SESSION 754312389: DONE in 967 s
+  757216464 VISal: 188.4 s
+  757216464 VISam: 216.9 s
+  757216464 VISl: 190.8 s
+  757216464 VISp: 338.0 s
+  757216464 VISrl: 115.1 s
+SESSION 757216464: DONE in 1050 s
+  760345702 VISal: 301.5 s
+  760345702 VISam: 205.4 s
+  760345702 VISl: 203.6 s
+  760345702 VISp: 273.5 s
+  760345702 VISpm: 169.3 s
+SESSION 760345702: DONE in 1154 s
+  762602078 VISam: 187.9 s
+  762602078 VISp: 179.0 s
+  762602078 VISrl: 195.4 s
+SESSION 762602078: DONE in 563 s
+  797828357 VISal: 247.6 s
+  797828357 VISam: 278.7 s
+  797828357 VISl: 271.2 s
+  797828357 VISp: 360.9 s
+  797828357 VISpm: 291.6 s
+  797828357 VISrl: 58.0 s
+SESSION 797828357: DONE in 1509 s

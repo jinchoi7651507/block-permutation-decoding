@@ -1,0 +1,13 @@
+{
+ "windows_total": 1809,
+ "windows_kept": 1808,
+ "windows_dropped": {
+  "gap": 0,
+  "imu": 1,
+  "hr": 0
+ },
+ "included": true,
+ "windows_per_block": 75,
+ "n_features": 55,
+ "subject": "subject106"
+}

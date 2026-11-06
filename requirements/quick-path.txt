@@ -1,0 +1,9 @@
+# Quick path (REPRODUCE.md §1, §2, figures): Python 3.12
+numpy==2.5.4
+scipy==1.18.1
+scikit-learn==1.7.2
+pandas==2.3.3
+h5py==3.16.0
+matplotlib==3.10.9
+pytest==9.2.0
+opentimestamps==0.5.0

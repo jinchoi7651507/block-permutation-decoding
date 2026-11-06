@@ -1,0 +1,50 @@
+2026-10-23 14:27:16 UTC phase 1 start
+debconf: unable to initialize frontend: Dialog
+debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+dpkg-preconfigure: unable to re-open stdin: 
+debconf: unable to initialize frontend: Dialog
+debconf: (Dialog frontend will not work on a dumb terminal, an emacs shell buffer, or without a controlling terminal.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (This frontend requires a controlling tty.)
+debconf: falling back to frontend: Teletype
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+1.13.2 1.7.2 2.5.4 1.18.1
+2026-10-23 14:27:46 UTC feature manifest OK (100 files)
+DESIGN-v2-ADDENDUM-2.md: OK
+code/graded2.py: OK
+code/graded_pilot2.py: OK
+code/run_graded2.py: OK
+code/download_pilot2.sh: OK
+code/equiv_check.py: OK
+code/compare_equiv.py: OK
+eligibility/PILOT2-SUBJECTS.txt: OK
+eligibility/PILOT2-SUBJECTS.sha256: OK
+eligibility/REPLACEMENT-ORDER-v2.txt: OK
+eligibility/REPLACEMENT-ORDER-v2.sha256: OK
+eligibility/EQUIV-SUBJECTS.txt: OK
+eligibility/EQUIV-SUBJECTS.sha256: OK
+2026-10-23 14:27:47 UTC MACHINE.txt written
+2026-10-23 14:30:10 UTC equivalence check rc 0
+{'N1': 1.0, 'N2': 1.0, 'N3': 0.97, 'N4': 0.9, 'N5': 0.84, 'N6': 0.72, 'N7': 0.63, 'N8': 0.48, 'N10': 0.32, 'N12': 0.28, 'N14': 0.21, 'N16': 0.16, 'N20': 0.11, 'N24': 0.11} chosen N5
+2026-10-23 14:33:32 UTC graded pilot 2 rc 0
+2026-10-23 14:33:32 UTC phase 1 end
+2026-10-23 14:34:57 UTC phase 2 start: main arms
+2026-10-23 18:23:24 UTC main arms done
+2026-10-23 22:29:00 UTC sensitivity done
+2026-10-23 22:29:00 UTC graded rule: N5
+2026-10-23 23:08:25 UTC graded arms done
+2026-10-23 23:08:25 UTC phase 2 end

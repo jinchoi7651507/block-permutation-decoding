@@ -1,0 +1,52 @@
+{
+ "freeze": "2023_12_bwm_release",
+ "fixture_sha256": "db9edfc6f5d92a4df81d488bfb1068f43526a13717bb8fc7da2aecdd28876ac4",
+ "n_insertions": 699,
+ "n_sessions": 459,
+ "n_mice": 139,
+ "pilot_note": "attempt 2: first sessions of ORDER.json passing the runner's trial gate with >= 1 region-session",
+ "examined": [
+  {
+   "position": 0,
+   "eid": "56956777-dca5-468c-87cb-78150432cc57",
+   "passed_over": "fewer than 250 kept trials"
+  },
+  {
+   "position": 1,
+   "eid": "a34b4013-414b-42ed-9318-e93fbbc71e7b",
+   "passed_over": "no region-session with >= 10 good units"
+  },
+  {
+   "position": 2,
+   "eid": "64e3fb86-928c-4079-865c-b364205b502e",
+   "passed_over": null
+  },
+  {
+   "position": 3,
+   "eid": "75b6b132-d998-4fba-8482-961418ac957d",
+   "passed_over": "fewer than 250 kept trials"
+  },
+  {
+   "position": 4,
+   "eid": "fece187f-b47f-4870-a1d6-619afe942a7d",
+   "passed_over": null
+  }
+ ],
+ "sessions": [
+  {
+   "eid": "64e3fb86-928c-4079-865c-b364205b502e",
+   "pids": [
+    "da17779f-7728-4c51-8b54-b88764c0908d"
+   ],
+   "subject": "NYU-46"
+  },
+  {
+   "eid": "fece187f-b47f-4870-a1d6-619afe942a7d",
+   "pids": [
+    "5d570bf6-a4c6-4bf1-a14b-2c878c84ef0e",
+    "f7c93877-ec05-4091-a003-e69fae0f2fa8"
+   ],
+   "subject": "CSH_ZAD_029"
+  }
+ ]
+}

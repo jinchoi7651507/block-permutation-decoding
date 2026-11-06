@@ -1,0 +1,4 @@
+3.12.3 2.5.4 1.18.1 1.7.2
+Model name:                              AMD EPYC 7B13
+4dffb152a9269162037545759628416ff9aa5f1eb8dfd6fa4804660c91a4eda8  run_grid.py
+6a288fe11130aa889ef5f1ddafff95227383c7ebdd9fe0f7702407b4868446b9  sim.py

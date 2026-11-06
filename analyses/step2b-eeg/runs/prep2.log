@@ -1,0 +1,32 @@
+2026-10-22 22:54:58 chain add2 start
+2026-10-23 00:21:10 addendum 2 attested
+DESIGN-v2-ADDENDUM-2.md: OK
+code/graded2.py: OK
+code/graded_pilot2.py: OK
+code/run_graded2.py: OK
+code/download_pilot2.sh: OK
+code/equiv_check.py: OK
+code/compare_equiv.py: OK
+eligibility/PILOT2-SUBJECTS.txt: OK
+eligibility/PILOT2-SUBJECTS.sha256: OK
+eligibility/REPLACEMENT-ORDER-v2.txt: OK
+eligibility/REPLACEMENT-ORDER-v2.sha256: OK
+eligibility/EQUIV-SUBJECTS.txt: OK
+eligibility/EQUIV-SUBJECTS.sha256: OK
+DESIGN-v2-ADDENDUM.md: OK
+code/preprocess.py: OK
+code/run_2b.py: OK
+code/graded_pilot.py: OK
+code/summarize_2b.py: OK
+code/download_pilot.sh: OK
+eligibility/REPLACEMENT-ORDER.txt: OK
+eligibility/PILOT-SUBJECTS.txt: OK
+../step2-comparison/code/sim.py: OK
+eligibility/PILOT2-SUBJECTS.txt: OK
+2026-10-23 00:21:46 sub-010216 64973520
+2026-10-23 00:24:05 sub-010305 318990000
+2026-10-23 00:26:51 sub-010164 325345000
+2026-10-23 00:29:13 sub-010092 319920000
+2026-10-23 00:33:33 sub-010041 314619000
+DONE
+2026-10-23 00:34:06 pilot2 download done

@@ -1,0 +1,602 @@
+Fig1 row 0 Simulation           1.000 [0.996, 1.000]  sim_summary c000 P2 (Wilson)
+Fig1 row 0 Mouse (Neuropixels)  0.977 [0.937, 1.000]  allen_summary new shared24/main P2
+Fig1 row 0 Human EEG            0.922 [0.885, 0.949]  summary_2b balanced/main/main/cleaned_s5 P2
+Fig1 row 0 fMRI (post hoc)      0.900 [0.828, 0.967]  step4 summary fake/detrended/main P2
+Fig1 row 0 Body-worn sensors (post hoc) 1.000 [1.000, 1.000]  step5 summary fake/windows2s/main P2
+Fig1 row 1 Mouse (Neuropixels)  0.837 [0.772, 0.899]  step1 results.json shared24/lr_topk/blk_fixed
+Fig1 row 2 Simulation           1.000 [0.996, 1.000]  sim_summary c000 P4 (Wilson)
+Fig1 row 2 Mouse (Neuropixels)  0.992 [0.975, 1.000]  allen_summary new shared24/main P4
+Fig1 row 2 Human EEG            0.939 [0.909, 0.962]  summary_2b balanced/main/main/cleaned_s5 P4
+Fig1 row 2 fMRI (post hoc)      0.911 [0.850, 0.967]  step4 summary fake/detrended/main P4
+Fig1 row 2 Body-worn sensors (post hoc) 1.000 [1.000, 1.000]  step5 summary fake/windows2s/main P4
+Fig1 row 3 Simulation           0.057 [0.044, 0.073]  sim_summary c000 P5 (Wilson)
+Fig1 row 3 Mouse (Neuropixels)  0.052 [0.019, 0.089]  allen_summary new shared24/main P5
+Fig1 row 3 Human EEG            0.049 [0.041, 0.058]  summary_2b balanced/main/main/cleaned_s5 P5
+Fig1 row 3 fMRI (post hoc)      0.078 [0.044, 0.100]  step4 summary fake/detrended/main P5
+Fig1 row 3 Body-worn sensors (post hoc) 0.050 [0.021, 0.087]  step5 summary fake/windows2s/main P5
+Fig2a CoSMoMVPA                  0.202 [0.169, 0.239]  SUMMARY-TOOLS.md L4 (Wilson, n 500)
+Fig2a CoSMoMVPA, z-scored        0.208 [0.175, 0.246]  SUMMARY-TOOLS.md L4 (Wilson, n 500)
+Fig2a PyMVPA                     0.184 [0.152, 0.220]  SUMMARY-TOOLS.md L4 (Wilson, n 500)
+Fig2a PyMVPA, z-scored           0.214 [0.180, 0.252]  SUMMARY-TOOLS.md L4 (Wilson, n 500)
+Fig2a Block permutation test     0.044 [0.029, 0.066]  SUMMARY-TOOLS.md L4 (Wilson, n 500)
+written fig1.pdf fig2a.pdf
+Fig2b Fake block sequences   scikit-learn rule    0.704 [0.675, 0.729]  runs/SUMMARY.md
+Fig2b Fake block sequences   Pseudosession test   0.049 [0.046, 0.053]  runs/SUMMARY.md
+Fig2b Real block side        scikit-learn rule    0.746 [0.702, 0.785]  runs/SUMMARY.md
+Fig2b Real block side        Pseudosession test   0.098 [0.077, 0.129]  runs/SUMMARY.md
+Fig2b verdicts: both 146, P2 only 884, PS-refit only 0, neither 329
+written fig2b.pdf
+ED1 row 0 Spontaneous activity     0.977 [0.937, 1.000]  allen_summary new shared24/main P2
+ED1 row 0 Drifting-grating trials  0.983 [0.950, 1.000]  allen_summary new dg_shared24/main P2
+ED1 row 1 Spontaneous activity     0.837 [0.772, 0.899]  step1 results.json new/std6 shared24/lr_topk/blk_fixed
+ED1 row 1 Drifting-grating trials  0.709 [0.640, 0.776]  step1 results.json new/std6 dg_shared24/lr_topk/blk_fixed
+ED1 row 2 Spontaneous activity     0.992 [0.975, 1.000]  allen_summary new shared24/main P4
+ED1 row 2 Drifting-grating trials  0.983 [0.950, 1.000]  allen_summary new dg_shared24/main P4
+ED1 row 3 Spontaneous activity     0.052 [0.019, 0.089]  allen_summary new shared24/main P5
+ED1 row 3 Drifting-grating trials  0.075 [0.037, 0.118]  allen_summary new dg_shared24/main P5
+ED2a shared24/nosel0/blk_fixed    0.042 [0.011, 0.082]  step1 results.json new/std6 shared24/nosel0/blk_fixed
+ED2a sep24/nosel0/blk_fixed       0.045 [0.015, 0.078]  step1 results.json new/std6 sep24/nosel0/blk_fixed
+ED2a shared24/nosel0/blk_rerun    not run (design: no refit null for this readout)
+ED2a shared24/nosel/blk_fixed     0.097 [0.054, 0.145]  step1 results.json new/std6 shared24/nosel/blk_fixed
+ED2a sep24/nosel/blk_fixed        0.059 [0.021, 0.105]  step1 results.json new/std6 sep24/nosel/blk_fixed
+ED2a shared24/nosel/blk_rerun     0.029 [0.006, 0.058]  step1 results.json new/std6 shared24/nosel/blk_rerun
+ED2a shared24/rank/blk_fixed      0.427 [0.350, 0.503]  step1 results.json new/std6 shared24/rank/blk_fixed
+ED2a sep24/rank/blk_fixed         0.026 [0.006, 0.052]  step1 results.json new/std6 sep24/rank/blk_fixed
+ED2a shared24/rank/blk_rerun      0.029 [0.006, 0.059]  step1 results.json new/std6 shared24/rank/blk_rerun
+ED2a shared24/sel/blk_fixed       0.627 [0.521, 0.732]  step1 results.json new/std6 shared24/sel/blk_fixed
+ED2a sep24/sel/blk_fixed          0.029 [0.006, 0.058]  step1 results.json new/std6 sep24/sel/blk_fixed
+ED2a shared24/sel/blk_rerun       0.023 [0.000, 0.052]  step1 results.json new/std6 shared24/sel/blk_rerun
+ED2a shared24/lr_topk/blk_fixed   0.837 [0.772, 0.899]  step1 results.json new/std6 shared24/lr_topk/blk_fixed
+ED2a sep24/lr_topk/blk_fixed      0.049 [0.019, 0.084]  step1 results.json new/std6 sep24/lr_topk/blk_fixed
+ED2a shared24/lr_topk/blk_rerun   0.015 [0.000, 0.038]  step1 results.json new/std6 shared24/lr_topk/blk_rerun
+ED2a shared24/lr_all/blk_fixed    0.953 [0.914, 0.986]  step1 results.json new/std6 shared24/lr_all/blk_fixed
+ED2a sep24/lr_all/blk_fixed       0.044 [0.014, 0.078]  step1 results.json new/std6 sep24/lr_all/blk_fixed
+ED2a shared24/lr_all/blk_rerun    0.034 [0.008, 0.063]  step1 results.json new/std6 shared24/lr_all/blk_rerun
+ED2b shared24/lr_topk/binom         0.962 [0.926, 0.989]  step1 results.json new/std6 shared24/lr_topk/binom
+ED2b half24/lr_topk/binom           0.851 [0.797, 0.904]  step1 results.json new/std6 half24/lr_topk/binom
+ED2b paired24/lr_topk/binom         0.694 [0.618, 0.769]  step1 results.json new/std6 paired24/lr_topk/binom
+ED2b sep24/lr_topk/binom            0.244 [0.175, 0.314]  step1 results.json new/std6 sep24/lr_topk/binom
+ED2b shared24/lr_topk/trl_rerun     0.968 [0.934, 0.994]  step1 results.json new/std6 shared24/lr_topk/trl_rerun
+ED2b half24/lr_topk/trl_rerun       0.876 [0.817, 0.929]  step1 results.json new/std6 half24/lr_topk/trl_rerun
+ED2b paired24/lr_topk/trl_rerun     0.694 [0.618, 0.769]  step1 results.json new/std6 paired24/lr_topk/trl_rerun
+ED2b sep24/lr_topk/trl_rerun        0.256 [0.187, 0.326]  step1 results.json new/std6 sep24/lr_topk/trl_rerun
+ED2b shared24/lr_topk/trn_trl       0.951 [0.914, 0.982]  step1 within_train.json new/std6 shared24/lr_topk/trn_trl
+ED2b half24/lr_topk/trn_trl         0.769 [0.699, 0.837]  step1 within_train.json new/std6 half24/lr_topk/trn_trl
+ED2b paired24/lr_topk/trn_trl       0.536 [0.446, 0.621]  step1 within_train.json new/std6 paired24/lr_topk/trn_trl
+ED2b sep24/lr_topk/trn_trl          0.106 [0.056, 0.158]  step1 within_train.json new/std6 sep24/lr_topk/trn_trl
+ED2b shared24/lr_topk/trn_blk       0.894 [0.844, 0.942]  step1 within_train.json new/std6 shared24/lr_topk/trn_blk
+ED2b half24/lr_topk/trn_blk         0.722 [0.649, 0.795]  step1 within_train.json new/std6 half24/lr_topk/trn_blk
+ED2b paired24/lr_topk/trn_blk       0.286 [0.216, 0.363]  step1 within_train.json new/std6 paired24/lr_topk/trn_blk
+ED2b sep24/lr_topk/trn_blk          0.029 [0.006, 0.058]  step1 within_train.json new/std6 sep24/lr_topk/trn_blk
+ED2b shared24/lr_topk/blk_fixed     0.837 [0.772, 0.899]  step1 results.json new/std6 shared24/lr_topk/blk_fixed
+ED2b half24/lr_topk/blk_fixed       0.642 [0.559, 0.721]  step1 results.json new/std6 half24/lr_topk/blk_fixed
+ED2b paired24/lr_topk/blk_fixed     0.249 [0.175, 0.328]  step1 results.json new/std6 paired24/lr_topk/blk_fixed
+ED2b sep24/lr_topk/blk_fixed        0.049 [0.019, 0.084]  step1 results.json new/std6 sep24/lr_topk/blk_fixed
+ED2b shared24/lr_topk/blk_rerun     0.015 [0.000, 0.038]  step1 results.json new/std6 shared24/lr_topk/blk_rerun
+ED2b half24/lr_topk/blk_rerun       0.031 [0.006, 0.058]  step1 results.json new/std6 half24/lr_topk/blk_rerun
+ED2b paired24/lr_topk/blk_rerun     0.033 [0.006, 0.068]  step1 results.json new/std6 paired24/lr_topk/blk_rerun
+ED2b sep24/lr_topk/blk_rerun        0.038 [0.008, 0.072]  step1 results.json new/std6 sep24/lr_topk/blk_rerun
+ED2c sep/nosel0/binom         0.281 [0.213, 0.349]  step1 results.json new/std6 sep/nosel0/binom
+ED2c sep/nosel/binom          0.274 [0.216, 0.333]  step1 results.json new/std6 sep/nosel/binom
+ED2c sep/rank/binom           0.272 [0.206, 0.341]  step1 results.json new/std6 sep/rank/binom
+ED2c sep/sel/binom            0.265 [0.206, 0.327]  step1 results.json new/std6 sep/sel/binom
+ED2c iid/sel/circ_rerun       0.028 [0.006, 0.056]  step1 results.json new/std6 iid/sel/circ_rerun
+ED2c shared/sel/circ_rerun    0.151 [0.105, 0.198]  step1 results.json new/std6 shared/sel/circ_rerun
+ED2c shared24/sel/circ_rerun  0.051 [0.018, 0.089]  step1 results.json new/std6 shared24/sel/circ_rerun
+ED2c segment/sel/circ_rerun   0.351 [0.236, 0.470]  step1 results.json new/std6 segment/sel/circ_rerun
+ED3 repeated mean 0.1149, central 95% 0.014 to 0.244, p 0.0010  fixed_vs_repeated.json arms.repeated
+ED3 fixed    mean 0.0014, central 95% -0.141 to 0.143, p 0.0010  fixed_vs_repeated.json arms.fixed
+ED3 observed 0.3368, 123 units  fixed_vs_repeated.json
+ED4 main  B4  tau7   drift 0 P2 0.118  sim_summary c001_random_B4_tau7_d0_t0_main
+ED4 main  B4  tau20  drift 0 P2 0.128  sim_summary c028_random_B4_tau20_d0_t0_main
+ED4 main  B4  tau67  drift 0 P2 0.114  sim_summary c054_random_B4_tau67_d0_t0_main
+ED4 main  B4  tau160 drift 0 P2 0.148  sim_summary c081_random_B4_tau160_d0_t0_main
+ED4 main  B4  tau7   drift 0 P5 0.000  sim_summary c001_random_B4_tau7_d0_t0_main
+ED4 main  B4  tau20  drift 0 P5 0.000  sim_summary c028_random_B4_tau20_d0_t0_main
+ED4 main  B4  tau67  drift 0 P5 0.000  sim_summary c054_random_B4_tau67_d0_t0_main
+ED4 main  B4  tau160 drift 0 P5 0.000  sim_summary c081_random_B4_tau160_d0_t0_main
+ED4 main  B4  tau7   drift 1 P2 0.998  sim_summary c010_random_B4_tau7_d1_t0_main
+ED4 main  B4  tau20  drift 1 P2 1.000  sim_summary c037_random_B4_tau20_d1_t0_main
+ED4 main  B4  tau67  drift 1 P2 0.932  sim_summary c063_random_B4_tau67_d1_t0_main
+ED4 main  B4  tau160 drift 1 P2 0.848  sim_summary c090_random_B4_tau160_d1_t0_main
+ED4 main  B4  tau7   drift 1 P5 0.000  sim_summary c010_random_B4_tau7_d1_t0_main
+ED4 main  B4  tau20  drift 1 P5 0.000  sim_summary c037_random_B4_tau20_d1_t0_main
+ED4 main  B4  tau67  drift 1 P5 0.000  sim_summary c063_random_B4_tau67_d1_t0_main
+ED4 main  B4  tau160 drift 1 P5 0.000  sim_summary c090_random_B4_tau160_d1_t0_main
+ED4 main  B4  tau7   drift 2 P2 1.000  sim_summary c019_random_B4_tau7_d2_t0_main
+ED4 main  B4  tau20  drift 2 P2 1.000  sim_summary c045_random_B4_tau20_d2_t0_main
+ED4 main  B4  tau67  drift 2 P2 1.000  sim_summary c072_random_B4_tau67_d2_t0_main
+ED4 main  B4  tau160 drift 2 P2 0.984  sim_summary c099_random_B4_tau160_d2_t0_main
+ED4 main  B4  tau7   drift 2 P5 0.000  sim_summary c019_random_B4_tau7_d2_t0_main
+ED4 main  B4  tau20  drift 2 P5 0.000  sim_summary c045_random_B4_tau20_d2_t0_main
+ED4 main  B4  tau67  drift 2 P5 0.000  sim_summary c072_random_B4_tau67_d2_t0_main
+ED4 main  B4  tau160 drift 2 P5 0.000  sim_summary c099_random_B4_tau160_d2_t0_main
+ED4 main  B12 tau7   drift 0 P2 0.120  sim_summary c004_random_B12_tau7_d0_t0_main
+ED4 main  B12 tau20  drift 0 P2 0.130  sim_summary c031_random_B12_tau20_d0_t0_main
+ED4 main  B12 tau67  drift 0 P2 0.154  sim_summary c057_random_B12_tau67_d0_t0_main
+ED4 main  B12 tau160 drift 0 P2 0.136  sim_summary c084_random_B12_tau160_d0_t0_main
+ED4 main  B12 tau7   drift 0 P5 0.046  sim_summary c004_random_B12_tau7_d0_t0_main
+ED4 main  B12 tau20  drift 0 P5 0.054  sim_summary c031_random_B12_tau20_d0_t0_main
+ED4 main  B12 tau67  drift 0 P5 0.044  sim_summary c057_random_B12_tau67_d0_t0_main
+ED4 main  B12 tau160 drift 0 P5 0.062  sim_summary c084_random_B12_tau160_d0_t0_main
+ED4 main  B12 tau7   drift 1 P2 1.000  sim_summary c013_random_B12_tau7_d1_t0_main
+ED4 main  B12 tau20  drift 1 P2 1.000  sim_summary c000_random_B12_tau20_d1_t0_main
+ED4 main  B12 tau67  drift 1 P2 0.994  sim_summary c066_random_B12_tau67_d1_t0_main
+ED4 main  B12 tau160 drift 1 P2 0.980  sim_summary c093_random_B12_tau160_d1_t0_main
+ED4 main  B12 tau7   drift 1 P5 0.040  sim_summary c013_random_B12_tau7_d1_t0_main
+ED4 main  B12 tau20  drift 1 P5 0.057  sim_summary c000_random_B12_tau20_d1_t0_main
+ED4 main  B12 tau67  drift 1 P5 0.044  sim_summary c066_random_B12_tau67_d1_t0_main
+ED4 main  B12 tau160 drift 1 P5 0.052  sim_summary c093_random_B12_tau160_d1_t0_main
+ED4 main  B12 tau7   drift 2 P2 1.000  sim_summary c022_random_B12_tau7_d2_t0_main
+ED4 main  B12 tau20  drift 2 P2 1.000  sim_summary c048_random_B12_tau20_d2_t0_main
+ED4 main  B12 tau67  drift 2 P2 1.000  sim_summary c075_random_B12_tau67_d2_t0_main
+ED4 main  B12 tau160 drift 2 P2 0.998  sim_summary c102_random_B12_tau160_d2_t0_main
+ED4 main  B12 tau7   drift 2 P5 0.044  sim_summary c022_random_B12_tau7_d2_t0_main
+ED4 main  B12 tau20  drift 2 P5 0.044  sim_summary c048_random_B12_tau20_d2_t0_main
+ED4 main  B12 tau67  drift 2 P5 0.038  sim_summary c075_random_B12_tau67_d2_t0_main
+ED4 main  B12 tau160 drift 2 P5 0.044  sim_summary c102_random_B12_tau160_d2_t0_main
+ED4 main  B24 tau7   drift 0 P2 0.146  sim_summary c007_random_B24_tau7_d0_t0_main
+ED4 main  B24 tau20  drift 0 P2 0.132  sim_summary c034_random_B24_tau20_d0_t0_main
+ED4 main  B24 tau67  drift 0 P2 0.130  sim_summary c060_random_B24_tau67_d0_t0_main
+ED4 main  B24 tau160 drift 0 P2 0.088  sim_summary c087_random_B24_tau160_d0_t0_main
+ED4 main  B24 tau7   drift 0 P5 0.050  sim_summary c007_random_B24_tau7_d0_t0_main
+ED4 main  B24 tau20  drift 0 P5 0.046  sim_summary c034_random_B24_tau20_d0_t0_main
+ED4 main  B24 tau67  drift 0 P5 0.050  sim_summary c060_random_B24_tau67_d0_t0_main
+ED4 main  B24 tau160 drift 0 P5 0.032  sim_summary c087_random_B24_tau160_d0_t0_main
+ED4 main  B24 tau7   drift 1 P2 1.000  sim_summary c016_random_B24_tau7_d1_t0_main
+ED4 main  B24 tau20  drift 1 P2 1.000  sim_summary c042_random_B24_tau20_d1_t0_main
+ED4 main  B24 tau67  drift 1 P2 0.998  sim_summary c069_random_B24_tau67_d1_t0_main
+ED4 main  B24 tau160 drift 1 P2 0.984  sim_summary c096_random_B24_tau160_d1_t0_main
+ED4 main  B24 tau7   drift 1 P5 0.052  sim_summary c016_random_B24_tau7_d1_t0_main
+ED4 main  B24 tau20  drift 1 P5 0.026  sim_summary c042_random_B24_tau20_d1_t0_main
+ED4 main  B24 tau67  drift 1 P5 0.044  sim_summary c069_random_B24_tau67_d1_t0_main
+ED4 main  B24 tau160 drift 1 P5 0.052  sim_summary c096_random_B24_tau160_d1_t0_main
+ED4 main  B24 tau7   drift 2 P2 1.000  sim_summary c025_random_B24_tau7_d2_t0_main
+ED4 main  B24 tau20  drift 2 P2 1.000  sim_summary c051_random_B24_tau20_d2_t0_main
+ED4 main  B24 tau67  drift 2 P2 1.000  sim_summary c078_random_B24_tau67_d2_t0_main
+ED4 main  B24 tau160 drift 2 P2 1.000  sim_summary c105_random_B24_tau160_d2_t0_main
+ED4 main  B24 tau7   drift 2 P5 0.040  sim_summary c025_random_B24_tau7_d2_t0_main
+ED4 main  B24 tau20  drift 2 P5 0.034  sim_summary c051_random_B24_tau20_d2_t0_main
+ED4 main  B24 tau67  drift 2 P5 0.042  sim_summary c078_random_B24_tau67_d2_t0_main
+ED4 main  B24 tau160 drift 2 P5 0.046  sim_summary c105_random_B24_tau160_d2_t0_main
+ED4 tool  B4  tau7   drift 0 P2 0.090  sim_summary c002_random_B4_tau7_d0_t0_tool
+ED4 tool  B4  tau20  drift 0 P2 0.092  sim_summary c029_random_B4_tau20_d0_t0_tool
+ED4 tool  B4  tau67  drift 0 P2 0.076  sim_summary c055_random_B4_tau67_d0_t0_tool
+ED4 tool  B4  tau160 drift 0 P2 0.066  sim_summary c082_random_B4_tau160_d0_t0_tool
+ED4 tool  B4  tau7   drift 0 P5 0.000  sim_summary c002_random_B4_tau7_d0_t0_tool
+ED4 tool  B4  tau20  drift 0 P5 0.000  sim_summary c029_random_B4_tau20_d0_t0_tool
+ED4 tool  B4  tau67  drift 0 P5 0.000  sim_summary c055_random_B4_tau67_d0_t0_tool
+ED4 tool  B4  tau160 drift 0 P5 0.000  sim_summary c082_random_B4_tau160_d0_t0_tool
+ED4 tool  B4  tau7   drift 1 P2 0.786  sim_summary c011_random_B4_tau7_d1_t0_tool
+ED4 tool  B4  tau20  drift 1 P2 0.850  sim_summary c038_random_B4_tau20_d1_t0_tool
+ED4 tool  B4  tau67  drift 1 P2 0.754  sim_summary c064_random_B4_tau67_d1_t0_tool
+ED4 tool  B4  tau160 drift 1 P2 0.618  sim_summary c091_random_B4_tau160_d1_t0_tool
+ED4 tool  B4  tau7   drift 1 P5 0.000  sim_summary c011_random_B4_tau7_d1_t0_tool
+ED4 tool  B4  tau20  drift 1 P5 0.000  sim_summary c038_random_B4_tau20_d1_t0_tool
+ED4 tool  B4  tau67  drift 1 P5 0.000  sim_summary c064_random_B4_tau67_d1_t0_tool
+ED4 tool  B4  tau160 drift 1 P5 0.000  sim_summary c091_random_B4_tau160_d1_t0_tool
+ED4 tool  B4  tau7   drift 2 P2 0.908  sim_summary c020_random_B4_tau7_d2_t0_tool
+ED4 tool  B4  tau20  drift 2 P2 0.974  sim_summary c046_random_B4_tau20_d2_t0_tool
+ED4 tool  B4  tau67  drift 2 P2 0.914  sim_summary c073_random_B4_tau67_d2_t0_tool
+ED4 tool  B4  tau160 drift 2 P2 0.848  sim_summary c100_random_B4_tau160_d2_t0_tool
+ED4 tool  B4  tau7   drift 2 P5 0.000  sim_summary c020_random_B4_tau7_d2_t0_tool
+ED4 tool  B4  tau20  drift 2 P5 0.000  sim_summary c046_random_B4_tau20_d2_t0_tool
+ED4 tool  B4  tau67  drift 2 P5 0.000  sim_summary c073_random_B4_tau67_d2_t0_tool
+ED4 tool  B4  tau160 drift 2 P5 0.000  sim_summary c100_random_B4_tau160_d2_t0_tool
+ED4 tool  B12 tau7   drift 0 P2 0.058  sim_summary c005_random_B12_tau7_d0_t0_tool
+ED4 tool  B12 tau20  drift 0 P2 0.048  sim_summary c032_random_B12_tau20_d0_t0_tool
+ED4 tool  B12 tau67  drift 0 P2 0.084  sim_summary c058_random_B12_tau67_d0_t0_tool
+ED4 tool  B12 tau160 drift 0 P2 0.072  sim_summary c085_random_B12_tau160_d0_t0_tool
+ED4 tool  B12 tau7   drift 0 P5 0.026  sim_summary c005_random_B12_tau7_d0_t0_tool
+ED4 tool  B12 tau20  drift 0 P5 0.020  sim_summary c032_random_B12_tau20_d0_t0_tool
+ED4 tool  B12 tau67  drift 0 P5 0.054  sim_summary c058_random_B12_tau67_d0_t0_tool
+ED4 tool  B12 tau160 drift 0 P5 0.040  sim_summary c085_random_B12_tau160_d0_t0_tool
+ED4 tool  B12 tau7   drift 1 P2 0.448  sim_summary c014_random_B12_tau7_d1_t0_tool
+ED4 tool  B12 tau20  drift 1 P2 0.592  sim_summary c040_random_B12_tau20_d1_t0_tool
+ED4 tool  B12 tau67  drift 1 P2 0.660  sim_summary c067_random_B12_tau67_d1_t0_tool
+ED4 tool  B12 tau160 drift 1 P2 0.614  sim_summary c094_random_B12_tau160_d1_t0_tool
+ED4 tool  B12 tau7   drift 1 P5 0.034  sim_summary c014_random_B12_tau7_d1_t0_tool
+ED4 tool  B12 tau20  drift 1 P5 0.042  sim_summary c040_random_B12_tau20_d1_t0_tool
+ED4 tool  B12 tau67  drift 1 P5 0.046  sim_summary c067_random_B12_tau67_d1_t0_tool
+ED4 tool  B12 tau160 drift 1 P5 0.042  sim_summary c094_random_B12_tau160_d1_t0_tool
+ED4 tool  B12 tau7   drift 2 P2 0.518  sim_summary c023_random_B12_tau7_d2_t0_tool
+ED4 tool  B12 tau20  drift 2 P2 0.722  sim_summary c049_random_B12_tau20_d2_t0_tool
+ED4 tool  B12 tau67  drift 2 P2 0.748  sim_summary c076_random_B12_tau67_d2_t0_tool
+ED4 tool  B12 tau160 drift 2 P2 0.738  sim_summary c103_random_B12_tau160_d2_t0_tool
+ED4 tool  B12 tau7   drift 2 P5 0.040  sim_summary c023_random_B12_tau7_d2_t0_tool
+ED4 tool  B12 tau20  drift 2 P5 0.030  sim_summary c049_random_B12_tau20_d2_t0_tool
+ED4 tool  B12 tau67  drift 2 P5 0.046  sim_summary c076_random_B12_tau67_d2_t0_tool
+ED4 tool  B12 tau160 drift 2 P5 0.056  sim_summary c103_random_B12_tau160_d2_t0_tool
+ED4 tool  B24 tau7   drift 0 P2 0.084  sim_summary c008_random_B24_tau7_d0_t0_tool
+ED4 tool  B24 tau20  drift 0 P2 0.062  sim_summary c035_random_B24_tau20_d0_t0_tool
+ED4 tool  B24 tau67  drift 0 P2 0.072  sim_summary c061_random_B24_tau67_d0_t0_tool
+ED4 tool  B24 tau160 drift 0 P2 0.090  sim_summary c088_random_B24_tau160_d0_t0_tool
+ED4 tool  B24 tau7   drift 0 P5 0.046  sim_summary c008_random_B24_tau7_d0_t0_tool
+ED4 tool  B24 tau20  drift 0 P5 0.044  sim_summary c035_random_B24_tau20_d0_t0_tool
+ED4 tool  B24 tau67  drift 0 P5 0.042  sim_summary c061_random_B24_tau67_d0_t0_tool
+ED4 tool  B24 tau160 drift 0 P5 0.058  sim_summary c088_random_B24_tau160_d0_t0_tool
+ED4 tool  B24 tau7   drift 1 P2 0.296  sim_summary c017_random_B24_tau7_d1_t0_tool
+ED4 tool  B24 tau20  drift 1 P2 0.344  sim_summary c043_random_B24_tau20_d1_t0_tool
+ED4 tool  B24 tau67  drift 1 P2 0.422  sim_summary c070_random_B24_tau67_d1_t0_tool
+ED4 tool  B24 tau160 drift 1 P2 0.366  sim_summary c097_random_B24_tau160_d1_t0_tool
+ED4 tool  B24 tau7   drift 1 P5 0.040  sim_summary c017_random_B24_tau7_d1_t0_tool
+ED4 tool  B24 tau20  drift 1 P5 0.046  sim_summary c043_random_B24_tau20_d1_t0_tool
+ED4 tool  B24 tau67  drift 1 P5 0.052  sim_summary c070_random_B24_tau67_d1_t0_tool
+ED4 tool  B24 tau160 drift 1 P5 0.062  sim_summary c097_random_B24_tau160_d1_t0_tool
+ED4 tool  B24 tau7   drift 2 P2 0.380  sim_summary c026_random_B24_tau7_d2_t0_tool
+ED4 tool  B24 tau20  drift 2 P2 0.400  sim_summary c052_random_B24_tau20_d2_t0_tool
+ED4 tool  B24 tau67  drift 2 P2 0.440  sim_summary c079_random_B24_tau67_d2_t0_tool
+ED4 tool  B24 tau160 drift 2 P2 0.446  sim_summary c106_random_B24_tau160_d2_t0_tool
+ED4 tool  B24 tau7   drift 2 P5 0.036  sim_summary c026_random_B24_tau7_d2_t0_tool
+ED4 tool  B24 tau20  drift 2 P5 0.038  sim_summary c052_random_B24_tau20_d2_t0_tool
+ED4 tool  B24 tau67  drift 2 P5 0.036  sim_summary c079_random_B24_tau67_d2_t0_tool
+ED4 tool  B24 tau160 drift 2 P5 0.042  sim_summary c106_random_B24_tau160_d2_t0_tool
+ED4 block B4  tau7   drift 0 P2 0.000  sim_summary c003_random_B4_tau7_d0_t0_block
+ED4 block B4  tau20  drift 0 P2 0.000  sim_summary c030_random_B4_tau20_d0_t0_block
+ED4 block B4  tau67  drift 0 P2 0.000  sim_summary c056_random_B4_tau67_d0_t0_block
+ED4 block B4  tau160 drift 0 P2 0.000  sim_summary c083_random_B4_tau160_d0_t0_block
+ED4 block B4  tau7   drift 0 P5 0.000  sim_summary c003_random_B4_tau7_d0_t0_block
+ED4 block B4  tau20  drift 0 P5 0.000  sim_summary c030_random_B4_tau20_d0_t0_block
+ED4 block B4  tau67  drift 0 P5 0.000  sim_summary c056_random_B4_tau67_d0_t0_block
+ED4 block B4  tau160 drift 0 P5 0.000  sim_summary c083_random_B4_tau160_d0_t0_block
+ED4 block B4  tau7   drift 1 P2 0.030  sim_summary c012_random_B4_tau7_d1_t0_block
+ED4 block B4  tau20  drift 1 P2 0.142  sim_summary c039_random_B4_tau20_d1_t0_block
+ED4 block B4  tau67  drift 1 P2 0.158  sim_summary c065_random_B4_tau67_d1_t0_block
+ED4 block B4  tau160 drift 1 P2 0.142  sim_summary c092_random_B4_tau160_d1_t0_block
+ED4 block B4  tau7   drift 1 P5 0.000  sim_summary c012_random_B4_tau7_d1_t0_block
+ED4 block B4  tau20  drift 1 P5 0.000  sim_summary c039_random_B4_tau20_d1_t0_block
+ED4 block B4  tau67  drift 1 P5 0.000  sim_summary c065_random_B4_tau67_d1_t0_block
+ED4 block B4  tau160 drift 1 P5 0.000  sim_summary c092_random_B4_tau160_d1_t0_block
+ED4 block B4  tau7   drift 2 P2 0.040  sim_summary c021_random_B4_tau7_d2_t0_block
+ED4 block B4  tau20  drift 2 P2 0.192  sim_summary c047_random_B4_tau20_d2_t0_block
+ED4 block B4  tau67  drift 2 P2 0.228  sim_summary c074_random_B4_tau67_d2_t0_block
+ED4 block B4  tau160 drift 2 P2 0.252  sim_summary c101_random_B4_tau160_d2_t0_block
+ED4 block B4  tau7   drift 2 P5 0.000  sim_summary c021_random_B4_tau7_d2_t0_block
+ED4 block B4  tau20  drift 2 P5 0.000  sim_summary c047_random_B4_tau20_d2_t0_block
+ED4 block B4  tau67  drift 2 P5 0.000  sim_summary c074_random_B4_tau67_d2_t0_block
+ED4 block B4  tau160 drift 2 P5 0.000  sim_summary c101_random_B4_tau160_d2_t0_block
+ED4 block B12 tau7   drift 0 P2 0.006  sim_summary c006_random_B12_tau7_d0_t0_block
+ED4 block B12 tau20  drift 0 P2 0.004  sim_summary c033_random_B12_tau20_d0_t0_block
+ED4 block B12 tau67  drift 0 P2 0.014  sim_summary c059_random_B12_tau67_d0_t0_block
+ED4 block B12 tau160 drift 0 P2 0.022  sim_summary c086_random_B12_tau160_d0_t0_block
+ED4 block B12 tau7   drift 0 P5 0.044  sim_summary c006_random_B12_tau7_d0_t0_block
+ED4 block B12 tau20  drift 0 P5 0.028  sim_summary c033_random_B12_tau20_d0_t0_block
+ED4 block B12 tau67  drift 0 P5 0.060  sim_summary c059_random_B12_tau67_d0_t0_block
+ED4 block B12 tau160 drift 0 P5 0.058  sim_summary c086_random_B12_tau160_d0_t0_block
+ED4 block B12 tau7   drift 1 P2 0.072  sim_summary c015_random_B12_tau7_d1_t0_block
+ED4 block B12 tau20  drift 1 P2 0.170  sim_summary c041_random_B12_tau20_d1_t0_block
+ED4 block B12 tau67  drift 1 P2 0.182  sim_summary c068_random_B12_tau67_d1_t0_block
+ED4 block B12 tau160 drift 1 P2 0.194  sim_summary c095_random_B12_tau160_d1_t0_block
+ED4 block B12 tau7   drift 1 P5 0.018  sim_summary c015_random_B12_tau7_d1_t0_block
+ED4 block B12 tau20  drift 1 P5 0.042  sim_summary c041_random_B12_tau20_d1_t0_block
+ED4 block B12 tau67  drift 1 P5 0.050  sim_summary c068_random_B12_tau67_d1_t0_block
+ED4 block B12 tau160 drift 1 P5 0.052  sim_summary c095_random_B12_tau160_d1_t0_block
+ED4 block B12 tau7   drift 2 P2 0.126  sim_summary c024_random_B12_tau7_d2_t0_block
+ED4 block B12 tau20  drift 2 P2 0.218  sim_summary c050_random_B12_tau20_d2_t0_block
+ED4 block B12 tau67  drift 2 P2 0.228  sim_summary c077_random_B12_tau67_d2_t0_block
+ED4 block B12 tau160 drift 2 P2 0.212  sim_summary c104_random_B12_tau160_d2_t0_block
+ED4 block B12 tau7   drift 2 P5 0.054  sim_summary c024_random_B12_tau7_d2_t0_block
+ED4 block B12 tau20  drift 2 P5 0.050  sim_summary c050_random_B12_tau20_d2_t0_block
+ED4 block B12 tau67  drift 2 P5 0.050  sim_summary c077_random_B12_tau67_d2_t0_block
+ED4 block B12 tau160 drift 2 P5 0.038  sim_summary c104_random_B12_tau160_d2_t0_block
+ED4 block B24 tau7   drift 0 P2 0.008  sim_summary c009_random_B24_tau7_d0_t0_block
+ED4 block B24 tau20  drift 0 P2 0.018  sim_summary c036_random_B24_tau20_d0_t0_block
+ED4 block B24 tau67  drift 0 P2 0.010  sim_summary c062_random_B24_tau67_d0_t0_block
+ED4 block B24 tau160 drift 0 P2 0.008  sim_summary c089_random_B24_tau160_d0_t0_block
+ED4 block B24 tau7   drift 0 P5 0.048  sim_summary c009_random_B24_tau7_d0_t0_block
+ED4 block B24 tau20  drift 0 P5 0.062  sim_summary c036_random_B24_tau20_d0_t0_block
+ED4 block B24 tau67  drift 0 P5 0.044  sim_summary c062_random_B24_tau67_d0_t0_block
+ED4 block B24 tau160 drift 0 P5 0.044  sim_summary c089_random_B24_tau160_d0_t0_block
+ED4 block B24 tau7   drift 1 P2 0.106  sim_summary c018_random_B24_tau7_d1_t0_block
+ED4 block B24 tau20  drift 1 P2 0.176  sim_summary c044_random_B24_tau20_d1_t0_block
+ED4 block B24 tau67  drift 1 P2 0.224  sim_summary c071_random_B24_tau67_d1_t0_block
+ED4 block B24 tau160 drift 1 P2 0.186  sim_summary c098_random_B24_tau160_d1_t0_block
+ED4 block B24 tau7   drift 1 P5 0.042  sim_summary c018_random_B24_tau7_d1_t0_block
+ED4 block B24 tau20  drift 1 P5 0.044  sim_summary c044_random_B24_tau20_d1_t0_block
+ED4 block B24 tau67  drift 1 P5 0.054  sim_summary c071_random_B24_tau67_d1_t0_block
+ED4 block B24 tau160 drift 1 P5 0.044  sim_summary c098_random_B24_tau160_d1_t0_block
+ED4 block B24 tau7   drift 2 P2 0.140  sim_summary c027_random_B24_tau7_d2_t0_block
+ED4 block B24 tau20  drift 2 P2 0.214  sim_summary c053_random_B24_tau20_d2_t0_block
+ED4 block B24 tau67  drift 2 P2 0.234  sim_summary c080_random_B24_tau67_d2_t0_block
+ED4 block B24 tau160 drift 2 P2 0.232  sim_summary c107_random_B24_tau160_d2_t0_block
+ED4 block B24 tau7   drift 2 P5 0.052  sim_summary c027_random_B24_tau7_d2_t0_block
+ED4 block B24 tau20  drift 2 P5 0.048  sim_summary c053_random_B24_tau20_d2_t0_block
+ED4 block B24 tau67  drift 2 P5 0.030  sim_summary c080_random_B24_tau67_d2_t0_block
+ED4 block B24 tau160 drift 2 P5 0.048  sim_summary c107_random_B24_tau160_d2_t0_block
+ED5a c108_ABAB_B12_tau20_d1_t0_main     P2 0.964 [0.944, 0.977]  sim_summary c108_ABAB_B12_tau20_d1_t0_main
+ED5a c108_ABAB_B12_tau20_d1_t0_main     P5 0.000 [0.000, 0.008]  sim_summary c108_ABAB_B12_tau20_d1_t0_main
+ED5a c109_ABAB_B12_tau20_d1_t0.5_main   P2 0.960 [0.939, 0.974]  sim_summary c109_ABAB_B12_tau20_d1_t0.5_main
+ED5a c109_ABAB_B12_tau20_d1_t0.5_main   P5 0.000 [0.000, 0.008]  sim_summary c109_ABAB_B12_tau20_d1_t0.5_main
+ED5a c110_ABAB_B12_tau67_d1_t0_main     P2 0.668 [0.626, 0.708]  sim_summary c110_ABAB_B12_tau67_d1_t0_main
+ED5a c110_ABAB_B12_tau67_d1_t0_main     P5 0.000 [0.000, 0.008]  sim_summary c110_ABAB_B12_tau67_d1_t0_main
+ED5a c111_ABAB_B12_tau67_d1_t0.5_main   P2 0.744 [0.704, 0.780]  sim_summary c111_ABAB_B12_tau67_d1_t0.5_main
+ED5a c111_ABAB_B12_tau67_d1_t0.5_main   P5 0.000 [0.000, 0.008]  sim_summary c111_ABAB_B12_tau67_d1_t0.5_main
+ED5a c112_ABAB_B24_tau20_d1_t0_main     P2 0.920 [0.893, 0.941]  sim_summary c112_ABAB_B24_tau20_d1_t0_main
+ED5a c112_ABAB_B24_tau20_d1_t0_main     P5 0.000 [0.000, 0.008]  sim_summary c112_ABAB_B24_tau20_d1_t0_main
+ED5a c113_ABAB_B24_tau20_d1_t0.5_main   P2 0.920 [0.893, 0.941]  sim_summary c113_ABAB_B24_tau20_d1_t0.5_main
+ED5a c113_ABAB_B24_tau20_d1_t0.5_main   P5 0.000 [0.000, 0.008]  sim_summary c113_ABAB_B24_tau20_d1_t0.5_main
+ED5a c114_ABAB_B24_tau67_d1_t0_main     P2 0.554 [0.510, 0.597]  sim_summary c114_ABAB_B24_tau67_d1_t0_main
+ED5a c114_ABAB_B24_tau67_d1_t0_main     P5 0.000 [0.000, 0.008]  sim_summary c114_ABAB_B24_tau67_d1_t0_main
+ED5a c115_ABAB_B24_tau67_d1_t0.5_main   P2 0.602 [0.558, 0.644]  sim_summary c115_ABAB_B24_tau67_d1_t0.5_main
+ED5a c115_ABAB_B24_tau67_d1_t0.5_main   P5 0.000 [0.000, 0.008]  sim_summary c115_ABAB_B24_tau67_d1_t0.5_main
+ED5a c116_ABBA_B12_tau20_d1_t0_main     P2 1.000 [0.992, 1.000]  sim_summary c116_ABBA_B12_tau20_d1_t0_main
+ED5a c116_ABBA_B12_tau20_d1_t0_main     P5 0.004 [0.001, 0.014]  sim_summary c116_ABBA_B12_tau20_d1_t0_main
+ED5a c117_ABBA_B12_tau20_d1_t0.5_main   P2 1.000 [0.992, 1.000]  sim_summary c117_ABBA_B12_tau20_d1_t0.5_main
+ED5a c117_ABBA_B12_tau20_d1_t0.5_main   P5 0.002 [0.000, 0.011]  sim_summary c117_ABBA_B12_tau20_d1_t0.5_main
+ED5a c118_ABBA_B12_tau67_d1_t0_main     P2 0.990 [0.977, 0.996]  sim_summary c118_ABBA_B12_tau67_d1_t0_main
+ED5a c118_ABBA_B12_tau67_d1_t0_main     P5 0.000 [0.000, 0.008]  sim_summary c118_ABBA_B12_tau67_d1_t0_main
+ED5a c119_ABBA_B12_tau67_d1_t0.5_main   P2 0.996 [0.986, 0.999]  sim_summary c119_ABBA_B12_tau67_d1_t0.5_main
+ED5a c119_ABBA_B12_tau67_d1_t0.5_main   P5 0.000 [0.000, 0.008]  sim_summary c119_ABBA_B12_tau67_d1_t0.5_main
+ED5a c120_ABBA_B24_tau20_d1_t0_main     P2 1.000 [0.992, 1.000]  sim_summary c120_ABBA_B24_tau20_d1_t0_main
+ED5a c120_ABBA_B24_tau20_d1_t0_main     P5 0.006 [0.002, 0.017]  sim_summary c120_ABBA_B24_tau20_d1_t0_main
+ED5a c121_ABBA_B24_tau20_d1_t0.5_main   P2 0.998 [0.989, 1.000]  sim_summary c121_ABBA_B24_tau20_d1_t0.5_main
+ED5a c121_ABBA_B24_tau20_d1_t0.5_main   P5 0.000 [0.000, 0.008]  sim_summary c121_ABBA_B24_tau20_d1_t0.5_main
+ED5a c122_ABBA_B24_tau67_d1_t0_main     P2 0.984 [0.969, 0.992]  sim_summary c122_ABBA_B24_tau67_d1_t0_main
+ED5a c122_ABBA_B24_tau67_d1_t0_main     P5 0.000 [0.000, 0.008]  sim_summary c122_ABBA_B24_tau67_d1_t0_main
+ED5a c123_ABBA_B24_tau67_d1_t0.5_main   P2 0.986 [0.971, 0.993]  sim_summary c123_ABBA_B24_tau67_d1_t0.5_main
+ED5a c123_ABBA_B24_tau67_d1_t0.5_main   P5 0.000 [0.000, 0.008]  sim_summary c123_ABBA_B24_tau67_d1_t0.5_main
+ED5a c124_AABB_B12_tau20_d1_t0_main     P2 1.000 [0.992, 1.000]  sim_summary c124_AABB_B12_tau20_d1_t0_main
+ED5a c124_AABB_B12_tau20_d1_t0_main     P5 0.024 [0.014, 0.041]  sim_summary c124_AABB_B12_tau20_d1_t0_main
+ED5a c125_AABB_B12_tau20_d1_t0.5_main   P2 1.000 [0.992, 1.000]  sim_summary c125_AABB_B12_tau20_d1_t0.5_main
+ED5a c125_AABB_B12_tau20_d1_t0.5_main   P5 0.010 [0.004, 0.023]  sim_summary c125_AABB_B12_tau20_d1_t0.5_main
+ED5a c126_AABB_B12_tau67_d1_t0_main     P2 0.996 [0.986, 0.999]  sim_summary c126_AABB_B12_tau67_d1_t0_main
+ED5a c126_AABB_B12_tau67_d1_t0_main     P5 0.000 [0.000, 0.008]  sim_summary c126_AABB_B12_tau67_d1_t0_main
+ED5a c127_AABB_B12_tau67_d1_t0.5_main   P2 1.000 [0.992, 1.000]  sim_summary c127_AABB_B12_tau67_d1_t0.5_main
+ED5a c127_AABB_B12_tau67_d1_t0.5_main   P5 0.008 [0.003, 0.020]  sim_summary c127_AABB_B12_tau67_d1_t0.5_main
+ED5a c128_AABB_B24_tau20_d1_t0_main     P2 1.000 [0.992, 1.000]  sim_summary c128_AABB_B24_tau20_d1_t0_main
+ED5a c128_AABB_B24_tau20_d1_t0_main     P5 0.010 [0.004, 0.023]  sim_summary c128_AABB_B24_tau20_d1_t0_main
+ED5a c129_AABB_B24_tau20_d1_t0.5_main   P2 1.000 [0.992, 1.000]  sim_summary c129_AABB_B24_tau20_d1_t0.5_main
+ED5a c129_AABB_B24_tau20_d1_t0.5_main   P5 0.010 [0.004, 0.023]  sim_summary c129_AABB_B24_tau20_d1_t0.5_main
+ED5a c130_AABB_B24_tau67_d1_t0_main     P2 0.996 [0.986, 0.999]  sim_summary c130_AABB_B24_tau67_d1_t0_main
+ED5a c130_AABB_B24_tau67_d1_t0_main     P5 0.000 [0.000, 0.008]  sim_summary c130_AABB_B24_tau67_d1_t0_main
+ED5a c131_AABB_B24_tau67_d1_t0.5_main   P2 1.000 [0.992, 1.000]  sim_summary c131_AABB_B24_tau67_d1_t0.5_main
+ED5a c131_AABB_B24_tau67_d1_t0.5_main   P5 0.000 [0.000, 0.008]  sim_summary c131_AABB_B24_tau67_d1_t0.5_main
+ED5b fixed_half   main   P2 1.000 [0.908, 1.000]  summary_2b fixed_half/main/main/cleaned_s5
+ED5b fixed_half   main   P5 0.947 [0.827, 0.985]  summary_2b fixed_half/main/main/cleaned_s5
+ED5b fixed_half   tool   P2 1.000 [0.908, 1.000]  summary_2b fixed_half/tool/main/cleaned_s5
+ED5b fixed_half   tool   P5 0.895 [0.759, 0.958]  summary_2b fixed_half/tool/main/cleaned_s5
+ED5b fixed_half   block  P2 1.000 [0.908, 1.000]  summary_2b fixed_half/block/main/cleaned_s5
+ED5b fixed_half   block  P5 1.000 [0.908, 1.000]  summary_2b fixed_half/block/main/cleaned_s5
+ED5b fixed_aabb   main   P2 0.974 [0.865, 0.995]  summary_2b fixed_aabb/main/main/cleaned_s5
+ED5b fixed_aabb   main   P5 0.289 [0.170, 0.448]  summary_2b fixed_aabb/main/main/cleaned_s5
+ED5b fixed_aabb   tool   P2 0.789 [0.637, 0.889]  summary_2b fixed_aabb/tool/main/cleaned_s5
+ED5b fixed_aabb   tool   P5 0.263 [0.150, 0.420]  summary_2b fixed_aabb/tool/main/cleaned_s5
+ED5b fixed_aabb   block  P2 0.947 [0.827, 0.985]  summary_2b fixed_aabb/block/main/cleaned_s5
+ED5b fixed_aabb   block  P5 0.632 [0.473, 0.766]  summary_2b fixed_aabb/block/main/cleaned_s5
+ED5b fixed_abba   main   P2 0.895 [0.759, 0.958]  summary_2b fixed_abba/main/main/cleaned_s5
+ED5b fixed_abba   main   P5 0.026 [0.005, 0.135]  summary_2b fixed_abba/main/main/cleaned_s5
+ED5b fixed_abba   tool   P2 0.474 [0.325, 0.627]  summary_2b fixed_abba/tool/main/cleaned_s5
+ED5b fixed_abba   tool   P5 0.079 [0.027, 0.208]  summary_2b fixed_abba/tool/main/cleaned_s5
+ED5b fixed_abba   block  P2 0.368 [0.234, 0.527]  summary_2b fixed_abba/block/main/cleaned_s5
+ED5b fixed_abba   block  P5 0.079 [0.027, 0.208]  summary_2b fixed_abba/block/main/cleaned_s5
+ED6 L1  CoSMoMVPA main    0.164 [0.124, 0.214] usable 262 errors 238  SUMMARY-TOOLS.md L1 | CoSMoMVPA main
+ED6 L2  CoSMoMVPA main    0.306 [0.267, 0.348] usable 500 errors 0  SUMMARY-TOOLS.md L2 | CoSMoMVPA main
+ED6 L3  CoSMoMVPA main    0.062 [0.044, 0.087] usable 500 errors 0  SUMMARY-TOOLS.md L3 | CoSMoMVPA main
+ED6 L4  CoSMoMVPA main    0.202 [0.169, 0.239] usable 500 errors 0  SUMMARY-TOOLS.md L4 | CoSMoMVPA main
+ED6 L1  CoSMoMVPA zscore  0.179 [0.137, 0.230] usable 262 errors 238  SUMMARY-TOOLS.md L1 | CoSMoMVPA zscore
+ED6 L2  CoSMoMVPA zscore  0.586 [0.542, 0.628] usable 500 errors 0  SUMMARY-TOOLS.md L2 | CoSMoMVPA zscore
+ED6 L3  CoSMoMVPA zscore  0.062 [0.044, 0.087] usable 500 errors 0  SUMMARY-TOOLS.md L3 | CoSMoMVPA zscore
+ED6 L4  CoSMoMVPA zscore  0.208 [0.175, 0.246] usable 500 errors 0  SUMMARY-TOOLS.md L4 | CoSMoMVPA zscore
+ED6 L1  PyMVPA main       0.672 [0.630, 0.712] usable 500 errors 0  SUMMARY-TOOLS.md L1 | PyMVPA main
+ED6 L2  PyMVPA main       0.486 [0.442, 0.530] usable 500 errors 0  SUMMARY-TOOLS.md L2 | PyMVPA main
+ED6 L3  PyMVPA main       0.098 [0.075, 0.127] usable 500 errors 0  SUMMARY-TOOLS.md L3 | PyMVPA main
+ED6 L4  PyMVPA main       0.184 [0.152, 0.220] usable 500 errors 0  SUMMARY-TOOLS.md L4 | PyMVPA main
+ED6 L1  PyMVPA zscore     0.438 [0.395, 0.482] usable 500 errors 0  SUMMARY-TOOLS.md L1 | PyMVPA zscore
+ED6 L2  PyMVPA zscore     0.702 [0.660, 0.740] usable 500 errors 0  SUMMARY-TOOLS.md L2 | PyMVPA zscore
+ED6 L3  PyMVPA zscore     0.116 [0.091, 0.147] usable 500 errors 0  SUMMARY-TOOLS.md L3 | PyMVPA zscore
+ED6 L4  PyMVPA zscore     0.214 [0.180, 0.252] usable 500 errors 0  SUMMARY-TOOLS.md L4 | PyMVPA zscore
+ED6 L1  PyMVPA chunks     0.054 [0.037, 0.077] usable 500 errors 0  SUMMARY-TOOLS.md L1 | PyMVPA chunks
+ED6 L2  PyMVPA chunks     0.040 [0.026, 0.061] usable 500 errors 0  SUMMARY-TOOLS.md L2 | PyMVPA chunks
+ED6 L3  PyMVPA chunks     0.050 [0.034, 0.073] usable 500 errors 0  SUMMARY-TOOLS.md L3 | PyMVPA chunks
+ED6 L4  PyMVPA chunks     0.118 [0.093, 0.149] usable 500 errors 0  SUMMARY-TOOLS.md L4 | PyMVPA chunks
+ED6 L1  P3 port           0.256 [0.207, 0.312] usable 262 errors 238  SUMMARY-TOOLS.md L1 | P3 port
+ED6 L2  P3 port           0.092 [0.070, 0.121] usable 500 errors 0  SUMMARY-TOOLS.md L2 | P3 port
+ED6 L3  P3 port           0.058 [0.041, 0.082] usable 500 errors 0  SUMMARY-TOOLS.md L3 | P3 port
+ED6 L4  P3 port           0.222 [0.188, 0.260] usable 500 errors 0  SUMMARY-TOOLS.md L4 | P3 port
+ED6 L1  P4 port           0.236 [0.201, 0.275] usable 500 errors 0  SUMMARY-TOOLS.md L1 | P4 port
+ED6 L2  P4 port           0.086 [0.064, 0.114] usable 500 errors 0  SUMMARY-TOOLS.md L2 | P4 port
+ED6 L3  P4 port           0.102 [0.078, 0.132] usable 500 errors 0  SUMMARY-TOOLS.md L3 | P4 port
+ED6 L4  P4 port           0.134 [0.107, 0.167] usable 500 errors 0  SUMMARY-TOOLS.md L4 | P4 port
+ED6 L1  P5                0.046 [0.031, 0.068] usable 500 errors 0  SUMMARY-TOOLS.md L1 | P5
+ED6 L2  P5                0.042 [0.028, 0.063] usable 500 errors 0  SUMMARY-TOOLS.md L2 | P5
+ED6 L3  P5                not defined
+ED6 L4  P5                0.044 [0.029, 0.066] usable 500 errors 0  SUMMARY-TOOLS.md L4 | P5
+ED7 Mouse, shuffled 5-fold                   t_test       1.000  allen_summary new group_level
+ED7 Mouse, shuffled 5-fold                   sign_flip    1.000  allen_summary new group_level
+ED7 Mouse, shuffled 5-fold                   valid_group  0.065  allen_summary new group_level
+ED7 Mouse, default folds                     t_test       1.000  allen_summary new group_level
+ED7 Mouse, default folds                     sign_flip    1.000  allen_summary new group_level
+ED7 Mouse, default folds                     valid_group  0.045  allen_summary new group_level
+ED7 Mouse, whole blocks out                  t_test       0.000  allen_summary new group_level
+ED7 Mouse, whole blocks out                  sign_flip    0.000  allen_summary new group_level
+ED7 Mouse, whole blocks out                  valid_group  0.040  allen_summary new group_level
+ED7 Mouse, grating trials, shuffled 5-fold   t_test       1.000  allen_summary new group_level
+ED7 Mouse, grating trials, shuffled 5-fold   sign_flip    1.000  allen_summary new group_level
+ED7 Mouse, grating trials, shuffled 5-fold   valid_group  0.070  allen_summary new group_level
+ED7 EEG t-test 1.000, group null 0.040  summary_2b group_level
+ED8 P1              Fake block sequences 0.773 [0.745, 0.795]  runs/SUMMARY.md Fake block sequences
+ED8 P1              Real block side      0.803 [0.765, 0.834]  runs/SUMMARY.md Real block side
+ED8 P2              Fake block sequences 0.704 [0.675, 0.729]  runs/SUMMARY.md Fake block sequences
+ED8 P2              Real block side      0.746 [0.702, 0.785]  runs/SUMMARY.md Real block side
+ED8 P4              Fake block sequences 0.758 [0.729, 0.780]  runs/SUMMARY.md Fake block sequences
+ED8 P4              Real block side      0.795 [0.757, 0.827]  runs/SUMMARY.md Real block side
+ED8 PS-fixed        Fake block sequences 0.577 [0.550, 0.600]  runs/SUMMARY.md Fake block sequences
+ED8 PS-fixed        Real block side      0.638 [0.589, 0.683]  runs/SUMMARY.md Real block side
+ED8 PS-refit        Fake block sequences 0.049 [0.046, 0.053]  runs/SUMMARY.md Fake block sequences
+ED8 PS-refit        Real block side      0.098 [0.077, 0.129]  runs/SUMMARY.md Real block side
+ED8 P1-block        Fake block sequences not run
+ED8 P1-block        Real block side      0.019 [0.011, 0.036]  runs/SUMMARY.md Real block side
+ED8 P2-block        Fake block sequences 0.010 [0.008, 0.013]  runs/SUMMARY.md Fake block sequences
+ED8 P2-block        Real block side      0.016 [0.009, 0.033]  runs/SUMMARY.md Real block side
+ED8 P4-block        Fake block sequences not run
+ED8 P4-block        Real block side      0.013 [0.006, 0.030]  runs/SUMMARY.md Real block side
+ED8 PS-fixed-block  Fake block sequences not run
+ED8 PS-fixed-block  Real block side      0.011 [0.005, 0.028]  runs/SUMMARY.md Real block side
+ED8 PS-refit-block  Fake block sequences 0.050 [0.046, 0.054]  runs/SUMMARY.md Fake block sequences
+ED8 PS-refit-block  Real block side      0.068 [0.050, 0.093]  runs/SUMMARY.md Real block side
+ED8 SEL-fixed       Fake block sequences 0.061 [0.056, 0.066]  runs/SUMMARY.md Fake block sequences
+ED8 SEL-fixed       Real block side      0.106 [0.083, 0.139]  runs/SUMMARY.md Real block side
+ED8 SEL-repeat      Fake block sequences 0.049 [0.046, 0.053]  runs/SUMMARY.md Fake block sequences
+ED8 SEL-repeat      Real block side      0.080 [0.062, 0.111]  runs/SUMMARY.md Real block side
+ED8 IID-P1          Fake block sequences 0.090 [0.085, 0.095]  runs/SUMMARY.md Fake block sequences
+ED8 IID-P1          Real block side      not run
+ED8 IID-P2          Fake block sequences 0.048 [0.045, 0.052]  runs/SUMMARY.md Fake block sequences
+ED8 IID-P2          Real block side      not run
+ED8 IID-P4          Fake block sequences 0.092 [0.087, 0.097]  runs/SUMMARY.md Fake block sequences
+ED8 IID-P4          Real block side      not run
+ED8 IID-SEL-fixed   Fake block sequences 0.052 [0.048, 0.055]  runs/SUMMARY.md Fake block sequences
+ED8 IID-SEL-fixed   Real block side      not run
+ED8 IID-SEL-repeat  Fake block sequences 0.052 [0.049, 0.055]  runs/SUMMARY.md Fake block sequences
+ED8 IID-SEL-repeat  Real block side      not run
+ED9a ACAd     P2 9/12  PS-refit 2/12  runs/SUMMARY.md Extended Data list
+ED9a ACAv     P2 5/8  PS-refit 0/8  runs/SUMMARY.md Extended Data list
+ED9a ACB      P2 6/9  PS-refit 0/9  runs/SUMMARY.md Extended Data list
+ED9a AId      P2 5/6  PS-refit 1/6  runs/SUMMARY.md Extended Data list
+ED9a AIp      P2 3/4  PS-refit 1/4  runs/SUMMARY.md Extended Data list
+ED9a AIv      P2 3/4  PS-refit 2/4  runs/SUMMARY.md Extended Data list
+ED9a AM       P2 0/4  PS-refit 0/4  runs/SUMMARY.md Extended Data list
+ED9a ANcr1    P2 3/3  PS-refit 1/3  runs/SUMMARY.md Extended Data list
+ED9a ANcr2    P2 2/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a AON      P2 7/9  PS-refit 0/9  runs/SUMMARY.md Extended Data list
+ED9a APN      P2 28/30  PS-refit 5/30  runs/SUMMARY.md Extended Data list
+ED9a AUDp     P2 4/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a AUDv     P2 4/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a AV       P2 3/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a BLA      P2 4/6  PS-refit 0/6  runs/SUMMARY.md Extended Data list
+ED9a BMA      P2 5/7  PS-refit 0/7  runs/SUMMARY.md Extended Data list
+ED9a BST      P2 3/6  PS-refit 1/6  runs/SUMMARY.md Extended Data list
+ED9a CA1      P2 27/47  PS-refit 1/47  runs/SUMMARY.md Extended Data list
+ED9a CA3      P2 19/25  PS-refit 0/25  runs/SUMMARY.md Extended Data list
+ED9a CEA      P2 2/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a CENT2    P2 8/8  PS-refit 0/8  runs/SUMMARY.md Extended Data list
+ED9a CENT3    P2 7/8  PS-refit 1/8  runs/SUMMARY.md Extended Data list
+ED9a CLI      P2 2/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a COAp     P2 3/4  PS-refit 0/4  runs/SUMMARY.md Extended Data list
+ED9a COPY     P2 5/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a CP       P2 36/43  PS-refit 7/43  runs/SUMMARY.md Extended Data list
+ED9a CS       P2 4/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a CUL4 5   P2 15/15  PS-refit 2/15  runs/SUMMARY.md Extended Data list
+ED9a CUN      P2 2/4  PS-refit 0/4  runs/SUMMARY.md Extended Data list
+ED9a DCO      P2 5/6  PS-refit 0/6  runs/SUMMARY.md Extended Data list
+ED9a DEC      P2 4/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a DG       P2 21/29  PS-refit 1/29  runs/SUMMARY.md Extended Data list
+ED9a DN       P2 3/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a DP       P2 6/7  PS-refit 0/7  runs/SUMMARY.md Extended Data list
+ED9a ECT      P2 2/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a ENTl     P2 12/13  PS-refit 3/13  runs/SUMMARY.md Extended Data list
+ED9a ENTm     P2 7/11  PS-refit 0/11  runs/SUMMARY.md Extended Data list
+ED9a EPd      P2 5/7  PS-refit 1/7  runs/SUMMARY.md Extended Data list
+ED9a EPv      P2 2/3  PS-refit 1/3  runs/SUMMARY.md Extended Data list
+ED9a Eth      P2 3/11  PS-refit 1/11  runs/SUMMARY.md Extended Data list
+ED9a FOTU     P2 4/4  PS-refit 1/4  runs/SUMMARY.md Extended Data list
+ED9a FRP      P2 2/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a GPe      P2 6/6  PS-refit 1/6  runs/SUMMARY.md Extended Data list
+ED9a GRN      P2 11/11  PS-refit 2/11  runs/SUMMARY.md Extended Data list
+ED9a IC       P2 6/11  PS-refit 1/11  runs/SUMMARY.md Extended Data list
+ED9a ILA      P2 5/7  PS-refit 0/7  runs/SUMMARY.md Extended Data list
+ED9a IP       P2 13/13  PS-refit 1/13  runs/SUMMARY.md Extended Data list
+ED9a IRN      P2 17/19  PS-refit 4/19  runs/SUMMARY.md Extended Data list
+ED9a LAV      P2 2/3  PS-refit 1/3  runs/SUMMARY.md Extended Data list
+ED9a LD       P2 5/10  PS-refit 0/10  runs/SUMMARY.md Extended Data list
+ED9a LGd      P2 11/15  PS-refit 0/15  runs/SUMMARY.md Extended Data list
+ED9a LGv      P2 3/4  PS-refit 0/4  runs/SUMMARY.md Extended Data list
+ED9a LH       P2 3/3  PS-refit 2/3  runs/SUMMARY.md Extended Data list
+ED9a LHA      P2 2/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a LP       P2 23/38  PS-refit 1/38  runs/SUMMARY.md Extended Data list
+ED9a LSr      P2 8/21  PS-refit 2/21  runs/SUMMARY.md Extended Data list
+ED9a LSv      P2 2/4  PS-refit 0/4  runs/SUMMARY.md Extended Data list
+ED9a MD       P2 9/11  PS-refit 1/11  runs/SUMMARY.md Extended Data list
+ED9a MDRN     P2 2/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a MEA      P2 1/6  PS-refit 0/6  runs/SUMMARY.md Extended Data list
+ED9a MG       P2 5/9  PS-refit 2/9  runs/SUMMARY.md Extended Data list
+ED9a MOp      P2 20/22  PS-refit 6/22  runs/SUMMARY.md Extended Data list
+ED9a MOs      P2 22/26  PS-refit 4/26  runs/SUMMARY.md Extended Data list
+ED9a MRN      P2 48/57  PS-refit 10/57  runs/SUMMARY.md Extended Data list
+ED9a MS       P2 1/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a MV       P2 11/13  PS-refit 1/13  runs/SUMMARY.md Extended Data list
+ED9a NLL      P2 2/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a NOD      P2 4/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a NTS      P2 3/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a ORBl     P2 4/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a ORBm     P2 4/4  PS-refit 1/4  runs/SUMMARY.md Extended Data list
+ED9a ORBvl    P2 5/5  PS-refit 2/5  runs/SUMMARY.md Extended Data list
+ED9a PA       P2 3/4  PS-refit 0/4  runs/SUMMARY.md Extended Data list
+ED9a PAA      P2 2/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a PAG      P2 19/21  PS-refit 0/21  runs/SUMMARY.md Extended Data list
+ED9a PAR      P2 1/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a PARN     P2 5/8  PS-refit 0/8  runs/SUMMARY.md Extended Data list
+ED9a PB       P2 5/7  PS-refit 1/7  runs/SUMMARY.md Extended Data list
+ED9a PCG      P2 3/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a PCN      P2 1/3  PS-refit 1/3  runs/SUMMARY.md Extended Data list
+ED9a PF       P2 3/3  PS-refit 1/3  runs/SUMMARY.md Extended Data list
+ED9a PGRN     P2 3/3  PS-refit 1/3  runs/SUMMARY.md Extended Data list
+ED9a PIR      P2 4/16  PS-refit 0/16  runs/SUMMARY.md Extended Data list
+ED9a PL       P2 8/10  PS-refit 1/10  runs/SUMMARY.md Extended Data list
+ED9a PO       P2 20/29  PS-refit 4/29  runs/SUMMARY.md Extended Data list
+ED9a POL      P2 1/4  PS-refit 0/4  runs/SUMMARY.md Extended Data list
+ED9a POST     P2 4/8  PS-refit 0/8  runs/SUMMARY.md Extended Data list
+ED9a PPN      P2 10/10  PS-refit 2/10  runs/SUMMARY.md Extended Data list
+ED9a PRM      P2 3/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a PRNc     P2 6/6  PS-refit 2/6  runs/SUMMARY.md Extended Data list
+ED9a PRNr     P2 13/15  PS-refit 4/15  runs/SUMMARY.md Extended Data list
+ED9a PSV      P2 3/4  PS-refit 1/4  runs/SUMMARY.md Extended Data list
+ED9a PYR      P2 3/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a PoT      P2 2/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a ProS     P2 4/7  PS-refit 0/7  runs/SUMMARY.md Extended Data list
+ED9a RN       P2 7/8  PS-refit 3/8  runs/SUMMARY.md Extended Data list
+ED9a RSPagl   P2 6/8  PS-refit 2/8  runs/SUMMARY.md Extended Data list
+ED9a RSPd     P2 8/10  PS-refit 0/10  runs/SUMMARY.md Extended Data list
+ED9a RSPv     P2 7/12  PS-refit 0/12  runs/SUMMARY.md Extended Data list
+ED9a RT       P2 11/14  PS-refit 3/14  runs/SUMMARY.md Extended Data list
+ED9a SCm      P2 33/35  PS-refit 7/35  runs/SUMMARY.md Extended Data list
+ED9a SCs      P2 5/7  PS-refit 0/7  runs/SUMMARY.md Extended Data list
+ED9a SF       P2 4/4  PS-refit 0/4  runs/SUMMARY.md Extended Data list
+ED9a SGN      P2 3/5  PS-refit 1/5  runs/SUMMARY.md Extended Data list
+ED9a SI       P2 5/6  PS-refit 0/6  runs/SUMMARY.md Extended Data list
+ED9a SIM      P2 8/8  PS-refit 0/8  runs/SUMMARY.md Extended Data list
+ED9a SMT      P2 3/4  PS-refit 1/4  runs/SUMMARY.md Extended Data list
+ED9a SPIV     P2 7/7  PS-refit 2/7  runs/SUMMARY.md Extended Data list
+ED9a SPVI     P2 2/4  PS-refit 0/4  runs/SUMMARY.md Extended Data list
+ED9a SPVO     P2 3/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a SSp-bfd  P2 13/13  PS-refit 0/13  runs/SUMMARY.md Extended Data list
+ED9a SSp-ll   P2 3/3  PS-refit 0/3  runs/SUMMARY.md Extended Data list
+ED9a SSp-m    P2 5/6  PS-refit 0/6  runs/SUMMARY.md Extended Data list
+ED9a SSp-tr   P2 4/6  PS-refit 1/6  runs/SUMMARY.md Extended Data list
+ED9a SSp-ul   P2 3/4  PS-refit 2/4  runs/SUMMARY.md Extended Data list
+ED9a SSs      P2 6/8  PS-refit 2/8  runs/SUMMARY.md Extended Data list
+ED9a SUB      P2 8/12  PS-refit 0/12  runs/SUMMARY.md Extended Data list
+ED9a SUT      P2 3/5  PS-refit 2/5  runs/SUMMARY.md Extended Data list
+ED9a SUV      P2 6/6  PS-refit 0/6  runs/SUMMARY.md Extended Data list
+ED9a TEa      P2 4/5  PS-refit 1/5  runs/SUMMARY.md Extended Data list
+ED9a TRN      P2 6/6  PS-refit 0/6  runs/SUMMARY.md Extended Data list
+ED9a TTd      P2 4/6  PS-refit 0/6  runs/SUMMARY.md Extended Data list
+ED9a V        P2 5/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a VAL      P2 4/5  PS-refit 1/5  runs/SUMMARY.md Extended Data list
+ED9a VISa     P2 19/20  PS-refit 0/20  runs/SUMMARY.md Extended Data list
+ED9a VISam    P2 6/7  PS-refit 0/7  runs/SUMMARY.md Extended Data list
+ED9a VISl     P2 3/5  PS-refit 0/5  runs/SUMMARY.md Extended Data list
+ED9a VISli    P2 2/4  PS-refit 0/4  runs/SUMMARY.md Extended Data list
+ED9a VISp     P2 13/17  PS-refit 0/17  runs/SUMMARY.md Extended Data list
+ED9a VISpm    P2 4/6  PS-refit 1/6  runs/SUMMARY.md Extended Data list
+ED9a VPL      P2 10/10  PS-refit 3/10  runs/SUMMARY.md Extended Data list
+ED9a VPM      P2 16/18  PS-refit 1/18  runs/SUMMARY.md Extended Data list
+ED9a VeCB     P2 2/3  PS-refit 1/3  runs/SUMMARY.md Extended Data list
+ED9a ZI       P2 13/14  PS-refit 3/14  runs/SUMMARY.md Extended Data list
+ED9b stimulus-significant   221 of 544, mice 108, Wilson 0.366-0.448  runs/SUMMARY.md positive control
+ED9b other                  96 of 803, mice 112, Wilson 0.099-0.144  runs/SUMMARY.md positive control
+ED9b no value               1 of 12, mice 9, Wilson 0.015-0.354  runs/SUMMARY.md positive control
+ED10a smaller effect P1   raw 1.000 size-adjusted 0.058  sim_summary power pw0_delta0.2
+ED10a smaller effect P2   raw 1.000 size-adjusted 0.050  sim_summary power pw0_delta0.2
+ED10a smaller effect P3   raw 0.533 size-adjusted 0.053  sim_summary power pw0_delta0.2
+ED10a smaller effect P4   raw 1.000 size-adjusted 0.050  sim_summary power pw0_delta0.2
+ED10a smaller effect P5   raw 0.071 size-adjusted 0.057  sim_summary power pw0_delta0.2
+ED10a larger effect P1   raw 1.000 size-adjusted 0.072  sim_summary power pw1_delta0.5
+ED10a larger effect P2   raw 1.000 size-adjusted 0.050  sim_summary power pw1_delta0.5
+ED10a larger effect P3   raw 0.523 size-adjusted 0.053  sim_summary power pw1_delta0.5
+ED10a larger effect P4   raw 1.000 size-adjusted 0.050  sim_summary power pw1_delta0.5
+ED10a larger effect P5   raw 0.656 size-adjusted 0.615  sim_summary power pw1_delta0.5
+ED10b P1   raw 0.947 size-adjusted 0.887 [0.796, 0.957]  summary_2b size_adjusted_power_pos_graded
+ED10b P2   raw 0.932 size-adjusted 0.878 [0.788, 0.946]  summary_2b size_adjusted_power_pos_graded
+ED10b P3   raw 0.933 size-adjusted 0.925 [0.855, 0.974]  summary_2b size_adjusted_power_pos_graded
+ED10b P4   raw 0.949 size-adjusted 0.569 [0.449, 0.738]  summary_2b size_adjusted_power_pos_graded
+ED10b P5   raw 0.839 size-adjusted 0.846 [0.758, 0.918]  summary_2b size_adjusted_power_pos_graded

@@ -1,0 +1,50 @@
+# Step 5 design: the step 2 permutation rules on non-neural wearable-sensor recordings (PAMAP2)
+
+Version 2, written 2026-11-02 (KST) before any data of this step were downloaded or opened. Draft v1 was reviewed by a statistician persona and a wearable-sensing persona (`review-v1-statistician.txt`, `review-v1-wearable.txt`); responses in §12. To be re-reviewed (with the shared engine and summary, which the v1 reviewers did not receive), committed and timestamped (OpenTimestamps); the data are downloaded only after the Bitcoin attestation. Post hoc with respect to steps 1–3 (author decision 2026-11-02).
+
+## 1. Question and what it can show
+Does the failure of trial-level and training-label permutation under shared blocks also occur in one non-neural continuous recording? This step repeats the fake-label benchmark on body-worn inertial sensors, a digital-health setting in which decoders are also cross-validated on time-ordered data. P5 is exact by construction here (§4), so its rate is an implementation check; the empirical content is how far P1–P4 exceed 5% and P5's power in the injected-signal control.
+
+## 2. Data
+PAMAP2 Physical Activity Monitoring (UCI Machine Learning Repository, dataset 231, doi 10.24432/C5NW2H; CC BY 4.0), `Protocol/subject101.dat` … `subject109.dat` only (`Optional` not used), downloaded by `code/fetch_pamap2.py` (writes `MANIFEST.sha256` of the nine files). Per the dataset's documentation: 54 columns per row at 100 Hz (timestamp, activity ID, heart rate, then three IMUs on hand, chest and ankle, each with temperature, 3D acceleration ±16 g, 3D acceleration ±6 g, 3D gyroscope, 3D magnetometer and 4 orientation values documented as invalid). The loader asserts 54 columns and increasing timestamps.
+- Subject index for all seeds: s = subject number − 101 (subject101 → 0, …, subject109 → 8), computed from the subject name in code.
+
+## 3. Windows, blocks, features
+- The whole protocol recording of each subject is used in time order, all activity IDs included (activity labels are not used).
+- Windows: non-overlapping windows of 200 consecutive rows. A window is dropped if its timestamps contain a step larger than 0.015 s (a gap), if any of the 27 IMU channels (±16 g acceleration, gyroscope, magnetometer, three IMUs) has fewer than 100 valid rows, or if heart rate has no valid value. Features per window: mean and standard deviation of each IMU channel over its valid rows, and mean heart rate (55). Dropped windows are counted by reason.
+- Blocks: the retained windows are cut into 24 consecutive blocks of equal window count (remainder at the end dropped); blocks are contiguous in window order, not exactly in time when windows were dropped (block start and end timestamps are stored). Runs: 4 runs of 6 consecutive blocks.
+- Inclusion (decided by `prepare_pamap2.py` before any decoding, reason written to `<subject>.json`): at least 480 retained windows (20 per block) and no constant feature; a loader failure (wrong column count, non-increasing timestamps, an exception) also excludes the subject, labelled as such in its reason and named in the results note. Expected: subject109 excluded (its protocol recording is short), about 8 subjects included.
+
+## 4. Labels with no information, and the positive control
+- Within each run, 3 of its 6 blocks are assigned to class 1 at random. Per subject, 30 assignments drawn with `default_rng([2026, 51, s, d])`, d = 0..29 (redrawn while equal to an earlier one or its class swap; each assignment stays marginally uniform over the within-run group). P5 permutes the observed block labels within runs (the same group), so it is exact under the null for these labels; the positive control measures its power.
+- Other seeds: fold seed and P2 `random_state` = `default_rng([2026, 53, s, d, split index]).integers(2**31 − 1)` (the fake and positive-control arms share it, so they share the S-main folds); rule generator = `default_rng([2026, 54, s, d, split index, round(10 δ)])` (δ = 0 for fake labels). Split index: main 0, tool 1, block 2.
+- Positive control (injected signal): for assignment d, δ times the feature's standard deviation (over the retained, block-assigned windows of the subject, test folds included; acceptable for a descriptive control) is added on class-1 windows to 6 seeded features (`default_rng([2026, 52, s, d])`), δ ∈ {0.5, 1.0}, under S-main only; raw power per rule, descriptive.
+
+## 5. Splits
+S-main: shuffled KFold(5); S-tool: unshuffled StratifiedKFold(5), re-split per permuted label vector; S-block: whole blocks held out, fold = block index mod 4 (`PredefinedSplit`; each fold holds 6 blocks spread over all runs; a fixed map, independent of GroupKFold's tie order). No leave-one-run-out split (runs are an artefact of this design).
+
+## 6. Rules (step 2 `sim.py`, unchanged; 200 draws each; statistic = mean fold accuracy)
+P1 binomial test of the pooled held-out correct count; P2 scikit-learn `permutation_test_score` (labels permuted across all windows, refit; fixed fold list under S-main and S-block, re-split per permuted vector under S-tool); P3 labels permuted within runs at window level, refit (the CoSMoMVPA rule); P4 training labels permuted per fold, refit, test labels kept (PyMVPA tutorial, ADAM); P5 block labels permuted within runs, training and test together, refit. p = (1 + #null ≥ obs) / (N + 1); a fold whose training labels hold one class makes the statistic undefined; an undefined null draw counts as an exceedance.
+
+## 7. Decoder
+`sim.pipeline()` (standardization, 20 features by F test, L2 logistic regression, C = 1), fitted on training folds only.
+
+## 8. Outcomes and decision rules (fixed now; `../step4-fmri-haxby/code/summarize.py --step 5`)
+- Unit = subject; per subject the share of its 30 assignments with p < 0.05 (strict; undefined p left out and counted); mean over subjects; subject percentile bootstrap 95% interval (B = 20,000; a fresh `default_rng(20261102)` for every quantity). "Inflated" = lower bound above 10%. Also per rule: the number of subjects with at least 5 rejections of 30.
+- **Primary contrast E5:** E = 1[p_P2 < 0.05] − 1[p_P5 < 0.05] per (subject, assignment), fake labels, S-main; pairs with an undefined p left out and counted; mean per subject, then over subjects; "positive" = bootstrap lower bound above 0. Also: per-subject E and the number of subjects with E > 0 (exact one-sided binomial test over all subjects with a defined E; subjects with E = 0 are kept and count as not positive, which is conservative). With fewer than 5 subjects with a defined E no decision is made (descriptive only).
+- Secondary (no decision): every rule under every split; positive-control power.
+- The summary stops if a row is duplicated, a test row is present, a subject has no inclusion record, an included subject's key set differs from the design (90 fake and 60 control keys), a row has a number of draws other than 200, or rows come from different package versions.
+
+## 9. Predictions (may be wrong)
+1. P1, P2, P4 inflated under S-main.
+2. (Implementation check) P5 not inflated (bootstrap upper bound at or below 10%) under every split.
+3. Under S-block, P2 and P4 lower than under S-main (paired per-subject difference, descriptive).
+4. Positive control: P5 power higher at δ 1.0 than at δ 0.5 (descriptive).
+
+## 10. Compute, environment, reporting
+Laptop, Python 3.12, numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2 (`requirements.txt`), one process per subject, `OMP_NUM_THREADS=1`; expected about 2 h for about 8 subjects (run after step 4). The number of draws, assignments, splits and rules is not reduced for time. Code: `code/fetch_pamap2.py`, `code/prepare_pamap2.py`, `code/run_pamap2.py`, and the engine, summary and synthetic checks of step 4 (`../step4-fmri-haxby/code/engine.py`, `summarize.py`, `test_synthetic.py`, which includes this step's checks). Rows: `runs/rows.step5.<subject>.jsonl` with every p, the observed accuracy, P5's null accuracies, seeds, δ and the signal features, convergence warnings, draws and package versions; resumable with stored rows checked. Order: re-review → commit and timestamp → Bitcoin attestation → fetch → prepare (inclusion) → run → results note §0 → summary → results note. Every pre-specified quantity is reported whatever it shows. Not done: activity labels as decoding targets (each activity occupies one segment per subject, so no valid test exists for them), the `Optional` recordings, other sensor datasets.
+
+## 11. (reserved)
+
+## 12. Response to the v1 reviews
+Both reviewers MUST 1 (engine and summary not supplied): they are supplied to the re-review and timestamped with this step's hash list. MUST 2 (subject index): fixed from the subject name (§2). Statistician MUST 3 (S-block tie order): fixed map block mod 4 (§5). Statistician MUST 4 (E5 definition): §8. Wearable MUST 3 (`--n-assign`): removed; a `--test` mode marks its rows and the summary rejects them. SHOULD items applied: expected N and minimum N (§3, §8); sign test and per-subject values (§8); predictions with criteria or labelled descriptive (§9); exactness argument (§4); timestamp gaps and monotonic check (§3); positive-control scaling stated (§4); explicit δ in the rule seed and rows; row writes as one appended and flushed line, with truncated-line and missing-newline handling; versions and draws in rows; end-to-end synthetic test; scope softened (§1); rules defined inline (§6); versions pinned (§10); block timestamps stored (§3); convergence warnings counted instead of hidden; resume checks stored labels and seeds; `N_SIG = 6` hard-coded; constant-feature check. Not applied: a separate `GroupKFold` map in each row (replaced by the fixed map). Re-review (`review-v2-*.txt`): both reviewers 'ready to timestamp'; remaining SHOULD items applied before the stamp as listed in step 4 §12, plus: resume also checks δ; undefined null draws stated (§6); 'exact' worded for the null (§4); prediction 2 criterion; the rule seed shared with the fold seed noted in step 4 §10.

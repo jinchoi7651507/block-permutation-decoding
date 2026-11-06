@@ -1,0 +1,6 @@
+Coding scheme of the survey (items and allowed values; verbatim from the protocol):
+| C1 split | blocked (whole blocks held out) / shared (random trial-level k-fold, odd–even, or train/test inside blocks) / unclear |
+| C2 test | binomial or parametric vs chance / trial-label permutation / block or session permutation / pseudosession or circular/linear shift / other / unclear |
+| C3 refit in null | decoder refit in every null draw / decoder fixed, only held-out labels permuted / unclear |
+| C4 label-based unit selection before decoding | none / yes, inside training folds / yes, on all trials / unclear |
+| C5 code available | yes / no |
