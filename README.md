@@ -1,4 +1,4 @@
-*First timestamp: Bitcoin block 971261 (2026-10-13 15:18 UTC), for `analyses/trackA-std/PREREG-trackA.md`, before any new mouse session was downloaded. Check all 17 proofs with `python prereg/ots_verify_public.py $(find analyses -name '*.ots')`. Copied on 2026-11-06 from the authors' working repository. Archived at https://doi.org/10.5281/zenodo.24008938. Timestamped files are byte-identical, and `PROVENANCE.md` lists the changes to other files.*
+*First timestamp: Bitcoin block 971261 (2026-10-13 15:18 UTC), for `analyses/trackA-std/PREREG-trackA.md`, before any new mouse session was downloaded. Check all 17 proofs with `python prereg/ots_verify_public.py $(find analyses -name '*.ots')`. Copied on 2026-11-06 from the authors' working repository. Archived at https://doi.org/10.5281/zenodo.24008938. Preprint DOI to be added soon. Timestamped files are byte-identical, and `PROVENANCE.md` lists the changes to other files.*
 
 # Block permutation tests for decoders when training and test trials share recording blocks
 
