@@ -5,6 +5,7 @@ authors:
   - family-names: Choi
     given-names: Dongjin
     affiliation: "Independent Researcher, South Korea"
+    orcid: "https://orcid.org/0009-0002-1147-0393"
 license: MIT
 doi: "10.5281/zenodo.24008938"
 repository-code: "https://github.com/jinchoi7651507/block-permutation-decoding"
