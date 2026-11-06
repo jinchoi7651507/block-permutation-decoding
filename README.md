@@ -2,7 +2,7 @@
 
 # Block permutation tests for decoders when training and test trials share recording blocks
 
-This repository holds the code, the timestamped designs and the outputs behind the preprint "Common decoding tests fail when training and test trials share recording blocks" (bioRxiv, [DOI when posted]). Nothing here has been peer reviewed yet.
+This repository holds the code, the timestamped designs and the outputs behind the preprint "Common decoding tests fail when training and test trials share recording blocks" (preprint to be posted within days). Nothing here has been peer reviewed yet.
 
 **In short.** When training and test trials come from the same recording blocks, the permutation rules that decoding toolboxes ship and teach call labels that carry no information decodable in most tests, and the toolboxes run as shipped call about one in five decodable in balanced runs. Permuting the labels of all trials together, block by block, and refitting the decoder keeps the nominal 5% when conditions are assigned to blocks at random. The test is provided as a function in `blockperm/`.
 
