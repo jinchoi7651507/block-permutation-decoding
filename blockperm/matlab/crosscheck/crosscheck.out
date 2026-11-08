@@ -1,0 +1,11 @@
+# Cross-check run Sun Nov  8 21:50:12 KST 2026 (Python: numpy 2.5.4, scikit-learn 1.9.1, mne 1.14 dev; Octave 11.3.0 with statistics 2.1.2, datatypes 1.6.2; macOS arm64)
+epochs 180, features 64, runs 12
+--- Python
+imagery: score 0.5722, 924 arrangements, p 0.6558
+fake: score 0.5389, 924 arrangements, p 0.8723
+--- Octave
+imagery: score 0.5722, 924 arrangements, p 0.6558; Python p 0.6558; max |null difference| 2.22e-16
+fake: score 0.5389, 924 arrangements, p 0.8723; Python p 0.8723; max |null difference| 2.22e-16
+cross-check passed: same nulls and p values
+--- MVPA-Light 942ce39
+MVPA-Light: score 0.8111 (repeated call 0.8111), 49 permutations, p 0.140

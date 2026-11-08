@@ -98,6 +98,17 @@ python analyses/step4-fmri-haxby/code/test_synthetic.py
 ```
 
 - The tests end with "12 passed"; one of them checks that the function gives the same scores and p values as the simulator used in the analyses (`analyses/step2-comparison/code/sim.py`). The example prints 14 (35%) for trial-level permutation and 1 (2%) for the block permutation test, out of 40 recordings with labels that carry no information.
+
+The MATLAB and Octave port (optional; no result of the paper uses it). Needs GNU Octave 7 or later (checked with 11.3.0), and MNE for the EEG features:
+
+```bash
+(cd blockperm/matlab && octave --no-gui --eval "test_block_permutation_test")
+python blockperm/matlab/crosscheck/make_eegbci_features.py $OUT/eegbci     # downloads PhysioNet EEGBCI subject 1, runs 3 to 14
+python blockperm/matlab/crosscheck/run_python_check.py $OUT/eegbci
+(cd blockperm/matlab/crosscheck && octave --no-gui --eval "run_matlab_check('$OUT/eegbci')")
+```
+
+- The unit checks end with "all checks passed" (size under no information 0.040 in Octave 11.3.0; `blockperm/matlab/test_block_permutation_test.out`). The cross-check prints the same p for Python and Octave (0.6558 for the real labels, 0.8723 for labels with no information, 924 arrangements each) and "cross-check passed"; the shipped record is `blockperm/matlab/crosscheck/crosscheck.out`. About 5 min on a laptop.
 - `foldmap_check.py` prints `maps_sha256` a2f34e49… on arm64 (as `foldmap_arm64_laptop.json`) and 2b94cd2f… on x86 (as `foldmap_x86_c2d.json`). The replicate-level comparison (800 of 800) is in `analyses/foldmap/replicate_*_compare.txt`, with its protocol in `REPLICATE-CHECK.md`; its scripts expect the working repository's layout (`PROVENANCE.md`).
 - The Extended Data Fig. 3 summary is rebuilt from the shipped permutation scores (null means 0.0014 fixed, 0.1149 repeated); the full rerun from the raw data is in `analyses/yaron-panel/RESULTS-NOTE.md`.
 - The survey recount prints "11 of 14" (trial-level tests; one code recoded on 2026-11-04, `practice-survey/final-check-2026-11-04/RESULT.md`); with `item=='C1'` and `x['final']=='shared'` it prints "14 of 14".

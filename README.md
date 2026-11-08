@@ -30,7 +30,7 @@ from blockperm import block_permutation_test_score
 score, null_scores, p = block_permutation_test_score(pipeline, X, y, blocks=block_id, cv=cv)
 ```
 
-Install with `pip install ./blockperm` (Python 3.12), or copy `blockperm/blockperm.py` into a project. Put every step that is fitted to the labels (scaling, feature selection, the decoder) in one scikit-learn `Pipeline` and give one block identity per trial. The function permutes the labels of whole blocks, reruns the cross-validation for every permutation and returns the observed score, the null scores and the p value. `blockperm/README.md` explains the arguments, when the test is valid, the smallest attainable p value for few blocks, and the change for each toolbox.
+Install with `pip install ./blockperm` (Python 3.12), or copy `blockperm/blockperm.py` into a project. Put every step that is fitted to the labels (scaling, feature selection, the decoder) in one scikit-learn `Pipeline` and give one block identity per trial. The function permutes the labels of whole blocks, reruns the cross-validation for every permutation and returns the observed score, the null scores and the p value. `blockperm/README.md` explains the arguments, when the test is valid, the smallest attainable p value for few blocks, and the change for each toolbox. `blockperm/docs/TUTORIAL.md` is a step-by-step guide (folds, strata, pseudosessions, few blocks, fixed block orders, checking a pipeline with labels that carry no information). `blockperm/matlab/` holds a MATLAB and Octave port that takes a function returning the cross-validated score for a label vector. It was not used for any result in this repository; on real EEG its exact null equals the Python one (`blockperm/matlab/README.md`). A release on PyPI is planned after the revision of the manuscript.
 
 ## Results and where they are reproduced
 
@@ -119,7 +119,7 @@ Then rebuild every summary and figure from the shipped files and compare them wi
 
 | Path | What |
 |---|---|
-| `blockperm/` | The block permutation test as a function, with tests and an example. |
+| `blockperm/` | The block permutation test as a function, with tests, an example, a tutorial (`docs/`) and a MATLAB and Octave port with its checks (`matlab/`). |
 | `figures/` | Scripts that draw every figure from `analyses/`, the plotted values and the PDFs. |
 | `requirements/` | Pinned package versions of each environment, from the `pip freeze` recorded with each run. |
 | `analyses/step1-decomposition/` | Mouse recordings with labels assigned to blocks: trial-level tests, fixed and refitted decoders, training-label permutation (Fig. 1, row 2). |
