@@ -39,7 +39,7 @@ Python 3.12 with numpy, scipy and scikit-learn (tested with numpy 2.5.4, scipy 1
 
 ```sh
 pip install .                   # from this folder (the module and its dependencies); or copy blockperm.py into a project
-python -m pytest tests          # about 45 s on one core
+python -m pytest tests          # a few minutes on one core; the warnings it prints are expected
 python examples/fake_block_labels.py
 ```
 
