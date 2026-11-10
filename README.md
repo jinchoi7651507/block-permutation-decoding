@@ -2,7 +2,7 @@
 
 This repository holds the code, the timestamped designs and the outputs behind the preprint "Common decoding tests fail when training and test trials share recording blocks" (preprint, Zenodo, https://doi.org/10.5281/zenodo.24012190). Nothing here has been peer reviewed yet.
 
-**In short.** When training and test trials come from the same recording blocks, the permutation rules that decoding toolboxes ship and teach call labels that carry no information decodable in most tests, and the toolboxes run as shipped call about one in five decodable in balanced runs. Permuting the labels of all trials together, block by block, and refitting the decoder stays near the nominal 5% when conditions are assigned to blocks at random. The test is provided as a function in `blockperm/`.
+**In short.** When training and test trials come from the same recording blocks, the permutation rules that decoding toolboxes ship and teach call labels that carry no information decodable in most tests, and the toolboxes run as shipped call about one in five decodable in balanced runs. Permuting the labels of all trials together, block by block, and refitting the decoder stays near the nominal 5% when conditions are assigned to blocks at random. The test is provided as a function in `blockperm/` (`pip install blockperm`), with a two-minute demo that runs in the browser ([Colab](https://colab.research.google.com/github/jinchoi7651507/block-permutation-decoding/blob/main/blockperm/examples/blockperm_demo.ipynb)).
 
 To use the test, see [Using the test](#using-the-test); to check the results, see [How to reproduce](#how-to-reproduce) and `REPRODUCE.md`.
 
