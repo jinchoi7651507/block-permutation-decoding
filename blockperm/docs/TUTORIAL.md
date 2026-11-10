@@ -4,13 +4,14 @@ This guide shows how to test a cross-validated decoding score when the labels fo
 
 ## 1. Install
 
-From a copy of the repository:
+From PyPI or from a copy of the repository:
 
 ```
-pip install ./blockperm
+pip install blockperm      # PyPI
+pip install ./blockperm    # repository copy
 ```
 
-It needs Python 3.12, numpy and scikit-learn. A release on PyPI is planned.
+It needs Python 3.12, numpy and scikit-learn, and installs from PyPI with `pip install blockperm`.
 
 ## 2. The basic call
 

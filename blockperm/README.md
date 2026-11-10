@@ -38,7 +38,7 @@ All three rejected far more often than 5%. Permuting block labels and rerunning 
 Python 3.12 with numpy, scipy and scikit-learn (tested with numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2); tested on macOS (arm64). No special hardware is needed; one CPU core is enough.
 
 ```sh
-pip install ".[test]"           # from this folder (the module, its dependencies and pytest); or copy blockperm.py into a project
+pip install blockperm           # from PyPI; or, in this folder, pip install ".[test]" (with pytest), or copy blockperm.py into a project
 python -m pytest tests          # a few minutes on one core; the warnings it prints are expected
 python examples/fake_block_labels.py
 ```
@@ -56,7 +56,7 @@ The test `test_equivalence_with_reference` checks that, with `exact=False`, the 
 ## Tutorial, MATLAB and Octave
 - `docs/TUTORIAL.md`: a step-by-step guide (folds, strata, pseudosessions, few blocks, fixed block orders, checking a pipeline with labels that carry no information).
 - `matlab/`: a MATLAB and Octave port, `block_permutation_test.m`, which takes a function returning the cross-validated score for a label vector. This Python function is the reference; the port is checked against it in `matlab/crosscheck/` (`matlab/README.md`).
-- A release on PyPI is planned (version 0.1.0, the version used in the paper).
+- On PyPI: `pip install blockperm` (version 0.1.0, the version used in the paper).
 
 ## Not included
 No `n_jobs` and no fit parameters (unlike `permutation_test_score`); the permutations run one after another. License: MIT (`LICENSE`).
