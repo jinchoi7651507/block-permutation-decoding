@@ -128,7 +128,7 @@ Paths are relative to `analyses/`. Some rows give numbers of the results notes t
 | qualifying sessions and true-template z-test, gate items | Addendum 3 | `step6-reanalysis-cell/vm-out-a3/note_tables.out`, `RESULTS.md` section 1.8 |
 | Klee et al. (2026) group block test p, ITI and PERI, 1.5e-05 and 6e-06; drift accuracy 51.4% | as stated | `step6b-reanalysis-sciadv/out/SUMMARY.md` |
 | Jahn et al. (2024) corrected p 0.48–0.64 (main text) | Holm 0.4795, 0.6434, 0.6434 | `step6-reanalysis-cell/vm-out-a2/summary.md` |
-| 3 of 14 surveyed studies stated random assignment of the decoded condition (two with a constraint) | random 1, pseudorandom-constrained 2 | `practice-survey/random-assignment-coding.csv` |
+| 4 of 14 surveyed studies stated random assignment of the decoded condition (three with a constraint) | random 1, pseudorandom-constrained 3 (column `author_check_2026-11-11`) | `practice-survey/random-assignment-coding.csv` |
 | raw fMRI, whole blocks held out: accuracy on labels with no information 40% (mean) | 0.3997 over 180 rows | `step4-fmri-haxby/runs/rows.step4.*.jsonl` (arm fake, prep raw, split block) |
 | Jahn et al. (2024): 17 sessions, 171 blocks | as stated | `step6-reanalysis-cell/RESULTS.md` section 1.1 |
 | Klee et al. (2026): intertrial window 3.95 to 2.08 s before the reward threshold crossing | as stated | `step6b-reanalysis-sciadv/DESIGN.md` section 0, item 2 |
@@ -138,7 +138,7 @@ Paths are relative to `analyses/`. Some rows give numbers of the results notes t
 | Klee et al. (2026): self-paced drift decoding above chance in 3 of 6 mice; first Go trials of three mice (Methods) | as stated | `step6b-reanalysis-sciadv/out/SUMMARY.md`, `RESULTS.md` |
 | Extended Data Fig. 3a: 18 sessions | 18 | `yaron-panel/RESULTS-NOTE.md` |
 | Methods, Supplementary Table 1: 8 of 30 sessions (stated rerun) | as stated | `trackA-std/RERUN.md` |
-| SN 2: random assignment, 1 random, 2 constrained, 9 fixed, 1 animal-determined, 1 not stated | counts of the coding | `practice-survey/random-assignment-coding.csv` |
+| SN 2: random assignment, 1 random, 3 constrained, 8 fixed, 1 animal-determined, 1 not stated | counts of the author-checked column | `practice-survey/random-assignment-coding.csv` |
 | SN 5: 9 of 10 rows inside the interval, about 3 points, formula 0.3–5.4 points | recomputed from the table | `step1-decomposition/results/results.md` |
 | SN 6: EEG, labels assigned within one eye state 93%, labels on 120-s blocks 96% | as stated | `step2b-eeg/results/summary_2b.md` |
 | Methods: labels varying trial by trial without slow drift, CoSMoMVPA 6.2%, PyMVPA training-label rule 10–12% | as stated | `step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md` |

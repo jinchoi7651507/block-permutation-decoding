@@ -10,7 +10,7 @@ From a copy of the repository:
 pip install ./blockperm
 ```
 
-It needs Python 3.12, numpy and scikit-learn. A release on PyPI is planned after the revision of the manuscript.
+It needs Python 3.12, numpy and scikit-learn. A release on PyPI is planned.
 
 ## 2. The basic call
 
