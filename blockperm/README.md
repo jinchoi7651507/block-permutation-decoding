@@ -9,6 +9,8 @@ score, null_scores, p = block_permutation_test_score(
     pipeline, X, y, blocks=block_id, cv=KFold(5, shuffle=True, random_state=0), n_permutations=1000, random_state=0)
 ```
 
+Try it in the browser without installing anything: [open the demo in Colab](https://colab.research.google.com/github/jinchoi7651507/block-permutation-decoding/blob/main/blockperm/examples/blockperm_demo.ipynb) (`examples/blockperm_demo.ipynb`, about two minutes on the free CPU).
+
 ## What it does
 - Each permutation permutes the labels of whole blocks between blocks, so the labels of training and test trials move together and every block keeps its trials.
 - The whole cross-validation is rerun for every permutation, including every step fitted to the labels. Put scaling, feature or neuron selection and the model in one scikit-learn `Pipeline`.
