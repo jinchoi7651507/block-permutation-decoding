@@ -1,0 +1,36 @@
+diff --git a/results/reanalysis-cell/code/test_synthetic.py b/results/reanalysis-cell/code/test_synthetic.py
+index 08869e5..94f844d 100644
+--- a/results/reanalysis-cell/code/test_synthetic.py
++++ b/results/reanalysis-cell/code/test_synthetic.py
+@@ -422,10 +422,15 @@ def new_checks():
+     import argparse
+     ADD = "2026-11-08-synthetic-test"
+     ns = argparse.Namespace(name="primary", perms=3, draws=1, workers=1, variant=None, out=str(o), extract_root="x", cache=False, addendum=ADD)
+-    # N2: while the platform placeholder is present, every data stage is refused; the suite then sets the real platform string in this process only
+-    check("platform placeholder present in cell_env and refused by every data stage (inspect, gate, select, test)",
+-          cell_env.DEFAULT_PLATFORM == cell_env.PLATFORM_PLACEHOLDER and "to be fixed by the author before the stamp" in cell_env.DEFAULT_PLATFORM
+-          and all(_refused(lambda f=f: f(ns), "platform is not fixed") for f in (rc.stage_inspect, rc.stage_gate, rc.stage_select, rc.stage_test)))
++    # Addendum 1 (2026-11-08): the platform is fixed (N2). Every data stage must refuse another platform without a dated
++    # addendum (F1); checked by pointing DEFAULT_PLATFORM at a platform this process is not on, then restoring it
++    fixed = cell_env.DEFAULT_PLATFORM
++    cell_env.DEFAULT_PLATFORM = "Other-OS other-arch"
++    ns_plain = argparse.Namespace(**dict(vars(ns), addendum=None))
++    refused_other = all(_refused(lambda f=f: f(ns_plain), "the design fixes") for f in (rc.stage_inspect, rc.stage_gate, rc.stage_select, rc.stage_test))
++    cell_env.DEFAULT_PLATFORM = fixed
++    check("platform fixed to 'Linux x86_64' in cell_env, and every data stage (inspect, gate, select, test) refuses another platform without a dated addendum",
++          fixed == "Linux x86_64" and refused_other)
+     cell_env.DEFAULT_PLATFORM = cell_env.platform_record()["platform"]
+     try:
+         cell_env.check_environment(); lowered_refused = False
+@@ -433,6 +438,11 @@ def new_checks():
+         lowered_refused = True
+     check("environment: a lowered 60-trial rule (CELL_MIN_TRIALS) is refused by the run-time check", lowered_refused)
+     os.environ["CELL_MIN_TRIALS"] = "60"       # the runner's own check must pass; sizes stay scaled down in this process (workers=1)
++    # Addendum 1 (2026-11-08): stage_test compares the platform with gate.json (F1); the suite now writes a synthetic gate.json
++    (o / "gate.json").write_text(json.dumps({"platform": dict(cell_env.platform_record(), platform="Other-OS other-arch")}))
++    ns_f1 = argparse.Namespace(**dict(vars(ns), perms=1000, draws=10, addendum=None))
++    check("test stage refused when gate.json records another platform (F1)", _refused(lambda: rc.stage_test(ns_f1), "different platform"))
++    (o / "gate.json").write_text(json.dumps({"platform": cell_env.platform_record()}))
+     rc.stage_test(ns)
+     r1 = (o / "test-primary.json").read_text()
+     (o / "test-primary.json").unlink()

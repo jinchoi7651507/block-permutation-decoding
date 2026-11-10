@@ -1,0 +1,80 @@
+ok   T1 prctile([1 2 3 4],50) = 2.5 (MATLAB)
+ok   T1 prctile([1 2 3 4],25) = 1.5 (MATLAB)
+ok   T1 prctile([1 2 3 4 5],10) = 1 (MATLAB clamps)
+ok   T1 movmean([1..5],5) = [2 2.5 3 3.5 4]
+ok   T1 zscore uses N-1
+ok   T2 dF/F: flat baseline 100 gives 0 outside transients
+ok   T2 dF/F: 150 on baseline 100 gives 50 %
+ok   T2 dF/F: ramp gives the half-window lead of the deposited baseline  [max |diff| 0.002; residual of the ramp -9.1 %]
+ok   T2 dF/F: negative baseline gives all NaN
+ok   T2 Figure 4 filter keeps two 50 % transients
+ok   T2 Figure 4 filter drops a cell with one crossing
+ok   T2 Figure 4 filter drops a cell with a 600 % event
+ok   T2 Figure 4 filter drops NaN cells
+ok   T3 trials: Hits only, cued first, edge trial excluded
+ok   T3 trials: window and binning orientation
+ok   T3 trials: block ids from BlockType changes
+ok   T3 trials: artefact flag (mean over cells > 10) only on the Hit at 7000
+ok   T4 bin 45 centre is -2.02 s (movement baseline)
+ok   T4 ITI window = MATLAB bins 16-44, -3.95 to -2.08 s
+ok   T4 PERI window = MATLAB bins 73-81, -0.15 to +0.38 s
+ok   T5 SVM accuracy near Bayes 0.773  [0.782]
+ok   T5 LDA accuracy near Bayes 0.773  [0.784]
+ok   T5 cv_accuracy_bins equals sklearn cross_val_score (same folds)  [0.7425 vs 0.7425]
+ok   T5 balanced subsample keeps all of the smaller class
+ok   T6 20 balanced arrangements of C S C S C S, 10 class-swap pairs
+ok   T6 class swap leaves the refit accuracy unchanged  [89.7222 vs 89.7222]
+ok   T6 smallest per-mouse block p = 0.1
+ok   T7 exact group null equals brute-force enumeration (3 mice, 8000 combinations)  [0.639000 vs 0.639000]
+ok   T7 group p minimum (2/20)^6 = 1e-6
+ok   T7 unrounded nulls, every mouse at the top: p = (2/20)^6 = 1e-6  [p 1e-06, min 1e-06]
+ok   T13 verdict sentences: drift clause, not-distinguishable clause, exchangeability sentence
+ok   T14 signed rank, n = 6, all differences one sign: two-sided exact p = 2/64 = 1/32  [p 0.03125]
+ok   T14 signed rank drops a NaN pair, as MATLAB signrank does
+ok   T14 tied absolute differences are counted  [ties 1]
+ok   T15 pinned blockperm hash and package versions match  [{'numpy': '2.5.4', 'scipy': '1.18.1', 'scikit-learn': '1.7.2'}]
+ok   T16 verdict: None or NaN drift accuracy gives '(drift check not available)' for ITI only
+ok   T17 partition keys are Python ints (no 'np.int64' in the seed key text)  [(0, 1, 2)|(0, 1, 3)|(0, 1, 4)|(0, 1, 5)|]
+ok   T18 mean comparison on a rounding boundary: 0.285 vs 0.28 and 0.29 at 2 digits, 0.35 vs 0.3 at 1 digit
+ok   T19 Fig. 4D peak search ignores a higher value outside bins 60-90; in-range peak passes 73-81  [peak bin 73 (MATLAB)]
+ok   T8 block test equals blockperm.block_permutation_test_score (exact, fixed folds, no subsample)  [p 1.000 vs 1.000]
+T9 calibration (reduced settings: 1 bin, 30 cells, 6 blocks of 25-35 trials, 10 folds, R = 1, D = 50 trial-shuffle draws, 60 groups of 6 mice; labels carry no information; slow drift)
+  random assignment: mean accuracy 84.7%
+    per mouse, trial shuffle rejects  360/360 = 100.0% (95% CI 99.0-100.0%)
+    per mouse, block test rejects     0/360 = 0.0% (95% CI 0.0-1.0%) (smallest attainable p = 0.1)
+    group, trial shuffle rejects      60/60 = 100.0% (95% CI 94.0-100.0%)
+    group, block test rejects         3/60 = 5.0% (95% CI 1.0-13.9%)
+ok   T9 trial shuffle inflated per mouse (> 20%)
+ok   T9 per-mouse block test never below 0.1
+ok   T9 group block test consistent with 5% under random assignment (exact binomial, two-sided p > 0.01)
+  fixed CSCSCS assignment: mean accuracy 74.0%
+    per mouse, trial shuffle rejects  358/360 = 99.4% (95% CI 98.0-99.9%)
+    per mouse, block test rejects     0/360 = 0.0% (95% CI 0.0-1.0%) (smallest attainable p = 0.1)
+    group, trial shuffle rejects      60/60 = 100.0% (95% CI 94.0-100.0%)
+    group, block test rejects         0/60 = 0.0% (95% CI 0.0-6.0%)
+T10 event-locked context signal (fixed pattern added to cued trials, amplitude 1.0), random assignment, 20 groups per drift level
+  weak drift (sd 0.05): mean accuracy 78.9%; group block test detects 20/20 = 100.0% (95% CI 83.2-100.0%); group trial shuffle detects 20/20 = 100.0% (95% CI 83.2-100.0%)
+ok   T10 group block test detects the event-locked signal with weak drift in >= 90% of groups
+  strong drift as in T9 (sd 0.25): mean accuracy 88.8%; group block test detects 5/20 = 25.0% (95% CI 8.7-49.1%); group trial shuffle detects 20/20 = 100.0% (95% CI 83.2-100.0%)
+  (descriptive, no pass/fail: with strong block-level drift every arrangement decodes well, so the block test has little power for a moderate event-locked signal)
+ok   T11 movement decoder (press vs baseline) detects a press-locked pattern  [acc 95.3, p 0.032]
+ok   T11 movement decoder near chance without a pattern  [acc 52.2]
+T12 timing: one linear SVM fit (171 trials x 210 cells, noise) = 2.2 ms; primary tests per mouse about 3.1e+06 fits, 1.9 CPU-hours (both windows, R = 4, D = 1000); 6 mice about 11 CPU-hours (primary part)
+T12 total: controls and secondary about 5.3 CPU-hours, gate about 0.6 CPU-hours, whole design about 17 CPU-hours at this fit time
+total time 2143 s; failures: 0 []
+$PY test_synthetic.py --n-jobs 6  5301.03s user 59.43s system 249% cpu 35:46.53 total
+
+## Addendum 2026-11-08 00:04 KST: T20 only (fixed order C S C S C S, descriptive), added before the stamp; pinned environment numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2; run with `test_synthetic.py --only-t20 --n-jobs 6`; the earlier output above is unchanged
+T20 event-locked context signal (fixed pattern added to cued trials, amplitude 1.0), fixed order C S C S C S, 20 groups of 6 mice per drift level (T10 numbers, random assignment, same seeds, from test_synthetic.out in brackets)
+  weak drift (sd 0.05): mean accuracy 76.5%; group block test rejects 20/20 = 100.0% (95% CI 83.2-100.0%) [T10: 20/20 = 100.0% (95% CI 83.2-100.0%)]; group trial shuffle rejects 20/20 = 100.0% (95% CI 83.2-100.0%)
+  strong drift as in T9 (sd 0.25): mean accuracy 82.1%; group block test rejects 0/20 = 0.0% (95% CI 0.0-16.8%) [T10: 5/20 = 25.0% (95% CI 8.7-49.1%)]; group trial shuffle rejects 20/20 = 100.0% (95% CI 83.2-100.0%)
+  (descriptive, no pass/fail)
+total time 285 s (T20 only)
+<venv>/bin/python test_synthetic.py   1248.13s user 17.06s system 441% cpu 4:46.74 total
+
+--- Addendum (2026-11-08 00:0x KST, after the PERI drift rule; T16-T19 and T21 rerun only, pinned environment numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2)
+ok   T16 verdict: None or NaN drift accuracy gives '(drift check not available)' in both windows
+ok   T21 PERI drift rule (2026-11-08): uninformative at drift >= 60%, not-distinguishable below, rejection unaffected
+ok   T17 partition keys are Python ints (no 'np.int64' in the seed key text)  [(0, 1, 2)|(0, 1, 3)|(0, 1, 4)|(0, 1, 5)|]
+ok   T18 mean comparison on a rounding boundary: 0.285 vs 0.28 and 0.29 at 2 digits, 0.35 vs 0.3 at 1 digit
+ok   T19 Fig. 4D peak search ignores a higher value outside bins 60-90; in-range peak passes 73-81  [peak bin 73 (MATLAB)]

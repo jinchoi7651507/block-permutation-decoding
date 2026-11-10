@@ -84,9 +84,19 @@ ED2c iid/sel/circ_rerun       0.028 [0.006, 0.056]  step1 results.json new/std6 
 ED2c shared/sel/circ_rerun    0.151 [0.105, 0.198]  step1 results.json new/std6 shared/sel/circ_rerun
 ED2c shared24/sel/circ_rerun  0.051 [0.018, 0.089]  step1 results.json new/std6 shared24/sel/circ_rerun
 ED2c segment/sel/circ_rerun   0.351 [0.236, 0.470]  step1 results.json new/std6 segment/sel/circ_rerun
-ED3 repeated mean 0.1149, central 95% 0.014 to 0.244, p 0.0010  fixed_vs_repeated.json arms.repeated
-ED3 fixed    mean 0.0014, central 95% -0.141 to 0.143, p 0.0010  fixed_vs_repeated.json arms.fixed
-ED3 observed 0.3368, 123 units  fixed_vs_repeated.json
+ED3a repeated mean 0.1149, 95% 0.014 to 0.244  yaron-panel/results/fixed_vs_repeated.json arms.repeated
+ED3a fixed    mean 0.0014, 95% -0.141 to 0.143  yaron-panel/results/fixed_vs_repeated.json arms.fixed
+ED3a observed 0.3368  fixed_vs_repeated.json observed
+ED3b LIP trial: observed 76.89, null mean 33.35, 95% 30.60 to 36.00, p 0.0010  step 6 test-trial.json
+ED3b LIP primary: observed 75.70, null mean 75.37, 95% 66.75 to 83.41, p 0.4785  step 6 test-primary.json
+ED3b FEF trial: observed 77.33, null mean 33.35, 95% 30.68 to 36.00, p 0.0010  step 6 test-trial.json
+ED3b FEF primary: observed 75.26, null mean 69.75, 95% 60.17 to 80.00, p 0.1598  step 6 test-primary.json
+ED3b LPFC trial: observed 71.56, null mean 33.33, 95% 30.48 to 36.03, p 0.0010  step 6 test-trial.json
+ED3b LPFC primary: observed 73.93, null mean 71.81, 95% 63.03 to 80.37, p 0.3217  step 6 test-primary.json
+ED3c ITI trial: observed 53.42, null mean 49.75, 95% 48.76 to 50.77  tests.json mice[].windows.ITI.trial.null (100,000 random combinations)
+ED3c ITI block: observed 53.42, null mean 50.87, 95% 49.77 to 52.08, p 1.5e-05  tests.json group.ITI.block; exact null by convolution
+ED3c PERI trial: observed 65.28, null mean 49.73, 95% 48.34 to 51.15  tests.json mice[].windows.PERI.trial.null (100,000 random combinations)
+ED3c PERI block: observed 65.28, null mean 58.28, 95% 55.78 to 61.56, p 6e-06  tests.json group.PERI.block; exact null by convolution
 ED4 main  B4  tau7   drift 0 P2 0.118  sim_summary c001_random_B4_tau7_d0_t0_main
 ED4 main  B4  tau20  drift 0 P2 0.128  sim_summary c028_random_B4_tau20_d0_t0_main
 ED4 main  B4  tau67  drift 0 P2 0.114  sim_summary c054_random_B4_tau67_d0_t0_main

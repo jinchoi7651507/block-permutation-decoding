@@ -1,0 +1,11 @@
+# Sun Nov  8 22:19:53 KST 2026 (.venv: numpy, scipy as pinned in cell_env)
+PASS entry point: stages use the wrapper's gate file (missing file refused)
+PASS entry point: --addendum refused
+PASS entry point: --addendum=... and abbreviations refused
+PASS first candidate with the variables is the gate file
+PASS second candidate used when the first lacks the variables
+PASS neither holds them: the stamped gate stops
+PASS altered gate file refused
+PASS compare-names writes the largest difference per region
+PASS stamped data_paths unchanged
+all checks passed

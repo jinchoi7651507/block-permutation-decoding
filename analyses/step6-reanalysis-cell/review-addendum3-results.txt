@@ -1,0 +1,8 @@
+(same fresh Opus agent; changed-lines check of RESULTS.md section 1.8; returned 2026-11-09 15:2x KST; saved by Claude, content as returned in substance, nothing applied)
+
+Verdict: Not ready for four wording fixes; Ready once applied, no further review. Replay, G1, z-test values, G11 level means, BLAS state, extraction counts and times checked and correct.
+1 MUST BLAS paragraph too strong: threadpoolctl reports the setting; measured on the Addendum 3 VM; Addendum 2 draws not saved. Word-level replacements; 1.7 item 6 names the BLAS report.
+2 MUST z-test sentence: name the model next to the block result; "as published" would suggest a published true-template verdict.
+3 MUST retry description: log shows one HTTP 500 and one IncompleteRead; the wrapper and run_data_a3b.sh are not in ADDENDUM-3.sha256.
+4 MUST number: largest p 2.008e-06, so "p <= 2.0e-6" is false; write p < 2.1e-6.
+Limitations: OTS proof for block 975126 relied on RUNNOTE; first-attempt marker and power-off from RUNNOTE only.

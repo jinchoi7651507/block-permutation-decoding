@@ -47,5 +47,8 @@
  "analyses/step5-pamap2/runs/run.subject105.err": "0adaa7b3220b3d0e9178ca501df93ae899e66a3c6fd0ac9693ed9fda6e5564f8",
  "analyses/step5-pamap2/runs/run.subject106.err": "0adaa7b3220b3d0e9178ca501df93ae899e66a3c6fd0ac9693ed9fda6e5564f8",
  "analyses/step5-pamap2/runs/run.subject107.err": "0adaa7b3220b3d0e9178ca501df93ae899e66a3c6fd0ac9693ed9fda6e5564f8",
- "analyses/step5-pamap2/runs/run.subject108.err": "0adaa7b3220b3d0e9178ca501df93ae899e66a3c6fd0ac9693ed9fda6e5564f8"
+ "analyses/step5-pamap2/runs/run.subject108.err": "0adaa7b3220b3d0e9178ca501df93ae899e66a3c6fd0ac9693ed9fda6e5564f8",
+ "analyses/step6-reanalysis-cell/JUDGEMENT-results.md": "2d173fe26d329fb59c29467d86908cb9483812d99aec12faac5657b4474d6fbc",
+ "analyses/step6b-reanalysis-sciadv/JUDGEMENT-results.md": "eadc27527975908e98475911c8f6d9bc9ff947bd7287ac5e2e82778fa1373cdd",
+ "analyses/step6b-reanalysis-sciadv/out/tests.log": "0e126deb1a7c2c8a22d8808c28847dae714ac6040333652c2be0a475d7e5eb43"
 }

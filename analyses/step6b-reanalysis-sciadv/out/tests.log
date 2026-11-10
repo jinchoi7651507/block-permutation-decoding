@@ -1,0 +1,9 @@
+tests start Sun Nov  8 16:44:42 KST 2026
+Traceback (most recent call last):
+  File "<repo>/results/reanalysis-sciadv/code/run_reanalysis.py", line 26, in <module>
+    import decode as dc
+ModuleNotFoundError: No module named 'decode'
+exit 1 Sun Nov  8 16:44:43 KST 2026
+tests start (rerun without -I) Sun Nov  8 16:44:59 KST 2026
+tests written
+exit 0 Mon Nov  9 00:04:18 KST 2026

@@ -1,0 +1,33 @@
+{
+ "predictions": {
+  "P1": [
+   "held",
+   "adopted variant: as_written"
+  ],
+  "P2": [
+   "held",
+   "G5 in variant as_written"
+  ],
+  "P3": [
+   "held",
+   "p = 1/(P+1) = 0.000999 in all three regions required"
+  ],
+  "P4": [
+   "not held",
+   "0 of 3 regions with Holm p < 0.05"
+  ],
+  "P5": [
+   "held",
+   "3 of 3 regions with Holm p >= 0.05"
+  ],
+  "P6": [
+   "held",
+   "998 of 1000 permutations differ from the observed design or are undefined"
+  ],
+  "P7": [
+   "held",
+   "adjacent-pair p <= primary p in 2 of 3 regions (raw p)"
+  ]
+ },
+ "interpretable": true
+}

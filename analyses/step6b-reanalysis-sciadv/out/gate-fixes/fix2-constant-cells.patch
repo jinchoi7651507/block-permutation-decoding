@@ -1,0 +1,29 @@
+diff --git a/code/matlab_port.py b/code/matlab_port.py
+index 38c08f9..1f4e2ed 100644
+--- a/code/matlab_port.py
++++ b/code/matlab_port.py
+@@ -48,7 +48,10 @@ def matlab_movmean(x, k=5):
+ 
+ def matlab_zscore(x):
+     x = np.asarray(x, float)
+-    return (x - x.mean()) / x.std(ddof=1)
++    s = x.std(ddof=1)
++    if s == 0:
++        s = 1.0                      # MATLAB zscore: a zero standard deviation is replaced by 1
++    return (x - x.mean()) / s
+ 
+ 
+ def df_anya(signal, fs=FS, win_s=60, base_prc=50):
+@@ -72,7 +75,11 @@ def df_anya(signal, fs=FS, win_s=60, base_prc=50):
+     if len(X) != n_pts:
+         raise ValueError("MATLAB interp1 would fail here (len(X)=%d, nPts=%d)" % (len(X), n_pts))
+     L = np.arange(1, Ls + 1)
+-    baseline = interp1d(X, Y, kind="linear", fill_value="extrapolate")(L)
++    if np.ptp(Y) == 0:
++        # MATLAB interp1 returns exactly Y(1) for equal knots; scipy's extrapolation adds ~1e-16 noise
++        baseline = np.full(Ls, Y[0])
++    else:
++        baseline = interp1d(X, Y, kind="linear", fill_value="extrapolate")(L)
+     if baseline.min() < 0:
+         return np.full(Ls, np.nan), np.nan
+     return (FP - baseline) / baseline * 100.0, float(baseline.mean())

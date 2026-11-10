@@ -1,0 +1,48 @@
+diff --git a/code/matlab_port.py b/code/matlab_port.py
+index 38c08f9..e366471 100644
+--- a/code/matlab_port.py
++++ b/code/matlab_port.py
+@@ -114,7 +114,7 @@ def block_ids(event_block_type):
+     return np.concatenate([[0], np.cumsum(bt[1:] != bt[:-1])]).astype(int)
+ 
+ 
+-def build_trials(cells, event_id, event_ts, block_type, include_go=False, binned=True):
++def build_trials(cells, event_id, event_ts, block_type, include_go=False, binned=True, matlab_label_lag=False):
+     """Figure4.m Panel D trial matrix.
+ 
+     Trials are Hit events of cued blocks (type 2) then of self-paced blocks (type 1) (then Go events, type 3,
+@@ -137,6 +137,10 @@ def build_trials(cells, event_id, event_ts, block_type, include_go=False, binned
+         parts.append((np.where(event_id == "Go")[0], 3))
+     nf = cells.shape[1]
+     Xs, tt, bb, ts = [], [], [], []
++    # Figure2.m line 197: TrialType1(CGlobal)=TStype(Clocal), with Clocal counting only the kept trials,
++    # so every trial after a skipped one takes the label of an earlier event (list order: cued Hit, self Hit, Go)
++    all_types = np.concatenate([np.full(len(idx), typ) for idx, typ in parts])
++    n_kept = 0
+     for idx, typ in parts:
+         for e in idx:
+             t = int(event_ts[e])
+@@ -145,7 +149,8 @@ def build_trials(cells, event_id, event_ts, block_type, include_go=False, binned
+                 if binned:
+                     seg = seg.reshape(seg.shape[0], N_BINS, BIN).mean(axis=2)
+                 Xs.append(seg)
+-                tt.append(typ)
++                tt.append(int(all_types[n_kept]) if matlab_label_lag else typ)
++                n_kept += 1
+                 bb.append(blk[e])
+                 ts.append(t)
+     X = np.stack(Xs).astype(float)                                   # trials x cells x time
+diff --git a/code/run_reanalysis.py b/code/run_reanalysis.py
+index 7a09699..727e67e 100644
+--- a/code/run_reanalysis.py
++++ b/code/run_reanalysis.py
+@@ -67,7 +67,8 @@ def check_manifest(data_dir):
+ 
+ def mouse_trials(m, mode="fig4", include_go=False, binned=True):
+     cells, _ = mp.preprocess_cells(m["cells"], mode)
+-    return mp.build_trials(cells, m["event_id"], m["event_ts"], m["block_type"], include_go, binned)
++    return mp.build_trials(cells, m["event_id"], m["event_ts"], m["block_type"], include_go, binned,
++                           matlab_label_lag=(mode == "fig2"))
+ 
+ 
+ def clean(tr):

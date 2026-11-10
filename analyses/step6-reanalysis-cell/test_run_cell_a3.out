@@ -1,0 +1,39 @@
+primary: observed matches True; 3 of 3 permutations match the saved design counts
+trial: observed matches True; 3 of 3 permutations match the saved design counts
+win600: observed matches True; 3 of 3 permutations match the saved design counts
+estimated: observed matches True; 3 of 3 permutations match the saved design counts
+adjacent: observed matches True; 3 of 3 permutations match the saved design counts
+G11 level means, largest difference from the saved gate.json: 0.2321428571428571
+true-template z-test p: {'LIP': [5.91479023835175e-10, 9.99947255323166e-06, 5.6121485864908214e-30], 'FEF': [0.0003309116372608558, 3.4396686596915364e-05, 0.00011928172701435404], 'LPFC': [4.7734599226191085e-06, 9.47953482220284e-18, 0.0009270755549376903]}
+PASS primary: replayed design counts equal the decoder path for the observed labelling and 4 permutations
+PASS primary: compare_design reports all matches
+PASS primary: compare_design counts a mismatch
+PASS primary: n_qual has one list per region
+PASS trial: replayed design counts equal the decoder path for the observed labelling and 4 permutations
+PASS trial: compare_design reports all matches
+PASS trial: compare_design counts a mismatch
+PASS trial: n_qual has one list per region
+PASS win600: replayed design counts equal the decoder path for the observed labelling and 4 permutations
+PASS win600: compare_design reports all matches
+PASS win600: compare_design counts a mismatch
+PASS win600: n_qual has one list per region
+PASS estimated: replayed design counts equal the decoder path for the observed labelling and 4 permutations
+PASS estimated: compare_design reports all matches
+PASS estimated: compare_design counts a mismatch
+PASS estimated: n_qual has one list per region
+PASS adjacent: replayed design counts equal the decoder path for the observed labelling and 4 permutations
+PASS adjacent: compare_design reports all matches
+PASS adjacent: compare_design counts a mismatch
+PASS adjacent: n_qual has one list per region
+PASS z_table uses cellport.z_test (ddof 1, against 1/3)
+PASS z_table mean per level
+PASS gate draws with the same purpose code repeat exactly
+PASS the wrapper imports cell_env before numpy
+PASS replay does not depend on the number of workers
+PASS qualifying sessions are saved per region
+PASS qualifying neurons equal the neurons of the qualifying sessions
+PASS main(): design replay of the five tests matches the prior
+PASS main(): true-template z-test, draws, G1 and BLAS state are saved
+PASS main(): refuses other package versions than the Addendum 2 run
+PASS main(): stops when G1 fails
+all checks passed

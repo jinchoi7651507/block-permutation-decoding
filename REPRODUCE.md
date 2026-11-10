@@ -8,27 +8,27 @@ Rule names used in the outputs: P1 binomial test of held-out accuracy; P2 trial-
 
 | Step | Section | What it shows | Time |
 |---|---|---|---|
-| Check the files | §1 | every hash list matches the files here; the 17 timestamp proofs | about 1 min |
-| Rebuild every summary from the shipped rows | §2 | the tables behind every number of the paper, byte for byte | about 5 min |
+| Check the files | §1 | every hash list matches the files here; the 23 timestamp proofs | about 1 min |
+| Rebuild every summary from the shipped rows | §2 (steps 6 and 6b: shipped-output checks in §3) | the tables behind the numbers of the paper, byte for byte | about 5 min |
 | Recompute one simulation replicate | §2 | the same p values as the cloud row | about 20 s |
 | Test the function; recount the survey; synthetic checks of steps 4 and 5 | §2 | `blockperm` tests and example; the survey's counts; ALL OK | about 3 min |
 | Redraw the figures | §2 | Figs 1–2 and Extended Data Figs 1–10 from the shipped outputs, byte for byte | about 1 min |
 | Full runs | §3 | every row from the raw data or the simulator | hours to days per step |
 
-Quick path (about 10 minutes): §1 and §2. `NUMBERS.md` gives the source of every number.
+Quick path (10 to 25 minutes, depending on the machine): §1 and §2. `NUMBERS.md` gives the source of every number.
 
 ## 1. Check the files
 
 ```bash
-python prereg/check_hash_lists.py                                  # 29 hash lists; must end with "ALL OK"
-python prereg/ots_verify_public.py $(find analyses -name '*.ots')  # 17 proofs; earliest Bitcoin block of each; must end with "ALL OK"
+python prereg/check_hash_lists.py                                  # 35 hash lists; must end with "ALL OK"
+python prereg/ots_verify_public.py $(find analyses -name '*.ots')  # 23 proofs; earliest Bitcoin block of each; must end with "ALL OK"
 ```
 
 `check_hash_lists.py` reports nine data manifests separately (recordings and EEG features that are not redistributed); §3 checks them after the download. `prereg/README.md` lists each proof against the start of its run and the first time a result was read.
 
 ## 2. Rebuild the summaries (quick path)
 
-The run rows are shipped as archives, each unpacking into the folder name it had on the machine that wrote it. `-k` keeps the files already shipped (for example the public copies of the machine records). On Linux, GNU tar stops at those files with `-k`; write `tar xzf <archive> --skip-old-files` for each archive.
+The run rows are shipped as archives, each unpacking into the folder name it had on the machine that wrote it. `-k` keeps the files already shipped (for example the public copies of the machine records). On Linux, GNU tar stops at those files with `-k`; write `tar xzf <archive> --skip-old-files` for each archive. The five archives unpack to about 220 MB in about 31,500 files.
 
 ```bash
 (cd analyses/step2-comparison && tar xzkf runs_cloud.tgz && tar xzkf runs_allen.tgz && tar xzkf runs_add3.tgz)   # into runs/, runs_allen/, runs_add3/
@@ -64,6 +64,7 @@ Each summary prints its tables; the `.md` files hold the same numbers as the `.j
 Recompute one simulation replicate from scratch (cell `c000`, replicate 0; about 20 s):
 
 ```bash
+: "${OUT:?run the first block of this section first}"
 (cd analyses/step2-comparison/code && python run_grid.py --design random --B 12 --L 20 --tau-s 20 --drift 1 --split main \
     --reps 1 --n-perm 200 --seed 2026000 --out $OUT/c000.jsonl)
 ```
@@ -71,6 +72,7 @@ Recompute one simulation replicate from scratch (cell `c000`, replicate 0; about
 Compare it with replicate 0 of the shipped cloud rows (from the repository root):
 
 ```bash
+: "${OUT:?run the first block of this section first}"
 python -c "import json,glob;n=json.loads(open('$OUT/c000.jsonl').readline());o=[r for f in glob.glob('analyses/step2-comparison/runs/c000_random_B12_tau20_d1_t0_main.w*.jsonl') for r in map(json.loads,open(f)) if r['rep']==0][0];[print(k,n[k],o[k],'same' if n[k]==o[k] else 'differs') for k in ('P1','P2','P3','P4','P5')]"
 ```
 
@@ -79,17 +81,19 @@ P2, P3 (undefined in this replicate), P4 and P5 print "same"; the binomial p val
 Redraw the figures (Figs 1, 2a, 2b and Extended Data Figs 1–10) from the shipped outputs and compare them with the shipped PDFs (copied first into the scratch folder):
 
 ```bash
+: "${OUT:?run the first block of this section first}"
 mkdir $OUT/pdf && cp figures/*.pdf $OUT/pdf/
 (cd figures && python make_bc_figures.py > $OUT/values_bc.txt && python make_ed_figures.py > $OUT/values_ed.txt)
 for f in $OUT/pdf/*.pdf; do cmp $f figures/$(basename $f); done
 cat $OUT/values_bc.txt $OUT/values_ed.txt | cmp - figures/figures_values.txt
 ```
 
-Both checks must print nothing (checked on 2026-11-02). The scripts overwrite the PDFs in `figures/` and also write PNG previews there. `figures/figures_values.txt` lists every plotted value with its source file and key.
+Both checks must print nothing (checked on 2026-11-10). The scripts overwrite the PDFs in `figures/` and also write PNG previews there; afterwards restore the shipped files with `cp $OUT/pdf/*.pdf figures/ && rm figures/*.png`. `figures/figures_values.txt` lists every plotted value with its source file and key.
 
 The function, the fold-map check and the survey counts:
 
 ```bash
+: "${OUT:?run the first block of this section first}"
 (cd blockperm && python -m pytest -q tests && python examples/fake_block_labels.py)
 python analyses/foldmap/foldmap_check.py
 (cd analyses/yaron-panel/code && python fixed_vs_repeated.py --from-csv ../results/null_draws.csv --out $OUT && cmp $OUT/fixed_vs_repeated.json ../results/fixed_vs_repeated.json)
@@ -99,9 +103,10 @@ python analyses/step4-fmri-haxby/code/test_synthetic.py
 
 - The tests end with "12 passed"; one of them checks that the function gives the same scores and p values as the simulator used in the analyses (`analyses/step2-comparison/code/sim.py`). The example prints 14 (35%) for trial-level permutation and 1 (2%) for the block permutation test, out of 40 recordings with labels that carry no information.
 
-The MATLAB and Octave port (optional; no result of the paper uses it). Needs GNU Octave 7 or later (checked with 11.3.0), and MNE for the EEG features:
+The MATLAB and Octave port (optional; no result of the paper uses it). Needs GNU Octave 7 or later (checked with 11.3.0), and for the EEG features `pip install mne==1.13.2` and network access (the cross-check downloads PhysioNet EEGBCI subject 1, runs 3 to 14, once):
 
 ```bash
+: "${OUT:?run the first block of this section first}"
 (cd blockperm/matlab && octave --no-gui --eval "test_block_permutation_test")
 python blockperm/matlab/crosscheck/make_eegbci_features.py $OUT/eegbci     # downloads PhysioNet EEGBCI subject 1, runs 3 to 14
 python blockperm/matlab/crosscheck/run_python_check.py $OUT/eegbci
@@ -110,7 +115,7 @@ python blockperm/matlab/crosscheck/run_python_check.py $OUT/eegbci
 
 - The unit checks end with "all checks passed" (size under no information 0.040 in Octave 11.3.0; `blockperm/matlab/test_block_permutation_test.out`). The cross-check prints the same p for Python and Octave (0.6558 for the real labels, 0.8723 for labels with no information, 924 arrangements each) and "cross-check passed"; the shipped record is `blockperm/matlab/crosscheck/crosscheck.out`. About 5 min on a laptop.
 - `foldmap_check.py` prints `maps_sha256` a2f34e49… on arm64 (as `foldmap_arm64_laptop.json`) and 2b94cd2f… on x86 (as `foldmap_x86_c2d.json`). The replicate-level comparison (800 of 800) is in `analyses/foldmap/replicate_*_compare.txt`, with its protocol in `REPLICATE-CHECK.md`; its scripts expect the working repository's layout (`PROVENANCE.md`).
-- The Extended Data Fig. 3 summary is rebuilt from the shipped permutation scores (null means 0.0014 fixed, 0.1149 repeated); the full rerun from the raw data is in `analyses/yaron-panel/RESULTS-NOTE.md`.
+- The Extended Data Fig. 3a summary is rebuilt from the shipped permutation scores (null means 0.0014 fixed, 0.1149 repeated); the full rerun from the raw data is in `analyses/yaron-panel/RESULTS-NOTE.md`.
 - The survey recount prints "11 of 14" (trial-level tests; one code recoded on 2026-11-04, `practice-survey/final-check-2026-11-04/RESULT.md`); with `item=='C1'` and `x['final']=='shared'` it prints "14 of 14".
 - `test_synthetic.py` runs the synthetic checks of steps 4 and 5 (about 1 min) and ends with "ALL OK", as in `analyses/step4-fmri-haxby/test_synthetic.out`; scikit-learn's warning that KFold ignores `groups` is expected.
 
@@ -127,6 +132,8 @@ REPO=$(pwd); RERUN=$(mktemp -d); cp -R analyses $RERUN/; cd $RERUN/analyses
 | Allen Visual Coding Neuropixels, 32 sessions | about 80 GB (74.5 GB for the 30 new mice) | depends on the connection | step 1: 8.6 + 2.5 core-hours |
 | MPI LEMON, 40 participants | 12.8 GB | 1.5 h on the authors' connection (`eligibility/download.log`) | step 2b main arms: 8.5 h on one 56-vCPU machine (`runs/vm.log` in the archive) |
 | IBL Brain-Wide Map, 459 sessions | about 96 GB in all, at most 1.2 GB per session; each worker deletes a session's spike files after counting, so the disk holds about 1.3 GB per worker | during the run, one session at a time | 6 h 8 min with 47 workers |
+| Jahn et al. (2024), Zenodo 10.5281/zenodo.10529801 (step 6) | 460 listed members, by range requests | see steps 6 and 6b | below |
+| Klee et al. (2026), Zenodo 10.5281/zenodo.16333867 (step 6b) | 3.57 GB zip | see steps 6 and 6b | below |
 | Yaron et al. (2025), 19 files | 1.3 GB | depends on the connection | about 5 min to load, 2 min for 1,000 permutations |
 | Haxby et al. (2001), PyMVPA distribution, 6 subjects (step 4) | 1.8 GB of archives | about 5 min (the run's `fetch.log`) | about 5 h for six subjects in parallel on the laptop of `ENVIRONMENT.md` (part of it in sleep cycles; `chain.log`) |
 | PAMAP2, UCI archive (step 5) | 0.7 GB archive | about 3 min | about 2 h for eight subjects, six at a time, on the same laptop |
@@ -240,6 +247,44 @@ python ../../step4-fmri-haxby/code/summarize.py --step 5 --rows <rows5> --featur
 
 `code/chain_45.sh` is the run record and keeps the working-repository layout (`results/step4-fmri-haxby/`); the commands above are the same steps for this layout. The synthetic checks of both steps are in §2.
 
+### steps 6 and 6b (pre-specified reanalyses of published studies)
+
+The authors' code and data are not redistributed. Each folder lists the members it needs with their CRC-32. In `step6-reanalysis-cell/`: `data-members.tsv` and `manifest-zenodo-10529801.tsv` (Jahn et al. 2024, Zenodo 10.5281/zenodo.10529801, CC BY 4.0, `Data.zip` and `Figure_2.zip`), in `step6b-reanalysis-sciadv/`: `manifest-zenodo-16333867.tsv` and `authors-code/EXTRACTED.tsv` (Klee et al. 2026, Zenodo record 16333867, CC BY 4.0, `Klee_ScienceAdv_data_code.zip`). The authors' code in those records is what the ports follow; the hash lists name it through these list files.
+
+Step 6 ran on a Google Compute Engine c2d-highcpu-56 (Ubuntu 24.04, Python 3.12.3, `pip install -r requirements/step6-cell.txt`); every data stage refuses another platform than "Linux x86_64". About 4.5 h on 56 vCPUs, 0.8 GB of data.
+
+```bash
+: "${RERUN:?run the set-up line of section 3 first}"
+cd "$RERUN/analyses/step6-reanalysis-cell"
+python -I code/fetch_data.py <root>                                  # 460 listed members by range requests; each checked by CRC-32
+python -I code/run_cell_a2.py fetch-gate --extract-root <root>       # gate file of Addendum 2
+python -I code/run_cell_a2.py inspect --extract-root <root> --out out --cache
+python -I code/run_cell_a2.py gate --extract-root <root> --out out --cache --workers 56
+python -I code/run_cell_a2.py select --out out
+for t in primary trial win600 adjacent estimated; do python -I code/run_cell_a2.py test --name $t --extract-root <root> --out out --cache --workers 56; done
+python -I code/summarize_cell.py --out out                           # compare with vm-out-a2/summary.md
+python -I code/run_cell_a3.py fill --extract-root <root> --prior out --out out-a3 --workers 56   # design counts and the true-template z-test
+```
+
+Zenodo can answer range requests with HTTP 500; `code/fetch_data_retry.py <root>` resumes with the same allow-list. To check the shipped outputs only (the quick-path environment is enough; from `analyses/step6-reanalysis-cell/`), unpack `vm-out-a2/a2-out.tgz` into a new folder, run `python -I code/summarize_cell.py --out <folder>/out-a2`, and compare `<folder>/out-a2/summary.md` with `vm-out-a2/summary.md`. The tables of `RESULTS.md` sections 1.3–1.4 that `summarize_cell.py` does not print: `python -I note_tables.py <folder>/out-a2`, compared with `vm-out-a2/note_tables.out`. For the qualifying sessions and the true-template z-test, unpack `vm-out-a3/a3-out.tgz` into a second folder and run `python -I note_tables.py <folder>/out-a2 <second folder>/out-a3/a3_fill.json`, compared with `vm-out-a3/note_tables.out`. The synthetic checks of the two reanalyses are `python -I code/test_synthetic.py` (steps 6 and 6b) and `python -I code/test_run_cell_a2.py`, `python -I code/test_run_cell_a3.py` (step 6), with their shipped outputs in each step's folder. The two `test_run_cell` checks run in the quick-path environment in under a minute and end with "all checks passed". The step 6 `test_synthetic.py` needs `pip install -r requirements/step6-cell.txt` (in the quick-path environment its two version checks and one platform check fail), takes about 35 min on a laptop and ends with "79 checks, 0 failed". The shipped `test_synthetic.out` is the run hash-listed with the design (66 checks); Addendum 1 changed the suite, and `test_synthetic-vm2.out` is its run on the cloud machine (79 checks).
+
+Step 6b ran on the laptop with 6 workers (about 7 h 20 min; `pip install -r requirements/step6b-sciadv.txt`).
+
+```bash
+: "${RERUN:?run the set-up line of section 3 first}"
+cd "$RERUN/analyses/step6b-reanalysis-sciadv"
+curl -L -o Klee.zip "https://zenodo.org/records/16333867/files/Klee_ScienceAdv_data_code.zip?download=1"   # 3,572,288,274 bytes, md5 18c4429be98ed9595009292caf478ded
+unzip Klee.zip "Data Structures/Switching_2p_Struc_Main.mat" "Data Structures/Switching_Behav_Struc.mat" "Data Structures/clusters_fig2.mat" -d <data>   # CRC-32 in DESIGN section 3.1
+python code/run_reanalysis.py inspect --data-dir <data> --out out-new
+python code/run_reanalysis.py gate --data-dir <data> --out out-new --n-jobs 6
+python code/run_reanalysis.py tests --data-dir <data> --out out-new --n-jobs 6
+python code/summarize.py --out out-new                               # compare with out/SUMMARY.md
+```
+
+To check the shipped outputs only (the quick-path environment is enough; from `analyses/step6b-reanalysis-sciadv/`), copy `out` to a new folder so that the shipped files are not overwritten, run `python code/summarize.py --out <copy>`, and compare `<copy>/SUMMARY.md` with `out/SUMMARY.md`. The step 6b `code/decode.py` imports `blockperm` from `code-package/blockperm`, the layout of the authors' working repository (the file is hash-listed and kept unchanged); before `code/run_reanalysis.py` or `code/test_synthetic.py`, run `mkdir -p code-package && ln -s ../blockperm code-package/blockperm` at the repository root. The step 6b `test_synthetic.py` needs `pip install -r requirements/step6b-sciadv.txt`, takes about 35 to 40 min on a laptop and ends with "failures: 0 []".
+
+Five files differ from their hash lists for the reasons in `PROVENANCE.md`; `prereg/check_hash_lists.py` names them and still ends with "ALL OK".
+
 ### practice survey: quote check
 
 ```bash
@@ -250,7 +295,7 @@ python check_quotes.py          # strict pass: 107 of 140 quotes found (the othe
 python check_quotes_alnum.py    # second pass, spaces and punctuation ignored: 140 of 140; rewrites its line in quote_check.md
 ```
 
-### yaron-panel (Extended Data Fig. 3; Zenodo 10.5281/zenodo.15531781, 19 files)
+### yaron-panel (Extended Data Fig. 3a; Zenodo 10.5281/zenodo.15531781, 19 files)
 
 Needs h5py (`ENVIRONMENT.md`). The download checks each file against the Zenodo md5 and writes `MANIFEST.local.sha256`; compare it with the shipped manifest.
 

@@ -1,0 +1,16 @@
+(same fresh Opus agent as review-addendum1.txt; check of Addendum 2; returned 2026-11-08 22:03 KST; saved by Claude, content as returned in substance, nothing applied)
+
+Verdict: Not ready, two MUST. Wrapper mechanics sound; one sentence of section 2 not supported by the authors' code.
+1. Reasoning: Plot_Figure_2_github.m loads the three files (lines 3-5) and plots Fig. 2D from *_mean_classification_net (lines 80, 92, 104); manifest row matches (411,320 bytes, ab452acd; zip size 4,637,807). Not supported: "*_combined ... a different analysis": plot_Fig2_cross_temporal_decoding.m lines 1609-1611 compute *_combined with nanmean of the network classification results loaded from the same combined-time 900 ms NN files that plot_Fig2_ET_pseudo_pop.m averages with mean into *_net (lines 60-71, 173-175); it may hold the same values. _net could also be in Figure_2_PCA.mat (82,588 bytes, fcbe3358).
+2. The wrapper changes only the gate path; stages look up data_paths at call time; GATE_VARS, shape check, G1-G11, ladder, seeds, P, D and platform checks untouched; no stamped file changed. Resume headers hash only CODE_FILES (record the wrapper in the run note). Hole: --addendum would lift the P/D and platform checks.
+3. CRC check and stop rule adequate; the test is real but narrow (patches data_paths directly, no positive case, output not saved).
+MUST 1: replace the section 2 sentence with the code-based text (nanmean of the same files; may hold the same values; gate reads the stamped name).
+MUST 2: every stage through the wrapper without --addendum.
+SHOULD 1: save the test output; list it, the addendum, both code files and vm-out gate.log in ADDENDUM-2.sha256.
+SHOULD 2: fallback to Figure_2_PCA.mat under the same rules.
+SHOULD 3: descriptive _net vs _combined difference per region; RUNNOTE line that every stage ran through the wrapper.
+SHOULD 4: test through the entry point with a positive case.
+SHOULD 5: fresh --out folder on the VM.
+SHOULD 6: python -I in the docstring.
+
+Changed-lines check (same agent, returned 2026-11-08 22:06 KST): MUST 1 and MUST 2 resolved except that the --addendum refusal caught only the exact token (argparse also accepts --addendum=... and abbreviations); fallback logic correct; CRCs match the manifest; python -I safe for the workers (folders inserted on sys.path; fork on Linux). MUST: refuse every option starting with --a, add a test. SHOULD: shape guard in compare-names; hash list contents including gate.log of the first run.

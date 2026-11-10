@@ -17,6 +17,8 @@ All analyses are Python except the two toolboxes run as shipped (CoSMoMVPA in Oc
 | `step3-ibl`, summary | the laptop | Python 3.12.3, numpy 2.5.4, scipy 1.18.1, pandas 2.3.3 |
 | `yaron-panel` (Extended Data Fig. 3) | the laptop | Python 3.12.3, numpy 2.4.6, scipy 1.18.1, h5py 3.16.0, matplotlib 3.10.9 (`yaron-panel/RESULTS-NOTE.md`) |
 | `step4-fmri-haxby`, `step5-pamap2` (post hoc) | the laptop (`chain_45.sh`; one process per subject, `OMP_NUM_THREADS=1`) | Python 3.12.3, numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2, nibabel 5.3.2 (step 4; `requirements.txt` of each step); the runners stop with other numpy or scikit-learn versions |
+| `step6-reanalysis-cell` | Google Compute Engine c2d-highcpu-56 (AMD EPYC 7B13, 56 vCPU), Ubuntu 24.04 | Python 3.12.3, numpy 2.5.4, scipy 1.18.1, scikit-learn 1.9.1, h5py 3.14.0; threads and platform recorded in the outputs |
+| `step6b-reanalysis-sciadv` | the laptop, macOS arm64, 6 workers | Python 3.12, numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2, mat-io 1.0.2, h5py 3.16.0, pandas 3.1.1 |
 
 ## Quick-path environment
 

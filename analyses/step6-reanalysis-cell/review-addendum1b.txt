@@ -1,0 +1,11 @@
+(same fresh agent as review-addendum1.txt, Claude Opus; follow-up check; returned 2026-11-08 17:37 KST; saved by Claude, content as returned in substance, nothing applied)
+
+1. Addendum 1: both MUST items resolved. vm-hashes2.txt written on the VM at 08:32:17 UTC (hashlib), 21 entries equal the stamped hashes, test_synthetic.py d06b5a82... with mtime 07:58:38 UTC before the suite start 07:58:42 UTC; listed in ADDENDUM-1.sha256; section 3 sentence present. All 12 entries of ADDENDUM-1.sha256 re-hashed with hashlib and match. Leaving RUNNOTE out is acceptable. Minor: JUDGEMENT-addendum1.md says "shasum" (project rule hashlib; hashlib agrees); RUNNOTE chronology slip (17:0x entry before the 16:58-17:26 entry).
+2. Addendum 1b: Not ready, one small MUST. The wrapper cannot extract outside the list (DATA_ALLOWED set from data-members.tsv; --data always set; 460 rows, no duplicates, absolute paths, ".." or backslashes; sizes equal zenodo-files tsv; fetch_members.py keeps its stamped hash). Layout matches run_cell.data_paths and g1_integrity. The refusal check exercises the real logic but is an observation, not an assertion (exit 0 in every case; vacuous if no unlisted .mat existed); its output was not saved.
+MUST 1. Save (or rerun) the refusal check output as fetch-refusal-check.out with a date line, list it in ADDENDUM-1b.sha256, and change the hash-list sentence to "(this file, code/fetch_data.py, fetch-refusal-check.out)".
+SHOULD 1. Make the refusal check fail loudly (raise if no unlisted member; capture stdout; require "REFUSED\t<member>" and no folder written; print "refusal check passed").
+SHOULD 2. Add: "The download starts only after DESIGN-v2.sha256, ADDENDUM-1.sha256 and ADDENDUM-1b.sha256 each have a Bitcoin block, and after the VM check (hashlib) that every file in the three lists matches, including code/fetch_data.py."
+SHOULD 3. Use python -I in the docstring and run command.
+SHOULD 4. If the author has not approved 1b itself, record that go separately before the stamp (rule 16).
+SHOULD 5. RUNNOTE line for 1b (time, output file, no data read).
+Recorded only: in stage_gate a G1 failure stops after load_sessions, not before; no accuracy computed either way.

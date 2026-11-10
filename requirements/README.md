@@ -10,5 +10,7 @@
 | `step2b-cloud.txt` | Python 3.12 with MNE 1.13.2: step 2b arms (cloud); set-up `analyses/step2b-eeg/gcp/vm_setup.sh` | `pip freeze` in `runs/MACHINE.txt` inside `runs_cloud_2b_rerun49.tgz` |
 | `step3-ibl.txt` | Python 3.12 with ONE-api 3.6.1, ibllib 4.1.0, scikit-learn 1.9.1, `brainwidemap` at 118fc36; set-up `analyses/step3-ibl/gcp/vm_ibl_setup.sh` | `pip freeze` in `analyses/step3-ibl/runs/MACHINE.txt` |
 | `step4-5-laptop.txt` | Python 3.12 with nibabel 5.3.2: steps 4 and 5 (post hoc fMRI and body-worn sensors) on the laptop | the step folders' `requirements.txt`, asserted by the runners |
+| `step6-cell.txt` | Python 3.12: step 6 on the cloud machine of `ENVIRONMENT.md` | `analyses/step6-reanalysis-cell/code/cell_env.py` (pinned) |
+| `step6b-sciadv.txt` | Python 3.12: step 6b on the laptop | `analyses/step6b-reanalysis-sciadv/DESIGN.md` section 5 and the run note |
 
 The step 2 mouse cells and the step 2b preprocessing ran on the laptop of `ENVIRONMENT.md` with the step 2 and step 2b versions.

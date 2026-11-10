@@ -27,7 +27,7 @@ In the analyses this function accompanies, three rules that toolboxes run were t
 - trial-level permutation within runs (the CoSMoMVPA tutorial rule);
 - permutation of training labels only, with test labels kept (the PyMVPA tutorial rule).
 
-All three rejected far more often than 5%. Permuting block labels and rerunning the whole cross-validation stayed near 5% in random block designs. With a fixed block order the result depends on the data. In the simulated fixed orders the test was conservative (0–2.4% with shuffled 5-fold). In resting EEG with fixed orders aligned with slow drift it rejected often (first half against second half in most recordings, a pairs-of-blocks order in 29%), and it stayed near 5% for an order orthogonal to a linear trend. There the blocks were not exchangeable (label = time; see "When it is valid"). With labels that vary trial by trial, the first two rules stayed near 5%, and the training-label rule was somewhat above it (up to about 11–12%); the large excess arises when labels follow blocks. `examples/fake_block_labels.py` shows the effect on a synthetic drifting recording.
+All three rejected far more often than 5%. Permuting block labels and rerunning the whole cross-validation stayed near 5% in random block designs. With a fixed block order the result depends on the data. In the simulated fixed orders the test was conservative (0–2.4% with shuffled 5-fold). In resting EEG with fixed orders aligned with slow drift it rejected often (first half against second half in most recordings, a pairs-of-blocks order in 29%), and it stayed near 5% for an order orthogonal to a linear trend. There the blocks were not exchangeable (label = time; see "When it is valid"). With labels that vary trial by trial, the first two rules stayed near 5%, and the training-label rule was somewhat above it (10–12%); the large excess arises when labels follow blocks. `examples/fake_block_labels.py` shows the effect on a synthetic drifting recording.
 
 ## One-line changes per tool
 - **scikit-learn:** call `block_permutation_test_score` with `blocks=`. Passing `groups=` to `permutation_test_score` restricts the shuffle to within groups; with labels constant within blocks, every permutation then returns the observed labels.
@@ -35,12 +35,20 @@ All three rejected far more often than 5%. Permuting block labels and rerunning 
 - **PyMVPA training-label permutation:** permute the labels of all trials, training and test, block by block.
 
 ## Install and test
-Python 3.12 with numpy, scipy and scikit-learn (tested with numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2):
+Python 3.12 with numpy, scipy and scikit-learn (tested with numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2); tested on macOS (arm64). No special hardware is needed; one CPU core is enough.
 
 ```sh
-pip install .                   # from this folder (the module and its dependencies); or copy blockperm.py into a project
+pip install ".[test]"           # from this folder (the module, its dependencies and pytest); or copy blockperm.py into a project
 python -m pytest tests          # a few minutes on one core; the warnings it prints are expected
 python examples/fake_block_labels.py
+```
+
+On a laptop (Apple arm64, 2026-11-10) the install took about 15 s with a network connection, the tests about 1.5 min and the example about 1.5 min. In this folder alone the tests end with "8 passed, 4 skipped" (the equivalence tests need the reference file named below); inside the paper's repository they end with "12 passed". The example prints:
+
+```
+labels with no information, 40 recordings, p < 0.05:
+  permutation_test_score (trial labels permuted): 14 (35%)
+  block_permutation_test_score (block labels permuted): 1 (2%)
 ```
 
 The test `test_equivalence_with_reference` checks that, with `exact=False`, the same `random_state` Generator and the same folds, this function returns the same observed score, null scores and p value (except that it returns no null when the observed score is undefined) as the reference implementation used in the analyses (`analyses/step2-comparison/code/sim.py` in the paper's repository; another location can be given with `REFERENCE_SIM_DIR`), for shuffled 5-fold, re-split stratified 5-fold, GroupKFold by block and a user `draw`; it is skipped when that file is not present. With the default `exact="auto"`, designs with no more arrangements than `n_permutations` are enumerated instead (the null then has one score per arrangement).

@@ -22,7 +22,7 @@ Eleven fresh `claude -p --model opus --tools "Read"` runs, three at a time, each
 
 Nothing has been changed.
 
-## Applied (author 2026-11-04 15:4x: "네 권고대로 반영"; f92dd43)
+## Applied (author 2026-11-04 15:4x: "apply your recommendation" (translated from Korean); f92dd43)
 - PMC12873149 C2: unclear → binomial or parametric in `../coding_final.csv` (resolution column records the recode and its reason); at-risk 11 of 14 (Wilson 52–92%) in the abstract, main text, SN 2 (with one sentence on the recode) and Supplementary Table 2, README, NUMBERS, REPRODUCE; correction line in `../SUMMARY.md`.
 - PMC10783789 C4: code kept "none"; Supplementary Table 2 cell "none (main analysis; one secondary analysis selected units on all trials)"; note in the resolution column.
 - C1 of PMC12873149 and the six C5 codes kept, as judged above.

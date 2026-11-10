@@ -1,0 +1,1 @@
+the determinism stage uses the scaled-down synthetic sizes: run it with CELL_MIN_TRIALS=18 (the test suite sets it)

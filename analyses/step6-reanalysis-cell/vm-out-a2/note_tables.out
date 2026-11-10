@@ -1,0 +1,24 @@
+primary obs design {'n_prog': 76, 'n_neurons': 113}; null N_progression 60/64/102, N_neurons 61/105/135 (min/median/max)
+  LIP obs 0.7570 null mean 0.7537 sd 0.0424 q5 0.6812 q95 0.8213 p 0.4785 holm 0.6434
+  FEF obs 0.7526 null mean 0.6975 sd 0.0529 q5 0.6120 q95 0.7875 p 0.1598 holm 0.4795
+  LPFC obs 0.7393 null mean 0.7181 sd 0.0439 q5 0.6444 q95 0.7897 p 0.3217 holm 0.6434
+trial obs design {'n_prog': 76, 'n_neurons': 113}; null N_progression 60/71/87, N_neurons 100/113/113 (min/median/max)
+  LIP obs 0.7689 null mean 0.3335 sd 0.0139 q5 0.3102 q95 0.3563 p 0.0010 holm 0.0030
+  FEF obs 0.7733 null mean 0.3335 sd 0.0136 q5 0.3119 q95 0.3570 p 0.0010 holm 0.0030
+  LPFC obs 0.7156 null mean 0.3333 sd 0.0135 q5 0.3111 q95 0.3548 p 0.0010 holm 0.0030
+win600 obs design {'n_prog': 76, 'n_neurons': 113}; null N_progression 60/64/111, N_neurons 65/105/135 (min/median/max)
+  LIP obs 0.6830 null mean 0.6981 sd 0.0447 q5 0.6203 q95 0.7692 p 0.6334 holm 1.0000
+  FEF obs 0.7111 null mean 0.6481 sd 0.0501 q5 0.5657 q95 0.7378 p 0.1249 holm 0.3746
+  LPFC obs 0.6415 null mean 0.6696 sd 0.0434 q5 0.5991 q95 0.7462 p 0.7363 holm 1.0000
+adjacent obs design {'n_prog': 76, 'n_neurons': 113}; null N_progression 60/64/102, N_neurons 73/108/135 (min/median/max)
+  LIP obs 0.7363 null mean 0.7324 sd 0.0422 q5 0.6620 q95 0.8000 p 0.4795 holm 0.4855
+  FEF obs 0.7556 null mean 0.6738 sd 0.0567 q5 0.5872 q95 0.7657 p 0.0819 holm 0.2458
+  LPFC obs 0.7185 null mean 0.6898 sd 0.0419 q5 0.6222 q95 0.7599 p 0.2428 holm 0.4855
+estimated obs design {'n_prog': 61, 'n_neurons': 100}; null N_progression 60/63/92, N_neurons 61/93/135 (min/median/max)
+  LIP obs 0.6750 null mean 0.7014 sd 0.0460 q5 0.6222 q95 0.7759 p 0.7323 holm 1.0000
+  FEF obs 0.6917 null mean 0.6563 sd 0.0535 q5 0.5681 q95 0.7473 p 0.2597 holm 0.7792
+  LPFC obs 0.6694 null mean 0.6711 sd 0.0466 q5 0.5970 q95 0.7500 p 0.5155 holm 1.0000
+post hoc, primary: P(null N_prog >= 76) 0.200, P(null N_neurons >= 113) 0.405
+  LIP slope per trial 0.0008 per neuron 0.0014; fitted null at observed design 0.7687 (null mean 0.7537, difference 0.0150); raw p as run 0.479, linear design adjustment 0.618, near observed design (n=221) 0.527; 98.3rd percentile 0.839
+  FEF slope per trial 0.0011 per neuron 0.0021; fitted null at observed design 0.7198 (null mean 0.6975, difference 0.0223); raw p as run 0.160, linear design adjustment 0.241, near observed design (n=221) 0.185; 98.3rd percentile 0.804
+  LPFC slope per trial 0.0007 per neuron 0.0017; fitted null at observed design 0.7341 (null mean 0.7181, difference 0.0161); raw p as run 0.322, linear design adjustment 0.453, near observed design (n=221) 0.347; 98.3rd percentile 0.811

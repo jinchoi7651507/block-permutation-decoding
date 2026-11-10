@@ -1,0 +1,40 @@
+# Figure S3 legend of PMC11574977 (author manuscript supplement NIHMS2030175-supplement-1.pdf, Europe PMC supplementaryFiles for PMC11574977, fetched 2026-11-08 00:0x KST by Claude; sha256 of the PDF: 395a468d5bbc404d1eaec7f1938a4cabc387c00ba504b58eb0313e7235f05e59). Text extracted with pdftotext, quoted for the design; the PDF is kept outside the repository.
+
+(A) Firing rate over time for three example, simultaneously recorded, neurons for three different bins of estimated template color (z scored over the full session).
+The ‘‘tuning’’ of the neuron was maintained over time in the trial.
+(B) Top panel shows an example trial showing the difference between the estimated template (orange), the chosen color (green), the expected value function
+(black), and the mean value (dashed black). Bottom panel shows the proportion of significant neurons for the 4 mutually exclusive models: estimated template
+(ET), expected value (EV), mean value (MV), and chosen color (CC). Models were fit to 167/231/492 neurons in LIP/FEF/LPFC in a 600- to 300-ms window
+around the onset of the targets. The estimated template best explained neural activity in the largest group of neurons in all three regions (30.54/40.26/30.08% in
+LIP/FEF/LPFC, all p % 0.002, permutation test), although the expected value distribution was also well represented (29.95/16.02/24.59% of neurons in LIP/FEF/
+LPFC, all p % 0.002). Mean value and chosen color were comparatively less represented in all three regions (MV: 1.20%/0.92%/3.25% in LIP/FEF/LPFC, p =
+0.008/0.0978/0.002, and CC: 0/1.73/0.23% in LIP/FEF/LPFC, p = 0.6447/0.01/0.1138). See STAR Methods for details on model comparison.
+(C) Proportion of neurons significantly encoding the four mutually exclusive models in each region over time, relative to the onset of the targets (300 ms windows,
+as in Figure 2D).
+(D) Top panel shows percent explained variance by the first 10 principal components (100 bootstraps, mean and 95% confidence interval). Inset shows the
+effective dimensionality (100 bootstraps, mean and standard error to the mean). Bottom panels show neural activity in all three regions projected into a reduced
+dimensionality space consisting of the first three principle components (PCs, in decreasing order of explained variance). LIP, 146 neurons; FEF, 216 neurons;
+LPFC, 475 neurons. The gray triangle represents the onset of the targets, and the green triangle represents the approximate time of response (200 ms after the
+onset of the targets). The projection along the 4th PC shows the separation of the three estimated templates’ color in a triangle shape with a linear effect of time.
+The projection in the first 3 PCs leads to a more cyclic effect of time.
+(E) Cross-temporal decoding of the attentional template (as in Figure 2F, trained across all progression levels). x axis corresponds to time window used to train
+classifier, and y axis corresponds to the time window used for testing the classifier (on withheld trials). Color code indicates classification accuracy of template,
+and lines indicate significance level (z test on 100 bootstraps). Triangles represent the approximate time of fixation (black), targets onset (gray), and
+response (green).
+(F) Proportion of neurons significantly sensitive to the true attentional template (i.e., the color used by the behavioral task). Thus, the representation of the template
+did not depend on the behavioral model.
+(G) True template classification accuracy for each third of the block, estimated on withheld trials (as in Figure 2D, left half, 113 neurons per region, trained/tested
+on 80%/20% of 76 trials per progression level [three levels] and estimated template color bin [three bins]). Violin plot: central white dot is the median, thick vertical
+gray bar represents the 25th to 75th quartile, and area represents the kernel density estimate of the data.
+(H) Same as Figure 2D, left half, but with bins rotated by p/3, 120 neurons per region, trained/tested on 80%/20% of 62 trials per progression level (three levels)
+and estimated template color bin (three bins).
+(I) Same as Figure 2D, left half, but with 4 bins, 49 neurons per region, trained/tested on 80%/20% of 61 neurons. For all panels, *p % 0.05, **p % 0.01,
+***p % 0.001.
+            ll
+      OPEN ACCESS                                                                                                                                   Article
+
+
+
+
+Figure S4. Extended analysis of the structured and incremental nature of the estimated template representation, related to Figures 3 and 4
+(A) Results of the permutation test on the trial-by-trial decoding accuracy for all trials. Gray bars represent the histogram of the shuffled mean circular distance

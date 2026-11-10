@@ -10,4 +10,4 @@ Source: model identifiers in the session transcript of the agents that did each 
 | Audit of 40 automatic exclusions | 2026-10-20 14:00 | Claude Opus 5.5 |
 | Second check of the same 40 (`final-check-2026-11-02/`) | 2026-11-02 | Claude Opus 5.5 (`claude -p --model opus`; the CLI also calls Claude Haiku 5.5 for housekeeping) |
 
-Prompts are not distributed.
+The prompts of the screening, coding and first audit are not distributed; the prompts of the two later checks are in their folders (`final-check-2026-11-02/scripts/`, `final-check-2026-11-04/prompts/`).

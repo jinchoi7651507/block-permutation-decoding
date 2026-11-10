@@ -19,13 +19,23 @@ A = ROOT / "analyses"
 DATA = {"MANIFEST.sha256", "EEG-MANIFEST.sha256", "EEG-MANIFEST-PILOT.sha256", "EEG-MANIFEST-PILOT2.sha256",
         "FEATURES-MANIFEST.sha256", "MANIFEST-haxby.sha256", "MANIFEST-pamap2.sha256", "fulltext-MANIFEST.sha256"}
 GCP = ("../../working-archive/2026-10-26/gcp/", "gcp/")
+BLOCKPERM = ("../../code-package/blockperm/blockperm.py", "../../blockperm/blockperm.py")
+# files that differ from their list for a reason stated in PROVENANCE.md (section "Reanalyses"); anything else fails
+EXPECTED = {("step6-reanalysis-cell/DESIGN-v2.sha256", "code/test_synthetic.py"),
+            ("step6-reanalysis-cell/ADDENDUM-1.sha256", "JUDGEMENT-addendum1.md"),
+            ("step6b-reanalysis-sciadv/DESIGN-v2.sha256", "NOTES.md"),
+            ("step6b-reanalysis-sciadv/DESIGN-v2.sha256", "code/matlab_port.py"),
+            ("step6b-reanalysis-sciadv/DESIGN-v2.sha256", "code/run_reanalysis.py")}
 
 
 def check(listing, cwd):
     text = listing.read_text()
     if listing.name == "BUDGET-OUTCOME.sha256":
         text = text.replace(*GCP)
-    bad = []
+    if "step6b-reanalysis-sciadv" in str(listing):
+        text = text.replace(*BLOCKPERM)
+    bad, expected = [], []
+    key = str(listing.relative_to(A))
     for line in text.splitlines():
         if not line.strip():
             continue
@@ -40,8 +50,10 @@ def check(listing, cwd):
             bad.append(f"{name}: FAILED open or read")
             continue
         if not ok:
-            bad.append(f"{name}: FAILED")
-    return bad, len(text.splitlines())
+            (expected if (key, name) in EXPECTED else bad).append(name)
+    for name in expected:
+        print(f"expected difference (PROVENANCE.md): {key}: {name}")
+    return [f"{x}: FAILED" for x in bad], len(text.splitlines())
 
 
 def main():

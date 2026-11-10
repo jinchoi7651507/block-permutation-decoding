@@ -1,0 +1,7 @@
+(same fresh Opus agent as review-results.txt; changed-lines re-check; returned 2026-11-09 12:2x KST; saved by Claude, content as returned in substance, nothing applied)
+
+Verdict: Not ready for one wording fix (item 1); Ready once applied, no further review needed. M1-M7 and S1-S7 resolved. Numbers: no mismatch (note_tables.py reproduces note_tables.out byte for byte; changed-line values match outputs).
+1. MUST 1.6: the 98.3rd-percentile bar applies only to the first Holm rejection; replace with "A first Holm rejection (smallest raw p below 1/60) needs accuracy above about 0.80 to 0.84, by region, under these block permutation nulls".
+2. Record: n_qual is computed in cellport.py l.180, returned by run_decoder, dropped at cell_tests.py l.179.
+3. Optional: name the source of the gate-run C counts (gate-runs/as_written.json).
+Limitations: changed lines only; thresholds use unadjusted nulls (about 0.015-0.022 higher at the observed design); out-a2/ paths resolve in the local extraction or inside a2-out.tgz.

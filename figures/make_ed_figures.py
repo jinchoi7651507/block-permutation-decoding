@@ -5,11 +5,13 @@ identity). Run: python3 make_ed_figures.py [ED numbers]   (default: all that are
 """
 import json
 import sys
+import tarfile
 from pathlib import Path
 
 import matplotlib
 matplotlib.use("pdf")
 import matplotlib.pyplot as plt  # noqa: E402
+import numpy as np  # noqa: E402
 
 R = Path(__file__).resolve().parents[1] / "analyses"   # public layout: the analyses/ folder of this repository
 OUT = Path(__file__).resolve().parent
@@ -94,7 +96,7 @@ def ed2():
             dot(a, i + off, m, ci, col, mk, filled)
             print("ED2a %-28s %.3f [%.3f, %.3f]  %s" % (key, m, ci[0], ci[1], src))
     a.set_yticks(range(len(readouts))); a.set_yticklabels([r[1] for r in readouts], fontsize=6); a.invert_yaxis()
-    style(a, "Called decodable (%)")
+    style(a, "Labels with no information called decodable (%)")
     a.set_title("a  Block permutation, by decoder", loc="left", fontsize=7)
     ha = [plt.Line2D([], [], ls="", marker="o", color=MOUSE, ms=4, label="Decoder fixed, shared blocks"),
           plt.Line2D([], [], ls="", marker="o", color=MOUSE, mfc="white", ms=4, label="Decoder fixed, separate blocks"),
@@ -113,7 +115,7 @@ def ed2():
             dot(b, i - 0.27 + 0.18 * j, m, ci, MOUSE, mk, filled, label=name if i == 0 else None)
             print("ED2b %-30s %.3f [%.3f, %.3f]  %s" % (f"{sch}/lr_topk/{t}", m, ci[0], ci[1], src))
     b.set_yticks(range(len(tests))); b.set_yticklabels([t[1] for t in tests], fontsize=6); b.invert_yaxis()
-    style(b, "Called decodable (%)")
+    style(b, "Labels with no information\ncalled decodable (%)")
     b.set_title("b  Top-20 logistic, by block scheme", loc="left", fontsize=7)
     hb, lb = b.get_legend_handles_labels()
     l2 = leg.legend(hb, lb, frameon=False, loc="upper left", bbox_to_anchor=(-0.55, 0.62), fontsize=6, handletextpad=0.3,
@@ -137,7 +139,7 @@ def ed2():
     tr = mt.blended_transform_factory(c.transAxes, c.transData)
     c.text(-0.04, -0.9, "Binomial, separate blocks", fontsize=6, color=INK, weight="bold", ha="right", transform=tr)
     c.text(-0.04, 4.1, "Circular shift, cut chosen", fontsize=6, color=INK, weight="bold", ha="right", transform=tr)
-    style(c, "Called decodable (%)")
+    style(c, "Labels with no information called decodable (%)")
     c.set_title("c  Other tests", loc="left", fontsize=7)
     fig.savefig(OUT / "ed2.pdf", metadata=META)
     fig.savefig(OUT / "ed2.png", dpi=300)
@@ -248,32 +250,107 @@ def _wilson(k, n, z=1.96):
     return [c - w, c + w]
 
 
-def ed3():
-    """Rat auditory cortex (Yaron et al. 2025 data, post hoc): mean and central 95% of the held-out correlation in
-    1,000 block permutations within sessions, unit selection repeated or held fixed, against the observed value
-    (yaron-panel/results/fixed_vs_repeated.json). Same values as the repository panel, BC style."""
-    s = json.load(open(R / "yaron-panel/results/fixed_vs_repeated.json"))
-    obs, arms = s["observed"], s["arms"]
-    rows = [("repeated", "Unit selection repeated\nin every permutation", INK, "D", False),
-            ("fixed", "Units selected on the real\nlabels, held fixed", MUTED, "o", True)]
-    fig, ax = plt.subplots(figsize=(4.2, 1.7))
-    for i, (key, _, col, mk, filled) in enumerate(rows):
-        m = arms[key]
-        ax.plot([m["q025"], m["q975"]], [i, i], color=col, lw=1.2, solid_capstyle="round", zorder=2)
-        ax.plot(m["null_mean"], i, mk, ms=4.5, color=col, mfc=col if filled else "white", mec=col if not filled else "white", mew=0.9, zorder=3)
-        ax.text(m["q975"] + 0.012, i, "mean %.3f" % m["null_mean"], va="center", fontsize=6, color=INK)
-        print("ED3 %-8s mean %.4f, central 95%% %.3f to %.3f, p %.4f  fixed_vs_repeated.json arms.%s" % (key, m["null_mean"], m["q025"], m["q975"], m["p"], key))
-    ax.axvline(obs, color=INK, lw=1)
-    ax.text(obs - 0.006, -0.7, "observed %.3f" % obs, ha="right", va="center", fontsize=6, color=INK)
-    ax.axvline(0, color=MUTED, lw=0.6, ls=(0, (2, 2)))
-    print("ED3 observed %.4f, %d units  fixed_vs_repeated.json" % (obs, s["selected"]))
-    ax.set_yticks(range(2)); ax.set_yticklabels([r[1] for r in rows]); ax.set_ylim(1.5, -0.9)
-    ax.set_xlim(-0.2, 0.4)
-    ax.set_xlabel("Held-out correlation in 1,000 block permutations")
+def _null_row(ax, y, obs, null, marker, col, label_obs=None):
+    """One row: filled observed marker, open marker with central 95% for the null; values in the data unit given."""
+    lo, hi = np.percentile(null, [2.5, 97.5])
+    m = float(np.mean(null))
+    ax.plot([lo, hi], [y, y], color=col, lw=1.2, solid_capstyle="round", zorder=2)
+    ax.plot(m, y, marker, ms=4.5, color=col, mfc="white", mec=col, mew=0.9, zorder=3)
+    ax.plot(obs, y, "o", ms=4.2, color=INK, mec="white", mew=0.5, zorder=4)
+    return m, lo, hi
+
+
+def _ed3_style(ax, xlabel, chance=None):
+    if chance is not None:
+        ax.axvline(chance, color=MUTED, lw=0.6, ls=(0, (2, 2)))
+    ax.set_xlabel(xlabel)
     ax.grid(axis="x", color=GRID, lw=0.5); ax.set_axisbelow(True)
     for sd in ("top", "right"):
         ax.spines[sd].set_visible(False)
-    fig.tight_layout()
+
+
+def _sum_null(lists):
+    """Exact null of the mean over mice: convolution of each mouse's null on a 0.001-point grid (descriptive quantiles)."""
+    d = np.ones(1)
+    lo = 0
+    for x in lists:
+        v = np.rint(np.asarray(x) * 1000).astype(int)
+        m = v.min()
+        h = np.bincount(v - m) / len(v)
+        d = np.convolve(d, h)
+        lo += m
+    return d, lo, len(lists)
+
+
+def _quant(d, lo, n, q):
+    k = int(np.searchsorted(np.cumsum(d), q))
+    return (lo + k) / 1000 / n
+
+
+def ed3():
+    """Reanalyses of published data. (a) rat auditory cortex (Yaron et al. 2025, post hoc; yaron-panel). (b) Jahn et al. 2024,
+    true template, 900 ms, observed and permutation nulls (step 6 outputs). (c) Klee et al. 2026, group mean over 6 mice,
+    observed and nulls (step 6b outputs). Every plotted value is printed with its source."""
+    s = json.load(open(R / "yaron-panel/results/fixed_vs_repeated.json"))
+    cell = {}
+    with tarfile.open(R / "step6-reanalysis-cell/vm-out-a2/a2-out.tgz") as z:
+        for n in ("primary", "trial"):
+            cell[n] = json.load(z.extractfile("out-a2/test-%s.json" % n))
+    sa = json.load(open(R / "step6b-reanalysis-sciadv/out/tests.json"))
+    fig, axes = plt.subplots(3, 1, figsize=(4.6, 5.0), gridspec_kw={"height_ratios": [1.5, 6, 4]})
+    ax = axes[0]
+    obs, arms = s["observed"], s["arms"]
+    rows = [("repeated", "Unit selection repeated", INK, "D"), ("fixed", "Selected units held fixed", INK, "s")]
+    for i, (key, _, col, mk) in enumerate(rows):
+        m = arms[key]
+        ax.plot([m["q025"], m["q975"]], [i, i], color=col, lw=1.2, solid_capstyle="round", zorder=2)
+        ax.plot(m["null_mean"], i, mk, ms=4.5, color=col, mfc="white", mec=col, mew=0.9, zorder=3)
+        print("ED3a %-8s mean %.4f, 95%% %.3f to %.3f  yaron-panel/results/fixed_vs_repeated.json arms.%s" % (key, m["null_mean"], m["q025"], m["q975"], key))
+    ax.axvline(obs, color=INK, lw=1)
+    ax.text(obs - 0.006, -0.72, "observed %.3f" % obs, ha="right", va="center", fontsize=6, color=INK)
+    print("ED3a observed %.4f  fixed_vs_repeated.json observed" % obs)
+    ax.set_yticks(range(2)); ax.set_yticklabels([r[1] for r in rows]); ax.set_ylim(1.5, -1.1); ax.set_xlim(-0.2, 0.4)
+    _ed3_style(ax, "Held-out correlation", 0.0)
+    ax = axes[1]
+    labels = []
+    y = 0
+    for reg in ("LIP", "FEF", "LPFC"):
+        for test, name, mk, col in (("trial", "trial-level shuffle", "o", MUTED), ("primary", "block permutation", "D", INK)):
+            r = cell[test]["regions"][reg]
+            m, lo, hi = _null_row(ax, y, 100 * r["observed"], 100 * np.array(r["null"], float), mk, col)
+            labels.append("%s, %s" % (reg, name))
+            print("ED3b %s %s: observed %.2f, null mean %.2f, 95%% %.2f to %.2f, p %.4f  step 6 test-%s.json" % (reg, test, 100 * r["observed"], m, lo, hi, r["p"], test))
+            y += 1
+        y += 0.5
+    ax.set_yticks([0, 1, 2.5, 3.5, 5, 6]); ax.set_yticklabels(labels); ax.set_ylim(6.7, -0.7); ax.set_xlim(25, 95)
+    _ed3_style(ax, "Decoding accuracy of the template bin (%)", 100 / 3)
+    ax = axes[2]
+    labels = []
+    y = 0
+    rng = np.random.default_rng(20261109)
+    for wn, wname in (("ITI", "intertrial"), ("PERI", "peri-movement")):
+        obs = sa["group"][wn]["block"]["T"]
+        tr = np.array([rng.choice(np.array(mo["windows"][wn]["trial"]["null"], float), 100000) for mo in sa["mice"]]).mean(0)
+        m, lo, hi = _null_row(ax, y, obs, tr, "o", MUTED)
+        print("ED3c %s trial: observed %.2f, null mean %.2f, 95%% %.2f to %.2f  tests.json mice[].windows.%s.trial.null (100,000 random combinations)" % (wn, obs, m, lo, hi, wn))
+        labels.append("%s, trial-level shuffle" % wname); y += 1
+        d, l0, n = _sum_null([mo["windows"][wn]["block"]["null"] for mo in sa["mice"]])
+        lo, hi = _quant(d, l0, n, 0.025), _quant(d, l0, n, 0.975)
+        m = float(np.sum(d * (l0 + np.arange(len(d))))) / 1000 / n
+        ax.plot([lo, hi], [y, y], color=INK, lw=1.2, solid_capstyle="round", zorder=2)
+        ax.plot(m, y, "D", ms=4.5, color=INK, mfc="white", mec=INK, mew=0.9, zorder=3)
+        ax.plot(obs, y, "o", ms=4.2, color=INK, mec="white", mew=0.5, zorder=4)
+        print("ED3c %s block: observed %.2f, null mean %.2f, 95%% %.2f to %.2f, p %.3g  tests.json group.%s.block; exact null by convolution" % (wn, obs, m, lo, hi, sa["group"][wn]["block"]["p"], wn))
+        labels.append("%s, group block test" % wname); y += 1.5
+    ax.set_yticks([0, 1, 2.5, 3.5]); ax.set_yticklabels(labels); ax.set_ylim(4.2, -0.7); ax.set_xlim(44, 72)
+    _ed3_style(ax, "Decoding accuracy of context, mean over 6 mice (%)", 50.0)
+    h = [plt.Line2D([], [], marker="o", ls="", ms=4.2, color=INK, label="observed"),
+         plt.Line2D([], [], marker="o", ls="-", lw=1, ms=4.5, color=MUTED, mfc="white", label="trial-level null"),
+         plt.Line2D([], [], marker="D", ls="-", lw=1, ms=4.5, color=INK, mfc="white", label="block null")]
+    fig.legend(handles=h, loc="upper center", ncol=3, frameon=False, fontsize=6)
+    for a, c in zip(axes, "abc"):
+        a.text(-0.42, 1.02, c, transform=a.transAxes, fontweight="bold", fontsize=8, color=INK)
+    fig.tight_layout(rect=(0, 0, 1, 0.97), h_pad=0.8)
     fig.savefig(OUT / "ed3.pdf", metadata=META)
     fig.savefig(OUT / "ed3.png", dpi=300)
 

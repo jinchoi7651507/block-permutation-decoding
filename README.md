@@ -1,10 +1,12 @@
-*First timestamp: Bitcoin block 971261 (2026-10-13 15:18 UTC), for `analyses/trackA-std/PREREG-trackA.md`, before any new mouse session was downloaded. Check all 17 proofs with `python prereg/ots_verify_public.py $(find analyses -name '*.ots')`. Copied on 2026-11-06 from the authors' working repository. Archived at https://doi.org/10.5281/zenodo.24008938. Preprint: https://doi.org/10.5281/zenodo.24012190. Timestamped files are byte-identical, and `PROVENANCE.md` lists the changes to other files.*
-
 # Block permutation tests for decoders when training and test trials share recording blocks
 
 This repository holds the code, the timestamped designs and the outputs behind the preprint "Common decoding tests fail when training and test trials share recording blocks" (preprint, Zenodo, https://doi.org/10.5281/zenodo.24012190). Nothing here has been peer reviewed yet.
 
-**In short.** When training and test trials come from the same recording blocks, the permutation rules that decoding toolboxes ship and teach call labels that carry no information decodable in most tests, and the toolboxes run as shipped call about one in five decodable in balanced runs. Permuting the labels of all trials together, block by block, and refitting the decoder keeps the nominal 5% when conditions are assigned to blocks at random. The test is provided as a function in `blockperm/`.
+**In short.** When training and test trials come from the same recording blocks, the permutation rules that decoding toolboxes ship and teach call labels that carry no information decodable in most tests, and the toolboxes run as shipped call about one in five decodable in balanced runs. Permuting the labels of all trials together, block by block, and refitting the decoder stays near the nominal 5% when conditions are assigned to blocks at random. The test is provided as a function in `blockperm/`.
+
+To use the test, see [Using the test](#using-the-test); to check the results, see [How to reproduce](#how-to-reproduce) and `REPRODUCE.md`.
+
+*First timestamp: Bitcoin block 971261 (2026-10-13 15:18 UTC), for `analyses/trackA-std/PREREG-trackA.md`, before any new mouse session was downloaded. Check all 23 proofs with `python prereg/ots_verify_public.py $(find analyses -name '*.ots')`. Copied on 2026-11-06 from the authors' working repository; steps 6 and 6b added on 2026-11-09. Archived at https://doi.org/10.5281/zenodo.24008938. Preprint: https://doi.org/10.5281/zenodo.24012190. Timestamped files are byte-identical, and `PROVENANCE.md` lists the changes to other files.*
 
 ## What the paper shows
 
@@ -16,7 +18,7 @@ We assigned labels that carry no information to the recording blocks of mouse Ne
 - Permuting labels between whole blocks with the trained decoder held fixed called 84% decodable (top-20 logistic decoder).
 - Permuting only the training labels and refitting, the rule in the PyMVPA tutorial, called 99% (mouse) and 94% (EEG) decodable.
 - CoSMoMVPA and PyMVPA, run as shipped on simulated recordings, called 18–21% decodable.
-- Permuting the labels of all trials together, block by block, and refitting the decoder called 5% decodable. Here this is exact, because the labels were assigned to blocks at random.
+- Permuting the labels of all trials together, block by block, and refitting the decoder called about 5% decodable. Here this is valid, because the labels were assigned to blocks at random.
 - In two post hoc analyses, block-design fMRI (Haxby et al. 2001, 6 participants) and body-worn sensor recordings (PAMAP2, 8 participants) gave the same pattern. With shared blocks, the trial-level and training-label rules called 90–100% of the labels decodable (detrended fMRI and sensors), and the block permutation test 8% and 5%.
 
 In the International Brain Laboratory brain-wide recordings (1,359 brain regions analyzed in single sessions, 118 mice), we decoded which side the task's block structure favored. On the real block structure, the scikit-learn rule called 75% of the regions decodable and the pseudosession test (decoders refit on block sequences drawn from the task's own generator) 10%. For 884 regions (65%), only the scikit-learn rule called the block side decodable.
@@ -39,10 +41,10 @@ Install with `pip install ./blockperm` (Python 3.12), or copy `blockperm/blockpe
 | Survey: shared-block splits; trial-level tests | 14 of 14; 11 of 14 | protocol committed before the search | `analyses/practice-survey/SUMMARY.md` | §2 (recount) |
 | Fig. 1, row 1: trial-level permutation | 98% mouse, 92% EEG | specified in advance | `analyses/step2-comparison/results/allen_summary.md`, `analyses/step2b-eeg/results/summary_2b.md` | §2 |
 | Fig. 1, row 2: block permutation, decoder held fixed | 84%; 43–95% across decoders fitted to the labels | post hoc (designed after the Track A results); run started 9 min before its block, no result read before it | `analyses/step1-decomposition/results/results.md` | §2 |
-| Extended Data Fig. 3: published rat data, block permutation with the unit selection fixed or repeated | null mean 0.001 (fixed) against 0.115 (repeated); observed 0.337 | post hoc | `analyses/yaron-panel/RESULTS-NOTE.md` | §2 |
 | Fig. 1, row 3: training labels only, refit | 99% mouse, 94% EEG | specified in advance | as row 1 | §2 |
-| Fig. 1, row 4: block permutation test | 5% (mouse, EEG, simulation) | specified in advance | as row 1; `analyses/step2-comparison/results/sim_summary.md` | §2 |
-| Block permutation test with a fixed block order | 0–2.4% in simulation; 95% and 29% in EEG | specified in advance | `analyses/step2-comparison/RESULTS-NOTE.md` §1, `analyses/step2b-eeg/RESULTS-NOTE.md` §2 | §2 |
+| Fig. 1, row 4: block permutation test | near 5% (5.2% mouse, 4.9% EEG, 5.7% simulation) | specified in advance | as row 1; `analyses/step2-comparison/results/sim_summary.md` | §2 |
+| Extended Data Fig. 3a: published rat data, block permutation with the unit selection fixed or repeated | null mean 0.001 (fixed) against 0.115 (repeated); observed 0.337 | post hoc | `analyses/yaron-panel/RESULTS-NOTE.md` | §2 |
+| Block permutation test with a fixed block order | 0–2.4% in simulation; 95% and 29% in EEG | specified in advance for the main split (the other two splits were added by addendum 3, post hoc) | `analyses/step2-comparison/RESULTS-NOTE.md` §1, `analyses/step2b-eeg/RESULTS-NOTE.md` §2 | §2 |
 | Fig. 2a: CoSMoMVPA and PyMVPA as shipped (simulation) | 18–21%, against 4% | added after the main design (addendum 3, post hoc); one replicate of one cell was seen before it was stamped | `analyses/step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md` | §2 |
 | Group-level tests on shared-block splits | t-test 100%; null built from the block permutation test 4–7% (shared-block splits) | specified in advance | `analyses/step2b-eeg/RESULTS-NOTE.md` §3, `analyses/step2-comparison/RESULTS-NOTE.md` §3 | §2 |
 | Power of the block permutation test; size-adjusted power of the other tests | 7% and 66% (simulation); EEG 88–93% for the trial-level tests and 57% for training-label permutation, against 85% | specified in advance; EEG post hoc | `analyses/step2-comparison/RESULTS-NOTE.md` §2, `analyses/step2b-eeg/RESULTS-NOTE.md` §4 | §2 |
@@ -54,6 +56,13 @@ Install with `pip install ./blockperm` (Python 3.12), or copy `blockperm/blockpe
 
 Every number in the paper is traced to a file and key in `NUMBERS.md`.
 
+## Reanalyses of published studies (added after the preprint; not in the preprint text)
+
+| Study | Design | Result of the pre-specified test | Status | Output | `REPRODUCE.md` |
+|---|---|---|---|---|---|
+| Template decoding, macaque LIP, FEF and LPFC (Jahn et al. 2024, *Cell*; 17 sessions, 171 blocks, template drawn at random per block) | block permutation test, true template, 900 ms window, Holm over three regions | the reproduction gate matched the published Fig. 2D accuracy and z-test; trial-level permutation at its smallest p; under the block permutation test, which assumes that blocks are exchangeable with the color-selection penalty unmodeled, template decoding not established in any region (Holm 0.64, 0.48, 0.64); limited power (a mean of 3 to 4 blocks per bin) and not evidence of absence | specified in advance, four dated addenda | `analyses/step6-reanalysis-cell/RESULTS.md` §1, `vm-out-a2/summary.md` | §3 |
+| Context decoding, mouse dorsolateral striatum (Klee et al. 2026, *Science Advances*; 6 mice, fixed order C S C S C S) | group block test, intertrial (ITI) and peri-movement (PERI) windows | under the block test, which rests on an exchangeability model because the order was fixed, context decoding is above the block-arrangement null in both windows (p = 1.5e-05 and 6e-06); with a fixed order this cannot exclude slow drift | specified in advance; two fixes to the port after the reproduction gate first failed | `analyses/step6b-reanalysis-sciadv/RESULTS.md` §1, `out/SUMMARY.md` | §3 |
+
 ### Extended Data, Supplementary Information and figures
 
 | Item | Content | Source (in `analyses/` unless stated) |
@@ -61,7 +70,8 @@ Every number in the paper is traced to a file and key in `NUMBERS.md`.
 | Figs 1, 2a, 2b; Extended Data Figs 1–10 | the plotted values and the scripts that draw them | `figures/` (`figures_values.txt`; `REPRODUCE.md` §2) |
 | Extended Data Fig. 1 | real drifting-grating trials | `step1-decomposition/results/results.md` (`dg_*`), `step2-comparison/results/allen_summary.md` (`dg_shared24`) |
 | Extended Data Fig. 2 | decoders and splits in the mouse recordings | `step1-decomposition/results/results.md`, `within_train.md` |
-| Extended Data Fig. 3 | rat recordings, unit selection fixed or repeated (post hoc) | `yaron-panel/results/fixed_vs_repeated.json`, `yaron-panel/RESULTS-NOTE.md` |
+| Extended Data Fig. 3a | rat recordings, unit selection fixed or repeated (post hoc) | `yaron-panel/results/fixed_vs_repeated.json`, `yaron-panel/RESULTS-NOTE.md` |
+| Extended Data Fig. 3b, c | reanalyses of Jahn et al. (2024) and Klee et al. (2026) | `step6-reanalysis-cell/vm-out-a2/` (`a2-out.tgz`, `summary.md`), `step6b-reanalysis-sciadv/out/` (`tests.json`, `SUMMARY.md`) |
 | Extended Data Fig. 4 | simulation grid | `step2-comparison/results/sim_summary.md` |
 | Extended Data Fig. 5 | fixed block orders | `step2-comparison/results/sim_summary.md`, `add3_summary.md`; `step2b-eeg/results/summary_2b.md` |
 | Extended Data Fig. 6 | toolboxes in all layouts; agreement gate | `step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md`; gate result `runs_add3/tools/gate/GATE-RESULT.json` inside `runs_add3.tgz`; `step2-comparison/RESULTS-NOTE.md` §5 |
@@ -69,7 +79,7 @@ Every number in the paper is traced to a file and key in `NUMBERS.md`.
 | Extended Data Figs 8, 9 | IBL: all rows, region counts (134 regions with at least three sessions), positive control | `step3-ibl/runs/SUMMARY.md`, `step3-ibl/RESULTS-NOTE.md` |
 | Extended Data Fig. 10 | power and size-adjusted power (EEG graded control post hoc; the pre-specified first graded control did not reach its target range) | `step2-comparison/RESULTS-NOTE.md` §2, `step2b-eeg/RESULTS-NOTE.md` §4 |
 | Supplementary Note 1 | the earlier pre-registered mouse analysis (outputs only) | `trackA-std/results/results.md`, `trackA-std/prereg-run/results/` |
-| Supplementary Note 2, Table 2 | practice survey | `practice-survey/` (`SUMMARY.md`, `coding_final.csv`, `AUDIT-AUTO-EXCLUSIONS.md`, `final-check-2026-11-02/`, `final-check-2026-11-04/`) |
+| Supplementary Note 2, Table 2 | practice survey | `practice-survey/` (`SUMMARY.md`, `coding_final.csv`, `random-assignment-coding.csv` (random assignment of the decoded condition; post hoc, added 2026-11-09), `AUDIT-AUTO-EXCLUSIONS.md`, `final-check-2026-11-02/`, `final-check-2026-11-04/`) |
 | Supplementary Note 3 | alpha-power slope over the EEG session (post hoc) | `step2b-eeg/RESULTS-NOTE.md` §6, `step2b-eeg/results/alpha_slope.json` |
 | Supplementary Note 4, Table 3 | runs with one class; the two platforms | `step2-comparison/RESULTS-NOTE.md` §1, §5, §6; `foldmap/` |
 | Supplementary Note 5, Table 4 | predicted false-positive rate of the binomial test | `step1-decomposition/results/results.md` (block-number sweep), `step1-decomposition/RESULTS-NOTE.md` (P-D) |
@@ -96,7 +106,7 @@ Every number in the paper is traced to a file and key in `NUMBERS.md`.
 | `C1`–`C5` (survey) | coded items: split, test, decoder in the null, unit selection, code availability |
 | `E4`, `E5`; `F`, `V`, `S`; `M`, `R` | primary contrasts of steps 4–5; of step 3 (fake labels, real labels, unit selection); of step 2 (simulation, mouse) |
 | `balanced`, `fixed_half`, `fixed_aabb`, `fixed_abba`, `cleaned_s5`, `pos_graded`, `balanced_graded`, `N5`, `rerun49` (step 2b) | EEG arms: random balanced labels; fixed orders (halves, AABB in runs of four blocks, ABBA); the main preprocessing; the post hoc graded control and its noise rule; the reviewed rerun of worker 49 |
-| `new` (Allen summaries) | the 30 mice other than the two of the original study |
+| `new` (Allen summaries) | the 30 mice other than the two of the earlier pre-registered analysis |
 | `dg_*`, `shared`, `sep` (step 1) | drifting-grating trials; shared or separate blocks without the 24-block suffix |
 | `G1`–`G4`, `P-D` | toolbox agreement gates; the step 1 prediction tested in Supplementary Note 5 |
 | `arm`, `prep`, `fake` (steps 4, 5) | summary columns: fake labels or a positive control; preprocessing |
@@ -108,12 +118,14 @@ Every number in the paper is traced to a file and key in `NUMBERS.md`.
 
 ## How to reproduce
 
+Install the quick-path environment first (`pip install -r requirements/quick-path.txt`, Python 3.12); the proof check needs network access.
+
 ```sh
 python prereg/check_hash_lists.py                                  # every hash list against the files: ALL OK
-python prereg/ots_verify_public.py $(find analyses -name '*.ots')  # the 17 timestamp proofs: ALL OK
+python prereg/ots_verify_public.py $(find analyses -name '*.ots')  # the 23 timestamp proofs: ALL OK
 ```
 
-Then rebuild every summary and figure from the shipped files and compare them with the shipped ones (`REPRODUCE.md` §2, about 10 minutes on a laptop, with `pip install -r requirements/quick-path.txt`). Full runs need the public data; the simulation grid, the toolboxes, the EEG analysis and the IBL analysis each ran on one cloud machine for 5 to 14 hours (`REPRODUCE.md` §3). Versions and machines are in `ENVIRONMENT.md`.
+Then rebuild every summary and figure from the shipped files and compare them with the shipped ones (`REPRODUCE.md` §2, 10 to 25 minutes depending on the machine). Full runs need the public data; the simulation grid, the toolboxes, the EEG analysis and the IBL analysis each ran on one cloud machine for 5 to 14 hours (`REPRODUCE.md` §3). Versions and machines are in `ENVIRONMENT.md`.
 
 ## Repository layout
 
@@ -131,7 +143,9 @@ Then rebuild every summary and figure from the shipped files and compare them wi
 | `analyses/practice-survey/` | Protocol, search, screening and coding of the survey (full texts not redistributed). |
 | `analyses/step4-fmri-haxby/` | Post hoc: the same tests on block-design fMRI (Haxby et al. 2001, the PyMVPA tutorial data); design, code, rows, summary, results note (Supplementary Note 7). |
 | `analyses/step5-pamap2/` | Post hoc: the same tests on body-worn sensor recordings (PAMAP2); design, code, rows, summary, results note; shares the step 4 engine, summary script, synthetic checks and run note (Supplementary Note 7). |
-| `analyses/yaron-panel/` | Extended Data Fig. 3: the block permutation with the unit selection held fixed or repeated, on the public data of Yaron et al. (2025). |
+| `analyses/step6-reanalysis-cell/` | Pre-specified reanalysis of template decoding in Jahn et al. (2024): design, four addenda, code, gate, outputs, results note. The authors' code is not copied (`REPRODUCE.md` §3). `vm-out/`: the first run, stopped at the reproduction gate; `vm-out-a2/`: the reported run (Addendum 2); `vm-out-a3/`: Addendum 3. |
+| `analyses/step6b-reanalysis-sciadv/` | Pre-specified reanalysis of context decoding in Klee et al. (2026): design, code, gate, outputs, results note. The authors' code is not copied. |
+| `analyses/yaron-panel/` | Extended Data Fig. 3a: the block permutation with the unit selection held fixed or repeated, on the public data of Yaron et al. (2025). |
 | `prereg/` | Index of the timestamp proofs against run times, and two check scripts. |
 | `REPRODUCE.md`, `ENVIRONMENT.md`, `NUMBERS.md`, `PROVENANCE.md` | Steps with expected outputs and runtimes; versions and machines; the source of every number; what was copied and what changed. |
 | `THIRD-PARTY.md`, `LICENSES/` | Origin and licenses of the toolbox excerpts. |
@@ -140,11 +154,11 @@ The folders `step1-decomposition` to `step3-ibl` each hold a design (`DESIGN*.md
 
 ## Pre-specification and timestamps
 
-Each analysis was specified in a design document that was reviewed, committed and timestamped with OpenTimestamps. `prereg/README.md` lists every proof with its earliest Bitcoin block against the start of the run and the first time any result was read, and it states the exceptions: the two step 1 runs started a few minutes before their blocks, the step 2 cloud run started 20 minutes before the block of its run-platform proof (the decision was committed before the run, its reviewed text a few minutes after), the Track A outputs come from a stated rerun, and the survey protocol was committed but not timestamped (its commit, 38 s before the search, is in the authors' working history, which is not part of this repository). Apart from one replicate of one addendum-3 cell, seen before that addendum was stamped, no result was opened before its block. Timestamped files are kept byte for byte (`PROVENANCE.md`).
+Each analysis except Extended Data Fig. 3a (post hoc, `analyses/yaron-panel/`, not timestamped) was specified in a design document that was reviewed, committed and timestamped with OpenTimestamps. `prereg/README.md` lists every proof with its earliest Bitcoin block against the start of the run and the first time any result was read, and it states the exceptions: the two step 1 runs started a few minutes before their blocks, the step 2 cloud run started 20 minutes before the block of its run-platform proof (the decision was committed before the run, its reviewed text a few minutes after), the step 6 test-suite pilot of Addendum 1 (no data) ran before its stamp, step 6 Addendum 3 was written after the results were read, the Track A outputs come from a stated rerun, and the survey protocol was committed but not timestamped (its commit, 38 s before the search, is in the authors' working history, which is not part of this repository). Apart from one replicate of one addendum-3 cell, seen before that addendum was stamped, no result was opened before its block. Timestamped files are kept byte for byte (`PROVENANCE.md`).
 
 ## Data
 
-No recordings are redistributed. Allen Brain Observatory Visual Coding Neuropixels (32 sessions) and MPI LEMON (resting EEG) are downloaded by the scripts in `analyses/trackA-std/code/` and `analyses/step2b-eeg/code/`; `REPRODUCE.md` §3 gives the commands that compare the downloaded files with the shipped manifests. The International Brain Laboratory data are read through the ONE API from the public server, Brain-Wide Map release `2023_12_bwm_release`, with the session list in `analyses/step3-ibl/runs/ORDER.json`. The rat auditory cortex recordings of Yaron et al. (2025; Zenodo 10.5281/zenodo.15531781, CC BY 4.0) are downloaded by `analyses/yaron-panel/data/fetch_yaron.py` and checked against its manifest (`REPRODUCE.md` §3). The fMRI data of Haxby et al. (2001), as distributed with PyMVPA (data.pymvpa.org/datasets/haxby2001), and PAMAP2 (UCI Machine Learning Repository, 10.24432/C5NW2H, CC BY 4.0) are downloaded by `analyses/step4-fmri-haxby/code/fetch_haxby.py` (checked against the server's MD5 sums) and `analyses/step5-pamap2/code/fetch_pamap2.py`; their manifests are in each step's `runs/`. The four main datasets take about 80 GB (Allen), 13 GB (LEMON), 96 GB (IBL) and 1.4 GB (Yaron et al.); the two post hoc datasets take 1.8 GB (Haxby et al.) and 0.7 GB (PAMAP2) as archives.
+No recordings are redistributed. Allen Brain Observatory Visual Coding Neuropixels (32 sessions; registry.opendata.aws/allen-brain-observatory) and MPI LEMON (resting EEG; fcon_1000.projects.nitrc.org/indi/retro/MPI_LEMON.html) are downloaded by the scripts in `analyses/trackA-std/code/` and `analyses/step2b-eeg/code/`; the data of the two reanalyses are on Zenodo (Jahn et al. 2024, 10.5281/zenodo.10529801, 0.8 GB of listed members; Klee et al. 2026, 10.5281/zenodo.16333867, a 3.57 GB archive); `REPRODUCE.md` §3 gives the commands that compare the downloaded files with the shipped manifests. The International Brain Laboratory data are read through the ONE API from the public server, Brain-Wide Map release `2023_12_bwm_release`, with the session list in `analyses/step3-ibl/runs/ORDER.json`. The rat auditory cortex recordings of Yaron et al. (2025; Zenodo 10.5281/zenodo.15531781, CC BY 4.0) are downloaded by `analyses/yaron-panel/data/fetch_yaron.py` and checked against its manifest (`REPRODUCE.md` §3). The fMRI data of Haxby et al. (2001), as distributed with PyMVPA (http://data.pymvpa.org/datasets/haxby2001), and PAMAP2 (UCI Machine Learning Repository, 10.24432/C5NW2H, CC BY 4.0) are downloaded by `analyses/step4-fmri-haxby/code/fetch_haxby.py` (checked against the server's MD5 sums) and `analyses/step5-pamap2/code/fetch_pamap2.py`; their manifests are in each step's `runs/`. The four main datasets take about 80 GB (Allen), 13 GB (LEMON), 96 GB (IBL) and 1.3 GB (Yaron et al.); the two post hoc datasets take 1.8 GB (Haxby et al.) and 0.7 GB (PAMAP2) as archives.
 
 ## Licenses
 
