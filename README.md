@@ -154,7 +154,16 @@ The folders `step1-decomposition` to `step3-ibl` each hold a design (`DESIGN*.md
 
 ## Pre-specification and timestamps
 
-Each analysis except Extended Data Fig. 3a (post hoc, `analyses/yaron-panel/`, not timestamped) was specified in a design document that was reviewed, committed and timestamped with OpenTimestamps. `prereg/README.md` lists every proof with its earliest Bitcoin block against the start of the run and the first time any result was read, and it states the exceptions: the two step 1 runs started a few minutes before their blocks, the step 2 cloud run started 20 minutes before the block of its run-platform proof (the decision was committed before the run, its reviewed text a few minutes after), the step 6 test-suite pilot of Addendum 1 (no data) ran before its stamp, step 6 Addendum 3 was written after the results were read, the Track A outputs come from a stated rerun, and the survey protocol was committed but not timestamped (its commit, 38 s before the search, is in the authors' working history, which is not part of this repository). Apart from one replicate of one addendum-3 cell, seen before that addendum was stamped, no result was opened before its block. Timestamped files are kept byte for byte (`PROVENANCE.md`).
+Each analysis except Extended Data Fig. 3a (post hoc, `analyses/yaron-panel/`, not timestamped) was specified in a design document that was reviewed, committed and timestamped with OpenTimestamps. `prereg/README.md` lists every proof with its earliest Bitcoin block against the start of the run and the first time any result was read. It states these exceptions:
+
+- the two step 1 runs started a few minutes before their blocks;
+- the step 2 cloud run started 20 minutes before the block of its run-platform proof (the decision was committed before the run, its reviewed text a few minutes after);
+- the step 6 test-suite pilot of Addendum 1 (no data) ran before its stamp;
+- step 6 Addendum 3 was written after the results were read;
+- the Track A outputs come from a stated rerun;
+- the survey protocol was committed but not timestamped (its commit, 38 s before the search, is in the authors' working history, which is not part of this repository).
+
+Apart from one replicate of one addendum-3 cell, seen before that addendum was stamped, no result was opened before its block. Timestamped files are kept byte for byte (`PROVENANCE.md`).
 
 ## Data
 
