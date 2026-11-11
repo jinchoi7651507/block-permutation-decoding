@@ -58,7 +58,7 @@ The test `test_equivalence_with_reference` checks that, with `exact=False`, the 
 ## Tutorial, MATLAB and Octave
 - `docs/TUTORIAL.md`: a step-by-step guide (folds, strata, pseudosessions, few blocks, fixed block orders, checking a pipeline with labels that carry no information).
 - `matlab/`: a MATLAB and Octave port, `block_permutation_test.m`, which takes a function returning the cross-validated score for a label vector. This Python function is the reference; the port is checked against it in `matlab/crosscheck/` (`matlab/README.md`).
-- On PyPI: `pip install blockperm` (version 0.1.0, the version used in the paper).
+- On PyPI: `pip install blockperm`. Version 0.1.2 has the same `blockperm.py` as 0.1.0, the version used in the paper; it adds the PyPI description (`PYPI.md`) and the preprint link.
 
 ## Not included
 No `n_jobs` and no fit parameters (unlike `permutation_test_score`); the permutations run one after another. License: MIT (`LICENSE`).

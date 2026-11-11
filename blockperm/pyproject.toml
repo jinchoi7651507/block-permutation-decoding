@@ -4,9 +4,9 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "blockperm"
-version = "0.1.0"
+version = "0.1.2"
 description = "Block permutation test for cross-validated decoding when labels follow recording blocks"
-readme = "README.md"
+readme = "PYPI.md"
 license = "MIT"
 license-files = ["LICENSE"]
 authors = [{name = "Dongjin Choi"}]
@@ -15,6 +15,7 @@ dependencies = ["numpy>=2.0", "scikit-learn>=1.4"]
 
 [project.urls]
 Repository = "https://github.com/jinchoi7651507/block-permutation-decoding"
+Preprint = "https://doi.org/10.5281/zenodo.24012190"
 
 [project.optional-dependencies]
 test = ["pytest"]
