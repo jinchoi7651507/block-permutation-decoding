@@ -38,7 +38,7 @@ Slow drift makes recording blocks distinguishable. When training and test trials
 pip install blockperm
 ```
 
-Python 3.12 or later, with numpy and scikit-learn. One CPU core is enough. The permutations run one after another (no `n_jobs`).
+Python 3.10 or later (tested on 3.10 to 3.13), with numpy and scikit-learn. One CPU core is enough. The permutations run one after another (no `n_jobs`).
 
 ## Documentation and citation
 

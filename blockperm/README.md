@@ -37,7 +37,7 @@ All three rejected far more often than 5%. Permuting block labels and rerunning 
 - **PyMVPA training-label permutation:** permute the labels of all trials, training and test, block by block.
 
 ## Install and test
-Python 3.12 with numpy, scipy and scikit-learn (tested with numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2); tested on macOS (arm64). No special hardware is needed; one CPU core is enough.
+Python 3.10 or later with numpy, scipy and scikit-learn; the tests pass on Python 3.10 to 3.13 (developed with numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2); tested on macOS (arm64). No special hardware is needed; one CPU core is enough.
 
 ```sh
 pip install blockperm           # from PyPI; or, in this folder, pip install ".[test]" (with pytest), or copy blockperm.py into a project
