@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare the equivalence rows of two machines (addendum 2 §6): rows matched on (subject, arm, assignment, split);
+"""Compare the equivalence rows of two machines: rows matched on (subject, arm, assignment, split);
 reports the number of rows whose p values of all rules are identical, the largest absolute difference in observed
 accuracy, and, over the 200 stored P5 null accuracies, the largest absolute difference and the share identical.
 

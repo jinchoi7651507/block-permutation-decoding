@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Step 2 addendum 3 completion rule (counts only; no p value or rate is printed). §1: every cell of CELLS-ADD3.json
-has 500 replicates and a last `done` line with every return code 0 in runs_add3/run.log. §2: per tool, variant and
+"""Completion check of the toolbox runs and fixed-order cells (counts only; no p value or rate is printed). Cells:
+every cell of CELLS-ADD3.json has 500 replicates and a last `done` line with every return code 0 in
+runs_add3/run.log. Toolboxes: per tool, variant and
 layout, rows present (expected 500 each), error flags, and the error classes of add3_summarize_tools (expected =
 CoSMoMVPA errors in L1 where the P3 port returns None); the reference rows (2,000). Complete = all counts as
 expected and no unexpected error.
@@ -33,7 +34,7 @@ def main():
         rc_ok = c["name"] in last and set(json.loads(last[c["name"]])) == {0}
         if n != c["reps"] or not rc_ok:
             bad_cells.append((c["name"], n, rc_ok))
-    print(f"§1 cells: {len(cells)}; incomplete or nonzero rc: {len(bad_cells)}", bad_cells[:5])
+    print(f"cells: {len(cells)}; incomplete or nonzero rc: {len(bad_cells)}", bad_cells[:5])
     ref = {}
     for f in t.glob("ref.w*.jsonl"):
         for r in map(json.loads, f.read_text().splitlines()):

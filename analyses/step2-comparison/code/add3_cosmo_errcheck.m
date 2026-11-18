@@ -1,4 +1,4 @@
-% Step 2 addendum 3 §2c G1b: CoSMoMVPA on a constructed dataset whose first chunk holds one class only.
+% Gate G1b: CoSMoMVPA on a constructed dataset whose first chunk holds one class only.
 % octave --no-gui add3_cosmo_errcheck.m <cosmo_dir> <out_txt>   (writes "error: <message>" or "no error")
 args = argv();
 addpath(genpath(fullfile(args{1}, 'mvpa')));

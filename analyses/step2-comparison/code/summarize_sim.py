@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2 simulation summary (DESIGN.md §7, §8, §15; addendum DESIGN-v2-ADDENDUM.md §3). Written before any study
-cell was read.
+"""Step 2 simulation summary.
 
 Per cell (runs/CELLS.json) and rule P1-P5: replicates, rate of p < 0.05 with a Wilson 95% interval, and the
 Monte Carlo 99% band of a 5% rate at that number of replicates. NaN p (undefined observed statistic) counts as an
@@ -10,8 +9,8 @@ Contrast M (primary cell): per replicate hit(Pk) - hit(P5), mean and 95% bootstr
 (B = 10,000, seed 20261022); P3 on the replicates where it ran.
 P5 fails (fixed-order designs, trend 0): rate above the upper end of the 99% band.
 B = 4: P5 has 6 balanced assignments, and an assignment and its swap give the same accuracy (3 distinct values), so the
-smallest attainable p is about 1/3 (DESIGN §15 says 0.17: corrected in addendum 1); printed as "cannot reject".
-Baselines (addendum 1 §3): at drift 0 the generator does not depend on tau_s, so the four tau_s copies of a drift-0
+smallest attainable p is about 1/3; printed as "cannot reject".
+Baselines: at drift 0 the generator does not depend on tau_s, so the four tau_s copies of a drift-0
 cell are pooled (2,000 replicates); primary baseline = pooled interleaved drift-0 rate for the same B and split;
 second, descriptive baseline = pooled random-design drift-0 rate. Differences get a 95% bootstrap interval.
 Q3 primary cell: interleaved, tau_s 20, drift 1, B 12, S-main (the others descriptive).
@@ -95,7 +94,7 @@ def cell_summary(rows, c):
 
 
 def size_adjusted(null_rows, alt_rows, rule):
-    """Addendum 1 §1b: threshold q = 5% quantile of the rule's p in the delta = 0 primary cell (P3 errors and NaN
+    """Size-adjusted power: threshold q = 5% quantile of the rule's p in the delta = 0 primary cell (P3 errors and NaN
     count as p = 1, i.e. never reject). Randomised at the tie: reject if p < q, and if p == q with probability
     g = (0.05 - P0(p < q)) / P0(p == q), so the realised size is exactly 5% in expectation. Reports raw power, the
     realised size of the plain rule p <= q, g, and the expected size-adjusted power P1(p < q) + g P1(p == q)."""

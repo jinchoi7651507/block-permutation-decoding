@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compute pilot (step 2 DESIGN.md §10): time one replicate of each rule in the primary-cell layout.
+"""Compute pilot: time one replicate of each rule in the primary-cell layout.
 Timing only: p values are computed but NOT printed or saved (no false-positive rate is opened here).
 
   python pilot_timing.py [--n-perm 200] [--reps 3]

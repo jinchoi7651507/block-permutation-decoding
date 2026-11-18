@@ -1,6 +1,6 @@
 """Summary of the Cell reanalysis: reads out/select.json, out/gate.json and out/test-*.json and writes summary.md and
-summary.json. The verdict sentences and the prediction marks are generated here, not edited by hand (DESIGN.md sections
-5, 9). Run: python -I summarize_cell.py [--out O]"""
+summary.json. The verdict sentences and the prediction marks are generated here, not edited by hand.
+Run: python -I summarize_cell.py [--out O]"""
 from __future__ import annotations
 
 import sys as _sys
@@ -49,7 +49,7 @@ def _tested(t):
 
 
 def mark_predictions(sel, gate, tests):
-    """Returns {id: (mark, reason)}; marks are held, not held, not tested. Definitions: DESIGN.md section 9."""
+    """Returns {id: (mark, reason)}; marks are held, not held, not tested."""
     out = {}
     tried = sel.get("tried", []) if sel else []
     # P1
@@ -154,7 +154,7 @@ def main(argv=None):
         L.append("")
     preds = mark_predictions(sel, gate, tests) if (sel and gate) else {}
     if preds:
-        L += ["## Predictions (DESIGN.md section 9)", "", "| id | mark | reason |", "|---|---|---|"]
+        L += ["## Predictions", "", "| id | mark | reason |", "|---|---|---|"]
         for k, (m, why) in preds.items():
             L.append("| %s | %s | %s |" % (k, m, why))
     (o / "summary.md").write_text("\n".join(L) + "\n")

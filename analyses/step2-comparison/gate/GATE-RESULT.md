@@ -22,8 +22,9 @@ Areas: 154 (step 1: 154); integrity (step 1 lr_topk recomputed = rows.jsonl): 15
 
 Gate (pipeline A): PASS. Step 2 ranking: f_classif (B), as designed (criterion 3).
 
-## Notes (2026-10-21 01:36 KST)
+## Notes (2026-10-21)
+- Criteria: (1) pipeline A gives the step 1 observed accuracy in at least 95% of the 154 areas and is within one held-out trial in all others; (2) A's pass rates of `trl_rerun`, `blk_fixed` and `blk_rerun` are within ±3 points of step 1; (3) step 2 uses B unless B differs from A by more than 3 points in any of the three tests.
 - Mouse-level rates here average over all 32 sessions with shared24 rows (the step 1 headline numbers, e.g. blk_fixed lr_topk 83.7%, are over the 30 new mice); both columns use the same aggregation, so the comparison is like for like.
-- Pipeline A differs from step 1 in 5 of 154 areas (max 0.47 points, i.e. one held-out trial or less) and in its predictions in 10 areas; the tight-tolerance run equals the default fit in 149/154, so part of the difference is lbfgs stopping early (default tol 1e-4, max_iter 100). For step 2, consider `max_iter=1000`; it would be stated in the step 2 design before the pilot.
-- Pipeline B (f_classif) differs in observed accuracy in 8 areas (max 4.2 points, from different top-20 units when the classes are unbalanced in calibration) but its three pass rates are within 0.6 points of A, so step 2 keeps f_classif as designed (criterion 3). Both are reported.
-- Not compared here: `trn_trl` (training-label-only permutation); step 2 runs it with the tool's own rule, and its gate is the step 1 addendum code.
+- Pipeline A differs from step 1 in 5 of 154 areas (max 0.47 points, i.e. one held-out trial or less) and in its predictions in 10 areas; the tight-tolerance run equals the default fit in 149/154, so part of the difference is lbfgs stopping early (default tol 1e-4, max_iter 100).
+- Pipeline B (f_classif) differs in observed accuracy in 8 areas (max 4.2 points, from different top-20 units when the classes are unbalanced in calibration) but its three pass rates are within 0.6 points of A, so step 2 keeps f_classif. Both are reported.
+- Not compared here: `trn_trl` (training-label-only permutation); step 2 runs it with the tool's own rule, and its gate is in step 1's `summarize_within_train.py`.

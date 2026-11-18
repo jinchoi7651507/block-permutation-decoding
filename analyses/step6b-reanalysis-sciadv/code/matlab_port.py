@@ -1,6 +1,6 @@
 """Python port of the preprocessing in the authors' MATLAB code (Zenodo 16333867).
 
-Sources (extracted to ../authors-code/, see NOTES.md):
+Sources (extracted to ../authors-code/):
   Support Functions/MATLAB/dF_Anya_test.m     -> df_anya()
   Figure Functions/Figure4.m, Panel D         -> fig4_cell_filter(), build_trials()
   Figure Functions/Figure2.m, Panel F/G       -> fig2_cells(), fig2_clusters()

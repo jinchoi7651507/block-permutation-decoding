@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Step 2b runner (DESIGN.md v2 §4-§6; addendum DESIGN-v2-ADDENDUM.md). Uses the step 2 rules and pipeline
+"""Step 2b runner. Uses the step 2 rules and pipeline
 (../../step2-comparison/code/sim.py, unchanged).
 
 Per subject (features from preprocess.py) and arm, every label assignment of that arm is tested under three splits
 (S-main shuffled KFold 5; S-tool unshuffled StratifiedKFold 5 re-split per permuted label vector; S-block
 GroupKFold(4) by block, deterministic) with the rules P1-P5 (200 permutation draws; P3 runs = runs of 4 consecutive
-blocks of the arm, DESIGN §5: 4 runs with 16 blocks, 2 runs with 8). One JSON line per (subject, arm, assignment, split, readout, variant) with every p, the observed
+blocks of the arm: 4 runs with 16 blocks, 2 runs with 8). One JSON line per (subject, arm, assignment, split, readout, variant) with every p, the observed
 accuracy and the P5 null accuracies.
 
 Before any arm: subjects with fewer than 20 epochs in any block are dropped (reported); every block is then
 subsampled (seeded) to the smallest per-block epoch count of that subject, so that both classes always have the
-same number of epochs and accuracy equals balanced accuracy (§6, S9).
+same number of epochs and accuracy equals balanced accuracy.
 
 Arms (block = one 60-s condition segment; 8 EC + 8 EO blocks):
   balanced    class 1 = 4 EC + 4 EO blocks; 50 assignments per subject from the 4,900, without replacement and
@@ -60,10 +60,10 @@ MIN_EPOCHS = 20
 # R4 frontal, 4 epochs; R5 frontal, 2 epochs.
 GRADED_RULES = {"R1": ("frontal", None, 0.0), "R2": ("all", 4, 0.0), "R3": ("all", 2, 0.0), "R4": ("frontal", 4, 0.0),
                 "R5": ("frontal", 2, 0.0),
-                # mixing ladder (EEG review M4): a fraction q of each block's epochs exchanged with epochs of the paired
+                # mixing ladder: a fraction q of each block's epochs exchanged with epochs of the paired
                 # opposite-state block (blocks 2j and 2j+1), all channels, all epochs; labels unchanged
                 "Q30": ("all", None, 0.30), "Q35": ("all", None, 0.35), "Q40": ("all", None, 0.40), "Q45": ("all", None, 0.45),
-                "Q48": ("all", None, 0.48)}                                  # last step (EEG re-review COULD)
+                "Q48": ("all", None, 0.48)}                                  # last step
 GRADED_ORDER = ("R1", "R2", "R4", "R3", "R5", "Q30", "Q35", "Q40", "Q45", "Q48")
 FRONTAL = ("Fp1", "Fp2", "AF7", "AF3", "AFz", "AF4", "AF8", "F7", "F5", "F3", "F1", "Fz", "F2", "F4", "F6", "F8")
 
@@ -73,7 +73,7 @@ def readout(name):
         return sim.pipeline()
     if name == "kall":
         return sim.pipeline(k="all")
-    if name == "nogamma":                                   # main pipeline without the 30-45 Hz band (EEG review S6)
+    if name == "nogamma":                                   # main pipeline without the 30-45 Hz band
         from sklearn.compose import ColumnTransformer
         return Pipeline([("drop_gamma", ColumnTransformer([("keep", "passthrough", list(range(244)))])),
                          *sim.pipeline().steps])
@@ -290,7 +290,7 @@ def main():
                    "seed": seed, "subject_index": si, "arm_index": ARMS.index(arm), "split_index": ["main", "tool", "block"].index(sp),
                    "kept_per_block": info.get("kept_per_block"),
                    "label_block_corr": float(np.corrcoef(v, np.arange(K))[0, 1])}
-            row.update(run_rules(readout(ro), Xa, y, aba, fl, null_vectors, rng, seed, aba // 4))   # runs of 4 consecutive blocks (DESIGN §5)
+            row.update(run_rules(readout(ro), Xa, y, aba, fl, null_vectors, rng, seed, aba // 4))   # runs of 4 consecutive blocks
             row["seconds"] = round(time.time() - t, 1)
             with out.open("a") as fh:
                 fh.write(json.dumps(row) + "\n")

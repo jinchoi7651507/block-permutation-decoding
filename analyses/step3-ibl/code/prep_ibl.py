@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 3 (IBL) label-free preparation, DESIGN.md v1 §2, §6, §9, run in this order after the code addendum is stamped:
+"""Step 3 (IBL) label-free preparation, run in this order:
 
   python prep_ibl.py order    --out ../runs/ORDER.json
       bwm_query(freeze='2023_12_bwm_release') reads the package fixture (no network; 699 insertions); probes merged
@@ -15,8 +15,8 @@
       Trials tables only (no spikes), first 30 sessions: block lengths (censored last block left out), number of
       blocks, class share of the real session vs its 220-pseudosession pool (same seeds as the run); strict side
       alternation and the first 90 trials at probabilityLeft 0.5 asserted (a failing session is listed and
-      excluded); pooled two-sample KS of block lengths with a permutation p (ties reported). Pre-set response
-      (§9): KS p < 0.01 -> PS-refit on real labels reported as approximate and Q2 descriptive only.
+      excluded); pooled two-sample KS of block lengths with a permutation p (ties reported). Pre-set response:
+      KS p < 0.01 -> PS-refit on real labels reported as approximate and Q2 descriptive only.
 """
 import argparse
 import hashlib

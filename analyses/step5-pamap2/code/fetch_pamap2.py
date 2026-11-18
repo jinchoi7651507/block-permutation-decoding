@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 5 (DESIGN.md §2): download PAMAP2 from the UCI repository (CC BY 4.0), unpack (the archive may contain a
+"""Step 5: download PAMAP2 from the UCI repository (CC BY 4.0), unpack (the archive may contain a
 nested zip), copy Protocol/subject101.dat ... subject109.dat into <dir>/Protocol, and write MANIFEST.sha256 with the
 SHA-256 of the downloaded archive and of the nine protocol files. UCI publishes no checksum; the manifest records
 what was used.

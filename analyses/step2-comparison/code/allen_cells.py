@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2 Allen cells (DESIGN.md §15 "Allen cells", §5b positive control; addendum DESIGN-v2-ADDENDUM.md).
+"""Step 2 Allen cells and their positive control.
 
 Per (session, visual area in STD6) and per label scheme, the five permutation rules of sim.py (P1 binomial,
 P2 scikit-learn permutation_test_score, P3 within-run, P4 training labels only, P5 block permutation with refit)
@@ -12,12 +12,12 @@ Schemes (fake labels follow 24 recording blocks; data and blocks as step 1, ../.
   dg_shared24, dg_sep24  drifting-grating trials in time order cut into 24 blocks (step 1 dg layout)
   Label vectors: shared = 12 of 24 blocks label 1; sep = 6 of the 12 calibration-pair blocks and 6 of the 12
   held-out-pair blocks label 1 (step 1 pair split). Under S-main and S-tool both are block designs whose blocks are
-  shared by training and test folds; sep differs from shared only in this balance constraint (addendum §2).
+  shared by training and test folds; sep differs from shared only in this balance constraint.
   P5 null set = the scheme's own assignment set (exact by randomisation; sanity cell).
-  Positive control pos_dg24 (§5b): real 0 vs 90 degree labels; the 0-degree trials (time order) are cut into 12
+  Positive control pos_dg24: real 0 vs 90 degree labels; the 0-degree trials (time order) are cut into 12
   chunks and the 90-degree trials into 12 chunks, and the chunks alternate (0, 90, 0, ...) as 24 blocks; P5 null
   set = all balanced assignments of the 24 blocks.
-Extra splits beyond §15 (addendum 1 §2): S-block = GroupKFold(5) by the 24 blocks (deterministic); for sep24 and
+Further splits: S-block = GroupKFold(5) by the 24 blocks (deterministic); for sep24 and
 dg_sep24 also "pair" = the step 1 pair split, one direction (train on calibration-pair blocks, test on held-out-pair
 blocks), as step 1.
 P3 runs = the recording's natural runs: the 3 spontaneous epochs (8 blocks each) for shared24/sep24, the Allen
@@ -58,7 +58,7 @@ warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 SESSIONS = HERE.parents[1] / "trackA-std" / "sessions_trackA.csv"
 SCHEMES = ("shared24", "sep24", "dg_shared24", "dg_sep24", "pos_dg24")
-SPLITS = ("main", "tool", "block", "pair")   # block and pair: addendum 1 §2, cells beyond §15 (author 2026-10-21)
+SPLITS = ("main", "tool", "block", "pair")   # block and pair: the further splits
 N_PERM = 200
 STREAM = {"shared24": 24 + 200, "sep24": 22 + 200, "dg_shared24": 90 + 24 + 200, "dg_sep24": 90 + 22 + 200,
           "pos_dg24": 470}
@@ -118,7 +118,7 @@ def run_one(counts, block, lab, draw, split, rng, seed_int, runs, kind="shared24
     out = {}
     out["acc"] = sim.cv_correct(est, X, y, fl)[1]
     if split == "pair":
-        # one held-out fold: sim.p1_binomial counts all trials; use the held-out trials as n (review, final check)
+        # one held-out fold: sim.p1_binomial counts all trials; use the held-out trials as n
         from scipy import stats as _st
         c, _ = sim.cv_correct(est, X, y, fl)
         out["P1"] = float("nan") if not np.isfinite(c) else float(_st.binom.sf(c - 1, len(fl[0][1]), 0.5))

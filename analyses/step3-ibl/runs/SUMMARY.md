@@ -32,7 +32,7 @@ Sessions in the prefix: finished 335, skipped 106, errored 18.
 - S = SEL-fixed - SEL-repeat: 1.2% (95% 0.8 to 1.5; Bonferroni 98.3% 0.8 to 1.6); **positive**; mice 118, region-sessions 1359, pairs 27180
 - beside S, the same contrast in the i.i.d. control: -0.0% (95% -0.3 to 0.2); mice 118, pairs 27180
 
-## Secondary contrasts (§7; no decision)
+## Secondary contrasts (no decision)
 
 - P1 - PS-refit: 72.4% (95% 69.7 to 74.6); mice 118, pairs 27180
 - P4 - PS-refit: 70.9% (95% 68.0 to 73.1); mice 118, pairs 27180

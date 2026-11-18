@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2b addendum 2 §6: equivalence check of the laptop and the cloud machine. Runs run_2b.main unchanged on the
+"""Step 2b equivalence check of the laptop and the cloud machine. Runs run_2b.main unchanged on the
 subjects of eligibility/EQUIV-SUBJECTS.txt (first-round pilot subjects, in no main table), with the assignment list
 cut to its first entries: balanced arm, S-main, assignments 0 and 1 (6 rows), and one balanced_graded row (fake labels,
 assignment 0) with the noise rule N4 for the first subject, to exercise graded2.weaken2 without eyes-closed/eyes-open labels.

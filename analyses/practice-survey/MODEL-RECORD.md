@@ -1,4 +1,4 @@
-# Models used in the practice survey (recorded 2026-11-02 23:3x KST from the session records)
+# Models used in the practice survey (recorded 2026-11-02 from the session records)
 
 Source: model identifiers in the session transcript of the agents that did each step (Claude Code subagent records, `message.model`), and `modelUsage` in the JSON outputs of the 2026-11-02 check.
 

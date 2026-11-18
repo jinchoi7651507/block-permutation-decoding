@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Step 2 addendum 3 §2b reference rows: on the same replicate files as the tools, the stamped pipeline and the
-stamped sim.py rules with leave-one-run-out folds: P3 port (within-run), P4 port (training labels only), P5
+"""Reference rows for the toolbox layouts: on the same replicate files as the tools, the step 2 pipeline and the
+sim.py rules with leave-one-run-out folds: P3 port (within-run), P4 port (training labels only), P5
 (block labels permuted between blocks, training and held-out together, rerun) with 200 fresh draws from the
 layout's randomisation set: L1 and L2 any balanced assignment of the 12 blocks (run_grid.balanced_draw, as the
-stamped §15 runner: exact by randomisation for L1, an approximation of the full enumeration for L2), L4 the order
+grid runner: exact by randomisation for L1, an approximation of the full enumeration for L2), L4 the order
 of the two blocks of each run flipped at random (the L4 design's own randomisation); undefined for L3. 200 draws,
 one rng default_rng([2029000 + j, rep, 5]) shared by P3, P4, P5 in that order (P4 draws depend on whether P3
 errored; harmless). One JSON line per replicate; resumable.

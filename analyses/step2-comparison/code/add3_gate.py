@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2 addendum 3 §2c agreement gate, Python part (G1 structure, G1b port error, G4 rule-level rates).
+"""Toolbox agreement gate, Python part (G1 structure, G1b port error, G4 rule-level rates).
 Reads the permutations the tools produced on L2 replicates 0-49 (CoSMoMVPA: L2_rXXX_perm.mat, index vectors,
 1-based; PyMVPA: L2_rXXX_pymvpa_perm.npy, draws x folds x trials targets) and the replicate files.
 
@@ -8,7 +8,7 @@ Reads the permutations the tools produced on L2 replicates 0-49 (CoSMoMVPA: L2_r
 G1: every CoSMoMVPA permutation keeps each sample in its chunk and the multiset of targets of every chunk.
 G1b: on the constructed replicate (chunk 1 single-class) the CoSMoMVPA call failed (file written by the Octave
 check) and sim.p3_within_run returns None. G4 (exact, P4 rule; computed in add3_pymvpa.py --gate, same Python 3.9 environment):
-on L2 replicates 0..exact_reps-1 PyMVPA's MCNullDist with SKLLearnerAdapter(stamped pipeline) gives the same null
+on L2 replicates 0..exact_reps-1 PyMVPA's MCNullDist with SKLLearnerAdapter(the step 2 pipeline) gives the same null
 errors as a plain scikit-learn loop over the regenerated draws. Here: fold order asserted (test chunks 1, 2, 3, 4).
 The PyMVPA draws are regenerated from the replicate's seed (the same sequence as in the tool run, not read from it).
 Descriptive (no pass): paired p of the P3 and P4 ports with the tools' draws vs with the ports' own draws

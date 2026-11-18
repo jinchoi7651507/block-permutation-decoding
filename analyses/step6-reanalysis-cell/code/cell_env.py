@@ -13,9 +13,9 @@ for _v in THREAD_VARS:
     os.environ[_v] = "1"
 
 PINNED = {"python": "3.12.3", "numpy": "2.5.4", "scipy": "1.18.1", "scikit-learn": "1.9.1", "h5py": "3.14.0"}
-PLATFORM_PLACEHOLDER = "PLATFORM: to be fixed by the author before the stamp"
-DEFAULT_PLATFORM = "Linux x86_64"   # author 2026-11-08: GCP c2d-highcpu-56, asia-northeast3, Ubuntu 24.04 LTS (DESIGN.md sections 7 and 8)
-MASTER_SEED = 20261107               # fixed in DESIGN.md section 8; every stream is derived from it (cell_tests.rng_for)
+PLATFORM_PLACEHOLDER = "PLATFORM: not fixed"
+DEFAULT_PLATFORM = "Linux x86_64"   # GCP c2d-highcpu-56, asia-northeast3, Ubuntu 24.04 LTS
+MASTER_SEED = 20261107               # every stream is derived from it (cell_tests.rng_for)
 
 
 def versions():
@@ -48,7 +48,7 @@ def check_environment():
 
 def require_platform_fixed(addendum=None):
     """Every data stage calls this first. Refused while the placeholder is present, and refused on any other
-    platform than DEFAULT_PLATFORM unless a dated addendum name is given (review of 2026-11-08, F1)."""
+    platform than DEFAULT_PLATFORM unless a dated addendum name is given."""
     if DEFAULT_PLATFORM == PLATFORM_PLACEHOLDER:
         raise SystemExit("refused: the platform is not fixed (cell_env.DEFAULT_PLATFORM holds the placeholder %r)" % PLATFORM_PLACEHOLDER)
     rec = platform_record()
@@ -59,7 +59,7 @@ def require_platform_fixed(addendum=None):
 
 
 def cpu_model():
-    """CPU model string (Linux /proc/cpuinfo, macOS sysctl); recorded in every header (review SHOULD)."""
+    """CPU model string (Linux /proc/cpuinfo, macOS sysctl); recorded in every header."""
     try:
         with open("/proc/cpuinfo") as f:
             for line in f:

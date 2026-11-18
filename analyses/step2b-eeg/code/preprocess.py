@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2b preprocessing (DESIGN.md v2 §3; addendum DESIGN-v2-ADDENDUM.md). Labels are not used here.
+"""Step 2b preprocessing. Labels are not used here.
 
 Per subject (raw BrainVision files in LEMON_DIR):
   blocks  condition segments from the marker file (S200 = eyes open, S210 = eyes closed; markers repeat every 2 s
@@ -36,7 +36,7 @@ import numpy as np
 import scipy
 import sklearn
 
-LEMON_DIR = Path(os.environ.get("LEMON_DIR", "/Users/jinchoi/Downloads/trackA-school/lemon/raw"))
+LEMON_DIR = Path(os.environ.get("LEMON_DIR", "lemon_raw"))
 FS = 250.0
 BANDS = ((1, 4), (4, 8), (8, 13), (13, 30), (30, 45))
 POSTERIOR = ("O1", "Oz", "O2", "PO3", "POz", "PO4", "PO7", "PO8", "P3", "Pz", "P4")
@@ -125,7 +125,7 @@ def preprocess(subject, out):
     mini = raw.copy().filter(1.0, 45.0, picks=["eeg", "eog"]).set_eeg_reference("average")
     # cleaned
     cl = raw.copy().filter(1.0, 45.0, picks=["eeg", "eog"]).notch_filter(50.0, picks=["eeg", "eog"])
-    # samples inside blocks (inter-block gaps excluded from channel statistics and from the ICA fit; review S2)
+    # samples inside blocks (inter-block gaps excluded from channel statistics and from the ICA fit)
     inside = np.zeros(cl.n_times, bool)
     on, du = [], []
     prev_end = None
@@ -141,11 +141,11 @@ def preprocess(subject, out):
         cl.set_annotations(mne.Annotations(on, du, ["BAD_gap"] * len(on)))
     eeg_only = cl.copy().pick("eeg")
     x = eeg_only.get_data()[:, inside]
-    names = eeg_only.ch_names                                            # names of the picked channels (review M1)
+    names = eeg_only.ch_names                                            # names of the picked channels
     assert len(names) == x.shape[0] == 61 and "VEOG" not in names
     ptp = np.ptp(x, axis=1) * 1e6
     flat = ptp < 1.0
-    # local robust z (re-review of M2): each channel's log variance minus the median over its 4 nearest neighbours
+    # local robust z: each channel's log variance minus the median over its 4 nearest neighbours
     # (standard_1005 positions, flat neighbours excluded); robust z of these differences over the non-flat channels.
     # Spatially broad physiological signals (posterior alpha, frontal blinks) are shared with the neighbours and do
     # not count; a single deviating channel does.
@@ -173,7 +173,7 @@ def preprocess(subject, out):
     veog = cl.copy().pick("eog").get_data()[0][inside]
     r = np.array([np.corrcoef(src[i], veog)[0, 1] for i in range(src.shape[0])])
     eegd = cl.copy().pick("eeg")
-    heog = (eegd.get_data(picks=["F7"])[0] - eegd.get_data(picks=["F8"])[0])[inside]   # pseudo-HEOG (review S4), logged only
+    heog = (eegd.get_data(picks=["F7"])[0] - eegd.get_data(picks=["F8"])[0])[inside]   # pseudo-HEOG, logged only
     rh = np.array([np.corrcoef(src[i], heog)[0, 1] for i in range(src.shape[0])])
     excl = [int(i) for i in np.where(np.abs(r) > 0.5)[0]]
     ica.exclude = excl
@@ -185,8 +185,8 @@ def preprocess(subject, out):
     qc.update({"local_robust_z_log_variance": [None if not np.isfinite(v) else round(float(v), 2) for v in rz],
                "flat_channels": [names[i] for i in np.where(flat)[0]],
                "ica_n_iter": int(getattr(ica, "n_iter_", -1)),
-               "ica_converged": bool(0 <= int(getattr(ica, "n_iter_", -1)) < 1000),   # n_iter = max_iter means not converged (EEG re-review)
-               "mad_zero": bool(not mad > 0),                                          # robust z set to 0 (EEG re-review COULD)
+               "ica_converged": bool(0 <= int(getattr(ica, "n_iter_", -1)) < 1000),   # n_iter = max_iter means not converged
+               "mad_zero": bool(not mad > 0),                                          # robust z set to 0
                "ica_pseudo_heog_r": [round(float(v), 3) for v in rh],
                "veog_ptp_uv": round(float(np.ptp(veog) * 1e6), 1), "veog_sd_uv": round(float(np.std(veog) * 1e6), 2),
                "psd_50Hz_over_40_44Hz": round(float(line), 4), "gap_seconds_total": round(float(sum(du)), 2)})

@@ -2,7 +2,7 @@
 
 Gate: 1540 values checked against Track A, 0 mismatches.
 
-Pass rate = mean over mice of the share of areas with p < 0.05 (95% mouse-bootstrap interval), %. Sanity-check cells (exact by construction; `sep` blk_fixed cannot pass) are marked in DESIGN.md §1.
+Pass rate = mean over mice of the share of areas with p < 0.05 (95% mouse-bootstrap interval), %. Sanity-check cells: cells that are exact by construction, and `sep` blk_fixed, which cannot pass.
 
 ## Primary contrasts
 - A (`sep`, binom): sel − nosel0 = -1.6 (-10.3–7.6) points; sel 26.5 (20.6–32.7), nosel0 28.1 (21.3–34.9)

@@ -1,4 +1,4 @@
-"""Summary tables and the pre-specified verdict sentences (DESIGN.md section 6) from OUT/gate.json and OUT/tests.json.
+"""Summary tables and the verdict sentences from OUT/gate.json and OUT/tests.json.
 
   python summarize.py [--out OUT]   -> prints Markdown; writes OUT/SUMMARY.md
 """
@@ -13,11 +13,11 @@ ALPHA = 0.05
 DEFAULT_OUT = Path(__file__).resolve().parents[1] / "out"
 
 
-DRIFT_MAX = 60.0      # percent; DESIGN.md section 0 item 3 (both windows since 2026-11-08)
+DRIFT_MAX = 60.0      # percent (both windows)
 
 
 def verdict(window, p_trial, p_block, drift_acc=None):
-    """Verdict sentence of DESIGN.md 4.5, generated from the group p values and the drift accuracy (both windows)."""
+    """Verdict sentence, generated from the group p values and the drift accuracy (both windows)."""
     drift_ok = drift_acc is not None and not math.isnan(drift_acc)
     t = "above chance" if p_trial < ALPHA else "not above chance"
     if p_block < ALPHA:
@@ -49,7 +49,7 @@ def main():
     for k, v in g["items"].items():
         L.append("| %s | %s | %s | %s |" % (k, json.dumps(v["value"])[:120], v["expected"], v["ok"]))
     if g["status"] != "pass":
-        L += ["", "The gate failed; no test is interpreted (DESIGN.md section 3)."]
+        L += ["", "The gate failed; no test is interpreted."]
     else:
         t = json.load(open(out / "tests.json"))
         for w in ("ITI", "PERI"):

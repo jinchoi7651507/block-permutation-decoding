@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 5 (DESIGN.md §2-§3): from one PAMAP2 protocol file (subject10x.dat, 54 columns, 100 Hz) to a feature file.
+"""Step 5: from one PAMAP2 protocol file (subject10x.dat, 54 columns, 100 Hz) to a feature file.
 Non-overlapping windows of 200 consecutive rows; a window is dropped if its timestamps contain a step larger than
 0.015 s (a gap in the recording), if any of the 27 IMU channels (hand, chest, ankle: 3D acceleration +-16 g, 3D
 gyroscope, 3D magnetometer) has fewer than 100 valid rows, or if heart rate has no valid value. Features per window:

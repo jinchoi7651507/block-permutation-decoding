@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Step 2b addendum 2: pilot of the noise ladder on the second-round pilot subjects (eligibility/PILOT2-SUBJECTS.txt).
+"""Step 2b pilot of the noise ladder on the second-round pilot subjects (eligibility/PILOT2-SUBJECTS.txt).
 
-As graded_pilot.py (addendum 1 §5): for each rule in graded2.NOISE_ORDER and pilot subject, 20 seeded weakenings
+As graded_pilot.py: for each rule in graded2.NOISE_ORDER and pilot subject, 20 seeded weakenings
 (default_rng([2026, 11, subject, draw])) of the EC vs EO labels, S-main split, P5 only (200 draws, null = all 8 + 8
 assignments of the 16 blocks). Power = share of p < 0.05, pooled and per subject. Chosen rule: the first rule in the
 ladder with pooled power in [0.20, 0.90] and per-subject power strictly between 0.05 and 0.95 in at least 3 of the 5
 subjects; if none, "not achieved" (final for every graded-control variant of step 2b). The full ladder is always run in
-the stated order (no subset option). The script stops if fewer than 5 subjects can be evaluated (addendum 2 §3:
-replace a dropped subject first). Stored with every test: p, observed accuracy, median and 95th percentile of the null
+the stated order (no subset option). The script stops if fewer than 5 subjects can be evaluated (a dropped
+subject is replaced first). Stored with every test: p, observed accuracy, median and 95th percentile of the null
 accuracies, kept epochs per block. --workers runs the (rule, subject) tasks in parallel processes; every task has its
 own seeds, so the result does not depend on the number of workers.
 
@@ -66,7 +66,7 @@ def main():
     dropped = sorted({s for _, s, rows in out if rows is None})
     evaluated = [s for s in subs if s not in dropped]
     if len(evaluated) != 5:                         # exactly 5 (re-check R2)
-        raise SystemExit(f"{len(evaluated)} pilot subjects evaluable, 5 required (dropped {dropped}); replace them first (addendum 2 §3)")
+        raise SystemExit(f"{len(evaluated)} pilot subjects evaluable, 5 required (dropped {dropped}); replace them first")
     res = {"rules": {}, "subjects": subs, "evaluated_subjects": evaluated, "ladder": list(g.NOISE_ORDER)}
     for rule in g.NOISE_ORDER:
         rows = [x for rr, _, rws in out if rr == rule and rws for x in rws]

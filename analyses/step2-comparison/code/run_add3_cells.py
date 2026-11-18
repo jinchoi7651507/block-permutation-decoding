@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
-"""Step 2 addendum 3 §1: simulation cells beyond §15 (author decision 2026-10-22): the fixed-order designs and the
-interleaved-label designs under S-tool and S-block (§15 and addendum 1 ran them under S-main only). Lists every cell
-with its seed, writes the list to runs_add3/CELLS-ADD3.json before anything runs, then runs each cell with the
-stamped run_grid.py through run_sim_cells.run_cell (unchanged), writing to runs_add3/ instead of runs/.
+"""Further simulation cells: the fixed-order designs and the interleaved-label designs under S-tool and S-block
+(the main grid ran them under S-main only). Lists every cell
+with its seed, writes the list to runs_add3/CELLS-ADD3.json before anything runs, then runs each cell with
+run_grid.py through run_sim_cells.run_cell (unchanged), writing to runs_add3/ instead of runs/.
 
   python run_add3_cells.py --list            # write runs_add3/CELLS-ADD3.json only
   python run_add3_cells.py --workers 56      # run every cell (resumable: run_grid.py skips replicates already written)
 
 Cells (64, 500 replicates each, 200 permutation draws): fixed order ABAB/ABBA/AABB x B 12, 24 x tau_s 20, 67 x trend
-0, 0.5, drift 1 (the §15 fixed-order arm) x split tool, block; interleaved labels, B 12, tau_s 7, 20, 67, 160 x drift
+0, 0.5, drift 1 (the fixed-order arm of the main grid) x split tool, block; interleaved labels, B 12, tau_s 7, 20, 67, 160 x drift
 1, 2 x split tool, block (the drift-0 interleaved cells under tool and block are cells 144-175 of runs/CELLS.json).
 Seed of cell i = 2,028,000 + i. Log: runs_add3/run.log (return code of every worker).
 """

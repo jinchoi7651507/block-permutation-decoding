@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2 pipeline gate against step 1 lr_topk on Allen shared24 (design ../gate/GATE-DESIGN.md).
+"""Step 2 pipeline gate against step 1 lr_topk on Allen shared24.
 
 Rebuilds step 1's shared24 counts, labels, split and null draws exactly (step 1 decompose.py functions,
 same RNG streams and order of consumption), recomputes step 1's lr_topk as an integrity check, and

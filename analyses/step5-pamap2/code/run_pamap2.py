@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 5 runner (DESIGN.md §4-§8). Per included subject (s = subject number - 101): 30 fake-label assignments
+"""Step 5 runner. Per included subject (s = subject number - 101): 30 fake-label assignments
 (3 of each run's 6 blocks in class 1), splits main, tool, block (fold = block mod 4), rules P1-P5
 (../../step4-fmri-haxby/code/engine.py); and the injected-signal positive control (delta 0.5 and 1.0 SD on 6 seeded
 features, class-1 windows) under main. One JSON line per (subject, arm, assignment, split) in

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summarise the step 2 pipeline gate (criteria in ../gate/GATE-DESIGN.md) -> ../gate/GATE-RESULT.md."""
+"""Summarise the step 2 pipeline gate -> ../gate/GATE-RESULT.md."""
 import json
 from pathlib import Path
 

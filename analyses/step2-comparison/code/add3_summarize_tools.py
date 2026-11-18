@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2 addendum 3 §2b summary (written before any tool or reference row exists).
+"""Summary of the toolbox runs and reference rows.
 
 Rows: CoSMoMVPA (variants main, zscore, unbal), PyMVPA (main, zscore, chunks; p_tool as returned, and p_mc),
 P3 port, P4 port, P5 (reference, undefined in L3). Per layout and row:
@@ -9,10 +9,10 @@ P3 port, P4 port, P5 (reference, undefined in L3). Per layout and row:
 - paired difference to P5 on the same replicates (survivors; and all with errors = non-rejection), 95% bootstrap
   interval over replicates (B = 10,000, seed 2029);
 - difference to the same row's L3 rate (the interleaved drift-0 baseline of the rule; unpaired bootstrap).
-Error classes (§2b): expected = CoSMoMVPA errors (any variant) in L1 on replicates where the P3 port also returns
+Error classes: expected = CoSMoMVPA errors (any variant) in L1 on replicates where the P3 port also returns
 None; anything else (any PyMVPA error, any error in L2, L3, L4, a CoSMoMVPA error where P3 is defined, a missing
 row) is UNEXPECTED: listed at the top and the run is not complete until it is investigated and rerun.
-Headline comparisons (§2b): L4 CoSMoMVPA and PyMVPA, main and zscore, each minus P5 and minus L3; the rest descriptive.
+Headline comparisons: L4 CoSMoMVPA and PyMVPA, main and zscore, each minus P5 and minus L3; the rest descriptive.
 
   python add3_summarize_tools.py --tools ../runs_add3/tools > ../runs_add3/tools/SUMMARY-TOOLS.md
 """

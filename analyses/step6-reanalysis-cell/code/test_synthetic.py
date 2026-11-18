@@ -227,7 +227,7 @@ def full_null_study(n):
     return rate
 
 
-# ----------------------------------------------------------------------------- v2 additions (review-v1 MUSTs 1, 3, 6, 7, 8)
+# ----------------------------------------------------------------------------- v2 additions
 def _refused(fn, text):
     try:
         fn()
@@ -422,8 +422,8 @@ def new_checks():
     import argparse
     ADD = "2026-11-08-synthetic-test"
     ns = argparse.Namespace(name="primary", perms=3, draws=1, workers=1, variant=None, out=str(o), extract_root="x", cache=False, addendum=ADD)
-    # Addendum 1 (2026-11-08): the platform is fixed (N2). Every data stage must refuse another platform without a dated
-    # addendum (F1); checked by pointing DEFAULT_PLATFORM at a platform this process is not on, then restoring it
+    # Addendum 1 (2026-11-08): the platform is fixed. Every data stage must refuse another platform without a dated
+    # addendum; checked by pointing DEFAULT_PLATFORM at a platform this process is not on, then restoring it
     fixed = cell_env.DEFAULT_PLATFORM
     cell_env.DEFAULT_PLATFORM = "Other-OS other-arch"
     ns_plain = argparse.Namespace(**dict(vars(ns), addendum=None))
@@ -438,7 +438,7 @@ def new_checks():
         lowered_refused = True
     check("environment: a lowered 60-trial rule (CELL_MIN_TRIALS) is refused by the run-time check", lowered_refused)
     os.environ["CELL_MIN_TRIALS"] = "60"       # the runner's own check must pass; sizes stay scaled down in this process (workers=1)
-    # Addendum 1 (2026-11-08): stage_test compares the platform with gate.json (F1); the suite now writes a synthetic gate.json
+    # Addendum 1 (2026-11-08): stage_test compares the platform with gate.json; the suite now writes a synthetic gate.json
     (o / "gate.json").write_text(json.dumps({"platform": dict(cell_env.platform_record(), platform="Other-OS other-arch")}))
     ns_f1 = argparse.Namespace(**dict(vars(ns), perms=1000, draws=10, addendum=None))
     check("test stage refused when gate.json records another platform (F1)", _refused(lambda: rc.stage_test(ns_f1), "different platform"))

@@ -1,4 +1,4 @@
-"""Runner for the Cell reanalysis (DESIGN.md sections 3, 5 to 8). Stages, in this order:
+"""Runner for the Cell reanalysis. Stages, in this order:
 
   python -I run_cell.py determinism                                  synthetic only, no data
   python -I run_cell.py inspect --extract-root R [--out O]           lists fields of the extracted members; no accuracy

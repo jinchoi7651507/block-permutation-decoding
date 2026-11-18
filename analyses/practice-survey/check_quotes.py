@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Check that every coder quote in coding_final.csv occurs in the full text of its study (fulltext/<pmcid>.xml).
-Written 2026-11-02 (after an outside critique of the survey; descriptive check, fixed before it was run).
+Written 2026-11-02 (descriptive check, written before it was run).
 
 Text normalization, applied to both the XML text (tags removed, entities unescaped) and the quote: Unicode NFKC,
 curly quotes and dashes to ASCII, whitespace collapsed, lower case. A quote with an ellipsis ("..." or "…") or a

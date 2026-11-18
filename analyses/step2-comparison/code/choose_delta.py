@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2 power: choose delta from the P5-only pilot (addendum 1 §1b; DESIGN §15 "Power"). Fixed before the pilot runs.
+"""Step 2 power: choose delta from the P5-only pilot.
 
 Pilot: runs/pp*_delta*.w*.jsonl (primary-cell layout, 50 replicates per delta in {0.1, 0.2, 0.3, 0.5, 0.8}).
 P5 power per delta = share of p < 0.05. d_mid = the smallest delta with power in [0.20, 0.50]; d_large = the smallest

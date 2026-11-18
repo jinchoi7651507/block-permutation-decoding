@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2b graded positive control, pilot (DESIGN.md v2 §4; addendum §5). Run on the 5 pilot subjects only
+"""Step 2b graded positive control, pilot. Run on the 5 pilot subjects only
 (eligibility/PILOT-SUBJECTS.txt, not in the main table) before the main run.
 
 For each weakening rule in run_2b.GRADED_ORDER (R1, R2, R4, R3, R5, then the mixing ladder Q30-Q48) and pilot subject:

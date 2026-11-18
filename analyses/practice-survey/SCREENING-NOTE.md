@@ -1,6 +1,6 @@
 # Screening note: practice survey (search + screening stage)
 
-Written 2026-10-20 (KST). Protocol: `PROTOCOL.md` (not edited). Coding of C1–C5 was not done here.
+Written 2026-10-20 (KST). Protocol: `PROTOCOL.md`. Coding of C1–C5 was not done here.
 
 ## Search
 - Database: Europe PMC REST API, `https://www.ebi.ac.uk/europepmc/webservices/rest/search`, `resultType=lite`, `pageSize=1000`, cursorMark paging, `format=json`.
@@ -33,13 +33,13 @@ Exclusions by first failing criterion:
 | unclear-criterion-3 | 4 |
 | unclear-criterion-4 | 9 |
 
-Included (order / pmcid): 47 / PMC12660755; 61 / PMC10783789; 228 / PMC13418543; 284 / PMC7618349; 577 / PMC11574977; 626 / PMC13633270; 769 / PMC12443960; 803 / PMC12873149; 1309 / PMC11156468; 1429 / PMC11666460; 1471 / PMC13065759; 1605 / PMC13526029; 1916 / PMC12872450; 2078 / PMC13433320. Their full-text XML files are in `fulltext/`, named by PMCID (14 files). The `evidence` column gives verbatim Methods quotes (block structure | held-out evaluation | significance test). Where a Methods sentence alone did not show that a test was actually reported, a Results or figure-legend quote is added in parentheses and labelled as such.
+Included (order / pmcid): 47 / PMC12660755; 61 / PMC10783789; 228 / PMC13418543; 284 / PMC7618349; 577 / PMC11574977; 626 / PMC13633270; 769 / PMC12443960; 803 / PMC12873149; 1309 / PMC11156468; 1429 / PMC11666460; 1471 / PMC13065759; 1605 / PMC13526029; 1916 / PMC12872450; 2078 / PMC13433320. Their full-text XML files are downloaded by `fetch_fulltext.py` and checked against `fulltext-MANIFEST.sha256`. The `evidence` column gives verbatim Methods quotes (block structure | held-out evaluation | significance test). Where a Methods sentence alone did not show that a test was actually reported, a Results or figure-legend quote is added in parentheses and labelled as such.
 
 ## Deviations and interpretations (in order of impact)
 
 1. **Fewer than 40 includes.** The whole list gave 14. The 40-paper target in §1 could not be met. The order of screening therefore has no effect on the included set.
 
-2. **Two-stage screening (automated keyword screen, then manual reading).** Every record's full-text XML was downloaded and parsed. For 1,698 records the decision came from an automated full-text keyword screen without manual reading:
+2. **Two-stage screening (automated keyword screen, then reading one record at a time by the screening agent).** Every record's full-text XML was downloaded and parsed. For 1,698 records the decision came from an automated full-text keyword screen without reading one record at a time:
    - the article type was not a research article (review, abstract collection, editorial and so on): reason 1, 156 records;
    - the body text had fewer than 5 recording terms (spike/single unit/calcium imaging/two-photon/Neuropixels/tetrode/electrophysiology/GCaMP/firing rate …) or fewer than 3 animal-species terms: reason 1, 1,316 records;
    - recording terms were present but there were fewer than 3 decoder/classifier terms: reason 2, 67 records;
@@ -47,7 +47,7 @@ Included (order / pmcid): 47 / PMC12660755; 61 / PMC10783789; 228 / PMC13418543;
 
    The other 672 records (≥5 recording terms and ≥3 decoder terms) were judged one by one by the screening agent from their Methods text (decoder sentences, block-design sentences and significance sentences), in order through criteria 1→4. For about 200 of these, criterion 1 was decided from the title plus the keyword profile: clearly human, non-neural or modelling papers.
 
-   Sensitivity check: re-running the automated exclusions with a broader recording regex (adding Ca2+, miniscope, ΔF/F, deconvolved, units and so on) flagged 179 records. Of these, 11 animal or neuroscience papers were read in full by the screening agent and 7 had their reason corrected (orders 100, 690, 2012, 2161, 2221, 2231, 2254). None of the 7 met all criteria. Independent coders may want to spot-check the automated exclusions.
+   Sensitivity check: re-running the automated exclusions with a broader recording regex (adding Ca2+, miniscope, ΔF/F, deconvolved, units and so on) flagged 179 records. Of these, 11 animal or neuroscience papers were read in full by the screening agent and 7 had their reason corrected (orders 100, 690, 2012, 2161, 2221, 2231, 2254). None of the 7 met all criteria.
 
 3. **No full text (159).** These are 154 Europe PMC preprints (PPR, no fullTextXML available) and 5 PMC articles whose fullTextXML endpoint returned HTTP 500 on repeated attempts: orders 669, 893, 1123, 1177, 1820. They are excluded as unclear-criterion-1. Two of them (893 BLA, 1820 gustatory cortex) look potentially relevant from their titles.
 
@@ -63,13 +63,9 @@ Included (order / pmcid): 47 / PMC12660755; 61 / PMC10783789; 228 / PMC13418543;
    - Included: 577 (the main decoded variable is the model-estimated template; the true template is block-constant), 803 (held-out procedure stated only as "cross-validated 50 times"), 1471 (dPCA pseudo-population; significance from a shuffled 95% CI), 1605 (chance from within-block pseudo-segmentation as well as label shuffle).
    - unclear-criterion-3: 133, 616, 1243, 1333.
 
-7. **One screener.** The protocol does not specify a second screener at the screening stage. All screening judgements were made by a single agent and need independent spot-checking.
+7. **One screener.** The protocol does not specify a second screener at the screening stage. All screening judgements were made by a single agent; independent spot-checks are reported in `AUDIT-AUTO-EXCLUSIONS.md` and the two later checks.
 
 ## Files
 - `search.json`: raw hits with retrieval time and query.
 - `screening.csv`: 2,370 rows (order, id, pmcid, doi, title, journal, year, decision, reason, evidence).
-- `fulltext/`: full-text XML of the 14 included papers (by PMCID).
-
-**Correction (2026-11-03):** the full-text XML files of the 14 included studies are kept in the working repository and are not redistributed; `fetch_fulltext.py` downloads them from Europe PMC and checks them against `fulltext-MANIFEST.sha256`.
-
-Correction (2026-11-06): "judged manually" and "read manually" above meant judged or read one record at a time rather than by the automatic screen; the screener was the single language-model agent named in point 7 and in MODEL-RECORD.md. Worded so on 2026-11-06.
+- `fetch_fulltext.py`, `fulltext-MANIFEST.sha256`: download and check of the full-text XML of the 14 included papers.

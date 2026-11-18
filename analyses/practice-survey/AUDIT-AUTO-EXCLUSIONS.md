@@ -1,13 +1,13 @@
 # Audit of the automatic exclusions (practice survey)
 
-Written 2026-10-20 23:06 KST. Auditor: one agent, independent of the screener. `screening.csv` was not changed. Protocol: `PROTOCOL.md` §2 (four inclusion criteria). Screening: `SCREENING-NOTE.md` deviation 2.
+Written 2026-10-20. Auditor: one agent, independent of the screener. `screening.csv` was not changed. Protocol: `PROTOCOL.md` §2 (four inclusion criteria). Screening: `SCREENING-NOTE.md` deviation 2.
 
 ## Sampling frame and draw
 - Frame: the 1,698 rows of `screening.csv` whose `reason` contains `keyword screen`, `article type` or `no full text`. This gives exactly 1,698 (1,316 keyword reason 1; 156 article type reason 1; 67 keyword reason 2; 159 unclear-criterion-1). It matches the count in SCREENING-NOTE. The 7 records corrected in the sensitivity check (orders 100, 690, 2012, 2161, 2221, 2231, 2254) now have manual reasons, so they are not in the frame.
 - Frame sorted by `order`, then `idx = numpy.random.default_rng(20261021).choice(1698, 40, replace=False)` (positions in the sorted frame), sorted.
 - Drawn orders (40): 63, 79, 98, 127, 137, 304, 305, 368, 375, 476, 508, 517, 518, 521, 663, 669, 901, 902, 1020, 1127, 1209, 1288, 1358, 1359, 1461, 1522, 1559, 1624, 1638, 1691, 1758, 1763, 1795, 1798, 1894, 1898, 2021, 2054, 2116, 2139.
 - How the sample breaks down by automatic reason: 35 keyword reason 1; 2 article type (98 abstract collection, 1638 review); 1 keyword reason 2 (368); 2 no full text (669, 1020). (Expected from the frame shares: 31.0 / 3.7 / 1.6 / 3.7.)
-- Full text: `https://www.ebi.ac.uk/europepmc/webservices/rest/{PMCID}/fullTextXML`, fetched 2026-10-20 around 23:02 KST. 38 of 40 returned XML. 669 returned HTTP 500 three times (it is one of the 5 PMC 500-errors in SCREENING-NOTE). 1020 is a preprint (PPR992842) with no PMCID. For both, the Europe PMC core record (abstract, publication type) was used. 517 returned XML with no `<body>` (a `restricted-by` record); it was judged from the abstract.
+- Full text: `https://www.ebi.ac.uk/europepmc/webservices/rest/{PMCID}/fullTextXML`, fetched 2026-10-20. 38 of 40 returned XML. 669 returned HTTP 500 three times (it is one of the 5 PMC 500-errors in SCREENING-NOTE). 1020 is a preprint (PPR992842) with no PMCID. For both, the Europe PMC core record (abstract, publication type) was used. 517 returned XML with no `<body>` (a `restricted-by` record); it was judged from the abstract.
 - Judging: Methods (or the closest section when there is none) read against criteria 1→4. The first failing criterion is recorded. Quotes are verbatim from the XML or abstract.
 
 ## Per-record results
@@ -63,13 +63,13 @@ Judgement codes: **CE** = correctly excluded; **WI** = would be included; **U** 
 
 ## What this means for the 14 included papers
 - Point estimate of includable papers missed among the 1,698: **0**. The Wilson upper bound, applied to all 1,698 records, gives up to **about 149** (0.0876 × 1,698). Put another way, the audit alone cannot rule out a true count well above 14. The bound is this loose because 40 is a small sample. It does not mean misses are likely.
-- Base rates suggest the real number is far lower. Among the 672 records that passed the keyword screen and were read by hand, only 14 were included (2.1%). In this sample, 36 of 40 automatic exclusions had no animal neural recording at all, and their topics were finance, geoscience, human MRI/EEG, genomics and so on. Only 4 (368, 521, 901, 1898) involved animal neural tissue, and none of these had a held-out population decoder of neural activity. If automatic exclusions were includable at even the 2.1% rate of the hand-read stratum, that would be about 36 papers. The evidence (0/40 here, 0/11 in the screener's broader-regex sensitivity check) points to a rate well below that.
+- Base rates suggest the real number is far lower. Among the 672 records that passed the keyword screen and were read one at a time by the screening agent, only 14 were included (2.1%). In this sample, 36 of 40 automatic exclusions had no animal neural recording at all, and their topics were finance, geoscience, human MRI/EEG, genomics and so on. Only 4 (368, 521, 901, 1898) involved animal neural tissue, and none of these had a held-out population decoder of neural activity. If automatic exclusions were includable at even the 2.1% rate of the stratum read one at a time, that would be about 36 papers. The evidence (0/40 here, 0/11 in the screener's broader-regex sensitivity check) points to a rate well below that.
 - In short: the audit found no sign that the keyword screen dropped includable papers. A random sample of 40, though, cannot bound the miss count tightly enough to make "14 is the complete set" a confident statement. The risk is concentrated in a small subset that random sampling rarely hits.
 
-## Issues found and suggested next steps
-1. **Low power where misses could occur.** Misses are only plausible among automatic exclusions that do mention animals and recordings. A targeted check would be more informative per record read: for example, read every automatic exclusion with ≥1 recording term and ≥3 animal terms, or every reason-2 keyword exclusion (67 records; 368 was the only one sampled).
-2. **Restricted XML scored as "no recordings".** 517's fullTextXML has front matter but no `<body>`. The keyword screen saw zero terms and coded it as reason 1 rather than unclear-criterion-1. It was harmless here (transcriptomics), but the same thing would silently exclude a relevant paper with restricted text. A check for body-less XML across the 1,316 keyword reason-1 records is advisable.
+## Limits of the audit
+1. **Low power where misses could occur.** Misses are only plausible among automatic exclusions that do mention animals and recordings. A targeted check (every automatic exclusion with ≥1 recording term and ≥3 animal terms, or every reason-2 keyword exclusion: 67 records, of which 368 was the only one sampled) would be more informative per record read.
+2. **Restricted XML scored as "no recordings".** 517's fullTextXML has front matter but no `<body>`. The keyword screen saw zero terms and coded it as reason 1 rather than unclear-criterion-1. It was harmless here (transcriptomics), but the same thing would silently exclude a relevant paper with restricted text. The same can affect any of the 1,316 keyword reason-1 records.
 3. **No-full-text group (159).** Both sampled records would fail criterion 1 on their abstracts. The two titles SCREENING-NOTE flags as potentially relevant (893, 1820) remain the main open risk in this group and were not in the sample.
 
 ## Reproduction
-Scratch scripts (not part of the survey files): `draw.py` (frame and draw), `fetch.py` (Europe PMC XML), `prof.py` / `meth.py` / `sn.py` (keyword profile, Methods openings, snippet search), in the session scratchpad `.../scratchpad/audit/`.
+The draw is the seeded draw stated above.

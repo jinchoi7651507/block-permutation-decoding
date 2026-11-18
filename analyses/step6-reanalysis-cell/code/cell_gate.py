@@ -1,4 +1,4 @@
-"""Reproduction gate for the Cell reanalysis (DESIGN.md section 6). Pure functions plus `run_gate`.
+"""Reproduction gate for the Cell reanalysis. Pure functions plus `run_gate`.
 Every item is a dict {name, core, stops, passed, detail}. `stops` marks the items whose failure stops all tests
 (G1, G2, G3, G9); G7 and G8 stop only the true-template tests; G4 and G5 decide the variant (cell_select)."""
 from __future__ import annotations
@@ -13,7 +13,7 @@ import numpy as np
 import cellport as cp
 import cell_tests as ct
 
-# published or stated numbers (DESIGN.md section 6)
+# published or stated numbers
 PUB = {"sessions": 17, "blocks": 171, "templates_per_session": (5, 16),
        "est_neurons": 100, "est_prog": 61,                  # Methods, Fig. 2D (estimated template)
        "s3g_neurons": 113, "s3g_prog": 76,                  # Fig. S3G legend (true template)

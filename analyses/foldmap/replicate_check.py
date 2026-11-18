@@ -3,14 +3,14 @@
 eight random-design B 24 S-block cells with the step 2 runner unchanged (`run_grid.py`, `sim.py`), and compares
 every rule's p value with the cloud rows (`runs_cloud/`) and the laptop rows (`runs/`).
 
-  python replicate_check.py run --mode asis   --reps 20 --workers 4 --out DIR   # stamped code as is (x86 VM)
+  python replicate_check.py run --mode asis   --reps 20 --workers 4 --out DIR   # analysis code as is (x86 VM)
   python replicate_check.py run --mode x86map --reps 20 --workers 6 --out DIR   # laptop, GroupKFold replaced by
                                                                                 # the x86 block-to-fold map
   python replicate_check.py compare --rows DIR --reps 20
 
 --mode x86map replaces only the folds of the S-block split for 24 blocks: fold k holds out the blocks that
 foldmap_x86_c2d.json assigns to fold k (GroupKFold's own fold order), with train and test indices in ascending
-order as GroupKFold returns them. Everything else (data, seeds, rules) is the stamped code.
+order as GroupKFold returns them. Everything else (data, seeds, rules) is the analysis code as run.
 """
 import argparse
 import json
@@ -49,7 +49,7 @@ def patch_folds():
 
 
 def worker_main(argv):
-    """Child process: optional patch, then the stamped run_grid.main() with the given argv."""
+    """Child process: optional patch, then run_grid.main() with the given argv."""
     sys.dont_write_bytecode = True
     sys.path.insert(0, str(STEP2 / "code"))
     mode = argv.pop(0)

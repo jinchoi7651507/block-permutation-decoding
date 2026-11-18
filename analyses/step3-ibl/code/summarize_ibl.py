@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Step 3 (IBL) summary, DESIGN.md v1 §7 and code addendum 1 §4 (items i-xiii), as specified in code addendum 2.
-Written before any IBL row exists.
+"""Step 3 (IBL) summary.
 
   python summarize_ibl.py --rows ../runs --order ../runs/ORDER.json --stim ../runs/STIM-REGIONS.json \
          --realism ../runs/REALISM.json --region-info <paper repo>/brainwidemap/meta/region_info.csv > ../runs/SUMMARY.md
@@ -18,7 +17,7 @@ Rules (fixed):
   primary contrasts F, V, S only.
 - decisions: a contrast is "positive" if its 95% lower bound > 0; a rate is "inflated" if its 95% lower bound > 10%.
   V gets no decision when the realism response makes Q2 descriptive.
-- secondary contrasts (§7), same pairing and interval, no decision: P1, P4, PS-fixed minus PS-refit (S-main, fake
+- secondary contrasts, same pairing and interval, no decision: P1, P4, PS-fixed minus PS-refit (S-main, fake
   labels); S-block: P2-block minus P2 (fake labels); P1 minus IID-P1.
 """
 import argparse
@@ -202,7 +201,7 @@ def main():
     res = paired("IID-SEL-fixed", "IID-SEL-repeat", fake, False)
     if res:
         print(f"- beside S, the same contrast in the i.i.d. control: {fmt(res[0], res[1])}; mice {res[2]}, pairs {res[4]}")
-    print("\n## Secondary contrasts (§7; no decision)\n")
+    print("\n## Secondary contrasts (no decision)\n")
     for name, a, b in (("P1 - PS-refit", "P1", "PS-refit"), ("P4 - PS-refit", "P4", "PS-refit"),
                        ("PS-fixed - PS-refit", "PS-fixed", "PS-refit"), ("S-block: P2-block - P2", "P2-block", "P2"),
                        ("P1 - IID-P1 (Extended Data)", "P1", "IID-P1")):

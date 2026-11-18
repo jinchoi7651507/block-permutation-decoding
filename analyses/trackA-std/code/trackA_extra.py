@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Track A extra analyses (pre-registered in PREREG-trackA.md; read that first).
+"""Track A extra analyses.
 
 Runs, per (session, visual area), three analyses that the planned script
 ephys-matched-null.py does not do. The planned primary analysis (P1) is NOT here:

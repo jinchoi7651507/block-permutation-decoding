@@ -1,9 +1,9 @@
-"""Addendum 3 (2026-11-09): fills two quantities the design promised and the stamped code did not save.
+"""Addendum 3 (2026-11-09): computes two reported quantities that the run of run_cell.py did not save.
 
 (1) qualifying sessions and neurons per region for every labelling of the five tests: each labelling is replayed from its
-    stamped seed (permutation only, no decoder), and its design counts are compared with the saved n_prog and n_neurons;
-(2) the z-test of DESIGN 5a on the true-template gate draws (the G11 draws, same purpose code and seeds).
-No test, window, seed, P, D, gate, decision rule or prediction changes. No stamped file changes.
+    seed (permutation only, no decoder), and its design counts are compared with the saved n_prog and n_neurons;
+(2) the z-test on the true-template gate draws (the G11 draws, same purpose code and seeds).
+No test, window, seed, P, D, gate, decision rule or prediction changes, and no file of the earlier run is edited.
 
     python -I run_cell_a3.py fill --extract-root ROOT --prior PRIOR_OUT --out OUT [--workers N] [--cache]
 PRIOR_OUT is the output folder of the Addendum 2 run (select.json, gate.json, test-*.json); it is only read.

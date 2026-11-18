@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2b, DESIGN §6 E6 (alpha-power slope over the 16 min), as defined in RESULTS-NOTE.md §6 (specified at results
-time, written before this script ran). Descriptive only.
+"""Step 2b alpha-power slope over the 16 min (post hoc; Supplementary Note 3). Descriptive only.
 
   python posthoc_alpha_slope.py --features <features dir> --rows ../runs_cloud_2b_rerun49/runs --out ../results/alpha_slope.json
 """

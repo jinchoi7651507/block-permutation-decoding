@@ -58,7 +58,7 @@ selection: interpretable (variant as_written)
 - trial: share of SVM fits with chosen C at the upper edge: {'LIP': 0.0, 'FEF': 0.0, 'LPFC': 0.0}
 - win600: share of SVM fits with chosen C at the upper edge: {'LIP': 0.0, 'FEF': 0.001, 'LPFC': 0.0}
 
-## Predictions (DESIGN.md section 9)
+## Predictions
 
 | id | mark | reason |
 |---|---|---|

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Step 2 addendum 3 machine set-up (§2d): step 2 Python 3.12 environment (requirements-step2.txt = laptop pip freeze),
+# Machine set-up of the toolbox runs: step 2 Python 3.12 environment (requirements-step2.txt = laptop pip freeze),
 # Octave + CoSMoMVPA fe5acaf, PyMVPA 2.6.5 under Python 3.9 (recipe from the 2026-10-26 install pilot).
 set -e
 exec > ~/setup.log 2>&1

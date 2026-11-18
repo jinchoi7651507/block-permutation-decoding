@@ -1,5 +1,5 @@
 #!/bin/bash
-# Step 2 addendum 3: runs_add3/MACHINE.txt (§2d). Provisioning from instance/scheduling/preemptible (the step 2 and 2b
+# Toolbox runs: runs_add3/MACHINE.txt. Provisioning from instance/scheduling/preemptible (the step 2 and 2b
 # records queried a non-existent path and hold an HTTP 404 page); the laptop also logs `gcloud compute instances describe`.
 cd ~/pe/results/step2-comparison
 M='http://metadata.google.internal/computeMetadata/v1/instance'

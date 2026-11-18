@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2 grid runner (DESIGN.md §5a, §13-§14). One call = one cell; one JSON line per replicate with the p of
+"""Step 2 grid runner. One call = one cell; one JSON line per replicate with the p of
 every rule, error flags and seeds. Rules: P1 binomial, P2 sklearn permutation_test_score, P3 within-run
 (CoSMoMVPA rule; None = the tool's error), P4 training labels only, P5 block permutation (rerun).
 

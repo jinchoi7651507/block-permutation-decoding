@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 4 (DESIGN.md §2): download the six subject tarballs of the PyMVPA Haxby 2001 distribution, check each
+"""Step 4: download the six subject tarballs of the PyMVPA Haxby 2001 distribution, check each
 against the server's MD5SUMS (stop on a mismatch), extract, and write MANIFEST.sha256 of the extracted files used
 (bold.nii.gz, labels.txt, mask4_vt.nii.gz per subject). Files already present with the right MD5 are not fetched again.
 

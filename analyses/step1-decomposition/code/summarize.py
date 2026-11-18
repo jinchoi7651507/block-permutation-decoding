@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summarise decompose.py rows (DESIGN.md v2, sections 8 and 10).
+"""Summarise decompose.py rows.
 
 Stops before writing results if the gate fails. Otherwise writes results.json and results.md:
 mouse-level pass rates (95% mouse-bootstrap intervals) for every scheme x readout x test,
@@ -130,7 +130,7 @@ def write_md(R, path):
     L = [f"# Step 1 results (30 new mice, std6 areas)\n",
          f"Gate: {R['gate']['checked']} values checked against Track A, {R['gate']['n_mismatch']} mismatches.\n",
          "Pass rate = mean over mice of the share of areas with p < 0.05 (95% mouse-bootstrap interval), %. "
-         "Sanity-check cells (exact by construction; `sep` blk_fixed cannot pass) are marked in DESIGN.md §1.\n",
+         "Sanity-check cells: cells that are exact by construction, and `sep` blk_fixed, which cannot pass.\n",
          "## Primary contrasts",
          f"- A (`sep`, binom): sel − nosel0 = {pct(m.get('contrast_A/sel_minus_nosel0'))} points; "
          f"sel {pct(m.get('sep/sel/binom'))}, nosel0 {pct(m.get('sep/nosel0/binom'))}",

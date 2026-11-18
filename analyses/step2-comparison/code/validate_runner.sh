@@ -1,8 +1,8 @@
 #!/bin/sh
-# Grid-runner validation before stamping (DESIGN.md §14 must 8; written 2026-10-21 11:31 KST).
+# Grid-runner validation before the main run (written 2026-10-21).
 # A: interleaved labels, drift 0 (sanity cell by construction): every rule should give about 5%.
 # B: random block design, Allen drift (= the primary cell layout): ONLY P5 is computed (exact by randomisation,
-#    about 5%); P1-P4 of this cell are not computed here so that no study value is opened before stamping.
+#    about 5%); P1-P4 of this cell are not computed here so that no study value is opened before the main run.
 # 200 replicates each, 3 workers; seed 9 (study cells use other seeds).
 cd "$(dirname "$0")"
 PY=<home>/Downloads/trackA-school/venv-step2/bin/python

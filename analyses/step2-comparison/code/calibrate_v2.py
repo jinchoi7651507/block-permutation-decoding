@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Allen calibration v2 of the step 2 generator (DESIGN.md §13-§14; v2 statistician review musts 1-4).
-Design written before running (2026-10-21 11:26 KST). Spontaneous activity only; no labels are used.
+"""Allen calibration v2 of the step 2 generator (the calibration used for the simulations).
+Spontaneous activity only; no labels are used.
 
 Targets (per Allen area, same 2-s pseudo-trial counts as step 1, means removed within each spontaneous epoch):
   acf   autocorrelation of the first principal component of the z-scored counts at lags 1, 2, 5, 10, 20, 40
@@ -11,7 +11,7 @@ Per mouse: median over its areas. Allen level: median over mice of each target; 
 Simulation: generator `sim.simulate2` (fast shared OU + slow shared OU + unit-specific slow OU, trend 0) on the
 median Allen layout (epoch lengths and gaps in trials, the process running through the gaps), n_units 89,
 base rate = median Allen mean count. The SAME estimators are applied to simulated data.
-Grid (fixed now): tau_f {1, 2, 4}; sigma_f {0.2, 0.4, 0.6}; tau_s {10, 20, 40, 80, 160}; sigma_s {0.2, 0.4, 0.6, 0.8};
+Grid: tau_f {1, 2, 4}; sigma_f {0.2, 0.4, 0.6}; tau_s {10, 20, 40, 80, 160}; sigma_s {0.2, 0.4, 0.6, 0.8};
 sigma_u {0, 0.2, 0.4}; 20 simulated sessions per point; statistic = median over the 20.
 Distance = sum over the 8 targets of ((sim - Allen) / sd over mice)**2. Best point = Allen level. Per-mouse best
 points give the IQR. Identification check for tau_s: the profile (minimum distance over the other parameters) at

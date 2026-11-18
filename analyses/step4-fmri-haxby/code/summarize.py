@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summary of steps 4 and 5 (DESIGN.md §8 of each step).
+"""Summary of steps 4 and 5.
 - Reads ../runs/rows.step<N>.<subject>.jsonl (test rows are rejected) and the feature JSONs (inclusion).
 - Checks: one row per key; every included subject complete (step 4: 30 x 2 x 4 fake + 2 control rows;
   step 5: 30 x 3 fake + 60 control rows); stops otherwise.

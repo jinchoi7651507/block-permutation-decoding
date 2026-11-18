@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 """Does the matched-null correction transfer outside our own simulator?
 
-Pre-registered in paper-experiment/prereg-electrophysiology.md, written before
-any analysis. Read that first: it fixes the decision rule and the exclusions.
-
 The manuscript's methodological claim is that a SEARCHED read-out score must be
 compared with a null that repeats the identical search, and that a constant
 decoder overstates the effect. This script asks whether that holds in public
@@ -35,7 +32,7 @@ from pathlib import Path
 import h5py
 import numpy as np
 
-# --- pre-registered constants -------------------------------------------------
+# --- constants ---------------------------------------------------------------
 ORIENTATIONS = (0.0, 90.0)     # the two classes
 MIN_RATE_HZ = 0.5              # unit exclusion
 MIN_UNITS_PER_AREA = 20        # area exclusion
@@ -206,7 +203,7 @@ def main() -> None:
     args = ap.parse_args()
     rng = np.random.default_rng(args.seed)
 
-    print(f"Pre-registered: paper-experiment/prereg-electrophysiology.md. seed {args.seed}, "
+    print(f"seed {args.seed}, "
           f"{NULL_DRAWS} null draws, window {RESPONSE_WINDOW[0]}-{RESPONSE_WINDOW[1]} s, "
           f"orientations {ORIENTATIONS[0]:.0f} vs {ORIENTATIONS[1]:.0f} deg.")
     print(f"Exclusions: unit < {MIN_RATE_HZ} Hz, area < {MIN_UNITS_PER_AREA} units.\n")
@@ -279,7 +276,7 @@ def main() -> None:
         Path(args.conventional_draws).write_text(json.dumps(conventional, indent=1))
 
     if not rows:
-        print("\nNo (session, area) unit survived the pre-registered exclusions.")
+        print("\nNo (session, area) unit survived the exclusions.")
         return
     gc = np.array([r[4] - r[5] for r in rows])
     gn = np.array([r[4] - r[6] for r in rows])
@@ -289,7 +286,7 @@ def main() -> None:
     print(f"  mean gap against the matched null     {gn.mean():+.1f}")
     print(f"  matched null gives the smaller gap in {smaller}/{len(rows)} units.")
 
-    # How much the constant decoder overstates it, per unit. The pre-registered
+    # How much the constant decoder overstates it, per unit. The decision
     # rule says "clearly smaller"; this puts a number on "clearly". It is the
     # same comparison, summarised, not an additional analysis, and it cannot
     # change the branch the rule selected.

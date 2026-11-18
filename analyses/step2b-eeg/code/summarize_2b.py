@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2b summary (DESIGN.md v2 §6; addendum DESIGN-v2-ADDENDUM.md §6). Written before any EEG row exists.
+"""Step 2b summary.
 
 Unit of inference = subject. For every arm x split x readout x variant x rule: per subject the share of its
 assignments with p < 0.05 (NaN p excluded; P3 errors excluded, and separately counted as non-rejections), the
@@ -57,7 +57,7 @@ ENUMERATED = ("ec_only", "eo_only", "long120")
 
 
 def size_adjusted(null_rows, alt_rows, rule, seed=20261027, B=2000):
-    """Size-adjusted power of pos_graded (addendum §6): threshold q = pooled 5% quantile ('lower') of the rule's p over
+    """Size-adjusted power of pos_graded: threshold q = pooled 5% quantile ('lower') of the rule's p over
     all balanced_graded rows (S-main), P3 errors / NaN as p = 1; randomised at the tie (g) so the expected size is 5%.
     Subject bootstrap resamples subjects jointly over both arms."""
     def pmap(rows):

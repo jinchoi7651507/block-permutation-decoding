@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Completion rule of RUN-PLATFORM.md, from run.log and replicate counts only (no p value is read or printed).
+"""Completion check of the cloud run, from run.log and replicate counts only (no p value is read or printed).
 
 For every cell of CELLS.json (177), POWER_PILOT_CELLS.json (5) and POWER_CELLS.json (2): the number of distinct
 replicate indices over the cell's worker files equals the planned number, and the last `done` line of the cell in

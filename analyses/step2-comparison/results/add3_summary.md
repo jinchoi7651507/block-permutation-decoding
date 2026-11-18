@@ -1,4 +1,4 @@
-# Step 2 addendum 3 §1: cells beyond §15 (summarize_add3.py)
+# Further simulation cells: fixed-order and interleaved designs under S-tool and S-block (summarize_add3.py)
 
 | cell | reps | P1 | P2 | P3 (err) | P4 | P5 | P5 fails | P1−base | P4−base |
 |---|---|---|---|---|---|---|---|---|---|

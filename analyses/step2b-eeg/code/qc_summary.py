@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Step 2b QC summary (addendum DESIGN-v2-ADDENDUM.md §2-§3). Reads only the per-subject QC files written by
+"""Step 2b QC summary. Reads only the per-subject QC files written by
 preprocess.py (no feature matrix, no label-dependent result). Prints, for the 40 main and the 5 pilot subjects:
 first condition, bad and flat channels (count of subjects with Fp1/Fp2 or O1/Oz/O2 flagged), ICA convergence and
 removed components, VEOG amplitude, 50 Hz line ratio, epochs per block (cleaned 5/2 s) and the subjects below the
-20-epoch rule, and the posterior alpha check (EC > EO) with the addendum §3 rule applied.
+20-epoch rule, and the posterior alpha check (EC > EO) with its exclusion rule applied.
 
   python qc_summary.py --features <dir> --out ../QC-NOTE.md
 """

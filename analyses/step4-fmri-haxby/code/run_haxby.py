@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 4 runner (DESIGN.md §4-§8). Per included subject (s = subject number - 1): 30 fake-label assignments
+"""Step 4 runner. Per included subject (s = subject number - 1): 30 fake-label assignments
 (half of each run's blocks in class 1), two preprocessings (detrended, raw), four splits (main, tool, run, block with
 fold = block mod 5), rules P1-P5 (engine.py); and the positive control (face vs house blocks only, detrended) under
 main and run. One JSON line per (subject, arm, preprocessing, assignment, split) in ../runs/rows.step4.<subject>.jsonl.

@@ -1,6 +1,6 @@
 #!/bin/bash
-# Download the raw BrainVision files (.vhdr, .vmrk, .eeg) of the 5 second-round pilot subjects (eligibility/PILOT2-SUBJECTS.txt; addendum 2;
-# hash-stamped before any .eeg download) into $LEMON_DIR (outside the repository), resumable (curl -C -),
+# Download the raw BrainVision files (.vhdr, .vmrk, .eeg) of the 5 second-round pilot subjects (eligibility/PILOT2-SUBJECTS.txt,
+# fixed before any .eeg download) into $LEMON_DIR (outside the repository), resumable (curl -C -),
 # then write eligibility/EEG-MANIFEST-PILOT2.sha256 (it hashes every .vhdr/.vmrk/.eeg in LEMON_DIR: main, pilot 1 and pilot 2).
 # Data are not redistributed.
 set -u

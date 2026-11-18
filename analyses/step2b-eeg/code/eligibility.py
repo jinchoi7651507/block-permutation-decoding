@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2b eligibility and subject draw (DESIGN.md v1 §2), written before running (2026-10-21 12:17 KST; design v2).
+"""Step 2b eligibility and subject draw.
 
 Downloads only the small BrainVision header/marker files (.vhdr, .vmrk) of every raw subject and the public META
 table; no EEG signal. Markers (EEG_Info on the server): S200 = eyes open, S210 = eyes closed.
@@ -9,7 +9,7 @@ recording or, if none, 60 s assumed and flagged); (iii) sampling interval read f
 Draw: 40 subjects from the eligible IDs with numpy default_rng(20261021), stratified by the META age bin into
 young (age bin starting at 20-35) and old (55+) in proportion to the eligible counts (rounded, remainder to young);
 the full seeded order of each stratum is saved so that replacements follow it. Output: lemon_eligibility.json,
-SUBJECTS.txt (to be OTS-stamped before any .eeg download).
+SUBJECTS.txt (fixed before any .eeg download).
 """
 import json
 import re

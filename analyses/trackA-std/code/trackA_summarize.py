@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Track A summary (pre-registered in PREREG-trackA.md). Reads the outputs of
+"""Track A summary. Reads the outputs of
 ephys-matched-null.py (P1 and its sensitivity runs) and trackA_extra.py, checks the
-gates, computes every pre-registered estimand at the animal level and writes
+gates, computes every estimand at the animal level and writes
 results.json and results.md (the template filled in).
 
   python3 trackA_summarize.py --runs <folder with the run outputs> --out <folder>
 
-Expected files in --runs (names fixed by README step 5):
+Expected files in --runs:
   p1_good.log, p1_good_draws.json      primary (Allen quality == good)
   p1_all.log,  p1_all_draws.json       sensitivity (every sorted cluster, as planned in 2026-09)
   p1_sdk.log,  p1_sdk_draws.json       sensitivity (AllenSDK default unit filter)
@@ -102,7 +102,7 @@ def ratio(rows, S):
 
 
 def m3_branch(est):
-    """PREREG section 5/7: share phrase, ratio number, or d with its interval."""
+    """Share phrase, ratio number, or d with its interval."""
     d_ok = est["d"].get("ci", [0])[0] > 0
     g_ok = est["g_const"].get("ci", [0])[0] > 0
     r = est.get("ratio", {})
@@ -151,7 +151,7 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--sessions-csv", default=None, help="smoke test only")
     ap.add_argument("--smoke", action="store_true", help="synthetic smoke test: original sessions absent is allowed")
-    ap.add_argument("--excluded", default="", help="comma-separated sessions removed under PREREG section 6 (reported)")
+    ap.add_argument("--excluded", default="", help="comma-separated sessions removed under the exclusion rule (reported)")
     args = ap.parse_args()
     global SESSIONS_CSV, SMOKE
     SMOKE = args.smoke
@@ -163,7 +163,7 @@ def main():
     R = {"gates": gate(runs)}
     if any(v is False for v in R["gates"].values()):
         (outd / "results.json").write_text(json.dumps(R, indent=1), encoding="utf-8")
-        raise SystemExit(f"GATE FAILED {R['gates']}: stop and report (PREREG section 6). No estimate computed.")
+        raise SystemExit(f"GATE FAILED {R['gates']}: stop and report. No estimate computed.")
     p1 = {t: read_p1(runs / f"p1_{t}.log", runs / f"p1_{t}_draws.json") for t in ("good", "all", "sdk")}
     extra = [json.loads(x) for x in (runs / "extra.jsonl").read_text(encoding="utf-8").splitlines()]
     logs = " ".join((runs / f"p1_{t}.log").read_text(encoding="utf-8") for t in ("good", "all", "sdk"))
@@ -183,7 +183,7 @@ def main():
     if bad or mism or free_diff:
         (outd / "results.json").write_text(json.dumps(R, indent=1), encoding="utf-8")
         raise SystemExit(f"CHECK FAILED (missing {bad}, area mismatch {mism}, free mismatch {free_diff}): "
-                         "follow PREREG section 6; no estimate computed.")
+                         "follow the exclusion rule; no estimate computed.")
 
     # P1 primary: new 30 animals, standard six areas, quality == good
     R["P1"] = {}

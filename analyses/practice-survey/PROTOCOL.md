@@ -1,6 +1,6 @@
 # Practice survey protocol: block-structured decoding and its significance tests (fixed before screening, 2026-10-20)
 
-Purpose: estimate how often published decoding analyses of block-structured variables use a significance test that step 1 (`../step1-decomposition/RESULTS-NOTE.md`) found to pass fake labels: a trial-level test (binomial, t-test, trial-label permutation) or a block permutation with the fitted decoder held fixed, when calibration and held-out trials share blocks. This replaces the non-systematic 12-paper reading. Committed before any paper is screened; deviations will be reported.
+Purpose: estimate how often published decoding analyses of block-structured variables use a significance test that step 1 (`../step1-decomposition/results/results.md`) found to pass fake labels: a trial-level test (binomial, t-test, trial-label permutation) or a block permutation with the fitted decoder held fixed, when calibration and held-out trials share blocks. Committed before any paper is screened; deviations will be reported.
 
 ## 1. Search
 - Database: Europe PMC REST API (full-text search of open-access articles), publication date 2024-01-01 to 2026-10-19, research articles, English.

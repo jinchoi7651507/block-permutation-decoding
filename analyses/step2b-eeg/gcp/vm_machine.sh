@@ -1,5 +1,5 @@
 #!/bin/bash
-# On the VM: write runs/MACHINE.txt (addendum 2 §6).
+# On the VM: write runs/MACHINE.txt.
 cd ~/pe/results/step2b-eeg
 {
 echo "written: $(date -u '+%F %T') UTC"

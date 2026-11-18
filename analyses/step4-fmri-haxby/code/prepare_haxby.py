@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 4 (DESIGN.md §2-§3): from one subject folder of the PyMVPA Haxby 2001 distribution (bold.nii.gz,
+"""Step 4: from one subject folder of the PyMVPA Haxby 2001 distribution (bold.nii.gz,
 labels.txt, mask4_vt.nii.gz) to a feature file. Runs listed in DROP are removed before anything else (subj5,
 chunk 8: corrupted, per the distribution's README). Writes <out>/<subject>.npz with, for the non-rest volumes in time
 order: X_detrended (per-run linear detrend and z-score over all volumes of the run, rest included), X_raw, block

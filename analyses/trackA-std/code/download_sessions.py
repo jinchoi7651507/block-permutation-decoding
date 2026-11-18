@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 """Download the 32 Allen Visual Coding Neuropixels brain_observatory_1.1 session NWB files
 (about 80 GB: 74.5 GB for the 30 new sessions plus about 6 GB for the 2 original ones).
-Run with --only original first (gate 0 in README), then without --only.
-
-DO NOT RUN before PREREG-trackA.md is final, committed and OpenTimestamps-attested (README step 1).
+Run with --only original first, then without --only.
 
   python3 download_sessions.py --dir <target folder> [--only new|original|all]
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Step 3 (IBL) core computations, DESIGN.md v1 §3-§7 (stamped). Pure functions on arrays; no IBL I/O, so they can be
-tested on synthetic sessions. Statistic = balanced accuracy (§4). Every p = (1 + #{null >= obs}) / (n + 1) except the
-sequential Besag-Clifford p of P2 and P4 (§5); an undefined observed statistic gives NaN (an error, never a small p).
+"""Step 3 (IBL) core computations. Pure functions on arrays; no IBL I/O, so they can be
+tested on synthetic sessions. Statistic = balanced accuracy. Every p = (1 + #{null >= obs}) / (n + 1) except the
+sequential Besag-Clifford p of P2 and P4; an undefined observed statistic gives NaN (an error, never a small p).
 
 Label vectors are given on the kept trials of a session (0/1, NaN = trial dropped in this draw). Blocks of a label
 vector = runs of equal values in trial order over the session's kept trials (a masked trial does not break a block).
@@ -84,7 +84,7 @@ def cv_score(est, X, y, folds, kind):
 
 # ------------------------------------------------------------------ rows
 def p1_z(y, pred):
-    """One-sided z test of pooled held-out balanced accuracy against 0.5, var = (1/n1 + 1/n2) / 16 (§5)."""
+    """One-sided z test of pooled held-out balanced accuracy against 0.5, var = (1/n1 + 1/n2) / 16."""
     if pred is None:
         return float("nan")
     n1, n0 = int(np.sum(y == 1)), int(np.sum(y == 0))
@@ -119,7 +119,7 @@ def p2(est, X, y, folds, kind, rs):
 
 
 def p4(est, X, y, folds, kind, rs):
-    """Training labels permuted per fold, refit, test labels kept (PyMVPA / ADAM), sequential."""
+    """Training labels permuted per fold, refit, test labels kept (PyMVPA), sequential."""
     obs, _ = cv_score(est, X, y, folds, kind)
 
     def one(r):
@@ -184,7 +184,7 @@ def ps_rows(est, X, y, nulls_refit, pool, kind, fm, fixed=True):
 
 # ------------------------------------------------------------------ selection pipeline (Q3)
 def calib_split(y):
-    """Calibration = first half of each block (time order), held-out = second half (§4)."""
+    """Calibration = first half of each block (time order), held-out = second half."""
     g = blocks_of(y)
     cal = np.zeros(len(y), bool)
     for b in np.unique(g):

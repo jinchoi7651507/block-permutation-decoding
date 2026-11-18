@@ -1,6 +1,6 @@
-"""Loader for the deposited MATLAB structures. TO BE CHECKED against the real files in stage 2.
+"""Loader for the deposited MATLAB structures.
 
-The structure is inferred from the authors' code and readme (NOTES.md), not from the data:
+The structure is inferred from the authors' code and readme, not from the data:
   Switching_2p_Struc_Main(s), s = 1..6 (one element per mouse, one imaging session each), fields
     cells_raw_neurophil_corrected  cells x frames
     EventID                        per event; compared with 'Hit' / 'Go' in MATLAB (categorical or string)

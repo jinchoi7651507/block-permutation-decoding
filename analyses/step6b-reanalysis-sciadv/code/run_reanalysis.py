@@ -1,16 +1,16 @@
-"""Stage 2 driver (not run in stage 1). See DESIGN.md.
+"""Driver of the reanalysis.
 
   python run_reanalysis.py inspect --data-dir DIR [--out OUT]
   python run_reanalysis.py gate  --data-dir DIR [--out OUT] [--n-jobs 6]
   python run_reanalysis.py tests --data-dir DIR [--out OUT] [--n-jobs 6]
 
 inspect: manifest check and the field names, types and shapes of the 2p structure; writes OUT/fields.txt; no
-        decoding (DESIGN.md 3.2). gate refuses to run without it.
+        decoding. gate refuses to run without it.
 gate  : manifest check, counts, behaviour numbers, clusters, and the Figure 4D port with the authors'
         settings (one subsample, 20 folds, 50 shuffles); writes OUT/gate.json with pass/fail per item, and a
-        time-stamped copy of every gate run (OUT/gate-runs/), all of which are reported (DESIGN.md 3.5).
+        time-stamped copy of every gate run (OUT/gate-runs/), all of which are reported.
 tests : refuses to run unless OUT/gate.json says "pass"; runs tests (a)-(c), the controls and the secondary
-        analyses with the seeds and draws of DESIGN.md; writes OUT/tests.json.
+        analyses with fixed seeds and draws; writes OUT/tests.json.
 """
 from __future__ import annotations
 
@@ -42,7 +42,7 @@ PLOT_LO, PLOT_HI = 59, 90          # 0-based slice of MATLAB bins 60-90 (Figure4
 
 
 def means_match(mean, published, nd):
-    """Means agree at the printed precision: |mean - published| <= half a unit of the last printed digit (review v2 S4;
+    """Means agree at the printed precision: |mean - published| <= half a unit of the last printed digit (this
     avoids round() ties on binary floats)."""
     return all(abs(m - e) <= 0.5 * 10 ** -d + 1e-9 for m, e, d in zip(mean, published, nd))
 
@@ -72,7 +72,7 @@ def mouse_trials(m, mode="fig4", include_go=False, binned=True):
 
 
 def clean(tr):
-    """Drop artefact trials (NaN rows) before subsampling; MATLAB kept them as NaN rows (DESIGN.md 3.4)."""
+    """Drop artefact trials (NaN rows) before subsampling; MATLAB kept them as NaN rows."""
     k = ~tr["artefact"]
     return {key: (v[k] if key in ("X", "ttype", "block", "ts", "artefact") else v) for key, v in tr.items()}
 
@@ -99,7 +99,7 @@ def fig4d_port(tr, s, n_shuffles=50):
 
 def signrank_pairs(d):
     """Two-sided exact signed-rank p of the paired columns of d (mice x 2), after dropping rows with NaN (MATLAB
-    signrank drops NaN pairs; review stat M4). Also returns the number of pairs kept, of zero differences and of
+    signrank drops NaN pairs). Also returns the number of pairs kept, of zero differences and of
     tied absolute differences (the exact grid of multiples of 1/32 for n = 6 holds only when both are 0)."""
     from scipy.stats import wilcoxon
     d = np.asarray(d, float)
@@ -112,7 +112,7 @@ def signrank_pairs(d):
 
 
 def inspect(a):
-    """Field names, types and shapes of the 2p structure, saved before any decoding (DESIGN.md 3.2)."""
+    """Field names, types and shapes of the 2p structure, saved before any decoding."""
     man = check_manifest(a.data_dir)
     mice = loader.load_2p(str(Path(a.data_dir) / FILES["2p"]))
     L = ["manifest: %s" % json.dumps(man), "reader: %s" % mice[0]["reader"], "mice: %d" % len(mice)]
@@ -127,7 +127,7 @@ def inspect(a):
 
 def gate(a):
     if not (Path(a.out) / "fields.txt").exists():
-        raise SystemExit("run the inspect stage first (DESIGN.md 3.2)")
+        raise SystemExit("run the inspect stage first")
     res = dict(items={}, notes=[], environment=dc.check_environment(), started=time.strftime("%Y-%m-%d %H:%M:%S %Z"))
     res["manifest"] = check_manifest(a.data_dir)
     mice = loader.load_2p(str(Path(a.data_dir) / FILES["2p"]))
@@ -196,7 +196,7 @@ def gate(a):
     res["fig4d_port"] = dict(real=real.tolist(), shuffle=shuf.tolist())
     real_m = np.array([c[0] for c in curves])
     shuf_m = np.array([c[1] for c in curves])
-    peak_k = PLOT_LO + int(np.argmax(real_m.mean(axis=0)[PLOT_LO:PLOT_HI]))   # plotted range of Fig. 4D (review v2 M1)
+    peak_k = PLOT_LO + int(np.argmax(real_m.mean(axis=0)[PLOT_LO:PLOT_HI]))   # plotted range of Fig. 4D
     n_above = int(np.sum(real_m[:, peak_k] > shuf_m[:, peak_k]))
     it["fig4d"] = dict(value=dict(peak_bin_1based=peak_k + 1, n_mice_above_at_peak=n_above),
                        expected="peak of the six-mouse mean real curve within the plotted range (MATLAB bins 60-90) in bins 73-81; real above the mouse's "
@@ -213,7 +213,7 @@ def tests(a):
     gp = Path(a.out) / "gate.json"
     g = json.load(open(gp)) if gp.exists() else {}
     if g.get("status") != "pass":
-        raise SystemExit("reproduction gate not passed; no test is run (DESIGN.md 3)")
+        raise SystemExit("reproduction gate not passed; no test is run")
     mice = loader.load_2p(str(Path(a.data_dir) / FILES["2p"]))
     nj = a.n_jobs
     R, D = 4, 1000
@@ -253,7 +253,7 @@ def tests(a):
             rec["S1_heldout_set"] = {w: dc.block_test(X, tb, lab, b, ("S1", s, w), R=R, n_jobs=nj, group_folds=pair)
                                      for w, b in dc.WINDOWS.items()}
         # S2: ITI window restricted to trials whose previous Hit was at least 5 s earlier
-        hits = np.sort(m["event_ts"][np.asarray(m["event_id"]) == "Hit"])      # all Hit events (review S6)
+        hits = np.sort(m["event_ts"][np.asarray(m["event_id"]) == "Hit"])      # all Hit events
         i_prev = np.searchsorted(hits, tr["ts"]) - 1
         prev = np.where(i_prev >= 0, hits[np.maximum(i_prev, 0)], -10**9)
         k = (tr["ts"] - prev) >= 5 * mp.FS
@@ -282,7 +282,7 @@ def tests(a):
         if s1:
             out["group"]["S1_" + wname] = dc.group_block_p([x["observed"] for x in s1], [x["null"] for x in s1])
     drift_acc = [r["drift"][k]["observed"] for r in out["mice"] for k in r["drift"]]
-    out["group"]["drift_accuracy"] = float(np.mean(drift_acc)) if drift_acc else None    # percent, DESIGN 0.3
+    out["group"]["drift_accuracy"] = float(np.mean(drift_acc)) if drift_acc else None    # percent
     s2 = [r["S2_iti_clean"] for r in out["mice"] if "S2_iti_clean" in r]
     if s2:
         out["group"]["S2_ITI"] = dict(block=dc.group_block_p([x["block"]["observed"] for x in s2], [x["block"]["null"] for x in s2]),

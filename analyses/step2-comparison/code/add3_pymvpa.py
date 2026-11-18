@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 2 addendum 3 §2b/§2c: PyMVPA 2.6.5 as shipped (Python 3.9 environment) on the replicate files of
+"""PyMVPA 2.6.5 as shipped (Python 3.9 environment) on the replicate files of
 add3_tools_data.py. Variants:
   main   : the tutorial's permutation test (pymvpa_tut.rst l. 256-330): LinearCSVMC(), NFoldPartitioner on chunks,
            AttributePermutator('targets', limit={'partitions': 1}, count=1) chained after the partitioner,
@@ -104,7 +104,7 @@ def run(args):
 def gate(args):
     """G2: per fold and draw, targets equal the observed ones on the testing partition and are a permutation of them
     on the training partition (L2 replicates 0..gate_reps-1, draws regenerated from the replicate's seed). The draws
-    and each fold's test chunk are saved for add3_gate.py. G3: PyMVPA CrossValidation with the stamped pipeline in
+    and each fold's test chunk are saved for add3_gate.py. G3: PyMVPA CrossValidation with the step 2 pipeline in
     SKLLearnerAdapter equals a plain scikit-learn leave-one-run-out loop (same environment). G4 (exact rule check):
     on replicates 0..exact_reps-1, PyMVPA's full MCNullDist with SKLLearnerAdapter(pipeline) gives the null errors;
     add3_gate.py recomputes them from the regenerated draws (equality expected)."""

@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
-"""Step 2 simulation and permutation rules (design ../DESIGN.md v1; POST HOC with respect to step 1).
+"""Step 2 simulation and permutation rules (post hoc with respect to step 1).
 
-Generator (§5a): k latent Ornstein-Uhlenbeck factors on trials (time constant tau, in trials) plus a slow
+Generator: k latent Ornstein-Uhlenbeck factors on trials (time constant tau, in trials) plus a slow
 linear trend, unit loadings from a Gaussian, Poisson spike counts. Labels follow recording blocks
 (random block assignment, fixed-order ABAB/ABBA/AABB, one block per condition) or vary trial by
 trial (interleaved). Signal (delta > 0) adds a rate change on label-1 trials to a fraction f of units.
 
-Rules (rows, §3), each refits the same scikit-learn pipeline (§2):
+Rules, each refits the same scikit-learn pipeline:
   P1  binomial test of the pooled held-out correct count
   P2  sklearn permutation_test_score (all labels permuted at trial level, whole CV rerun)
   P3  CoSMoMVPA cosmo_randomize_targets rule: labels permuted within each run (chunk), error if a run lacks a class
-  P4  training-partition labels permuted per fold, refit, test labels kept (PyMVPA tutorial, ADAM)
+  P4  training-partition labels permuted per fold, refit, test labels kept (PyMVPA tutorial)
   P5  block labels permuted between blocks, training and held-out together, whole CV rerun
-      (block_permutation_test_score, the deliverable of §9)
-Splits (§4): 'main' shuffled KFold(5); 'tool' unshuffled StratifiedKFold(5) (sklearn/MNE cv=None);
+      (block_permutation_test_score)
+Splits: 'main' shuffled KFold(5); 'tool' unshuffled StratifiedKFold(5) (sklearn/MNE cv=None);
 'block' GroupKFold(5) by block.
 """
 from __future__ import annotations
@@ -88,7 +88,7 @@ def folds(kind, X, y, blocks, seed, n_block_folds=5):
 
 class Resplit:
     """A splitter that is re-applied to each (permuted) label vector, as scikit-learn does when
-    permutation_test_score gets a splitter object (StratifiedKFold folds depend on y). Review 2b S3(a)."""
+    permutation_test_score gets a splitter object (StratifiedKFold folds depend on y)."""
 
     def __init__(self, cv, groups):
         self.cv, self.groups = cv, groups
@@ -103,7 +103,7 @@ def _folds_for(fl, X, y):
 
 def cv_correct(est, X, y, fl):
     """Total held-out correct (for P1) and the MEAN OF FOLD ACCURACIES (the statistic of scikit-learn's
-    permutation_test_score, used by every permutation rule so P2-P5 compare the same statistic; v2 review must 7).
+    permutation_test_score, used by every permutation rule so P2-P5 compare the same statistic).
     Each fold refit. fl: list of folds or Resplit. A training fold with one class gives (nan, nan)."""
     fl = _folds_for(fl, X, y)
     c = 0
@@ -120,7 +120,7 @@ def cv_correct(est, X, y, fl):
 
 def p_mc(null, obs):
     """(1 + #{null >= obs} + #NaN null) / (N + 1). An undefined observed statistic gives NaN (counted as an
-    error by the caller, never as a small p; v2 review must 6)."""
+    error by the caller, never as a small p)."""
     if not np.isfinite(obs):
         return float("nan")
     null = np.asarray(null, float)
@@ -138,7 +138,7 @@ def p1_binomial(est, X, y, fl):
 def p2_sklearn(est, X, y, fl, n_perm, seed):
     # A y-dependent splitter (StratifiedKFold) is passed as an object so sklearn re-splits on every permuted y.
     # GroupKFold does not depend on y: its folds are passed as a list, so `groups` never reaches sklearn's
-    # _shuffle (which would permute within blocks and give p = 1; DESIGN.md §3 footnote, a separate sanity cell).
+    # _shuffle (which would permute within blocks and give p = 1; a separate sanity cell).
     if isinstance(fl, Resplit):
         cv = fl.get(X, y) if isinstance(fl.cv, GroupKFold) else fl.cv
     else:
@@ -164,7 +164,7 @@ def p3_within_run(est, X, y, fl, runs, n_perm, rng):
 
 
 def p4_train_only(est, X, y, fl, n_perm, rng):
-    fl = _folds_for(fl, X, y)                               # folds fixed by the observed labels (PyMVPA/ADAM)
+    fl = _folds_for(fl, X, y)                               # folds fixed by the observed labels (PyMVPA)
     _, obs = cv_correct(est, X, y, fl)
     null = []
     for _ in range(n_perm):
@@ -181,7 +181,7 @@ def p4_train_only(est, X, y, fl, n_perm, rng):
 
 
 def block_permutation_test_score(est, X, y, blocks, fl, n_perm, rng, draw=None):
-    """P5 and the deliverable (§9): permute the per-block label vector between blocks (training and
+    """P5 and block_permutation_test_score: permute the per-block label vector between blocks (training and
     held-out together) or draw it from `draw(rng)` (e.g. pseudosessions), map to trials, rerun the whole CV.
     Returns (observed accuracy, null accuracies, p)."""
     ub = np.unique(blocks)
@@ -197,7 +197,7 @@ def block_permutation_test_score(est, X, y, blocks, fl, n_perm, rng, draw=None):
     return obs, np.array(null), p_mc(null, obs)
 
 
-# ------------------------------------------------------------------ generator v2 (DESIGN.md §13-§14)
+# ------------------------------------------------------------------ generator v2
 def ou_matrix(n, tau, m, rng):
     """m independent unit-variance OU series of length n (tau in trials), vectorised over series."""
     a = np.exp(-1.0 / tau)

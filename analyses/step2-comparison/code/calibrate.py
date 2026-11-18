@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Allen calibration of the step 2 generator (DESIGN.md §5a), written before running (2026-10-21 01:40 KST).
+"""Allen calibration of the step 2 generator (first version).
 
 What: per (session, std6 area) with step 1 shared24 rows, the same 2-s spontaneous pseudo-trial counts as
 step 1 (spont_onsets(path, 8), tax.area_counts). Two statistics:

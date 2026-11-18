@@ -1,5 +1,5 @@
 #!/bin/bash
-# Step 3 IBL machine set-up (code addendum 1 §1, §3): Python 3.12 env with ONE-api 3.6.1, ibllib 4.1.0, brainwidemap
+# Step 3 IBL machine set-up: Python 3.12 env with ONE-api 3.6.1, ibllib 4.1.0, brainwidemap
 # (paper repository) commit 118fc36; the paper repository checked out at the same commit for region_info.csv.
 set -e
 exec > ~/setup.log 2>&1

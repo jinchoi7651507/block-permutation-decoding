@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""Step 2 Allen summary (DESIGN.md §6, §7 contrast R, §15 Allen cells; addendum DESIGN-v2-ADDENDUM.md §4). Written
-before any Allen cell was run.
+"""Step 2 Allen summary.
 
 Rates: per scheme x split x rule, mean over mice of each mouse's share of areas with p < 0.05, 95% mouse
 bootstrap (B = 20,000, seed 20261015, as step 1). Primary set: the 30 new mice; sensitivity: all 32.
 NaN p and P3 errors excluded (denominators reported; P3 also with errors counted as non-rejections).
 Contrast R: shared24, S-main, per area hit(Pk) - hit(P5), averaged per mouse, mouse bootstrap.
-Group-level column (§6): rejection rates of (a) t-test, (b) sign-flip, (c) a valid group test over the 200
-fake-label experiments formed by the stored P5 null accuracies (see group_level; addendum 1 §4, review M3), plus
-the observed experiment's p values. Splits: main, tool, block (beyond §15), pair (sep schemes, beyond §15).
+Group-level column: rejection rates of (a) t-test, (b) sign-flip, (c) a valid group test over the 200
+fake-label experiments formed by the stored P5 null accuracies (see group_level), plus
+the observed experiment's p values. Splits: main, tool, block, pair (sep schemes).
 Rows are deduplicated on (session, area, scheme, split); the number of areas per scheme x split is reported.
 
   python summarize_allen.py --rows ../runs_allen --out ../results
@@ -52,7 +51,7 @@ def ok(p):
 
 
 def group_level(rows, n_null=1000):
-    """Group-level column (§6) as rates (addendum 1 §4, review M3). Per area: observed accuracy and its 200 P5 null
+    """Group-level column as rates. Per area: observed accuracy and its 200 P5 null
     accuracies (refitted fake-label assignments drawn from the scheme's own set). For each null index j, the j-th null
     accuracy of every area plays the observed accuracy of a fake-label experiment; across mice: (a) one-sample t-test
     of the per-mouse mean against 0.5, (b) sign-flip permutation (1,000 flips), (c) valid group test with a group

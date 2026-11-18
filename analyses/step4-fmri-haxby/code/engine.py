@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Shared engine of steps 4 and 5 (DESIGN.md §4-§8 of each step): fake labels assigned within runs, the splits,
+"""Shared engine of steps 4 and 5: fake labels assigned within runs, the splits,
 and the rules P1-P5 of step 2 (../../step2-comparison/code/sim.py, unchanged). P5 permutes the per-block labels
 within runs, the unit of randomization of the fake labels, so it is exact by construction.
 Whole-block splits use a fixed block-to-fold map (block index modulo the number of folds, PredefinedSplit), so the

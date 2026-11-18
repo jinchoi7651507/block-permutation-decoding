@@ -1,4 +1,4 @@
-% Step 2 addendum 3 §2b/§2c: CoSMoMVPA building blocks in the documented permutation loop, on the replicate files of
+% CoSMoMVPA building blocks in the documented permutation loop, on the replicate files of
 % add3_tools_data.py (CoSMoMVPA ships no single-subject permutation function; FAQ: "through cosmo_randomize_targets
 % and a for-loop the user can do that themselves"; examples/run_permutation_test.m).
 % octave --no-gui add3_cosmo.m <cosmo_dir> <data_dir> <out_csv> <worker> <of> <n_perm> <gate_dir or "-"> <variant>
@@ -14,7 +14,7 @@
 % Null: n_perm draws of cosmo_randomize_targets(ds, 'seed', 1000*rep + i) (labels permuted within each chunk;
 % error if a chunk lacks a target), whole cross-validation rerun; p = (1 + #{null >= obs}) / (n_perm + 1).
 % CSV line: layout, rep, variant, p, observed accuracy, error flag, n_perm, seconds, error message (commas removed).
-% Gate (§2c G1, variant main only): for L2 replicates 0-49 the permutation index vectors -> <gate_dir>/L2_rXXX_perm.mat.
+% Gate (G1, variant main only): for L2 replicates 0-49 the permutation index vectors -> <gate_dir>/L2_rXXX_perm.mat.
 % Resumable by (layout, rep, variant).
 1;
 function part = make_partitions(ds, variant)

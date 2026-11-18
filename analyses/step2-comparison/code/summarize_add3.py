@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Step 2 addendum 3 §1 summary: the cells beyond §15 (fixed-order and interleaved designs under S-tool and S-block).
-Written before any of these cells was run. Per cell and rule, as summarize_sim.cell_summary (rate of p < 0.05,
+"""Summary of the further simulation cells (fixed-order and interleaved designs under S-tool and S-block).
+Per cell and rule, as summarize_sim.cell_summary (rate of p < 0.05,
 Wilson 95% interval, Monte Carlo 99% band of 5%, P3 error share, P5 fails for fixed-order trend-0 cells). For the
 fixed-order cells, P1 and P4 minus the pooled interleaved drift-0 baseline of the same B and split (cells 144-175 of
 the main grid, read from --main-runs), 95% bootstrap as summarize_sim (2,000 draws, seed 20261022 + 3). These cells
-are reported as cells beyond §15 (descriptive).
+are descriptive.
 
   python summarize_add3.py --runs ../runs_add3 --main-runs ../runs_cloud --out ../results
 """
@@ -61,7 +61,7 @@ def main():
 
     def pts(x):
         return "–" if x is None else f"{100 * x['diff']:.1f}"
-    lines = ["# Step 2 addendum 3 §1: cells beyond §15 (summarize_add3.py)", ""]
+    lines = ["# Further simulation cells: fixed-order and interleaved designs under S-tool and S-block (summarize_add3.py)", ""]
     if res["incomplete_cells"]:
         lines.append(f"INCOMPLETE CELLS ({len(res['incomplete_cells'])}): " + ", ".join(res["incomplete_cells"][:10]))
     lines += ["| cell | reps | P1 | P2 | P3 (err) | P4 | P5 | P5 fails | P1−base | P4−base |",

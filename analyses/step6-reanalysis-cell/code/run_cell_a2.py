@@ -1,10 +1,10 @@
 """Addendum 2 (2026-11-08): the gate reads the authors' Fig. 2D values from Figure_2/plot_figure_2/Figure_2.mat.
 
-The stamped design names Figure_2_decoding_accuracy.mat as the gate file; that file has no *_mean_classification_net
+run_cell.py names Figure_2_decoding_accuracy.mat as the gate file; that file has no *_mean_classification_net
 variables. The authors' Plot_Figure_2_github.m loads Figure_2.mat, Figure_2_PCA.mat and Figure_2_decoding_accuracy.mat
-and plots Fig. 2D from *_mean_classification_net. This wrapper runs the stamped run_cell.py unchanged; it only makes
+and plots Fig. 2D from *_mean_classification_net. This wrapper runs run_cell.py unchanged; it only makes
 run_cell.data_paths return the gate file: the first of Figure_2.mat and Figure_2_PCA.mat (in that order) that holds
-all three variables with shape (3, 100) or (100, 3). If neither does, the stamped gate stops as before. Variable names
+all three variables with shape (3, 100) or (100, 3). If neither does, the gate stops as before. Variable names
 and every gate rule are unchanged. Run every stage through this wrapper without --addendum.
 
     python -I run_cell_a2.py fetch-gate --extract-root ROOT       extract the two candidate files (CRC-32 checked)
@@ -32,7 +32,7 @@ GATE_ZIP_SIZE = 4637807                                    # zenodo-files-105298
 CANDIDATES = {"Figure_2/plot_figure_2/Figure_2.mat": "ab452acd",          # manifest-zenodo-10529801-figure-zips.tsv
               "Figure_2/plot_figure_2/Figure_2_PCA.mat": "fcbe3358"}
 COMBINED_FILE = "Figure_2/plot_figure_2/Figure_2_decoding_accuracy.mat"
-STAMPED_DATA_PATHS = rc.data_paths
+ORIG_DATA_PATHS = rc.data_paths
 
 
 def crc32_of(path):
@@ -60,7 +60,7 @@ def gate_file_of(root):
 
 
 def data_paths(a):
-    root, stamped_gate = STAMPED_DATA_PATHS(a)
+    root, orig_gate = ORIG_DATA_PATHS(a)
     chosen = gate_file_of(a.extract_root)
     return root, chosen if chosen is not None else Path(a.extract_root) / next(iter(CANDIDATES))   # None: gate stops
 

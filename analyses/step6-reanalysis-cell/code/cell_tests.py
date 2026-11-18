@@ -38,7 +38,7 @@ def permute_blocks(sess, bins, rng, match_adjacent=False, max_tries=10000):
     """New per-trial labels: the labels of the labelled blocks are permuted among the labelled blocks of the
     session (counts per bin kept). Blocks without a label stay without. With match_adjacent, only permutations
     with the same number of consecutive same-bin block pairs as observed are kept (rejection sampling): the
-    pre-specified sensitivity for the penalty that makes a colour near the previous one less likely."""
+    sensitivity analysis for the penalty that makes a colour near the previous one less likely."""
     ub, lab = block_labels(sess.block, bins)
     idx = np.where(lab > 0)[0]
     obs_adj = _adjacent_same(lab)
@@ -56,7 +56,7 @@ def permute_blocks(sess, bins, rng, match_adjacent=False, max_tries=10000):
 
 
 def permute_block_sequences(sess, seq_bins, rng):
-    """Estimated-template secondary (option A of PRECHECK section 5): whole within-block label sequences are
+    """Estimated-template secondary (option A): whole within-block label sequences are
     permuted among the labelled blocks of the session, aligned by progression in the block: the receiving block
     of length L takes the label at relative position i/(L-1) of the donor sequence. seq_bins: per-column labels
     that may change within a block (0 = no label)."""

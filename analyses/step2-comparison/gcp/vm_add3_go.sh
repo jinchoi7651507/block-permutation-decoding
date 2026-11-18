@@ -1,5 +1,5 @@
 #!/bin/bash
-# On the addendum 3 VM: wait for the set-up, write MACHINE.txt, run add3_run.sh, archive runs_add3 with its hash,
+# On the VM of the toolbox and fixed-order cells: wait for the set-up, write MACHINE.txt, run add3_run.sh, archive runs_add3 with its hash,
 # power off (the laptop watcher then copies the archive back and deletes the machine).
 until grep -q "SETUP DONE" ~/setup.log 2>/dev/null; do
   if grep -qi "error" ~/setup.log 2>/dev/null && ! pgrep -f vm_add3_setup.sh >/dev/null; then echo "SETUP FAILED" >> ~/go.log; sudo shutdown -h now; exit 1; fi

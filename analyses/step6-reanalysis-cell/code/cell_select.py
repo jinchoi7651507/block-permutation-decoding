@@ -1,4 +1,4 @@
-"""Variant selection by code (DESIGN.md section 6). The gate items G4 and G5 decide the variant; the other core items
+"""Variant selection by code. The gate items G4 and G5 decide the variant; the other core items
 decide what may run. Any other variant than the adopted one is refused by `require_variant`."""
 from __future__ import annotations
 

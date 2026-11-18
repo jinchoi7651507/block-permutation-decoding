@@ -1,5 +1,5 @@
 #!/bin/bash
-# Step 3: runs/MACHINE.txt (code addendum 1 §3; provisioning from instance/scheduling/preemptible).
+# Step 3: runs/MACHINE.txt (provisioning from instance/scheduling/preemptible).
 cd ~/pe/results/step3-ibl
 M='http://metadata.google.internal/computeMetadata/v1/instance'
 q() { curl -s -H 'Metadata-Flavor: Google' "$M/$1"; }

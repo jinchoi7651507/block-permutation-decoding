@@ -201,7 +201,7 @@ def t_group_exact():
           "%.6f vs %.6f" % (brute, ours))
     six = [np.r_[np.full(2, 60.0), np.full(18, 50.0)]] * 6
     check("T7 group p minimum (2/20)^6 = 1e-6", np.isclose(dc.group_block_p([60.0] * 6, six)["p"], 1e-6))
-    # review M3: unrounded float nulls with every mouse at the top must give exactly the minimum
+    # unrounded float nulls with every mouse at the top must give exactly the minimum
     rngf = np.random.default_rng(7)
     fl = []
     for _ in range(6):
@@ -221,7 +221,7 @@ def t_group_exact():
 
 
 def t_v2_fixes():
-    """Review v2: S1 (missing drift accuracy), S3 (seed keys), S4 (mean comparison), M1 (Fig. 4D peak range)."""
+    """Missing drift accuracy, seed keys, mean comparison, Fig. 4D peak range."""
     from summarize import verdict
     vn, vf = verdict("ITI", 0.001, 0.3, drift_acc=None), verdict("ITI", 0.001, 0.3, drift_acc=float("nan"))
     vp = verdict("PERI", 0.001, 0.3, drift_acc=None)
@@ -253,7 +253,7 @@ def t_v2_fixes():
 
 
 def t_gate_helpers():
-    """Behaviour-gate signed rank (review stat M4, domain M3) and the pinned environment (review S8)."""
+    """Behaviour-gate signed rank and the pinned environment."""
     from run_reanalysis import signrank_pairs
     up = np.c_[np.arange(1, 7) + 1.0, np.zeros(6)]                      # all six differences positive
     p, n, nz, nt = signrank_pairs(up)
@@ -314,7 +314,7 @@ def t_timing():
     print("T12 timing: one linear SVM fit (171 trials x 210 cells, noise) = %.1f ms; primary tests per mouse "
           "about %.2g fits, %.1f CPU-hours (both windows, R = 4, D = 1000); 6 mice about %.0f CPU-hours (primary part)"
           % (1000 * dt, per_mouse, per_mouse * dt / 3600, 6 * per_mouse * dt / 3600))
-    # per mouse fits: primary 3,070,400; drift 932,640; S2 487,200; movement 36,360; S1 4,560 (review v2, section 3);
+    # per mouse fits: primary 3,070,400; drift 932,640; S2 487,200; movement 36,360; S1 4,560;
     # gate 918,000 fits for six mice
     other = 932640 + 487200 + 36360 + 4560
     gate = 918000
@@ -323,7 +323,7 @@ def t_timing():
           "CPU-hours at this fit time" % (6 * other * dt / 3600, gate * dt / 3600, tot))
 
 
-T10_REFERENCE = {0.05: "20/20 = 100.0% (95% CI 83.2-100.0%)", 0.25: "5/20 = 25.0% (95% CI 8.7-49.1%)"}   # test_synthetic.out, full run of 2026-11-07
+T10_REFERENCE = {0.05: "20/20 = 100.0% (95% CI 83.2-100.0%)", 0.25: "5/20 = 25.0% (95% CI 8.7-49.1%)"}   # full run of 2026-11-07
 
 
 def t20_fixed_order_power(Ge, D, n_jobs):

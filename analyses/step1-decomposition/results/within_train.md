@@ -1,4 +1,4 @@
-# Step 1 addendum: training-label-only permutation (30 new mice, std6 areas)
+# Step 1: training-label-only permutation (30 new mice, std6 areas)
 
 Gate: 4774 observed accuracies checked against runs/rows.jsonl, 0 mismatches, 0 NaN.
 

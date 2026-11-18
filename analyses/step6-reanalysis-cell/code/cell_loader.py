@@ -1,5 +1,5 @@
-"""Loader for the Zenodo 10.5281/zenodo.10529801 files. STRUCTURE INFERRED from the authors' MATLAB code
-(prepare_pseudopop_*_restricted_FEF.m); NOT YET CHECKED ON THE REAL FILES ("to verify on the real files").
+"""Loader for the Zenodo 10.5281/zenodo.10529801 files. Structure inferred from the authors' MATLAB code
+(prepare_pseudopop_*_restricted_FEF.m).
 
 Expected: Data/FR_around_event/FR_<event>_300_window_from_<a>_to_<b>/ID_<n>.mat, each with `Conditions` (struct with
 block_nb, trial_in_block, rule [radians], belief [100 x trials], stim, belief_precision) and the ROI variables LIP, FEF,

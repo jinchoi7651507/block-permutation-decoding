@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Summarise within_train.py rows (DESIGN-ADDENDUM-within-train.md §4 and §6).
+"""Summarise within_train.py rows.
 
 Stops before writing results if any observed accuracy differs from runs/rows.jsonl (gate).
 Otherwise writes within_train.json and within_train.md: mouse-level pass rates with 95%
@@ -72,7 +72,7 @@ def summarise(rows, ref):
 
 def write_md(R, path):
     m = R["new/std6"]
-    L = ["# Step 1 addendum: training-label-only permutation (30 new mice, std6 areas)\n",
+    L = ["# Step 1: training-label-only permutation (30 new mice, std6 areas)\n",
          f"Gate: {R['gate']['checked']} observed accuracies checked against runs/rows.jsonl, {R['gate']['n_mismatch']} mismatches, "
          f"{R['gate']['n_nan']} NaN.\n",
          "Pass rate = mean over mice of the share of areas with p < 0.05 (95% mouse-bootstrap interval), %. "

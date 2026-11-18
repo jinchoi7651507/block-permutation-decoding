@@ -5,8 +5,8 @@
   python -I fetch_members.py --url URL --size BYTES extract --data OUTDIR MEMBER [...]   (stage 2 only)
 
 Without --data only code and documentation members are extracted (.m .py .ipynb .txt .md .json .docx); the
-CRC-32 of every member is checked by zipfile. --data allows only the data members named in DATA_ALLOWED,
-which DESIGN.md lists; it is for stage 2, after DESIGN.md is fixed and stamped.
+CRC-32 of every member is checked by zipfile. --data allows only the data members named in DATA_ALLOWED;
+it is for stage 2.
 """
 from __future__ import annotations
 

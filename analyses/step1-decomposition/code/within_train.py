@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 1 addendum: training-label-only permutation (Within(Train)); read ../DESIGN-ADDENDUM-within-train.md.
+"""Step 1, training-label-only permutation (Within(Train)).
 
 Per (session, std6 area) it rebuilds the step 1 labels (same streams as decompose.py) and computes
   trn_trl  calibration labels permuted across calibration trials, readout refit, held-out labels kept

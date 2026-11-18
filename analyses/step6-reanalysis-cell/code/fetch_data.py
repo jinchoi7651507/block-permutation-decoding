@@ -1,6 +1,5 @@
-"""Stage 2 data download (Addendum 1b). Runs the stamped fetch_members.py unchanged; only DATA_ALLOWED is set at run
-time, to exactly the members that the stamped data-members.tsv lists for the zip being read (DESIGN section 3: "data
-option off until then"). No other member can be extracted. zipfile checks each member's CRC-32 while reading; gate G1
+"""Data download. Runs fetch_members.py unchanged; only DATA_ALLOWED is set at run time, to exactly the members that
+data-members.tsv lists for the zip being read. No other member can be extracted. zipfile checks each member's CRC-32 while reading; gate G1
 checks the extracted files again against data-members.tsv.
 
   python -I fetch_data.py DEST              extract the 460 listed members (Figure_2.zip, then Data.zip) under DEST

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 3 (IBL) runner, DESIGN.md v1 (stamped) with the code addendum. One session per call of `run_session`; one
+"""Step 3 (IBL) runner. One session per call of `run_session`; one
 JSON line per (region-session, label, row) in runs/rows.w<k>.jsonl; resumable by (eid, region, label).
 
   python run_ibl.py --order ../runs/ORDER.json --n-sessions N --out ../runs/rows.w<k>.jsonl --cache CACHE_k \
@@ -7,7 +7,7 @@ JSON line per (region-session, label, row) in runs/rows.w<k>.jsonl; resumable by
   python run_ibl.py ... --out ../runs/pilot.w<k>.jsonl --pilot   (2 sessions, p values discarded; separate file)
   python run_ibl.py ... --requeue        (before a restart: release claims of sessions without a final row)
 
-Per session (§2-§6): good units of every probe merged (load_good_units qc=1, revision 2024-05-06 fixed inside),
+Per session: good units of every probe merged (load_good_units qc=1, revision 2024-05-06 fixed inside),
 Beryl regions, region-sessions with >= 10 units; trials by load_trials_and_mask(min_rt 0.08, max_rt 2.0,
 exclude_nochoice, exclude_unbiased, truncate_to_pass); sessions with < 250 kept trials skipped; counts in -600 to
 -100 ms before stimulus onset (positive control: 0 to 100 ms). Pool of 220 pseudosessions per session
@@ -65,7 +65,7 @@ def pseudo_pool(trials, mask, session_index, n=220):
 
 
 def region_rows(X, y_real, pool, stim_real, stim_pool, X_stim, si, ri, pilot):
-    """All rows of one region-session (§6). Label vectors are full length over the session's kept trials with NaN
+    """All rows of one region-session. Label vectors are full length over the session's kept trials with NaN
     for trials outside that vector's own set; every statistic is computed on its own trials (observed and each null).
     The label-independent null statistics (PS-refit S-main and S-block, SEL-repeat) are computed once per pool
     member (cache) and reused by every scored label vector (results unchanged)."""
@@ -125,7 +125,7 @@ def region_rows(X, y_real, pool, stim_real, stim_pool, X_stim, si, ri, pilot):
         out.append({"label": f"fake{j}", **r})
     out.append({"label": "real", **main_rows(y_real, 20, list(range(20, 220)), "all")})   # Q2
     # positive control: observed on real-mask trials with non-zero contrast in the real session; each null on the
-    # real-mask trials with non-zero contrast in that pseudosession (§6), scored on its own stimulus sides
+    # real-mask trials with non-zero contrast in that pseudosession, scored on its own stimulus sides
     est_s = C.decoder(X_stim.shape[1])
     null_s = [C.null_refit(est_s, X_stim, stim_pool[k], "main", fm) for k in range(20, 220)]
     pr, _ = C.ps_rows(est_s, X_stim, stim_real, null_s, None, "main", fm, fixed=False)
@@ -139,7 +139,7 @@ def region_rows(X, y_real, pool, stim_real, stim_pool, X_stim, si, ri, pilot):
 
 
 def check_trials(trials, mask):
-    """§9 checks at run time (any failure -> session skipped with the reason)."""
+    """Checks at run time (any failure -> session skipped with the reason)."""
     pl = trials["probabilityLeft"].to_numpy()
     if len(mask) != len(trials):
         return "trials and mask lengths differ"
@@ -202,7 +202,7 @@ def run_session(one, row, si, args):
     con = np.where(right, trials["contrastRight"].to_numpy(), trials["contrastLeft"].to_numpy())
     stim_real = np.where(con > 0, right.astype(float), np.nan)[mask]
     pool, stim_pool = pseudo_pool(trials, mask, si)
-    freed = delete_session(one, eid, args.cache)                  # spike files of this session deleted (§2)
+    freed = delete_session(one, eid, args.cache)                  # spike files of this session deleted
     out = []
     for ri, reg in enumerate(sorted(set(beryl))):                 # region_index counts excluded regions too
         u = np.where(beryl == reg)[0]
@@ -236,7 +236,7 @@ def delete_session(one, eid, cache):
 
 
 def dummy_load(stop_file):
-    """Timing pilot (§3): keeps one vCPU busy with synthetic region-sessions (same code path) until stop_file exists,
+    """Timing pilot: keeps one vCPU busy with synthetic region-sessions (same code path) until stop_file exists,
     so that the 2 pilot sessions are timed with the planned number of workers running at once."""
     rng = np.random.default_rng(0)
     n = 400

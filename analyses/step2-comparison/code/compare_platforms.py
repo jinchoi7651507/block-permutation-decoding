@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Equivalence check of RUN-PLATFORM.md: laptop rows (runs/) against cloud rows (runs_cloud/). Changes nothing in
+"""Equivalence check of the two platforms: laptop rows (runs/) against cloud rows (runs_cloud/). Changes nothing in
 the result. Rows are matched on (cell name, replicate index); worker file numbers differ between the two machines
 (6 and 56 workers) and are ignored. For every matched replicate it compares n_units, the P3 error flag and the p
 value of each rule (P1-P5), and prints, per rule, the number of matched replicates, the share with identical p

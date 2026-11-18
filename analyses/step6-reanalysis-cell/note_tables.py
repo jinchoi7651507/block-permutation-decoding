@@ -1,4 +1,4 @@
-"""Tables of RESULTS.md 1.3-1.4 not printed by summarize_cell.py, and the post hoc design-count check of 1.6 (descriptive, not a test).
+"""Tables of the primary test that summarize_cell.py does not print, and the post hoc design-count check (descriptive, not a test).
 Run: python -I note_tables.py vm-out-a2/x/out-a2 > vm-out-a2/note_tables.out"""
 import json
 import sys

@@ -11,7 +11,7 @@ pip install blockperm      # PyPI
 pip install ./blockperm    # repository copy
 ```
 
-It needs Python 3.12, numpy and scikit-learn, and installs from PyPI with `pip install blockperm`.
+It needs Python 3.10 or later, numpy and scikit-learn.
 
 ## 2. The basic call
 
@@ -92,7 +92,7 @@ cd blockperm
 python examples/fake_block_labels.py 40
 ```
 
-It takes about 3 minutes and prints 14 (35%) for `permutation_test_score` and 1 (2%) for the block permutation test, out of 40 recordings.
+It takes about 1.5 minutes and prints 14 (35%) for `permutation_test_score` and 1 (2%) for the block permutation test, out of 40 recordings.
 
 ## 9. Time-resolved decoding
 

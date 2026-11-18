@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Step 1 decomposition of the fake-label pass rate, design v2 (post hoc; read ../DESIGN.md).
+"""Step 1 decomposition of the fake-label pass rate (post hoc).
 
 Per (session, visual area in STD6) it computes, for several label schemes and readouts, the
 p values of held-out validation (binomial), block-label permutations with the readout refit

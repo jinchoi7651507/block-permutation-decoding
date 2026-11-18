@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Step 2 simulation driver (DESIGN.md §15). Lists every simulation cell of §15 with its seed, writes the list to
+"""Step 2 simulation driver. Lists every simulation cell with its seed, writes the list to
 runs/CELLS.json before anything runs, then runs each cell with run_grid.py split over worker processes
 (--worker k --of W; one output file per worker; resumable because run_grid.py skips replicates already written).
-It does not change sim.py or run_grid.py (stamped). Power cells (δ > 0) are not here: δ is chosen first on a
-P5-only pilot (§15 "Power").
+It does not change sim.py or run_grid.py. Power cells (δ > 0) are not here: δ is chosen first on a
+P5-only pilot.
 
 Cells (δ = 0, L = 20, 200 permutation draws):
   random design: tau_s {7, 20, 67, 160} x drift {0, 1, 2} x B {4, 12, 24} x split {main, tool, block};
@@ -48,17 +48,17 @@ def cells():
     for tau in (7, 20, 67, 160):
         for drift in (0.0, 1.0, 2.0):
             out.append(dict(design="interleaved", B=12, tau_s=tau, drift=drift, trend=0.0, split="main", reps=500))
-    # Appended 2026-10-21 22:13 KST (commit ef0b45e), before they run (cells 144+; indices of earlier cells unchanged): interleaved,
-    # drift 0 baselines for every tau_s x B x split not covered above. §15 subtracts from every P1/P4 rate "its
-    # interleaved-label, drift-0 baseline in the same tau_s/B/split", but its interleaved arm lists only B 12 / main.
+    # Appended 2026-10-21, before they ran (cells 144+; indices of earlier cells unchanged): interleaved,
+    # drift 0 baselines for every tau_s x B x split not covered above. Every P1/P4 rate is also reported minus its
+    # interleaved-label, drift-0 baseline in the same tau_s/B/split (`minus_baseline`), but the interleaved arm lists only B 12 / main.
     for tau in (7, 20, 67, 160):
         for B in (4, 12, 24):
             for split in ("main", "tool", "block"):
                 if B == 12 and split == "main":
                     continue
                 out.append(dict(design="interleaved", B=B, tau_s=tau, drift=0.0, trend=0.0, split=split, reps=500))
-    # Appended 2026-10-21 22:38 KST (commit f0dc09a; addendum 1 §1, a cell beyond §15, before it runs): the primary-cell layout with
-    # the sign-randomised trend 0.5 (§15 "secondary arm"; the §15 grid gave trend 0.5 only to the fixed-order designs).
+    # Appended 2026-10-21, before it ran: the primary-cell layout with
+    # the sign-randomised trend 0.5 (the secondary arm; the main grid gave trend 0.5 only to the fixed-order designs).
     out.append(dict(design="random", B=12, tau_s=20, drift=1.0, trend=0.5, split="main", reps=500))
     for i, c in enumerate(out):
         c["seed"] = 2026000 + i
@@ -70,7 +70,7 @@ DELTAS_PILOT = (0.1, 0.2, 0.3, 0.5, 0.8)
 
 
 def power_pilot_cells():
-    """Addendum 1 §1b: P5-only pilot, primary-cell layout, 50 replicates per delta, seeds 2027000 + i."""
+    """P5-only power pilot, primary-cell layout, 50 replicates per delta, seeds 2027000 + i."""
     out = []
     for i, d in enumerate(DELTAS_PILOT):
         out.append(dict(design="random", B=12, tau_s=20, drift=1.0, trend=0.0, split="main", reps=50, delta=d,
@@ -79,7 +79,7 @@ def power_pilot_cells():
 
 
 def power_cells(d_mid, d_large):
-    """Addendum 1 §1b: all rules, primary-cell layout, 1,000 replicates at the two chosen deltas."""
+    """Power cells: all rules, primary-cell layout, 1,000 replicates at the two chosen deltas."""
     return [dict(design="random", B=12, tau_s=20, drift=1.0, trend=0.0, split="main", reps=1000, delta=d,
                  rules="P1,P2,P3,P4,P5", seed=2027100 + j, name=f"pw{j}_delta{d:g}") for j, d in enumerate((d_mid, d_large))]
 

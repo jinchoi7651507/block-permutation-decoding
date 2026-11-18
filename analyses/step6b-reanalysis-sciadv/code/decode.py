@@ -1,8 +1,8 @@
-"""Decoders and tests for the pre-specified reanalysis (DESIGN.md sections 4-6).
+"""Decoders and tests for the reanalysis.
 
 Window statistic: the authors' per-bin linear SVM (fitcsvm defaults: linear kernel, box constraint 1, no
 standardisation), balanced subsampling of the larger class, unstratified random 20-fold cross-validation over
-trials, accuracy averaged over folds; here averaged over the bins of a pre-specified window and over R repeats
+trials, accuracy averaged over folds; here averaged over the bins of a fixed window and over R repeats
 of (subsample, folds). Every step that depends on the labels (the subsample, the folds) is redone for every
 label vector, real or permuted.
 """
@@ -24,18 +24,18 @@ if str(BLOCKPERM_DIR) not in sys.path:
     sys.path.insert(0, str(BLOCKPERM_DIR))
 import blockperm  # noqa: E402  (used for n_distinct_arrangements and the equivalence test)
 
-BLOCKPERM_SHA256 = "4a5f8009e1d49d5bf1e30cb47a08f25f745e712bcc99b690456dd1c2081f4a08"      # pinned at the stamp (review S8)
+BLOCKPERM_SHA256 = "4a5f8009e1d49d5bf1e30cb47a08f25f745e712bcc99b690456dd1c2081f4a08"      # pinned before the run
 PINNED_VERSIONS = {"numpy": "2.5.4", "scipy": "1.18.1", "scikit-learn": "1.7.2"}
 
 
 def check_environment(strict=True):
-    """blockperm.py hash and package versions; the stage-2 driver stops on a mismatch (DESIGN.md section 5)."""
+    """blockperm.py hash and package versions; the stage-2 driver stops on a mismatch."""
     import scipy
     import sklearn
     got = {"numpy": np.__version__, "scipy": scipy.__version__, "scikit-learn": sklearn.__version__}
     hb = hashlib.sha256((BLOCKPERM_DIR / "blockperm.py").read_bytes()).hexdigest()
     if strict and (hb != BLOCKPERM_SHA256 or got != PINNED_VERSIONS):
-        raise SystemExit("environment differs from the stamp: blockperm %s, versions %s" % (hb, got))
+        raise SystemExit("environment differs from the pinned one: blockperm %s, versions %s" % (hb, got))
     return {"blockperm_sha256": hb, "versions": got}
 
 MASTER_SEED = 20261104
@@ -171,7 +171,7 @@ def trial_shuffle_test(X, y, bins, key, D=1000, R=4, n_folds=20, n_jobs=1, obser
 
 # ---------------------------------------------------------------- group level
 def _q(x):
-    """Accuracies (percent) on an integer grid of 1e-6 percent, so that sums are exact (review M3)."""
+    """Accuracies (percent) on an integer grid of 1e-6 percent, so that sums are exact."""
     return np.round(np.asarray(x, float) * 1e6).astype(np.int64)
 
 

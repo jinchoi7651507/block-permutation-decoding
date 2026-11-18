@@ -1,6 +1,6 @@
 """Python port of the pseudo-population decoder of Jahn et al., Cell 2024 (PMC11574977), Figure 2D and Fig. S3G.
 
-Follows the authors' MATLAB code in authors-code/Figure_2/code (file and line references in DESIGN.md section 4).
+Follows the authors' MATLAB code in authors-code/Figure_2/code (file and line references in the comments below).
 Approximations (marked APPROX): the hyperparameter search (grid instead of bayesopt), fitPosterior (Platt scaling on
 10-fold cross-validated scores) and fitcnet (sklearn MLP with the defaults recalled for fitcnet). To verify on the
 real files: the holdout size (assumed round(0.2 * N)), the fitcnet defaults, the fitPosterior details.
@@ -41,7 +41,7 @@ def n_val(n, rule=None):
         return int(math.ceil(HOLDOUT * n - 1e-9))
     raise ValueError("unknown validation size rule %r" % rule)
 # APPROX: grid replacing bayesopt over BoxConstraint and KernelScale (the two hyperparameters the paper names; the
-# MATLAB default Standardize is false, so standardisation is not searched: DESIGN.md section 0, D6). For a linear
+# MATLAB default Standardize is false, so standardisation is not searched). For a linear
 # kernel, dividing the predictors by KernelScale s is the same as multiplying C by 1/s^2, so one effective C is searched.
 # Upper end capped at 10^1: C >= 10^1.5 can need seconds per fit.
 GRIDS = {"coarse": (-6.0, -4.5, -3.0, -2.0, -1.0, 0.0, 1.0),                         # default, 7 settings

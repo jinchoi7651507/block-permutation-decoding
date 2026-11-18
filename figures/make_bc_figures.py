@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """BC figures from the summary outputs only (no row file is read). Prints every plotted value with its source.
 
-Fig. 1: rate of p < 0.05 on labels with no information, training and test trials sharing blocks, for four tests
-(rows) in three datasets (markers). Fig. 2a: real toolboxes run with their tutorials' split and permutation
-(simulated balanced-run layout L4) against the block test. Fig. 2b (IBL) is added after the IBL results note.
+Fig. 1a: rate of p < 0.05 on labels with no information, training and test trials sharing blocks, for four tests
+(rows) in five datasets (markers). Fig. 1b: the decoder of row 2 in the mouse recordings with whole blocks held out.
+Fig. 2a: real toolboxes run with their tutorials' split and permutation
+(simulated balanced-run layout L4) against the block test. Fig. 2b: IBL brain-wide recordings.
 Colors: validated categorical slots 1-3 (dataviz reference palette, light surface; CVD and normal-vision checks
 pass, aqua below 3:1 contrast -> distinct marker shapes and a legend carry identity).
 """
@@ -69,7 +70,7 @@ for i, (lab, rule, _perm, _refit) in enumerate(rows):
     c5 = sens["fake/windows2s/main/%s" % rule]
     vals.append((i, "Body-worn sensors (post hoc)", c5["mean"], c5["ci95"], "step5 summary fake/windows2s/main %s" % rule))
 
-fig, ax = plt.subplots(figsize=(3.5, 2.7))
+fig, (ax, axb) = plt.subplots(2, 1, figsize=(3.5, 3.9), gridspec_kw={"height_ratios": [4, 2.2], "hspace": 0.55})
 off = {"Simulation": -0.3, "Mouse (Neuropixels)": -0.15, "Human EEG": 0.0, "fMRI (post hoc)": 0.15,
        "Body-worn sensors (post hoc)": 0.3}
 for i, ds, m, ci, src in vals:
@@ -98,10 +99,35 @@ ax.grid(axis="x", color=GRID, lw=0.5)
 ax.set_axisbelow(True)
 for s in ("top", "right"):
     ax.spines[s].set_visible(False)
+ax.set_xlabel("")
+ax.text(-0.95, -1.1, "a", transform=ax.get_yaxis_transform(), fontsize=8, fontweight="bold", color=INK, va="center")
+ax.text(1.0, -1.1, "Training and test trials share blocks", transform=ax.get_yaxis_transform(), ha="right", va="center", fontsize=6, color=MUTED)
+# Fig. 1b: whole blocks held out, mouse, the decoder of row 2 (step 1 sep24, lr_topk)
+s1all = json.load(open(R / "step1-decomposition/results/results.json"))["new/std6"]
+rows_b = [("Binomial test", "binom"), ("Trial-level permutation", "trl_rerun"),
+          ("Block permutation, fixed decoder", "blk_fixed"), ("Block permutation test", "blk_rerun")]
+ds = "Mouse (Neuropixels)"
+for i, (lab, k) in enumerate(rows_b):
+    v = s1all["sep24/lr_topk/" + k]
+    axb.plot([100 * v["ci"][0], 100 * v["ci"][1]], [i, i], color=COL[ds], lw=1.2, solid_capstyle="round", zorder=2)
+    axb.plot(100 * v["mean"], i, MARK[ds], ms=4.5, color=COL[ds], mec="white", mew=0.8, zorder=3)
+    print("Fig1b row %d %-34s %.3f [%.3f, %.3f]  step1 results.json new/std6 sep24/lr_topk/%s" % (i, lab, v["mean"], v["ci"][0], v["ci"][1], k))
+axb.axvline(5, color=MUTED, lw=0.8, ls=(0, (3, 2)), zorder=1)
+axb.set_yticks(range(len(rows_b)))
+axb.set_yticklabels([r[0] for r in rows_b])
+axb.invert_yaxis()
+axb.set_xlim(0, 102)
+axb.set_xlabel("Labels with no information called decodable (%)")
+axb.grid(axis="x", color=GRID, lw=0.5)
+axb.set_axisbelow(True)
+for s in ("top", "right"):
+    axb.spines[s].set_visible(False)
+axb.text(-0.95, -1.0, "b", transform=axb.get_yaxis_transform(), fontsize=8, fontweight="bold", color=INK, va="center")
+axb.text(1.0, -1.0, "Whole blocks held out (mouse)", transform=axb.get_yaxis_transform(), ha="right", va="center", fontsize=6, color=MUTED)
 h, l = ax.get_legend_handles_labels()
 uniq = dict(zip(l, h))
-ax.legend(uniq.values(), uniq.keys(), frameon=False, fontsize=6, loc="upper center", bbox_to_anchor=(0.4, -0.2),
-          ncol=3, handletextpad=0.3, columnspacing=0.8)  # five entries: two rows, below the axis label
+axb.legend(uniq.values(), uniq.keys(), frameon=False, fontsize=6, loc="upper center", bbox_to_anchor=(0.4, -0.55),
+           ncol=3, handletextpad=0.3, columnspacing=0.8)  # five entries: two rows, below panel b
 fig.savefig(OUT / "fig1.pdf", bbox_inches="tight", metadata={"Creator": None, "Producer": None, "CreationDate": None})
 
 # Fig. 2a: toolboxes as shipped (layout L4, 500 replicates each; rates from SUMMARY-TOOLS.md)
@@ -135,7 +161,7 @@ for s in ("top", "right"):
 fig.savefig(OUT / "fig2a.pdf", bbox_inches="tight", metadata={"Creator": None, "Producer": None, "CreationDate": None})
 print("written fig1.pdf fig2a.pdf")
 
-# Fig. 2b: IBL brain-wide recordings (values parsed from the stamped summary output runs/SUMMARY.md)
+# Fig. 2b: IBL brain-wide recordings (values parsed from the summary output runs/SUMMARY.md)
 import re
 summ = (R / "step3-ibl/runs/SUMMARY.md").read_text()
 q1 = summ.split("## Q1 fake labels")[1].split("## Primary contrasts")[0]

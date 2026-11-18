@@ -35,7 +35,7 @@ Run the checks:
 
 ```
 cd matlab
-octave --no-gui --eval "test_block_permutation_test" > test_block_permutation_test.out
+octave --no-gui --eval "test_block_permutation_test" > OUT/test_block_permutation_test.out   # compare with the shipped test_block_permutation_test.out
 python crosscheck/make_eegbci_features.py OUT                          # needs mne; downloads the EEG data
 python crosscheck/run_python_check.py OUT
 octave --no-gui --eval "cd crosscheck; run_matlab_check('OUT')"

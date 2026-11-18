@@ -1,4 +1,4 @@
-"""Operational retry around the stamped fetch_data.py (2026-11-09, Addendum 3 run): Zenodo answered HTTP 500 on range
+"""Operational retry around fetch_data.py (2026-11-09): Zenodo answered HTTP 500 on range
 requests. Extracts only members not yet present with their listed CRC-32, in small batches, through the unchanged
 fetch_data.run and the unchanged allow-list. Run: python -I fetch_data_retry.py DEST"""
 import csv

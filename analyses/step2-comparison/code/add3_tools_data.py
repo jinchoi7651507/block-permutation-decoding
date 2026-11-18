@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Step 2 addendum 3 §2a: write the replicate datasets that the real tools (CoSMoMVPA, PyMVPA) and the Python
-reference rows read. Same generator lines as run_grid.one (copied; the stamped file is not edited).
+"""Write the replicate datasets that the real tools (CoSMoMVPA, PyMVPA) and the Python
+reference rows read. Same generator lines as run_grid.one (copied; run_grid.py is not edited).
 
   python add3_tools_data.py --out ../runs_add3/tools/data [--layouts 1,2,3] [--reps 500] [--worker k --of n]
 

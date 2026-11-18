@@ -1,10 +1,10 @@
 #!/bin/bash
 # Download the raw BrainVision files (.vhdr, .vmrk, .eeg) of the 5 pilot subjects (eligibility/PILOT-SUBJECTS.txt; next in the seeded order after the 40,
-# hash-stamped before any .eeg download) into $LEMON_DIR (outside the repository), resumable (curl -C -),
+# fixed before any .eeg download) into $LEMON_DIR (outside the repository), resumable (curl -C -),
 # then write eligibility/EEG-MANIFEST-PILOT.sha256. Data are not redistributed.
 set -u
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
-LEMON_DIR="${LEMON_DIR:-/Users/jinchoi/Downloads/trackA-school/lemon/raw}"
+LEMON_DIR="${LEMON_DIR:?set LEMON_DIR to the raw-data folder}"
 RAW=https://ftp.gwdg.de/pub/misc/MPI-Leipzig_Mind-Brain-Body-LEMON/EEG_MPILMBB_LEMON/EEG_Raw_BIDS_ID
 mkdir -p "$LEMON_DIR"
 (cd "$HERE" && shasum -a 256 -c eligibility/PILOT-SUBJECTS.sha256) || { echo "SUBJECTS.txt hash mismatch; stop"; exit 1; }
