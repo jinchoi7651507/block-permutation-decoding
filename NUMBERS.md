@@ -113,6 +113,7 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 |---|---|---|
 | 143 recorded areas (30 mice); 154 in all 32 | `n_areas` 143 (`new`), 154 (`all32`) | `step2-comparison/results/allen_summary.json` |
 | 24 blocks of about 35 s (spontaneous activity) | measured block length 35 s (8 blocks per epoch) | `step1-decomposition/results/results.md` (block-number sweep) |
+| blocks of about 73 s (4 per epoch, 12 in all; step 1 `sep`, `shared`, `segment`; Supplementary Note 5) | measured block length 73 s (4 blocks per epoch, 3 epochs) | `step1-decomposition/results/results.md` (block-number sweep); `trackA-std/code/trackA_extra.py` (`BLOCKS_PER_EPOCH`, `N_EPOCHS`) |
 | gate: 149 of 154 areas identical; F-test version within 0.6 points | pipeline gate | `step2-comparison/gate/GATE-RESULT.md` |
 | 40 participants drawn, 38 kept | `SUBJECTS.txt`; two dropped by the epoch rule | `step2b-eeg/eligibility/SUBJECTS.txt`, `step2b-eeg/QC-NOTE.md`, `step2b-eeg/results/summary_2b.md` (dropped subjects) |
 | EEG block permutations in the main and fixed-order arms drawn from the 4,900 balanced assignments (200 draws) | P5 null set = the 4,900; `N_PERM` 200 | `step2b-eeg/code/run_2b.py` |
