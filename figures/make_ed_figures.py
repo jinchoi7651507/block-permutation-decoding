@@ -99,7 +99,7 @@ def ed1():
     style(a, "Labels with no information called decodable (%)")
     a.set_title("a  Block permutation, by decoder", loc="left", fontsize=7)
     ha = [plt.Line2D([], [], ls="", marker="o", color=MOUSE, ms=4, label="Decoder fixed, shared blocks"),
-          plt.Line2D([], [], ls="", marker="o", color=MOUSE, mfc="white", ms=4, label="Decoder fixed, separate blocks"),
+          plt.Line2D([], [], ls="", marker="o", color=MOUSE, mfc="white", ms=4, label="Decoder fixed, held-out blocks"),
           plt.Line2D([], [], ls="", marker="D", color=INK, mfc="white", ms=4, label="Decoder refit, shared blocks")]
     l1 = leg.legend(handles=ha, frameon=False, loc="upper left", bbox_to_anchor=(-0.55, 1.0), fontsize=6, handletextpad=0.3,
                     title="Panel a", title_fontsize=6, alignment="left")
@@ -107,8 +107,8 @@ def ed1():
 
     tests = [("binom", "Binomial test"), ("trl_rerun", "Trial-level permutation, refit"), ("trn_trl", "Training labels only, trial-level"),
              ("trn_blk", "Training labels only, by block"), ("blk_fixed", "Block permutation, decoder fixed"), ("blk_rerun", "Block permutation test")]
-    schemes = [("shared24", "Shared blocks", "o", True), ("half24", "Shared, first vs second half", "^", True),
-               ("paired24", "Separate blocks, dependent labels", "s", False), ("sep24", "Separate blocks", "o", False)]
+    schemes = [("shared24", "Shared blocks", "o", True), ("half24", "First vs second half of each block", "^", True),
+               ("paired24", "Held-out blocks, label of a training block", "s", False), ("sep24", "Held-out blocks, own labels", "o", False)]
     for i, (t, _) in enumerate(tests):
         for j, (sch, name, mk, filled) in enumerate(schemes):
             m, ci, src = get(f"{sch}/lr_topk/{t}")
@@ -137,7 +137,7 @@ def ed1():
     c.set_yticks(ys); c.set_yticklabels([r[1] for r in rows], fontsize=6); c.set_ylim(8.6, -1.4)
     import matplotlib.transforms as mt
     tr = mt.blended_transform_factory(c.transAxes, c.transData)
-    c.text(-0.04, -0.9, "Binomial, separate blocks", fontsize=6, color=INK, weight="bold", ha="right", transform=tr)
+    c.text(-0.04, -0.9, "Binomial, held-out blocks", fontsize=6, color=INK, weight="bold", ha="right", transform=tr)
     c.text(-0.04, 4.1, "Circular shift, cut chosen", fontsize=6, color=INK, weight="bold", ha="right", transform=tr)
     style(c, "Labels with no information called decodable (%)")
     c.set_title("c  Other tests", loc="left", fontsize=7)
@@ -207,7 +207,7 @@ def ed6():
 
     rows = [("CoSMoMVPA main", "CoSMoMVPA"), ("CoSMoMVPA zscore", "CoSMoMVPA, z-scored per run"), ("PyMVPA main", "PyMVPA"),
             ("PyMVPA zscore", "PyMVPA, z-scored per run"), ("PyMVPA chunks", "PyMVPA, whole blocks permuted"),
-            ("P3 port", "Port: within-run permutation"), ("P4 port", "Port: training labels only"), ("P5", "Block permutation test")]
+            ("P3 port", "Within-run permutation, re-implemented"), ("P4 port", "Training-label permutation, re-implemented"), ("P5", "Block permutation test")]
     lays = [("L1", "Random 12-block design, runs of 3 blocks", "^", False), ("L2", "Fixed order AABB", "s", False),
             ("L3", "Labels varying trial by trial, no drift", "o", False), ("L4", "Balanced runs (as in Fig. 2a)", "o", True)]
     fig, ax = plt.subplots(figsize=(5.4, 3.3))

@@ -88,7 +88,7 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 | SN 7: 12 runs (11 for one participant), 30 assignments per participant, 55 features, one sensor participant excluded (42 windows, fewer than 480) | inclusion records; `N_ASSIGN` | `step4-fmri-haxby/runs/prepare.log`, `step4-fmri-haxby/code/run_haxby.py`, `step5-pamap2/runs/prepare.log` |
 | SN 7 positive controls: faces against houses 6 of 6; added signal 99.6–100% | control cells | both summaries |
 | Fig. 1: 1,000 simulation replicates; Fig. 2a: 500 replicates per layout | primary cell; layout L4 | `step2-comparison/results/sim_summary.md`; `runs_add3/tools/SUMMARY-TOOLS.md` |
-| ED 1c: binomial test 26.5% with separate blocks | `sep`, binom, sel | `step1-decomposition/results/results.md` |
+| ED 1c: binomial test 26.5% with held-out blocks | `sep`, binom, sel | `step1-decomposition/results/results.md` |
 | ED 4a: p = 0.001 for both nulls | `p` | `yaron-panel/results/fixed_vs_repeated.json` |
 | ED 3: 200 sets of labels with no information (mouse), 50 label assignments (EEG) | `n_experiments` 200; "over 50 assignments" | `step2-comparison/results/allen_summary.json` (`group_level`), `step2b-eeg/results/summary_2b.md` (last line) |
 | ED 8: 134 regions recorded in at least three sessions | region counts | `step3-ibl/runs/SUMMARY.md` |
