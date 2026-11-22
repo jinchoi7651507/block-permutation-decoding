@@ -1,4 +1,4 @@
-# Quick path, every package pinned: REPRODUCE.md §1–§2 pass byte for byte in a fresh Python 3.12.3 environment with these versions (2026-11-18). Install with: pip install -r requirements/quick-path-lock.txt
+# Quick path, every package pinned: REPRODUCE.md §1–§2 pass byte for byte in a fresh Python 3.12.3 environment with these versions. Install with: pip install -r requirements/quick-path-lock.txt
 cloudpickle==3.1.2
 contourpy==1.4.0
 cycler==0.12.1

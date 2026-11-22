@@ -452,17 +452,18 @@ def ed3():
 def ed10():
     """Power: simulation (two effect sizes, raw and size-adjusted) and EEG graded control (post hoc)."""
     pw = _sim()["power"]
+    sa = json.load(open(R / "step2-comparison/results/size_adjusted_exact.json"))
     eeg = json.load(open(R / "step2b-eeg/results/summary_2b.json"))["size_adjusted_power_pos_graded"]
     rules = ("P1", "P2", "P3", "P4", "P5")
     names = {"P1": "Binomial test", "P2": "Trial-level permutation", "P3": "Within-run permutation", "P4": "Training labels only", "P5": "Block permutation test"}
     fig, (a, b) = plt.subplots(1, 2, figsize=(7.2, 2.6))
     for j, (key, lab) in enumerate((("pw0_delta0.2", "smaller effect"), ("pw1_delta0.5", "larger effect"))):
         for i, r in enumerate(rules):
-            d = pw[key][r]
+            d, s = pw[key][r], sa[key][r]
             y = i - 0.15 + 0.3 * j
             a.plot(100 * d["raw_power"], y, "s", ms=4, color=SIM, mfc=SIM if j else "white", mew=0.9)
-            a.plot(100 * d["size_adjusted_power"], y, "o", ms=4, color=INK, mfc=INK if j else "white", mew=0.9)
-            print("ED10a %s %-4s raw %.3f size-adjusted %.3f  sim_summary power %s" % (lab, r, d["raw_power"], d["size_adjusted_power"], key))
+            a.plot(100 * s["size_adjusted_power"], y, "o", ms=4, color=INK, mfc=INK if j else "white", mew=0.9)
+            print("ED10a %s %-4s raw %.3f size-adjusted %.3f  sim_summary power %s; size_adjusted_exact %s" % (lab, r, d["raw_power"], s["size_adjusted_power"], key, key))
     a.set_yticks(range(5)); a.set_yticklabels([names[r] for r in rules]); a.invert_yaxis()
     style(a, "Power (%)"); a.set_title("a  Simulation (upper: smaller effect, open;\n    lower: larger effect, filled)", loc="left", fontsize=6.5)
     for i, r in enumerate(rules):

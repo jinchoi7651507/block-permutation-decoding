@@ -49,7 +49,7 @@ Install with `pip install ./blockperm` (Python 3.10 or later), or `pip install b
 | Block permutation test with a fixed block order | 0–2.4% in simulation; 95% and 29% in EEG | `analyses/step2-comparison/results/sim_summary.md`; `analyses/step2b-eeg/results/summary_2b.md` | §2 |
 | Fig. 2a: CoSMoMVPA and PyMVPA as shipped (simulation; post hoc) | 18–21%, against 4% | `analyses/step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md` | §2 |
 | Group-level tests on shared-block splits | t-test 100%; null built from the block permutation test 4–7% (shared-block splits) | `analyses/step2b-eeg/results/summary_2b.md`, `analyses/step2-comparison/results/allen_summary.md` | §2 |
-| Power of the block permutation test; size-adjusted power of the other tests (EEG post hoc) | 7% and 66% (simulation); EEG 88–93% for the trial-level tests and 57% for training-label permutation, against 85% | `analyses/step2-comparison/results/sim_summary.json` (`power`), `analyses/step2b-eeg/results/summary_2b.json` | §2 |
+| Power of the block permutation test; size-adjusted power of the other tests (EEG post hoc) | 7% and 66% (simulation); size-adjusted, simulation: binomial test 7% and 67% against 6% and 62% for the block permutation test, the other tests 5%; EEG 88–93% for the trial-level tests and 57% for training-label permutation, against 85% | `analyses/step2-comparison/results/sim_summary.json` (`power`), `analyses/step2-comparison/results/size_adjusted_exact.json`, `analyses/step2b-eeg/results/summary_2b.json` | §2 |
 | Fig. 2b: IBL, fake block sequences | 70% against 5% | `analyses/step3-ibl/runs/SUMMARY.md` | §2 |
 | Fig. 2b: IBL, real block structure | 884 of 1,359 verdicts differ (65%) | as above | §2 |
 | Post hoc: block-design fMRI (Haxby et al. 2001) | shared blocks: trial-level permutation 90%, training-label permutation 91%, block permutation test 8% (detrended) | `analyses/step4-fmri-haxby/results/summary.md` | §2 |
@@ -63,7 +63,7 @@ Every number in the paper is traced to a file and key in `NUMBERS.md`.
 | Study | Design | Result of the primary test | Output | `REPRODUCE.md` |
 |---|---|---|---|---|
 | Template decoding, macaque LIP, FEF and LPFC (Jahn et al. 2024, *Cell*; 17 sessions, 171 blocks, template drawn at random per block) | block permutation test, true template, 900 ms window, Holm over three regions | the reproduction gate matched the published Fig. 2D accuracy and z-test; trial-level permutation at its smallest p; under the block permutation test, which assumes that blocks are exchangeable with the color-selection penalty and the performance-based block ends unmodeled, template decoding not established in any region (Holm 0.64, 0.48, 0.64); limited power (a mean of 3 to 4 blocks per bin) and not evidence of absence | `analyses/step6-reanalysis-cell/vm-out-a2/summary.md`, `vm-out-a2/note_tables.out` | §3 |
-| Context decoding, mouse dorsolateral striatum (Klee et al. 2026, *Science Advances*; 6 mice, fixed order cued, self-paced, repeated three times) | group block permutation test, intertrial (ITI) and peri-movement (PERI) windows | under the block test, which rests on an exchangeability model because the order was fixed, context decoding is above the block-arrangement null in both windows (p = 1.5e-05 and 6e-06); with a fixed order this cannot exclude slow drift | `analyses/step6b-reanalysis-sciadv/out/SUMMARY.md` | §3 |
+| Context decoding, mouse dorsolateral striatum (Klee et al. 2026, *Science Advances*; 6 mice, fixed order cued, self-paced, repeated three times) | group block permutation test, intertrial (ITI) and peri-movement (PERI) windows | under the block permutation test, which rests on an exchangeability model because the order was fixed, context decoding is above the block-arrangement null in both windows (p = 1.5e-05 and 6e-06); with a fixed order this cannot exclude slow drift | `analyses/step6b-reanalysis-sciadv/out/SUMMARY.md` | §3 |
 
 ### Extended Data, Supplementary Information and figures
 
@@ -79,7 +79,7 @@ Every number in the paper is traced to a file and key in `NUMBERS.md`.
 | Extended Data Fig. 6 | toolboxes in all layouts; agreement gate | `step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md`; gate result `runs_add3/tools/gate/GATE-RESULT.json` inside `runs_add3.tgz` |
 | Extended Data Figs 7, 8 | IBL: all rows, region counts (134 regions with at least three sessions), positive control | `step3-ibl/runs/SUMMARY.md` |
 | Extended Data Fig. 9 | fixed block orders | `step2-comparison/results/sim_summary.md`, `add3_summary.md`; `step2b-eeg/results/summary_2b.md` |
-| Extended Data Fig. 10 | power and size-adjusted power (EEG graded control post hoc) | `step2-comparison/results/sim_summary.json` (`power`), `step2b-eeg/results/summary_2b.json` (`size_adjusted_power_pos_graded`) |
+| Extended Data Fig. 10 | power and size-adjusted power (EEG graded control post hoc) | `step2-comparison/results/sim_summary.json` (`power`), `step2-comparison/results/size_adjusted_exact.json`, `step2b-eeg/results/summary_2b.json` (`size_adjusted_power_pos_graded`) |
 | Supplementary Note 1 | the earlier mouse analysis (outputs only) | `trackA-std/results/results.json` (rerun), `trackA-std/first-run/results/results.json` (first run) |
 | Supplementary Note 2, Table 2 | practice survey | `practice-survey/` (`SUMMARY.md`, `coding_final.csv`, `random-assignment-coding.csv` (random assignment of the decoded condition; post hoc), `AUDIT-AUTO-EXCLUSIONS.md`, `final-check-2026-11-02/`, `final-check-2026-11-04/`) |
 | Supplementary Note 3 | alpha-power slope over the EEG session (post hoc) | `step2b-eeg/results/alpha_slope.json` |
@@ -142,7 +142,7 @@ Install the quick-path environment first (`pip install -r requirements/quick-pat
 | `analyses/step2-comparison/` | Simulation grid, mouse cells and the toolboxes as shipped (Fig. 1 for the mouse and the simulation; Fig. 2a). The toolbox excerpts are in `toolbox-src/` (`THIRD-PARTY.md`); the toolbox machine set-up in `gcp/`. |
 | `analyses/step2b-eeg/` | The same tests on MPI LEMON resting EEG (Fig. 1, EEG); cloud set-up in `gcp/`. |
 | `analyses/step3-ibl/` | The IBL brain-wide map (Fig. 2b). |
-| `analyses/trackA-std/` | The earlier mouse analysis that step 1 builds on: session list, the outputs of its first run (`first-run/`) and of the stated rerun (`results/`, `RERUN.md`). |
+| `analyses/trackA-std/` | The earlier mouse analysis that step 1 builds on: session list, the outputs of its first run (`first-run/`) and of the rerun (`results/`, `RERUN.md`). |
 | `analyses/foldmap/` | Platform check of scikit-learn's `GroupKFold` fold map. |
 | `analyses/practice-survey/` | Protocol, search, screening and coding of the survey (full texts not redistributed). |
 | `analyses/step4-fmri-haxby/` | Post hoc: the same tests on block-design fMRI (Haxby et al. 2001, the PyMVPA tutorial data); code, rows and summary (Supplementary Note 7). |

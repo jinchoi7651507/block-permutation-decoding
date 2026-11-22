@@ -1,5 +1,5 @@
 """Selection and held-out scoring of Yaron et al. (2025, PLoS Biol 23: e3003242), ported to Python from the
-authors' MATLAB code (Zenodo 10.5281/zenodo.15531880, v1.0.0), as needed for the fixed-versus-repeated comparison (Extended Data Fig. 3 of the paper).
+authors' MATLAB code (Zenodo 10.5281/zenodo.15531880, v1.0.0), as needed for the fixed-versus-repeated comparison (Extended Data Fig. 4a of the paper).
 
 Per session: active units (spike sum > 200); per condition and trial, the omission response = mean of bins
 306:420 minus mean of bins 276:305 (MATLAB, 1-based); trials subsampled to 50 per condition as in allmats.m.

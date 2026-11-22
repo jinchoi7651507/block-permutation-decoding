@@ -1,0 +1,112 @@
+{
+ "primary_cell": "c000_random_B12_tau20_d1_t0_main",
+ "tie_rule": "p equal to q, relative tolerance 1e-9",
+ "pw0_delta0.2": {
+  "delta": 0.2,
+  "n_reps": 1000,
+  "P1": {
+   "raw_power": 1.0,
+   "threshold_q": 2.715347752828121e-32,
+   "p0_below_q": 0.048,
+   "p0_tied": 0.003,
+   "tie_prob_g": 0.6666666666666673,
+   "size_adjusted_power": 0.07100000000000001,
+   "n_null": 1000,
+   "n_alt": 1000
+  },
+  "P2": {
+   "raw_power": 1.0,
+   "threshold_q": 0.004975124378109453,
+   "p0_below_q": 0.0,
+   "p0_tied": 0.991,
+   "tie_prob_g": 0.050454086781029264,
+   "size_adjusted_power": 0.050454086781029264,
+   "n_null": 1000,
+   "n_alt": 1000
+  },
+  "P3": {
+   "raw_power": 0.533,
+   "threshold_q": 0.004975124378109453,
+   "p0_below_q": 0.0,
+   "p0_tied": 0.496,
+   "tie_prob_g": 0.10080645161290323,
+   "size_adjusted_power": 0.05272177419354839,
+   "n_null": 1000,
+   "n_alt": 1000
+  },
+  "P4": {
+   "raw_power": 1.0,
+   "threshold_q": 0.004975124378109453,
+   "p0_below_q": 0.0,
+   "p0_tied": 0.995,
+   "tie_prob_g": 0.05025125628140704,
+   "size_adjusted_power": 0.05020100502512563,
+   "n_null": 1000,
+   "n_alt": 1000
+  },
+  "P5": {
+   "raw_power": 0.071,
+   "threshold_q": 0.04477611940298507,
+   "p0_below_q": 0.048,
+   "p0_tied": 0.004,
+   "tie_prob_g": 0.5000000000000004,
+   "size_adjusted_power": 0.057,
+   "n_null": 1000,
+   "n_alt": 1000
+  }
+ },
+ "pw1_delta0.5": {
+  "delta": 0.5,
+  "n_reps": 1000,
+  "P1": {
+   "raw_power": 1.0,
+   "threshold_q": 2.715347752828121e-32,
+   "p0_below_q": 0.048,
+   "p0_tied": 0.003,
+   "tie_prob_g": 0.6666666666666673,
+   "size_adjusted_power": 0.6746666666666667,
+   "n_null": 1000,
+   "n_alt": 1000
+  },
+  "P2": {
+   "raw_power": 1.0,
+   "threshold_q": 0.004975124378109453,
+   "p0_below_q": 0.0,
+   "p0_tied": 0.991,
+   "tie_prob_g": 0.050454086781029264,
+   "size_adjusted_power": 0.050454086781029264,
+   "n_null": 1000,
+   "n_alt": 1000
+  },
+  "P3": {
+   "raw_power": 0.523,
+   "threshold_q": 0.004975124378109453,
+   "p0_below_q": 0.0,
+   "p0_tied": 0.496,
+   "tie_prob_g": 0.10080645161290323,
+   "size_adjusted_power": 0.05272177419354839,
+   "n_null": 1000,
+   "n_alt": 1000
+  },
+  "P4": {
+   "raw_power": 1.0,
+   "threshold_q": 0.004975124378109453,
+   "p0_below_q": 0.0,
+   "p0_tied": 0.995,
+   "tie_prob_g": 0.05025125628140704,
+   "size_adjusted_power": 0.05025125628140704,
+   "n_null": 1000,
+   "n_alt": 1000
+  },
+  "P5": {
+   "raw_power": 0.656,
+   "threshold_q": 0.04477611940298507,
+   "p0_below_q": 0.048,
+   "p0_tied": 0.004,
+   "tie_prob_g": 0.5000000000000004,
+   "size_adjusted_power": 0.6154999999999999,
+   "n_null": 1000,
+   "n_alt": 1000
+  }
+ }
+}

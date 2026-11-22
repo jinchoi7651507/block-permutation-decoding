@@ -37,7 +37,7 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 | circular-shift null 5% and 15% (random blocks), 35% (half-session split) (Supplementary Notes 2 and 6, Extended Data Fig. 1c; iid 2.8 is not a block scheme) | circ_rerun sel: iid 2.8, shared24 5.1, shared 15.1, segment 35.1 | `step1-decomposition/results/results.md` |
 | whole blocks held out: trial-level training-label permutation 7–14% | sep24 trn_trl 7.0–14.3 | `step1-decomposition/results/within_train.md` |
 | smallest p about one in three with two blocks per condition | 6 arrangements, 3 distinct scores (class swap); smallest P5 p in the 36 random cells with B = 4: 0.22–0.27 | arithmetic; `step2-comparison/results/sim_summary.json` (`min_p`) |
-| power 7% and 66%; size-adjusted invalid tests 5–7% | P5 7.1 (δ 0.2), 65.6 (δ 0.5); P1, P2, P4 size-adjusted 5.0–7.2 | `step2-comparison/results/sim_summary.json` (`power`) |
+| power 7% and 66%; size-adjusted, at most 6 points above the block permutation test in the simulations | P5 7.1 (δ 0.2), 65.6 (δ 0.5); size-adjusted P1 7.1 and 67.5, P5 5.7 and 61.5, P2–P4 5.0–5.3 | `step2-comparison/results/sim_summary.json` (`power`); size-adjusted `step2-comparison/results/size_adjusted_exact.json` (its P1 values replace those in `sim_summary.json`, which counted every p within 10^-12 of the threshold as tied) |
 | EEG power up to 8 points more, training-label permutation less: 87.8–92.5% against 84.6%, training-label permutation 56.9% (post hoc) | size-adjusted P1–P3 87.8–92.5; P4 56.9; P5 84.6 | `step2b-eeg/results/summary_2b.json` (`size_adjusted_power_pos_graded`) |
 
 ## Fig. 2a and the toolboxes
@@ -45,7 +45,7 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 |---|---|---|
 | CoSMoMVPA and PyMVPA as shipped 18–21%, against 4% | L4: CoSMoMVPA 20.2 / 20.8, PyMVPA 18.4 / 21.4; P5 4.4 | `step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md` |
 | fixed block order 31–70% | L2: CoSMoMVPA 30.6 / 58.6, PyMVPA 48.6 / 70.2 | same |
-| PyMVPA chunk-level permutation 4–5% in L1–L3, 11.8% in L4 (Methods, per-toolbox change) | 5.4 / 4.0 / 5.0 (L1–L3); 11.8 (L4) | same |
+| PyMVPA chunk-level permutation 4–5% in L1–L3, 11.8% in L4 (Extended Data Fig. 6; not quoted in the text) | 5.4 / 4.0 / 5.0 (L1–L3); 11.8 (L4) | same |
 | `groups` permutes within blocks | scikit-learn `_shuffle` | `step2-comparison/TOOLBOX-DEFAULTS.md`; `step2-comparison/toolbox-src/sk_validation.py` |
 | group level: t-test 100%; group null 4–7% | EEG t 100%, group null 4%; mouse t 100% (S-main, S-tool), group null 4–7% | `step2b-eeg/results/summary_2b.md` (last line); `step2-comparison/results/allen_summary.md` (last column, shared24 and dg_shared24); `group_null_ci95` in `summary_2b.json` is not a valid interval and is not used |
 
@@ -117,7 +117,7 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 | gate: 149 of 154 areas identical; F-test version within 0.6 points | pipeline gate | `step2-comparison/gate/GATE-RESULT.md` |
 | 40 participants drawn, 38 kept | `SUBJECTS.txt`; two dropped by the epoch rule | `step2b-eeg/eligibility/SUBJECTS.txt`, `step2b-eeg/QC-NOTE.md`, `step2b-eeg/results/summary_2b.md` (dropped subjects) |
 | EEG block permutations in the main and fixed-order arms drawn from the 4,900 balanced assignments (200 draws) | P5 null set = the 4,900; `N_PERM` 200 | `step2b-eeg/code/run_2b.py` |
-| IBL: 459 sessions of 139 mice; 335 finished, 106 skipped, 18 errors; 325 sessions with regions; 47 workers | completed prefix and denominators | `step3-ibl/runs/ORDER.json` (`n_sessions`, `n_mice`), `step3-ibl/runs/SUMMARY.md`; sessions with regions and the 47 worker row files in `step3-ibl/runs_ibl.tgz` |
+| IBL: 459 sessions of 139 mice; 335 finished, 106 skipped, 18 errors; 325 sessions with regions | completed prefix and denominators | `step3-ibl/runs/ORDER.json` (`n_sessions`, `n_mice`), `step3-ibl/runs/SUMMARY.md`; sessions with regions and the 47 worker row files in `step3-ibl/runs_ibl.tgz` |
 | IBL: 20 fake block sequences per session; one pool of 220 pseudosessions | `range(20)`, `pseudo_pool(..., n=220)` | `step3-ibl/code/run_ibl.py` |
 | IBL realism check: KS 0.06, permutation p 0.14 | ks 0.0602, ks_perm_p 0.1409 | `step3-ibl/runs/REALISM.json` |
 | 40 automatic exclusions checked, none wrongly excluded (Wilson 0–8.8%) | 0 of 40 (language-model audit); 40 of 40 excluded (independent check, 2026-11-02); author's hand check: none wrongly excluded (`practice-survey/AUTHOR-CHECK.md`) | `practice-survey/AUDIT-AUTO-EXCLUSIONS.md`, `practice-survey/final-check-2026-11-02/RESULT.md` |
@@ -129,7 +129,7 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 | trial shuffle null mean 0.33, p at its minimum in all regions | 0.3335, 0.3335, 0.3333; 0.000999 | `step6-reanalysis-cell/vm-out-a2/note_tables.out` |
 | block permutation null means 0.75, 0.70, 0.72; observed 0.76, 0.75, 0.74 | 0.7537, 0.6975, 0.7181; 0.7570, 0.7526, 0.7393 | as above |
 | qualifying sessions and true-template z-test, gate items | `a3_fill.json` values printed by `note_tables.py` | `step6-reanalysis-cell/vm-out-a3/note_tables.out` |
-| Klee et al. (2026) group block test p, ITI and PERI, 1.5e-05 and 6e-06; drift accuracy 51.4% | as stated | `step6b-reanalysis-sciadv/out/SUMMARY.md` |
+| Klee et al. (2026) group block permutation test p, ITI and PERI, 1.5e-05 and 6e-06; drift accuracy 51.4% | as stated | `step6b-reanalysis-sciadv/out/SUMMARY.md` |
 | Klee et al. (2026): drift threshold 60% (Methods) | `DRIFT_MAX = 60.0` | `step6b-reanalysis-sciadv/code/summarize.py` |
 | Jahn et al. (2024) corrected p 0.48–0.64 (main text) | Holm 0.4795, 0.6434, 0.6434 | `step6-reanalysis-cell/vm-out-a2/summary.md` |
 | 4 of 14 surveyed studies stated random assignment of the decoded condition (three with a constraint) | random 1, pseudorandom-constrained 3 (column `author_check_2026-11-11`) | `practice-survey/random-assignment-coding.csv` |
@@ -142,10 +142,10 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 | Klee et al. (2026): 20 arrangements per mouse, 10 distinct scores, smallest group p 10^-6 (Methods) | C(6,3) = 20, class swap gives 10 ("of 10"); smallest possible 1e-06 | arithmetic; `step6b-reanalysis-sciadv/out/SUMMARY.md` |
 | Klee et al. (2026): self-paced drift decoding above chance in 3 of 6 mice (Methods) | self first vs last p < 0.05 in mice 1, 3 and 4 | `step6b-reanalysis-sciadv/out/SUMMARY.md` (Controls) |
 | Extended Data Fig. 4a: 18 sessions | 18 session files | `yaron-panel/data/MANIFEST.sha256`, `yaron-panel/code/yaron_pipeline.py` |
-| Methods, Supplementary Table 1: 8 of 30 sessions (stated rerun) | as stated | `trackA-std/RERUN.md` |
+| Supplementary Table 1: 8 of 30 sessions (rerun) | as stated | `trackA-std/RERUN.md` |
 | SN 2: random assignment, 1 random, 3 constrained, 8 fixed, 1 animal-determined, 1 not stated | counts of the author-checked column | `practice-survey/random-assignment-coding.csv` |
 | SN 5: 9 of 10 rows inside the interval, about 3 points, formula 0.3–5.4 points | recomputed from the table | `step1-decomposition/results/results.md` |
 | SN 6: EEG, labels assigned within one eye state 93%, labels on 120-s blocks 96% | as stated | `step2b-eeg/results/summary_2b.md` |
-| Methods: labels varying trial by trial without slow drift, CoSMoMVPA 6.2%, PyMVPA training-label rule 10–12% | as stated | `step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md` |
+| Extended Data Fig. 6 (not quoted in the text): labels varying trial by trial without slow drift, CoSMoMVPA 6.2%, PyMVPA training-label rule 10–12% | as stated | `step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md` |
 | Jahn et al. (2024): a mean of three to four blocks per color bin (main text; Extended Data Fig. 4b) | G10: LIP 3.42, FEF 3.40, LPFC 3.35 | `step6-reanalysis-cell/vm-out-a2/a2-out.tgz` (`out-a2/gate.json`, `extra.blocks_per_bin_true`) |
 | SN 6: 100% of runs with random folds, 54% with contiguous folds (simulated block variable) | a value of the cited paper, not an output of this repository | Harris (2020), Fig. 8 and its text |

@@ -1,4 +1,4 @@
-"""Panel (Extended Data Fig. 3 of the paper): null mean and central 95% range of the held-out score under the block permutation,
+"""Panel (Extended Data Fig. 4a of the paper): null mean and central 95% range of the held-out score under the block permutation,
 with the selection held fixed or repeated in every permutation, against the observed score.
 
     python plot_panel.py --summary ../results/fixed_vs_repeated.json --out ../results/panel.pdf

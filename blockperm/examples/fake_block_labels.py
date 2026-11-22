@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fake block labels on a drifting synthetic recording: scikit-learn's trial-level permutation test against the
 block permutation test. Labels are assigned to whole blocks at random and carry no information, so a valid test
-should reject in about 5% of recordings. Synthetic data only; runs in about a minute on one core.
+should reject in about 5% of recordings. Synthetic data only; runs in about 1.5 minutes on one core.
 
     python examples/fake_block_labels.py [n_recordings]
 """

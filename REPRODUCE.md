@@ -39,7 +39,7 @@ It checks eight archives and must end with "ALL OK". The data manifests (recordi
 
 ## 2. Rebuild the summaries (quick path)
 
-The run rows are shipped as archives, each unpacking into the folder name it had on the machine that wrote it. `-k` keeps the files already in the tree. On Linux, GNU tar stops at those files with `-k`; write `tar xzf <archive> --skip-old-files` for each archive. The five archives unpack to about 220 MB in about 31,500 files.
+The run rows are shipped as archives, each unpacking into the folder name it had on the machine that wrote it. `-k` keeps the files already in the tree. On Linux, GNU tar stops at those files with `-k`; write `tar xzf <archive> --skip-old-files` for each archive. The five archives below unpack to about 220 MB in about 31,500 files.
 
 ```bash
 (cd analyses/step2-comparison && tar xzkf runs_cloud.tgz && tar xzkf runs_allen.tgz && tar xzkf runs_add3.tgz)   # into runs/, runs_allen/, runs_add3/
@@ -56,6 +56,7 @@ python summarize.py --rows ../runs/rows.jsonl --out $OUT && cmp $OUT/results.md 
 python summarize_within_train.py --rows ../runs/within_train_rows.jsonl --out $OUT && cmp $OUT/within_train.md ../results/within_train.md
 cd ../../step2-comparison/code                                               # step 2, about 1 min
 python summarize_sim.py --runs ../runs --out $OUT && cmp $OUT/sim_summary.json ../results/sim_summary.json
+python size_adjusted_exact.py --runs ../runs --out $OUT && cmp $OUT/size_adjusted_exact.json ../results/size_adjusted_exact.json
 python summarize_allen.py --rows ../runs_allen --out $OUT && cmp $OUT/allen_summary.json ../results/allen_summary.json
 python summarize_add3.py --runs ../runs_add3 --main-runs ../runs --out $OUT && cmp $OUT/add3_summary.json ../results/add3_summary.json
 python add3_summarize_tools.py --tools ../runs_add3/tools > $OUT/SUMMARY-TOOLS.md && cmp $OUT/SUMMARY-TOOLS.md ../runs_add3/tools/SUMMARY-TOOLS.md
@@ -70,7 +71,7 @@ python summarize.py --step 5 --rows ../../step5-pamap2/runs --features ../../ste
 cd ../../..
 ```
 
-Each summary prints its tables; the `.md` files hold the same numbers as the `.json` files. Every `cmp` of this section, including the figures below, printed nothing in a clean copy with a fresh quick-path environment (macOS arm64, 2026-11-18).
+Each summary prints its tables; the `.md` files hold the same numbers as the `.json` files. Every `cmp` of this section, including the figures below, printed nothing in a clean copy with a fresh quick-path environment (macOS arm64).
 
 Recompute one simulation replicate from scratch (cell `c000`, replicate 0; about 20 s):
 
@@ -245,7 +246,7 @@ python posthoc_alpha_slope.py --features <features dir> --rows ../runs --out <sc
 
 Then rebuild the step 2b summary as in §2.
 
-The arms are those of the Methods (Labels with no information); the graded control is post hoc. `runs/vm.log` (in the archive) records each phase of the run. `download_eeg.sh` uses the BSD form `stat -f %z`; on Linux use `stat -c %s`.
+The analyses are those of the Methods (Labels with no information); the graded control is post hoc. `runs/vm.log` (in the archive) records each phase of the run. `download_eeg.sh` uses the BSD form `stat -f %z`; on Linux use `stat -c %s`.
 
 ### step 3 (IBL Brain-Wide Map, 459 sessions)
 

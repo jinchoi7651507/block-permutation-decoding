@@ -1,4 +1,4 @@
-"""Fixed vs repeated unit selection inside the block permutation, rat auditory cortex (Extended Data Fig. 3 of the paper).
+"""Fixed vs repeated unit selection inside the block permutation, rat auditory cortex (Extended Data Fig. 4a of the paper).
 
 Data: Yaron et al. 2025 (PLoS Biol 23: e3003242), Zenodo 10.5281/zenodo.15531781 (../data/fetch_yaron.py).
 Pipeline: the authors' selection on odd trials and held-out scoring on even trials (yaron_pipeline.py).

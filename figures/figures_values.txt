@@ -599,16 +599,16 @@ ED9b fixed_abba   tool   P2 0.474 [0.325, 0.627]  summary_2b fixed_abba/tool/mai
 ED9b fixed_abba   tool   P5 0.079 [0.027, 0.208]  summary_2b fixed_abba/tool/main/cleaned_s5
 ED9b fixed_abba   block  P2 0.368 [0.234, 0.527]  summary_2b fixed_abba/block/main/cleaned_s5
 ED9b fixed_abba   block  P5 0.079 [0.027, 0.208]  summary_2b fixed_abba/block/main/cleaned_s5
-ED10a smaller effect P1   raw 1.000 size-adjusted 0.058  sim_summary power pw0_delta0.2
-ED10a smaller effect P2   raw 1.000 size-adjusted 0.050  sim_summary power pw0_delta0.2
-ED10a smaller effect P3   raw 0.533 size-adjusted 0.053  sim_summary power pw0_delta0.2
-ED10a smaller effect P4   raw 1.000 size-adjusted 0.050  sim_summary power pw0_delta0.2
-ED10a smaller effect P5   raw 0.071 size-adjusted 0.057  sim_summary power pw0_delta0.2
-ED10a larger effect P1   raw 1.000 size-adjusted 0.072  sim_summary power pw1_delta0.5
-ED10a larger effect P2   raw 1.000 size-adjusted 0.050  sim_summary power pw1_delta0.5
-ED10a larger effect P3   raw 0.523 size-adjusted 0.053  sim_summary power pw1_delta0.5
-ED10a larger effect P4   raw 1.000 size-adjusted 0.050  sim_summary power pw1_delta0.5
-ED10a larger effect P5   raw 0.656 size-adjusted 0.615  sim_summary power pw1_delta0.5
+ED10a smaller effect P1   raw 1.000 size-adjusted 0.071  sim_summary power pw0_delta0.2; size_adjusted_exact pw0_delta0.2
+ED10a smaller effect P2   raw 1.000 size-adjusted 0.050  sim_summary power pw0_delta0.2; size_adjusted_exact pw0_delta0.2
+ED10a smaller effect P3   raw 0.533 size-adjusted 0.053  sim_summary power pw0_delta0.2; size_adjusted_exact pw0_delta0.2
+ED10a smaller effect P4   raw 1.000 size-adjusted 0.050  sim_summary power pw0_delta0.2; size_adjusted_exact pw0_delta0.2
+ED10a smaller effect P5   raw 0.071 size-adjusted 0.057  sim_summary power pw0_delta0.2; size_adjusted_exact pw0_delta0.2
+ED10a larger effect P1   raw 1.000 size-adjusted 0.675  sim_summary power pw1_delta0.5; size_adjusted_exact pw1_delta0.5
+ED10a larger effect P2   raw 1.000 size-adjusted 0.050  sim_summary power pw1_delta0.5; size_adjusted_exact pw1_delta0.5
+ED10a larger effect P3   raw 0.523 size-adjusted 0.053  sim_summary power pw1_delta0.5; size_adjusted_exact pw1_delta0.5
+ED10a larger effect P4   raw 1.000 size-adjusted 0.050  sim_summary power pw1_delta0.5; size_adjusted_exact pw1_delta0.5
+ED10a larger effect P5   raw 0.656 size-adjusted 0.615  sim_summary power pw1_delta0.5; size_adjusted_exact pw1_delta0.5
 ED10b P1   raw 0.947 size-adjusted 0.887 [0.796, 0.957]  summary_2b size_adjusted_power_pos_graded
 ED10b P2   raw 0.932 size-adjusted 0.878 [0.788, 0.946]  summary_2b size_adjusted_power_pos_graded
 ED10b P3   raw 0.933 size-adjusted 0.925 [0.855, 0.974]  summary_2b size_adjusted_power_pos_graded

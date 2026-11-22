@@ -28,7 +28,7 @@ pip install -r requirements/quick-path.txt   # numpy 2.5.4, scipy 1.18.1, scikit
 export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
 ```
 
-With this environment every summary in `REPRODUCE.md` §2 and every figure is rebuilt byte for byte from the shipped files (checked in a clean copy on macOS arm64, 2026-11-18). Pinned versions for the full runs, from the `pip freeze` recorded with each run, are in `requirements/` (`requirements/README.md`).
+With this environment every summary in `REPRODUCE.md` §2 and every figure is rebuilt byte for byte from the shipped files (checked in a clean copy on macOS arm64). Pinned versions for the full runs, from the `pip freeze` recorded with each run, are in `requirements/` (`requirements/README.md`).
 
 ## Platform differences
 

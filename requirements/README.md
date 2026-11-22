@@ -2,8 +2,8 @@
 
 | File | Environment | Source of the versions |
 |---|---|---|
-| `quick-path.txt` | Python 3.12: the archive check, every summary of `REPRODUCE.md` §2, the figures, `blockperm` tests | checked in a fresh environment on 2026-11-18 |
-| `quick-path-lock.txt` | the same, with every package pinned | §1–§2 pass byte for byte in a fresh environment with these versions (2026-11-18) |
+| `quick-path.txt` | Python 3.12: the archive check, every summary of `REPRODUCE.md` §2, the figures, `blockperm` tests | checked in a fresh environment |
+| `quick-path-lock.txt` | the same, with every package pinned | §1–§2 pass byte for byte in a fresh environment with these versions |
 | `../analyses/trackA-std/requirements.txt` | Python 3.12: the earlier mouse analysis and step 1 (Allen download and runs) | written with the earlier mouse analysis |
 | `step2-cloud.txt` | Python 3.12: step 2 simulation grid (cloud) | `pip freeze` in `runs/MACHINE.txt` inside `analyses/step2-comparison/runs_cloud.tgz` |
 | `step2-add3-py312.txt`, `pymvpa-py39.txt` | the toolbox runs and further simulation cells: the cells (Python 3.12) and PyMVPA 2.6.5 (Python 3.9); Octave 8.4 and CoSMoMVPA fe5acaf are installed by `analyses/step2-comparison/gcp/vm_add3_setup.sh` | `pip freeze` in `runs_add3/MACHINE.txt` inside `runs_add3.tgz` |

@@ -8,4 +8,4 @@ cd figures && python make_bc_figures.py && python make_ed_figures.py
 
 This overwrites the PDFs in this folder and writes PNG previews; to compare with the shipped files, follow `REPRODUCE.md` §2, which copies them first.
 
-Needs numpy and matplotlib (3.10.9 used). The 13 PDFs rebuilt this way are byte-identical to the shipped files (checked 2026-11-18); their PDF metadata fields are empty.
+Needs numpy and matplotlib (3.10.9 used). The 13 PDFs rebuilt this way are byte-identical to the shipped files; their PDF metadata fields are empty.
