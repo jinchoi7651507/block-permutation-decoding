@@ -1,19 +1,19 @@
 Fig1 row 0 Simulation           1.000 [0.996, 1.000]  sim_summary c000 P2 (Wilson)
 Fig1 row 0 Mouse (Neuropixels)  0.977 [0.937, 1.000]  allen_summary new shared24/main P2
 Fig1 row 0 Human EEG            0.922 [0.885, 0.949]  summary_2b balanced/main/main/cleaned_s5 P2
-Fig1 row 0 fMRI (post hoc)      0.900 [0.828, 0.967]  step4 summary fake/detrended/main P2
-Fig1 row 0 Body-worn sensors (post hoc) 1.000 [1.000, 1.000]  step5 summary fake/windows2s/main P2
+Fig1 row 0 fMRI                 0.900 [0.828, 0.967]  step4 summary fake/detrended/main P2
+Fig1 row 0 Body-worn sensors    1.000 [1.000, 1.000]  step5 summary fake/windows2s/main P2
 Fig1 row 1 Mouse (Neuropixels)  0.837 [0.772, 0.899]  step1 results.json shared24/lr_topk/blk_fixed
 Fig1 row 2 Simulation           1.000 [0.996, 1.000]  sim_summary c000 P4 (Wilson)
 Fig1 row 2 Mouse (Neuropixels)  0.992 [0.975, 1.000]  allen_summary new shared24/main P4
 Fig1 row 2 Human EEG            0.939 [0.909, 0.962]  summary_2b balanced/main/main/cleaned_s5 P4
-Fig1 row 2 fMRI (post hoc)      0.911 [0.850, 0.967]  step4 summary fake/detrended/main P4
-Fig1 row 2 Body-worn sensors (post hoc) 1.000 [1.000, 1.000]  step5 summary fake/windows2s/main P4
+Fig1 row 2 fMRI                 0.911 [0.850, 0.967]  step4 summary fake/detrended/main P4
+Fig1 row 2 Body-worn sensors    1.000 [1.000, 1.000]  step5 summary fake/windows2s/main P4
 Fig1 row 3 Simulation           0.057 [0.044, 0.073]  sim_summary c000 P5 (Wilson)
 Fig1 row 3 Mouse (Neuropixels)  0.052 [0.019, 0.089]  allen_summary new shared24/main P5
 Fig1 row 3 Human EEG            0.049 [0.041, 0.058]  summary_2b balanced/main/main/cleaned_s5 P5
-Fig1 row 3 fMRI (post hoc)      0.078 [0.044, 0.100]  step4 summary fake/detrended/main P5
-Fig1 row 3 Body-worn sensors (post hoc) 0.050 [0.021, 0.087]  step5 summary fake/windows2s/main P5
+Fig1 row 3 fMRI                 0.078 [0.044, 0.100]  step4 summary fake/detrended/main P5
+Fig1 row 3 Body-worn sensors    0.050 [0.021, 0.087]  step5 summary fake/windows2s/main P5
 Fig1b row 0 Binomial test                      0.244 [0.175, 0.314]  step1 results.json new/std6 sep24/lr_topk/binom
 Fig1b row 1 Trial-level permutation            0.256 [0.187, 0.326]  step1 results.json new/std6 sep24/lr_topk/trl_rerun
 Fig1b row 2 Block permutation, fixed decoder   0.049 [0.019, 0.084]  step1 results.json new/std6 sep24/lr_topk/blk_fixed

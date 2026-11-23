@@ -128,7 +128,7 @@ def ed1():
 
     rows = [(f"sep/{r}/binom", lab) for r, lab in readouts[:4]]
     rows += [(f"{s}/sel/circ_rerun", lab) for s, lab in (("iid", "Labels per trial"), ("shared", "Shared blocks (12)"),
-                                                          ("shared24", "Shared blocks (24)"), ("segment", "One stretch per label"))]
+                                                          ("shared24", "Shared blocks (24)"), ("segment", "Half-session split"))]
     ys = [0, 1, 2, 3, 5, 6, 7, 8]
     for y, (key, _) in zip(ys, rows):
         m, ci, src = get(key)
@@ -209,7 +209,7 @@ def ed6():
             ("PyMVPA zscore", "PyMVPA, z-scored per run"), ("PyMVPA chunks", "PyMVPA, whole blocks permuted"),
             ("P3 port", "Within-run permutation, re-implemented"), ("P4 port", "Training-label permutation, re-implemented"), ("P5", "Block permutation test")]
     lays = [("L1", "Random 12-block design, runs of 3 blocks", "^", False), ("L2", "Fixed order AABB", "s", False),
-            ("L3", "Labels varying trial by trial, no drift", "o", False), ("L4", "Balanced runs (as in Fig. 2a)", "o", True)]
+            ("L3", "Labels varying trial by trial, no drift", "o", False), ("L4", "Runs of two blocks, one per class (as in Fig. 2a)", "o", True)]
     fig, ax = plt.subplots(figsize=(5.4, 3.3))
     for i, (key, _) in enumerate(rows):
         for j, (L, name, mk, filled) in enumerate(lays):
@@ -472,7 +472,7 @@ def ed10():
         dot(b, i + 0.15, d["size_adjusted_power"], d["ci95"], INK, "o", False)
         print("ED10b %-4s raw %.3f size-adjusted %.3f [%.3f, %.3f]  summary_2b size_adjusted_power_pos_graded" % (r, d["raw_power"], d["size_adjusted_power"], *d["ci95"]))
     b.set_yticks(range(5)); b.set_yticklabels([names[r] for r in rules]); b.invert_yaxis()
-    style(b, "Power (%)"); b.set_title("b  Human EEG, graded control (post hoc)", loc="left", fontsize=7)
+    style(b, "Power (%)"); b.set_title("b  Human EEG, graded control", loc="left", fontsize=7)
     h = [plt.Line2D([], [], ls="", marker="s", color=SIM, ms=4, label="Raw power (simulation)"),
          plt.Line2D([], [], ls="", marker="D", color=EEG, ms=4, label="Raw power (EEG)"),
          plt.Line2D([], [], ls="", marker="o", color=INK, mfc="white", ms=4, label="Size-adjusted power (EEG: 95% interval)")]
