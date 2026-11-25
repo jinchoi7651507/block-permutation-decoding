@@ -6,7 +6,7 @@ All analyses are Python except the two toolboxes run as shipped (CoSMoMVPA in Oc
 
 | Analysis | Machine | Versions recorded with the run |
 |---|---|---|
-| `trackA-std` (earlier mouse analysis; first benchmark with labels that carry no information) | laptop: MacBook, Apple A18 Pro, 8 GB RAM, macOS 26.6.2 | Python 3.12.3, numpy 2.4.6, scipy 1.18.1, h5py 3.16.0 (`trackA-std/requirements.txt`) |
+| `trackA-std` (earlier mouse analysis; benchmark with labels with no information) | laptop: MacBook, Apple A18 Pro, 8 GB RAM, macOS 26.6.2 | Python 3.12.3, numpy 2.4.6, scipy 1.18.1, h5py 3.16.0 (`trackA-std/requirements.txt`) |
 | `step1-decomposition` | the same laptop | Python 3.12.3; package versions not written into the run logs; the logs show the `trackA-std` environment of the row above (the summaries reproduce byte for byte with the quick-path environment below) |
 | `step2-comparison`, simulation grid (the reported run) | Google Compute Engine c2d-highcpu-56 (AMD EPYC 7B13, 56 vCPU), Ubuntu 24.04.5 | Python 3.12, numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2 (full `pip freeze` in `runs/MACHINE.txt` inside `runs_cloud.tgz`) |
 | `step2-comparison`, mouse cells and the laptop equivalence run | the laptop | as above |
@@ -15,7 +15,6 @@ All analyses are Python except the two toolboxes run as shipped (CoSMoMVPA in Oc
 | `step2b-eeg`, arms and controls | c2d-highcpu-56 (AMD EPYC 7B13), Ubuntu 24.04.5 | MNE 1.13.2, numpy 2.5.4, scikit-learn 1.7.2 (`runs/MACHINE.txt` inside the archive) |
 | `step3-ibl`, main run | c2d-highmem-56 (AMD EPYC 7B13, 56 vCPU, 440 GB), Ubuntu 24.04.5 | ONE-api 3.6.1, ibllib 4.1.0, scikit-learn 1.9.1, numpy 2.5.4, scipy 1.18.1, `brainwidemap` at commit 118fc36 (`runs/MACHINE.txt`, with `pip freeze`) |
 | `step3-ibl`, summary | the laptop | Python 3.12.3, numpy 2.5.4, scipy 1.18.1, pandas 2.3.3 |
-| `yaron-panel` (Extended Data Fig. 4a) | the laptop | Python 3.12.3, numpy 2.4.6, scipy 1.18.1, h5py 3.16.0, matplotlib 3.10.9 |
 | `step4-fmri-haxby`, `step5-pamap2` (post hoc) | the laptop (one process per subject, `OMP_NUM_THREADS=1`) | Python 3.12.3, numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2, nibabel 5.3.2 (step 4; `requirements.txt` of each step); the runners stop with other numpy or scikit-learn versions |
 | `step6-reanalysis-cell` | Google Compute Engine c2d-highcpu-56 (AMD EPYC 7B13, 56 vCPU), Ubuntu 24.04 | Python 3.12.3, numpy 2.5.4, scipy 1.18.1, scikit-learn 1.9.1, h5py 3.14.0; threads and platform recorded in the outputs |
 | `step6b-reanalysis-sciadv` | the laptop, macOS arm64, 6 workers | Python 3.12, numpy 2.5.4, scipy 1.18.1, scikit-learn 1.7.2, mat-io 1.0.2, h5py 3.16.0, pandas 3.1.1 |

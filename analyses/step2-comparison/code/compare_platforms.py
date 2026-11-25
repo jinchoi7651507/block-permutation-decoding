@@ -7,7 +7,7 @@ values (None on both machines counts as identical) and the largest absolute diff
 printed; no p value of any cell is shown. The power files are compared only if both machines have them and the
 two delta choices are equal; the two choice files are printed either way.
 
-  python code/compare_platforms.py runs runs_cloud > equiv/EQUIV-PLATFORM.txt
+  python code/compare_platforms.py <laptop rows> <cloud rows> > <out>/EQUIV-PLATFORM.txt
 """
 import json
 import re

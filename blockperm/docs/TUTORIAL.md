@@ -83,7 +83,7 @@ The p value is valid when the observed assignment of blocks to conditions was dr
 - check the analysis on fake labels that follow time, for example the first half of the session against the second half;
 - prefer a random block order, or several blocks per condition in random order, when designing new experiments.
 
-## 8. Check your own pipeline with labels that carry no information
+## 8. Check your own pipeline with labels with no information
 
 `examples/fake_block_labels.py` assigns labels to whole blocks at random and runs both scikit-learn's `permutation_test_score` and the block permutation test. Because the labels carry no information, a valid test calls about 5% of them significant. Replace the synthetic recording in the example with your own data and pipeline to see how often each test calls your fake labels significant.
 

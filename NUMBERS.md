@@ -1,6 +1,6 @@
 # Where each number of the paper comes from
 
-Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accuracy; P2 trial-level permutation with refit (scikit-learn `permutation_test_score`); P3 trial-level permutation within runs (CoSMoMVPA tutorial rule); P4 training labels permuted, refit (PyMVPA tutorial); P5 the block permutation test (all labels permuted by block, refit). Rates are shares of tests with p < 0.05 on labels that carry no information. The "Value in the source" column quotes the source files, including their cell and layout labels (for example `shared24`: 24 blocks shared by training and test trials; `sep24`: calibration and held-out trials from separate blocks with independent labels; `S-main`, `S-tool`: shuffled five-fold and the scikit-learn default folds; `L1`–`L4`: block layouts of the toolbox runs; `PS-refit`: the pseudosession test); the README table "Names used in the files" defines them. Some rows give values that the paper shows only in figures or does not quote.
+Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accuracy; P2 trial-level permutation with refit (scikit-learn `permutation_test_score`); P3 trial-level permutation within runs (CoSMoMVPA tutorial rule); P4 training labels permuted, refit (PyMVPA tutorial); P5 the block permutation test (all labels permuted by block, refit). Rates are shares of tests with p < 0.05 on labels with no information. The "Value in the source" column quotes the source files, including their cell and layout labels (for example `shared24`: 24 blocks shared by training and test trials; `sep24`: calibration and held-out trials from separate blocks with independent labels; `S-main`, `S-tool`: shuffled five-fold and the scikit-learn default folds; `L1`–`L4`: block layouts of the toolbox runs; `PS-refit`: the pseudosession test); the README table "Names used in the files" defines them. Some rows give values that the paper shows only in figures or does not quote.
 
 ## Practice survey
 | Number | Value in the source | Source |
@@ -37,7 +37,7 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 | circular-shift null 5% and 15% (random blocks), 35% (half-session split) (Supplementary Notes 2 and 6, Extended Data Fig. 1c; iid 2.8 is not a block scheme) | circ_rerun sel: iid 2.8, shared24 5.1, shared 15.1, segment 35.1 | `step1-decomposition/results/results.md` |
 | whole blocks held out: trial-level training-label permutation 7–14% | sep24 trn_trl 7.0–14.3 | `step1-decomposition/results/within_train.md` |
 | smallest p about one in three with two blocks per condition | 6 arrangements, 3 distinct scores (class swap); smallest P5 p in the 36 random cells with B = 4: 0.22–0.27 | arithmetic; `step2-comparison/results/sim_summary.json` (`min_p`) |
-| power 7% and 66%; size-adjusted, at most 6 points above the block permutation test in the simulations | P5 7.1 (δ 0.2), 65.6 (δ 0.5); size-adjusted P1 7.1 and 67.5, P5 5.7 and 61.5, P2–P4 5.0–5.3 | `step2-comparison/results/sim_summary.json` (`power`); size-adjusted `step2-comparison/results/size_adjusted_exact.json` (its P1 values replace those in `sim_summary.json`, which counted every p within 10^-12 of the threshold as tied) |
+| power 7% and 66%; size-adjusted, at most 6 points above the block permutation test in the simulations | P5 7.1 (δ 0.2), 65.6 (δ 0.5); size-adjusted P1 7.1 and 67.5, P5 5.7 and 61.5, P2–P4 5.0–5.3 | `step2-comparison/results/sim_summary.json` (`power`); size-adjusted `step2-comparison/results/size_adjusted_exact.json` (its P1 values, 7.1 and 67.5, replace 5.8 and 7.2 in `sim_summary.json`, which counted every p within 10^-12 of the threshold as tied) |
 | EEG power up to 8 points more, training-label permutation less: 87.8–92.5% against 84.6%, training-label permutation 56.9% (post hoc) | size-adjusted P1–P3 87.8–92.5; P4 56.9; P5 84.6 | `step2b-eeg/results/summary_2b.json` (`size_adjusted_power_pos_graded`) |
 
 ## Fig. 2a and the toolboxes
@@ -45,15 +45,9 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 |---|---|---|
 | CoSMoMVPA and PyMVPA as shipped 18–21%, against 4% | L4: CoSMoMVPA 20.2 / 20.8, PyMVPA 18.4 / 21.4; P5 4.4 | `step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md` |
 | fixed block order 31–70% | L2: CoSMoMVPA 30.6 / 58.6, PyMVPA 48.6 / 70.2 | same |
-| PyMVPA chunk-level permutation 4–5% in L1–L3, 11.8% in L4 (Extended Data Fig. 6; not quoted in the text) | 5.4 / 4.0 / 5.0 (L1–L3); 11.8 (L4) | same |
+| PyMVPA chunk-level permutation 4–5% in L1–L3, 11.8% in L4 (Extended Data Fig. 5; not quoted in the text) | 5.4 / 4.0 / 5.0 (L1–L3); 11.8 (L4) | same |
 | `groups` permutes within blocks | scikit-learn `_shuffle` | `step2-comparison/TOOLBOX-DEFAULTS.md`; `step2-comparison/toolbox-src/sk_validation.py` |
 | group level: t-test 100%; group null 4–7% | EEG t 100%, group null 4%; mouse t 100% (S-main, S-tool), group null 4–7% | `step2b-eeg/results/summary_2b.md` (last line); `step2-comparison/results/allen_summary.md` (last column, shared24 and dg_shared24); `group_null_ci95` in `summary_2b.json` is not a valid interval and is not used |
-
-## Extended Data Fig. 4a (rat auditory cortex, post hoc)
-| Number | Value in the source | Source |
-|---|---|---|
-| 123 units selected, observed 0.337 | observed 0.3368, selected 123 | `yaron-panel/results/fixed_vs_repeated.json` |
-| null mean with the selection fixed 0.001, repeated 0.115 | arms.fixed.null_mean 0.0014; arms.repeated.null_mean 0.1149 | same |
 
 ## Fig. 2b and the IBL
 | Number | Value | Source |
@@ -89,15 +83,14 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 | SN 7 positive controls: faces against houses 6 of 6; added signal 99.6–100% | control cells | both summaries |
 | Fig. 1: 1,000 simulation replicates; Fig. 2a: 500 replicates per layout | primary cell; layout L4 | `step2-comparison/results/sim_summary.md`; `runs_add3/tools/SUMMARY-TOOLS.md` |
 | ED 1c: binomial test 26.5% with held-out blocks | `sep`, binom, sel | `step1-decomposition/results/results.md` |
-| ED 4a: p = 0.001 for both nulls | `p` | `yaron-panel/results/fixed_vs_repeated.json` |
 | ED 3: 200 sets of labels with no information (mouse), 50 label assignments (EEG) | `n_experiments` 200; "over 50 assignments" | `step2-comparison/results/allen_summary.json` (`group_level`), `step2b-eeg/results/summary_2b.md` (last line) |
-| ED 8: 134 regions recorded in at least three sessions | region counts | `step3-ibl/runs/SUMMARY.md` |
+| ED 7: 134 regions recorded in at least three sessions | region counts | `step3-ibl/runs/SUMMARY.md` |
 
 ## Supplementary Notes 1, 3, 4 and 5
 | Number | Value in the source | Source |
 |---|---|---|
 | SN 1: 16.5 (14.8–18.0), 12.5 (10.8–14.2), 43%, 28.9, 6.3 (5.5–7.3), 96%, 26.5% (20.6–32.7), 3.8% (0.8–7.2) | the rerun: `P1/good/new/std6` (`g_null`, `d`, `m3_branch`, `g_const`), `P2/std6/delta`, `P3/std6/p_lt05`, `C/std6` (`random_blocks/q2_p`, `random_blocks/block_p`) | `trackA-std/results/results.json` |
-| SN 1: first run 15.7 and 6.0 | `P1/good/new/std6/g_null`, `P2/std6/delta` | `trackA-std/first-run/results/results.json` |
+| Supplementary Table 1 (10-18): first run 15.7 and 6.0 | `P1/good/new/std6/g_null`, `P2/std6/delta` | `trackA-std/first-run/results/results.json` |
 | SN 3: slope median +0.0045 (range −0.059 to +0.084; 14 of 38 negative), −0.0016 and +0.0101 within states, Spearman 0.10 (−0.23 to 0.41) and −0.07 (−0.39 to 0.26) | `summary` | `step2b-eeg/results/alpha_slope.json`, computed by `step2b-eeg/code/posthoc_alpha_slope.py` |
 | SN 4: 47% of balanced assignments leave a run with one class | 438 of 924 (47.4%) | arithmetic over the 924 balanced assignments of 12 blocks in four runs of three |
 | SN 4: 461 of 1,000 failed; 97% of the other 539; 52% counting failures; 0.6% for the block permutation test on the same 539 | P3 error share 46.1, 97.2, 52.4; P5 0.6 | `step2-comparison/results/sim_summary.json` (cell c000, `P3`, `P5_on_same_reps`) |
@@ -120,7 +113,7 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 | IBL: 459 sessions of 139 mice; 335 finished, 106 skipped, 18 errors; 325 sessions with regions | completed prefix and denominators | `step3-ibl/runs/ORDER.json` (`n_sessions`, `n_mice`), `step3-ibl/runs/SUMMARY.md`; sessions with regions and the 47 worker row files in `step3-ibl/runs_ibl.tgz` |
 | IBL: 20 fake block sequences per session; one pool of 220 pseudosessions | `range(20)`, `pseudo_pool(..., n=220)` | `step3-ibl/code/run_ibl.py` |
 | IBL realism check: KS 0.06, permutation p 0.14 | ks 0.0602, ks_perm_p 0.1409 | `step3-ibl/runs/REALISM.json` |
-| 40 automatic exclusions checked, none wrongly excluded (Wilson 0–8.8%) | 0 of 40 (language-model audit); 40 of 40 excluded (independent check, 2026-11-02); author's hand check: none wrongly excluded (`practice-survey/AUTHOR-CHECK.md`) | `practice-survey/AUDIT-AUTO-EXCLUSIONS.md`, `practice-survey/final-check-2026-11-02/RESULT.md` |
+| 40 automatic exclusions checked, none wrongly excluded (Wilson 0–8.8%) | 0 of 40 (language-model audit) | `practice-survey/AUDIT-AUTO-EXCLUSIONS.md` |
 
 ## Reanalyses of published studies
 | Number | Value in the source | Source |
@@ -138,14 +131,13 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 | Klee et al. (2026): intertrial window 3.95 to 2.08 s before the reward threshold crossing | MATLAB bins 16-44, centres -3.95 to -2.08 s | `step6b-reanalysis-sciadv/code/decode.py` |
 | Klee et al. (2026): event-type labels differ from the authors' Figure 4 code for the first few Go trials of three mice (Methods) | first 2, 1 and 1 Go trials of mice 1–3 | counted from the deposited data with `step6b-reanalysis-sciadv/code/matlab_port.py` (`build_trials`, `matlab_label_lag=True` against `False`), following the authors' `Figure4.m` line 92 (Zenodo 10.5281/zenodo.16333867); not in a shipped output |
 | Klee et al. (2026): smallest per-mouse block p 0.1 | 0.1 | `step6b-reanalysis-sciadv/out/SUMMARY.md` |
-| Extended Data Fig. 4c: 100,000 random combinations of the per-mouse trial-level nulls | as stated | `figures/make_ed_figures.py`, `ed4()` |
+| Extended Data Fig. 8b: 100,000 random combinations of the per-mouse trial-level nulls | as stated | `figures/make_ed_figures.py`, `ed8()` |
 | Klee et al. (2026): 20 arrangements per mouse, 10 distinct scores, smallest group p 10^-6 (Methods) | C(6,3) = 20, class swap gives 10 ("of 10"); smallest possible 1e-06 | arithmetic; `step6b-reanalysis-sciadv/out/SUMMARY.md` |
 | Klee et al. (2026): self-paced drift decoding above chance in 3 of 6 mice (Methods) | self first vs last p < 0.05 in mice 1, 3 and 4 | `step6b-reanalysis-sciadv/out/SUMMARY.md` (Controls) |
-| Extended Data Fig. 4a: 18 sessions | 18 session files | `yaron-panel/data/MANIFEST.sha256`, `yaron-panel/code/yaron_pipeline.py` |
 | Supplementary Table 1: 8 of 30 sessions (rerun) | as stated | `trackA-std/RERUN.md` |
 | SN 2: random assignment, 1 random, 3 constrained, 8 fixed, 1 animal-determined, 1 not stated | counts of the author-checked column | `practice-survey/random-assignment-coding.csv` |
 | SN 5: 9 of 10 rows inside the interval, about 3 points, formula 0.3–5.4 points | recomputed from the table | `step1-decomposition/results/results.md` |
 | SN 6: EEG, labels assigned within one eye state 93%, labels on 120-s blocks 96% | as stated | `step2b-eeg/results/summary_2b.md` |
-| Extended Data Fig. 6 (not quoted in the text): labels varying trial by trial without slow drift, CoSMoMVPA 6.2%, PyMVPA training-label rule 10–12% | as stated | `step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md` |
-| Jahn et al. (2024): a mean of three to four blocks per color bin (main text; Extended Data Fig. 4b) | G10: LIP 3.42, FEF 3.40, LPFC 3.35 | `step6-reanalysis-cell/vm-out-a2/a2-out.tgz` (`out-a2/gate.json`, `extra.blocks_per_bin_true`) |
+| Extended Data Fig. 5 (not quoted in the text): labels varying trial by trial without slow drift, CoSMoMVPA 6.2%, PyMVPA training-label rule 10–12% | as stated | `step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md` |
+| Jahn et al. (2024): a mean of three to four blocks per color bin (main text; Extended Data Fig. 8a) | G10: LIP 3.42, FEF 3.40, LPFC 3.35 | `step6-reanalysis-cell/vm-out-a2/a2-out.tgz` (`out-a2/gate.json`, `extra.blocks_per_bin_true`) |
 | SN 6: 100% of runs with random folds, 54% with contiguous folds (simulated block variable) | a value of the cited paper, not an output of this repository | Harris (2020), Fig. 8 and its text |

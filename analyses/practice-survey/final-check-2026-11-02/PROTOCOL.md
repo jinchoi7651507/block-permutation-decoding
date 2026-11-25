@@ -1,9 +1,0 @@
-# Final independent check of the 40 audited automatic exclusions (protocol written 2026-11-02, before any run)
-
-One fresh Opus agent checks the same 40 records independently of the original agent audit (`../AUDIT-AUTO-EXCLUSIONS.md`) and of the author's hand check.
-
-- **Records:** the 40 orders drawn in `../AUDIT-AUTO-EXCLUSIONS.md` (seed 20261021), identified by PMCID from `../screening.csv`.
-- **Input to the checker:** the four inclusion criteria of `../PROTOCOL.md` §2 (verbatim) and, per record, a text file built mechanically from the Europe PMC full-text XML fetched 2026-11-02 (article type, title, abstract, section titles, Methods-like sections up to 25,000 characters, or the first 20,000 characters of the body if no Methods-titled section exists); for records without full text, the Europe PMC core record (title, publication type, abstract). The checker does not see the automatic reason, the original audit, its quotes or the author's verdicts.
-- **Checker:** fresh `claude -p --model opus --tools "Read"`, run inside a folder that holds only the criteria and the record files. The 40 records (about 840,000 characters) are split into four batches of 10, each checked by its own fresh Opus instance with the same prompt, so that no instance truncates its input; at most three at a time.
-- **Output per record (JSON):** include or exclude; the first failing criterion (1–4) or "none"; a verbatim quote from the record file supporting it; "unclear" allowed, with the reason.
-- **Reading (fixed now):** a record is a disagreement if the checker says include or unclear. Every disagreement is listed with both quotes, and the authors decide each one before the count of wrongly excluded records and its Wilson interval are reported. Runs with `is_error` or without parseable JSON are voided and rerun.

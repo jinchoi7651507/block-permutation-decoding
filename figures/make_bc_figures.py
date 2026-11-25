@@ -20,10 +20,10 @@ R = Path(__file__).resolve().parents[1] / "analyses"   # public layout: the anal
 OUT = Path(__file__).resolve().parent
 INK, MUTED, GRID = "#1f1f1e", "#6b6a64", "#d9d8d2"
 COL = {"Simulation": "#2a78d6", "Mouse (Neuropixels)": "#eb6834", "Human EEG": "#1baf7a",
-       "fMRI": "#6b6a64", "Body-worn sensors": "#6b6a64"}
+       "fMRI": "#6b6a64", "Wearable sensors": "#6b6a64"}
 MARK = {"Simulation": "s", "Mouse (Neuropixels)": "o", "Human EEG": "D", "fMRI": "^",
-        "Body-worn sensors": "v"}
-OPEN = {"fMRI", "Body-worn sensors"}   # fMRI and sensor datasets: open neutral markers, identity by shape and legend
+        "Wearable sensors": "v"}
+OPEN = {"fMRI", "Wearable sensors"}   # fMRI and sensor datasets: open neutral markers, identity by shape and legend
 plt.rcParams.update({"font.family": "sans-serif", "font.size": 7, "axes.edgecolor": MUTED, "axes.labelcolor": INK,
                      "xtick.color": MUTED, "ytick.color": INK, "pdf.fonttype": 42})
 
@@ -68,11 +68,11 @@ for i, (lab, rule, _perm, _refit) in enumerate(rows):
     c4 = fmri["fake/detrended/main/%s" % rule]
     vals.append((i, "fMRI", c4["mean"], c4["ci95"], "step4 summary fake/detrended/main %s" % rule))
     c5 = sens["fake/windows2s/main/%s" % rule]
-    vals.append((i, "Body-worn sensors", c5["mean"], c5["ci95"], "step5 summary fake/windows2s/main %s" % rule))
+    vals.append((i, "Wearable sensors", c5["mean"], c5["ci95"], "step5 summary fake/windows2s/main %s" % rule))
 
 fig, (ax, axb) = plt.subplots(2, 1, figsize=(3.5, 3.9), gridspec_kw={"height_ratios": [4, 2.2], "hspace": 0.55})
 off = {"Simulation": -0.3, "Mouse (Neuropixels)": -0.15, "Human EEG": 0.0, "fMRI": 0.15,
-       "Body-worn sensors": 0.3}
+       "Wearable sensors": 0.3}
 for i, ds, m, ci, src in vals:
     y = i + off[ds]
     ax.plot([100 * ci[0], 100 * ci[1]], [y, y], color=COL[ds], lw=1.2, solid_capstyle="round", zorder=2)

@@ -1,6 +1,6 @@
 # Audit of the automatic exclusions (practice survey)
 
-Written 2026-10-20. Auditor: one agent, independent of the screener. `screening.csv` was not changed. Protocol: `PROTOCOL.md` §2 (four inclusion criteria). Screening: `SCREENING-NOTE.md` deviation 2.
+Written 2026-10-20. Auditor: one agent, independent of the screener. `screening.csv` was not changed. Inclusion criteria: Supplementary Note 2. Screening: `SCREENING-NOTE.md` deviation 2.
 
 ## Sampling frame and draw
 - Frame: the 1,698 rows of `screening.csv` whose `reason` contains `keyword screen`, `article type` or `no full text`. This gives exactly 1,698 (1,316 keyword reason 1; 156 article type reason 1; 67 keyword reason 2; 159 unclear-criterion-1). It matches the count in SCREENING-NOTE. The 7 records corrected in the sensitivity check (orders 100, 690, 2012, 2161, 2221, 2231, 2254) now have manual reasons, so they are not in the frame.

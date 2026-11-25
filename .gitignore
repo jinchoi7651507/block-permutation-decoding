@@ -6,6 +6,9 @@ __pycache__/
 analyses/step2-comparison/runs/*
 !analyses/step2-comparison/runs/CELLS.json
 analyses/step2-comparison/runs_allen/
+analyses/step2-comparison/runs_laptop/
+analyses/step2b-eeg/runs/*
+analyses/step3-ibl/runs/*
 analyses/step2-comparison/runs_add3/*
 !analyses/step2-comparison/runs_add3/CELLS-ADD3.json
 !analyses/step2-comparison/runs_add3/tools/
@@ -14,6 +17,3 @@ analyses/step2-comparison/runs_add3/tools/*
 .venv/
 *.egg-info/
 blockperm/build/
-# downloaded recordings
-analyses/yaron-panel/data/raw/
-analyses/yaron-panel/data/MANIFEST.local.sha256

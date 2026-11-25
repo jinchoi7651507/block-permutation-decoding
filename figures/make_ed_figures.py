@@ -188,7 +188,7 @@ def ed9():
     fig.tight_layout(rect=(0, 0, 1, 0.92)); fig.savefig(OUT / "ed9.pdf", metadata=META); fig.savefig(OUT / "ed9.png", dpi=300)
 
 
-def ed6():
+def ed5():
     """Toolboxes as shipped (CoSMoMVPA, PyMVPA), their block-level option, the ported rules and the block permutation
     test in the four simulated layouts (500 replicates each; rate over usable replicates, Wilson 95%)."""
     import math
@@ -214,19 +214,19 @@ def ed6():
     for i, (key, _) in enumerate(rows):
         for j, (L, name, mk, filled) in enumerate(lays):
             if (L, key) not in tab:
-                print("ED6 %-3s %-17s not defined" % (L, key))
+                print("ED5 %-3s %-17s not defined" % (L, key))
                 continue
             usable, err, r = tab[(L, key)][0], tab[(L, key)][1], tab[(L, key)][2]
             ci = wil(r, usable)
             dot(ax, i - 0.27 + 0.18 * j, r, ci, INK if key == "P5" else MUTED if key.endswith("port") else SIM, mk, filled,
                 label=name if i == 0 else None)
-            print("ED6 %-3s %-17s %.3f [%.3f, %.3f] usable %d errors %d  SUMMARY-TOOLS.md %s | %s" % (L, key, r, ci[0], ci[1], usable, err, L, key))
+            print("ED5 %-3s %-17s %.3f [%.3f, %.3f] usable %d errors %d  SUMMARY-TOOLS.md %s | %s" % (L, key, r, ci[0], ci[1], usable, err, L, key))
     ax.set_yticks(range(len(rows))); ax.set_yticklabels([r[1] for r in rows], fontsize=6.5); ax.invert_yaxis()
     style(ax, "Labels with no information called decodable (%)", xmax=80)
     ax.legend(frameon=False, loc="lower right", fontsize=6, handletextpad=0.3)
     fig.tight_layout()
-    fig.savefig(OUT / "ed6.pdf", metadata=META)
-    fig.savefig(OUT / "ed6.png", dpi=300)
+    fig.savefig(OUT / "ed5.pdf", metadata=META)
+    fig.savefig(OUT / "ed5.png", dpi=300)
 
 
 def _ibl():
@@ -287,44 +287,30 @@ def _quant(d, lo, n, q):
     return (lo + k) / 1000 / n
 
 
-def ed4():
-    """Reanalyses of published data. (a) rat auditory cortex (Yaron et al. 2025, post hoc; yaron-panel). (b) Jahn et al. 2024,
-    true template, 900 ms, observed and permutation nulls (step 6 outputs). (c) Klee et al. 2026, group mean over 6 mice,
-    observed and nulls (step 6b outputs). Every plotted value is printed with its source."""
-    s = json.load(open(R / "yaron-panel/results/fixed_vs_repeated.json"))
+def ed8():
+    """Reanalyses of published data. (a) Jahn et al. 2024, true template, 900 ms, observed and permutation nulls
+    (step 6 outputs). (b) Klee et al. 2026, group mean over 6 mice, observed and nulls (step 6b outputs). Every plotted
+    value is printed with its source."""
     cell = {}
     with tarfile.open(R / "step6-reanalysis-cell/vm-out-a2/a2-out.tgz") as z:
         for n in ("primary", "trial"):
             cell[n] = json.load(z.extractfile("out-a2/test-%s.json" % n))
     sa = json.load(open(R / "step6b-reanalysis-sciadv/out/tests.json"))
-    fig, axes = plt.subplots(3, 1, figsize=(4.6, 5.0), gridspec_kw={"height_ratios": [1.5, 6, 4]})
+    fig, axes = plt.subplots(2, 1, figsize=(5.0, 4.35), gridspec_kw={"height_ratios": [6, 4]})
     ax = axes[0]
-    obs, arms = s["observed"], s["arms"]
-    rows = [("repeated", "Unit selection repeated", INK, "D"), ("fixed", "Selected units held fixed", INK, "s")]
-    for i, (key, _, col, mk) in enumerate(rows):
-        m = arms[key]
-        ax.plot([m["q025"], m["q975"]], [i, i], color=col, lw=1.2, solid_capstyle="round", zorder=2)
-        ax.plot(m["null_mean"], i, mk, ms=4.5, color=col, mfc="white", mec=col, mew=0.9, zorder=3)
-        print("ED4a %-8s mean %.4f, 95%% %.3f to %.3f  yaron-panel/results/fixed_vs_repeated.json arms.%s" % (key, m["null_mean"], m["q025"], m["q975"], key))
-    ax.axvline(obs, color=INK, lw=1)
-    ax.text(obs - 0.006, -0.72, "observed %.3f" % obs, ha="right", va="center", fontsize=6, color=INK)
-    print("ED4a observed %.4f  fixed_vs_repeated.json observed" % obs)
-    ax.set_yticks(range(2)); ax.set_yticklabels([r[1] for r in rows]); ax.set_ylim(1.5, -1.1); ax.set_xlim(-0.2, 0.4)
-    _ed3_style(ax, "Held-out correlation", 0.0)
-    ax = axes[1]
     labels = []
     y = 0
     for reg in ("LIP", "FEF", "LPFC"):
-        for test, name, mk, col in (("trial", "trial-level shuffle", "o", MUTED), ("primary", "block permutation", "D", INK)):
+        for test, name, mk, col in (("trial", "trial-level permutation", "o", MUTED), ("primary", "block permutation test", "D", INK)):
             r = cell[test]["regions"][reg]
             m, lo, hi = _null_row(ax, y, 100 * r["observed"], 100 * np.array(r["null"], float), mk, col)
             labels.append("%s, %s" % (reg, name))
-            print("ED4b %s %s: observed %.2f, null mean %.2f, 95%% %.2f to %.2f, p %.4f  step 6 test-%s.json" % (reg, test, 100 * r["observed"], m, lo, hi, r["p"], test))
+            print("ED8a %s %s: observed %.2f, null mean %.2f, 95%% %.2f to %.2f, p %.4f  step 6 test-%s.json" % (reg, test, 100 * r["observed"], m, lo, hi, r["p"], test))
             y += 1
         y += 0.5
     ax.set_yticks([0, 1, 2.5, 3.5, 5, 6]); ax.set_yticklabels(labels); ax.set_ylim(6.7, -0.7); ax.set_xlim(25, 95)
     _ed3_style(ax, "Decoding accuracy of the template bin (%)", 100 / 3)
-    ax = axes[2]
+    ax = axes[1]
     labels = []
     y = 0
     rng = np.random.default_rng(20261109)
@@ -332,30 +318,30 @@ def ed4():
         obs = sa["group"][wn]["block"]["T"]
         tr = np.array([rng.choice(np.array(mo["windows"][wn]["trial"]["null"], float), 100000) for mo in sa["mice"]]).mean(0)
         m, lo, hi = _null_row(ax, y, obs, tr, "o", MUTED)
-        print("ED4c %s trial: observed %.2f, null mean %.2f, 95%% %.2f to %.2f  tests.json mice[].windows.%s.trial.null (100,000 random combinations)" % (wn, obs, m, lo, hi, wn))
-        labels.append("%s, trial-level shuffle" % wname); y += 1
+        print("ED8b %s trial: observed %.2f, null mean %.2f, 95%% %.2f to %.2f  tests.json mice[].windows.%s.trial.null (100,000 random combinations)" % (wn, obs, m, lo, hi, wn))
+        labels.append("%s, trial-level permutation" % wname); y += 1
         d, l0, n = _sum_null([mo["windows"][wn]["block"]["null"] for mo in sa["mice"]])
         lo, hi = _quant(d, l0, n, 0.025), _quant(d, l0, n, 0.975)
         m = float(np.sum(d * (l0 + np.arange(len(d))))) / 1000 / n
         ax.plot([lo, hi], [y, y], color=INK, lw=1.2, solid_capstyle="round", zorder=2)
         ax.plot(m, y, "D", ms=4.5, color=INK, mfc="white", mec=INK, mew=0.9, zorder=3)
         ax.plot(obs, y, "o", ms=4.2, color=INK, mec="white", mew=0.5, zorder=4)
-        print("ED4c %s block: observed %.2f, null mean %.2f, 95%% %.2f to %.2f, p %.3g  tests.json group.%s.block; exact null by convolution" % (wn, obs, m, lo, hi, sa["group"][wn]["block"]["p"], wn))
-        labels.append("%s, group block test" % wname); y += 1.5
+        print("ED8b %s block: observed %.2f, null mean %.2f, 95%% %.2f to %.2f, p %.3g  tests.json group.%s.block; exact null by convolution" % (wn, obs, m, lo, hi, sa["group"][wn]["block"]["p"], wn))
+        labels.append("%s, group block permutation test" % wname); y += 1.5
     ax.set_yticks([0, 1, 2.5, 3.5]); ax.set_yticklabels(labels); ax.set_ylim(4.2, -0.7); ax.set_xlim(44, 72)
     _ed3_style(ax, "Decoding accuracy of context, mean over 6 mice (%)", 50.0)
     h = [plt.Line2D([], [], marker="o", ls="", ms=4.2, color=INK, label="observed"),
          plt.Line2D([], [], marker="o", ls="-", lw=1, ms=4.5, color=MUTED, mfc="white", label="trial-level null"),
          plt.Line2D([], [], marker="D", ls="-", lw=1, ms=4.5, color=INK, mfc="white", label="block null")]
     fig.legend(handles=h, loc="upper center", ncol=3, frameon=False, fontsize=6)
-    for a, c in zip(axes, "abc"):
+    for a, c in zip(axes, "ab"):
         a.text(-0.42, 1.02, c, transform=a.transAxes, fontweight="bold", fontsize=8, color=INK)
     fig.tight_layout(rect=(0, 0, 1, 0.97), h_pad=0.8)
-    fig.savefig(OUT / "ed4.pdf", metadata=META)
-    fig.savefig(OUT / "ed4.png", dpi=300)
+    fig.savefig(OUT / "ed8.pdf", metadata=META)
+    fig.savefig(OUT / "ed8.png", dpi=300)
 
 
-def ed7():
+def ed6():
     """IBL brain-wide map: every test row on fake block sequences (open) and on the real block side (filled),
     mouse-weighted rates with mouse-cluster BCa 95% intervals (runs/SUMMARY.md)."""
     _, q1, q2, rate = _ibl()
@@ -372,21 +358,21 @@ def ed7():
         for blk, name, filled, off in ((q1, "Fake block sequences", False, -0.17), (q2, "Real block side", True, 0.17)):
             v = rate(blk, key)
             if v is None:
-                print("ED7 %-15s %-20s not run" % (key, name))
+                print("ED6 %-15s %-20s not run" % (key, name))
                 continue
             dot(ax, i + off, v[0], v[1], MOUSE, "o", filled, label=name if i == 0 else None)
-            print("ED7 %-15s %-20s %.3f [%.3f, %.3f]  runs/SUMMARY.md %s" % (key, name, v[0], v[1][0], v[1][1], name))
+            print("ED6 %-15s %-20s %.3f [%.3f, %.3f]  runs/SUMMARY.md %s" % (key, name, v[0], v[1][0], v[1][1], name))
     ax.set_yticks(range(len(rows))); ax.set_yticklabels([r[1] for r in rows], fontsize=6.3); ax.invert_yaxis()
     for y in (4.5, 9.5, 11.5):
         ax.axhline(y, color=GRID, lw=0.6)
     style(ax, "Brain regions called decodable, per session (%)")
     ax.legend(frameon=False, loc="lower right", fontsize=6, handletextpad=0.3)
     fig.tight_layout()
-    fig.savefig(OUT / "ed7.pdf", metadata=META)
-    fig.savefig(OUT / "ed7.png", dpi=300)
+    fig.savefig(OUT / "ed6.pdf", metadata=META)
+    fig.savefig(OUT / "ed6.png", dpi=300)
 
 
-def ed8():
+def ed7():
     """IBL: (a) per region (at least 3 sessions, real block side), share of its region-sessions called decodable by
     the scikit-learn rule against the pseudosession test; (b) positive control, stimulus side 0-100 ms after onset,
     pseudosession test, by the region's mark in the published map (region_info.csv)."""
@@ -400,7 +386,7 @@ def ed8():
     for name, k2, n2, kp, n in reg:
         x, y = 100 * int(kp) / int(n), 100 * int(k2) / int(n2)
         a.plot(x, y, "o", ms=2 + 0.12 * int(n), color=MOUSE, mfc="none", mew=0.7, alpha=0.9)
-        print("ED8a %-8s P2 %s/%s  PS-refit %s/%s  runs/SUMMARY.md Extended Data list" % (name, k2, n2, kp, n))
+        print("ED7a %-8s P2 %s/%s  PS-refit %s/%s  runs/SUMMARY.md Extended Data list" % (name, k2, n2, kp, n))
     a.plot([0, 100], [0, 100], color=MUTED, lw=0.6, ls=(0, (3, 2)))
     a.set_xlim(-2, 102); a.set_ylim(-2, 102); a.set_aspect("equal")
     a.set_xlabel("Pseudosession test (%)"); a.set_ylabel("Trial-level permutation (%)")
@@ -415,14 +401,14 @@ def ed8():
         ci = _wilson(k, k + m)
         dot(b, i, k / (k + m), ci, MOUSE, "o", True)
         b.text(100 * ci[1] + 2, i, "%d of %d (%d mice)" % (k, k + m, mice), va="center", fontsize=6, color=INK)
-        print("ED8b %-22s %d of %d, mice %d, Wilson %.3f-%.3f  runs/SUMMARY.md positive control" % (lab, k, k + m, mice, ci[0], ci[1]))
+        print("ED7b %-22s %d of %d, mice %d, Wilson %.3f-%.3f  runs/SUMMARY.md positive control" % (lab, k, k + m, mice, ci[0], ci[1]))
     b.set_yticks(range(3)); b.set_yticklabels([labels[g[0]] for g in groups]); b.invert_yaxis()
     style(b, "Brain regions significant per session, stimulus side (%)", xmax=100)
     b.set_ylim(2.6, -0.6)
     b.set_title("b  Positive control (pseudosession test)", loc="left", fontsize=7)
     fig.tight_layout(w_pad=2.5)
-    fig.savefig(OUT / "ed8.pdf", metadata=META)
-    fig.savefig(OUT / "ed8.png", dpi=300)
+    fig.savefig(OUT / "ed7.pdf", metadata=META)
+    fig.savefig(OUT / "ed7.png", dpi=300)
 
 
 def ed3():
@@ -480,7 +466,7 @@ def ed10():
     fig.tight_layout(rect=(0, 0, 1, 0.9)); fig.savefig(OUT / "ed10.pdf", metadata=META); fig.savefig(OUT / "ed10.png", dpi=300)
 
 
-def ed5():
+def ed4():
     """Simulation grid, random block design: trial-level permutation (P2) and the block permutation test (P5) by drift
     time constant, drift strength and number of blocks, for the three splits."""
     import re
@@ -497,7 +483,7 @@ def ed5():
                         k = next((k for k in c if re.match(rf"c\d+_random_B{B}_tau{tau}_d{drift}_t0_{split}$", k)), None)
                         ys.append(100 * c[k][rule]["rate"] if k else float("nan"))
                         if k:
-                            print("ED5 %-5s B%-2s tau%-3s drift %s %s %.3f  sim_summary %s" % (split, B, tau, drift, rule, c[k][rule]["rate"], k))
+                            print("ED4 %-5s B%-2s tau%-3s drift %s %s %.3f  sim_summary %s" % (split, B, tau, drift, rule, c[k][rule]["rate"], k))
                     ax.plot(range(4), ys, ls=ls, color=color, marker=mk, ms=2.5, lw=0.9)
             ax.axhline(5, color=MUTED, lw=0.6, ls=(0, (3, 2)))
             ax.set_ylim(-3, 103); ax.set_xticks(range(4), [str(t) for t in taus])
@@ -515,7 +501,7 @@ def ed5():
          plt.Line2D([], [], color=MUTED, ls=":", lw=0.9, label="no slow drift"), plt.Line2D([], [], color=MUTED, ls="-", lw=0.9, label="drift 1"),
          plt.Line2D([], [], color=MUTED, ls="--", lw=0.9, label="drift 2")]
     fig.legend(handles=h, loc="upper center", ncol=5, frameon=False, fontsize=6)
-    fig.tight_layout(rect=(0, 0, 1, 0.95)); fig.savefig(OUT / "ed5.pdf", metadata=META); fig.savefig(OUT / "ed5.png", dpi=300)
+    fig.tight_layout(rect=(0, 0, 1, 0.95)); fig.savefig(OUT / "ed4.pdf", metadata=META); fig.savefig(OUT / "ed4.png", dpi=300)
 
 
 FIGS = {n: globals()[f"ed{n}"] for n in range(1, 11)}

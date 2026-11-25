@@ -56,7 +56,7 @@ labels with no information, 40 recordings, p < 0.05:
 The test `test_equivalence_with_reference` checks that, with `exact=False`, the same `random_state` Generator and the same folds, this function returns the same observed score, null scores and p value (except that it returns no null when the observed score is undefined) as the reference implementation used in the analyses (`analyses/step2-comparison/code/sim.py` in the paper's repository; another location can be given with `REFERENCE_SIM_DIR`), for shuffled 5-fold, re-split stratified 5-fold, GroupKFold by block and a user `draw`; it is skipped when that file is not present. With the default `exact="auto"`, designs with no more arrangements than `n_permutations` are enumerated instead (the null then has one score per arrangement).
 
 ## Tutorial, MATLAB and Octave
-- `docs/TUTORIAL.md`: a step-by-step guide (folds, strata, pseudosessions, few blocks, fixed block orders, checking a pipeline with labels that carry no information).
+- `docs/TUTORIAL.md`: a step-by-step guide (folds, strata, pseudosessions, few blocks, fixed block orders, checking a pipeline with labels with no information).
 - `matlab/`: a MATLAB and Octave port, `block_permutation_test.m`, which takes a function returning the cross-validated score for a label vector. This Python function is the reference; the port is checked against it in `matlab/crosscheck/` (`matlab/README.md`).
 - On PyPI: `pip install blockperm`. Versions 0.1.2 and 0.1.3 have the same `blockperm.py` as 0.1.0, the version used in the paper; 0.1.2 adds the PyPI description (`PYPI.md`) and the preprint link, and 0.1.3 states the requirement of Python 3.10 or later.
 

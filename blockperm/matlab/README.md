@@ -35,11 +35,12 @@ Run the checks:
 
 ```
 cd matlab
-octave --no-gui --eval "test_block_permutation_test" > OUT/test_block_permutation_test.out   # compare with the shipped test_block_permutation_test.out
-python crosscheck/make_eegbci_features.py OUT                          # needs mne; downloads the EEG data
-python crosscheck/run_python_check.py OUT
-octave --no-gui --eval "cd crosscheck; run_matlab_check('OUT')"
-octave --no-gui --eval "cd crosscheck; run_mvpa_light_example('OUT', 'path/to/MVPA-Light')"
+OUT=$(mktemp -d)
+octave --no-gui --eval "test_block_permutation_test" > $OUT/test_block_permutation_test.out   # compare with the shipped test_block_permutation_test.out
+python crosscheck/make_eegbci_features.py $OUT                         # needs mne; downloads the EEG data
+python crosscheck/run_python_check.py $OUT
+octave --no-gui --eval "cd crosscheck; run_matlab_check('$OUT')"
+octave --no-gui --eval "cd crosscheck; run_mvpa_light_example('$OUT', 'path/to/MVPA-Light')"
 ```
 
 In MATLAB, run `test_block_permutation_test` from the `matlab` folder.

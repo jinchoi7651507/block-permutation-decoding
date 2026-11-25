@@ -1,10 +1,10 @@
 # Screening note: practice survey (search + screening stage)
 
-Written 2026-10-20 (KST). Protocol: `PROTOCOL.md`. Coding of C1–C5 was not done here.
+Written 2026-10-20 (KST). Coding of C1–C5 was not done here.
 
 ## Search
 - Database: Europe PMC REST API, `https://www.ebi.ac.uk/europepmc/webservices/rest/search`, `resultType=lite`, `pageSize=1000`, cursorMark paging, `format=json`.
-- Query (exact, as in §1):
+- Query (exact):
   `(decoding OR decoder OR classifier) AND (permutation OR shuffled OR shuffle) AND (block OR blocks OR context) AND (neurons OR "single units" OR "calcium imaging" OR Neuropixels OR electrophysiology) AND OPEN_ACCESS:y AND PUB_YEAR:[2024 TO 2026]`
 - Retrieved: 2026-10-20T06:00:06+09:00 (one run).
 - Hits: 2,370 (hitCount 2,370; all retrieved). Source: MED 2,182, PPR 154, PMC 34. Latest firstPublicationDate 2026-10-16, so nothing falls after the protocol's 2026-10-19 cut-off.
@@ -37,7 +37,7 @@ Included (order / pmcid): 47 / PMC12660755; 61 / PMC10783789; 228 / PMC13418543;
 
 ## Deviations and interpretations (in order of impact)
 
-1. **Fewer than 40 includes.** The whole list gave 14. The 40-paper target in §1 could not be met. The order of screening therefore has no effect on the included set.
+1. **Fewer than 40 includes.** The whole list gave 14. The 40-paper target could not be met. The order of screening therefore has no effect on the included set.
 
 2. **Two-stage screening (automated keyword screen, then reading one record at a time by the screening agent).** Every record's full-text XML was downloaded and parsed. For 1,698 records the decision came from an automated full-text keyword screen without reading one record at a time:
    - the article type was not a research article (review, abstract collection, editorial and so on): reason 1, 156 records;
@@ -63,7 +63,7 @@ Included (order / pmcid): 47 / PMC12660755; 61 / PMC10783789; 228 / PMC13418543;
    - Included: 577 (the main decoded variable is the model-estimated template; the true template is block-constant), 803 (held-out procedure stated only as "cross-validated 50 times"), 1471 (dPCA pseudo-population; significance from a shuffled 95% CI), 1605 (chance from within-block pseudo-segmentation as well as label shuffle).
    - unclear-criterion-3: 133, 616, 1243, 1333.
 
-7. **One screener.** The protocol does not specify a second screener at the screening stage. All screening judgements were made by a single agent; independent spot-checks are reported in `AUDIT-AUTO-EXCLUSIONS.md` and the two later checks.
+7. **One screener.** The protocol does not specify a second screener at the screening stage. All screening judgements were made by a single agent; independent spot-checks are reported in `AUDIT-AUTO-EXCLUSIONS.md`.
 
 ## Files
 - `search.json`: raw hits with retrieval time and query.

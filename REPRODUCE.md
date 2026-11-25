@@ -39,7 +39,7 @@ It checks eight archives and must end with "ALL OK". The data manifests (recordi
 
 ## 2. Rebuild the summaries (quick path)
 
-The run rows are shipped as archives, each unpacking into the folder name it had on the machine that wrote it. `-k` keeps the files already in the tree. On Linux, GNU tar stops at those files with `-k`; write `tar xzf <archive> --skip-old-files` for each archive. The five archives below unpack to about 220 MB in about 31,500 files.
+The run rows are shipped as archives, each unpacking into the folder name it had on the machine that wrote it. `-k` keeps the files already in the tree. On Linux, GNU tar stops at those files with `-k`; write `tar --exclude='._*' --skip-old-files -xzf <archive>` for each archive (three archives also hold macOS metadata entries, `._*`, which macOS tar skips). The five archives below unpack to about 220 MB in about 31,500 files.
 
 ```bash
 (cd analyses/step2-comparison && tar xzkf runs_cloud.tgz && tar xzkf runs_allen.tgz && tar xzkf runs_add3.tgz)   # into runs/, runs_allen/, runs_add3/
@@ -76,16 +76,20 @@ Each summary prints its tables; the `.md` files hold the same numbers as the `.j
 Recompute one simulation replicate from scratch (cell `c000`, replicate 0; about 20 s):
 
 ```bash
+(
 : "${OUT:?run the first block of this section first}"
 (cd analyses/step2-comparison/code && python run_grid.py --design random --B 12 --L 20 --tau-s 20 --drift 1 --split main \
     --reps 1 --n-perm 200 --seed 2026000 --out $OUT/c000.jsonl)
+)
 ```
 
 Compare it with replicate 0 of the shipped cloud rows (from the repository root):
 
 ```bash
+(
 : "${OUT:?run the first block of this section first}"
 python -c "import json,glob;n=json.loads(open('$OUT/c000.jsonl').readline());o=[r for f in glob.glob('analyses/step2-comparison/runs/c000_random_B12_tau20_d1_t0_main.w*.jsonl') for r in map(json.loads,open(f)) if r['rep']==0][0];[print(k,n[k],o[k],'same' if n[k]==o[k] else 'differs') for k in ('P1','P2','P3','P4','P5')]"
+)
 ```
 
 P2, P3 (undefined in this replicate), P4 and P5 print "same"; the binomial p value (P1, about 1e-27) differs only in the last floating-point digit. scikit-learn's warning that KFold ignores `groups` is expected here.
@@ -122,47 +126,49 @@ It prints 76 cells, 38431 simulations and a largest difference of 2.6 points (a 
 Redraw the figures (Figs 1, 2a, 2b and Extended Data Figs 1–10) from the shipped outputs and compare them with the shipped PDFs (copied first into the scratch folder):
 
 ```bash
+(
 : "${OUT:?run the first block of this section first}"
 mkdir $OUT/pdf && cp figures/*.pdf $OUT/pdf/
 (cd figures && python make_bc_figures.py > $OUT/values_bc.txt && python make_ed_figures.py > $OUT/values_ed.txt)
 for f in $OUT/pdf/*.pdf; do cmp $f figures/$(basename $f); done
 cat $OUT/values_bc.txt $OUT/values_ed.txt | cmp - figures/figures_values.txt
+cp $OUT/pdf/*.pdf figures/ && rm figures/*.png
+)
 ```
 
-Both checks must print nothing. The scripts overwrite the PDFs in `figures/` and also write PNG previews there; afterwards restore the shipped files with `cp $OUT/pdf/*.pdf figures/ && rm figures/*.png`. `figures/figures_values.txt` lists every plotted value with its source file and key.
+Both checks must print nothing. The scripts overwrite the PDFs in `figures/` and write PNG previews there; the last line puts the shipped PDFs back and removes the previews. `figures/figures_values.txt` lists every plotted value with its source file and key.
 
 The function, the fold-map check and the survey counts:
 
 ```bash
-: "${OUT:?run the first block of this section first}"
 (cd blockperm && python -m pytest -q tests && python examples/fake_block_labels.py)
 python analyses/foldmap/foldmap_check.py
-(cd analyses/yaron-panel/code && python fixed_vs_repeated.py --from-csv ../results/null_draws.csv --out $OUT && cmp $OUT/fixed_vs_repeated.json ../results/fixed_vs_repeated.json)
 python -c "import csv;r=[x for x in csv.DictReader(open('analyses/practice-survey/coding_final.csv')) if x['item']=='C2'];print(sum(x['final'] in ('trial-label permutation','binomial or parametric') for x in r),'of',len(r))"
 python analyses/step4-fmri-haxby/code/test_synthetic.py
 ```
 
-- The tests end with "12 passed" (with warnings that some tests provoke on purpose); one of them checks that the function gives the same scores and p values as the simulator used in the analyses (`analyses/step2-comparison/code/sim.py`). The example prints 14 (35%) for trial-level permutation and 1 (2%) for the block permutation test, out of 40 recordings with labels that carry no information.
+- The tests end with "12 passed" (with warnings that some tests provoke on purpose); one of them checks that the function gives the same scores and p values as the simulator used in the analyses (`analyses/step2-comparison/code/sim.py`). The example prints 14 (35%) for trial-level permutation and 1 (2%) for the block permutation test, out of 40 recordings with labels with no information.
 
 The MATLAB and Octave port (optional; no result of the paper uses it). Needs GNU Octave 7 or later (checked with 11.3.0), and for the EEG features `pip install mne==1.13.2` and network access (the cross-check downloads PhysioNet EEGBCI subject 1, runs 3 to 14, once):
 
 ```bash
+(
 : "${OUT:?run the first block of this section first}"
 (cd blockperm/matlab && octave --no-gui --eval "test_block_permutation_test")
 python blockperm/matlab/crosscheck/make_eegbci_features.py $OUT/eegbci     # downloads PhysioNet EEGBCI subject 1, runs 3 to 14
 python blockperm/matlab/crosscheck/run_python_check.py $OUT/eegbci
 (cd blockperm/matlab/crosscheck && octave --no-gui --eval "run_matlab_check('$OUT/eegbci')")
+)
 ```
 
 - The unit checks end with "all checks passed" (size under no information 0.040 in Octave 11.3.0; `blockperm/matlab/test_block_permutation_test.out`). The cross-check prints the same p for Python and Octave (0.6558 for the real labels, 0.8723 for labels with no information, 924 arrangements each) and "cross-check passed"; the shipped record is `blockperm/matlab/crosscheck/crosscheck.out`. About 5 min on a laptop.
-- `foldmap_check.py` prints `maps_sha256` a2f34e49… on arm64 (as `foldmap_arm64_laptop.json`) and 2b94cd2f… on x86 (as `foldmap_x86_c2d.json`). The replicate-level comparison (800 of 800) is in `analyses/foldmap/replicate_*_compare.txt`, with its protocol in `REPLICATE-CHECK.md`. `replicate_check.py compare` reads the step 2 rows from the folder `STEP2_DIR`, with the cloud rows in `runs_cloud/` and the laptop rows in `runs/`; after §2, `mkdir -p $OUT/s2 && ln -s "$PWD/analyses/step2-comparison/runs" $OUT/s2/runs_cloud && ln -s "$PWD/analyses/step2-comparison/runs_laptop" $OUT/s2/runs` and `STEP2_DIR=$OUT/s2` give that layout.
-- The Extended Data Fig. 4a summary is rebuilt from the shipped permutation scores (null means 0.0014 fixed, 0.1149 repeated); the full run from the raw data is in §3 (yaron-panel).
+- `foldmap_check.py` prints `maps_sha256` a2f34e49… on arm64 (as `foldmap_arm64_laptop.json`) and 2b94cd2f… on x86 (as `foldmap_x86_c2d.json`). The replicate-level comparison (800 of 800) is in `analyses/foldmap/replicate_*_compare.txt`, with its protocol in `REPLICATE-CHECK.md`. `replicate_check.py compare` reads the step 2 rows from the folder `STEP2_DIR`, with the cloud rows in `runs_cloud/` and the laptop rows in `runs/`; after §2, `mkdir -p $OUT/s2 && ln -s "$PWD/analyses/step2-comparison/runs" $OUT/s2/runs_cloud && ln -s "$PWD/analyses/step2-comparison/runs_laptop" $OUT/s2/runs` and `STEP2_DIR=$OUT/s2` give that layout. Then `(cd analyses/foldmap && STEP2_DIR=$OUT/s2 python replicate_check.py compare --rows replicate_x86_rows/rows --reps 20 | cmp - replicate_x86_compare.txt && STEP2_DIR=$OUT/s2 python replicate_check.py compare --rows replicate_laptop_x86map_rows --reps 20 | cmp - replicate_laptop_compare.txt)` prints nothing.
 - The survey recount prints "11 of 14" (trial-level tests); with `item=='C1'` and `x['final']=='shared'` it prints "14 of 14".
 - `test_synthetic.py` runs the synthetic checks of steps 4 and 5 (about 2 min) and ends with "ALL OK", as in `analyses/step4-fmri-haxby/test_synthetic.out`; scikit-learn's warning that KFold ignores `groups` is expected.
 
 ## 3. Full runs
 
-Raw data are not redistributed. The blocks below use bash and start from the set-up line, and each stops at once if the set-up line has not been run, so that no block touches the shipped tree. To rerun a step without touching the shipped files, work in a copy of its folder with the shipped rows removed, then rebuild the summary as in §2 and compare it with the shipped one. The commands are those of the reported runs.
+Raw data are not redistributed. The blocks below use bash and start from the set-up line, and each stops at once if the set-up line has not been run, so that no block touches the shipped tree. To rerun a step without touching the shipped files, work in a copy of its folder with the shipped rows removed, then rebuild the summary as in §2 and compare it with the shipped one. The commands run the same analyses as the reported runs.
 
 ```bash
 REPO=$(pwd); RERUN=$(mktemp -d); cp -R analyses $RERUN/; cd $RERUN/analyses
@@ -177,7 +183,6 @@ The set-up scripts in the `gcp/` folders expect the step folders under `~/pe/res
 | IBL Brain-Wide Map, 459 sessions | about 96 GB in all, at most 1.2 GB per session; each worker deletes a session's spike files after counting, so the disk holds about 1.3 GB per worker | during the run, one session at a time | 6 h 8 min with 47 workers |
 | Jahn et al. (2024), Zenodo 10.5281/zenodo.10529801 (step 6) | 460 listed members, by range requests | see steps 6 and 6b | below |
 | Klee et al. (2026), Zenodo 10.5281/zenodo.16333867 (step 6b) | 3.57 GB zip | see steps 6 and 6b | below |
-| Yaron et al. (2025), 19 files | 1.3 GB | depends on the connection | about 5 min to load, 2 min for 1,000 permutations |
 | Haxby et al. (2001), PyMVPA distribution, 6 subjects (step 4) | 1.8 GB of archives | about 5 min (the run's `fetch.log`) | about 5 h for six subjects in parallel on the laptop of `ENVIRONMENT.md` (part of it in sleep cycles) |
 | PAMAP2, UCI archive (step 5) | 0.7 GB archive | about 3 min | about 2 h for eight subjects, six at a time, on the same laptop |
 
@@ -188,16 +193,18 @@ The simulation grid needs no data. It ran for about 13 h on one 56-vCPU machine 
 Needs h5py (`trackA-std/requirements.txt`). `<nwb folder>` is an absolute path. The download writes `MANIFEST.sha256` into the target folder; compare it with the shipped one.
 
 ```bash
+(
 : "${RERUN:?run the set-up line of section 3 first}"
 cd "$RERUN/analyses"
-python trackA-std/code/download_sessions.py --dir <nwb folder> --only all
-diff <(sort <nwb folder>/MANIFEST.sha256) <(sort trackA-std/MANIFEST.sha256) && echo "data as in the manifest"
+python trackA-std/code/download_sessions.py --dir "<nwb folder>" --only all
+diff <(sort "<nwb folder>"/MANIFEST.sha256) <(sort trackA-std/MANIFEST.sha256) && echo "data as in the manifest"
 cd step1-decomposition && rm -f runs/rows*.jsonl runs/within_train_rows*.jsonl && cd code
 IDS=$(python -c "import csv;print(','.join(r['session_id'] for r in csv.DictReader(open('../../trackA-std/sessions_trackA.csv'))))")
-for k in 0 1 2 3; do python decompose.py --dir <nwb folder> --sessions $IDS --out ../runs/rows_$k.jsonl --worker $k --of 4 & done; wait
+for k in 0 1 2 3; do python decompose.py --dir "<nwb folder>" --sessions $IDS --out ../runs/rows_$k.jsonl --worker $k --of 4 & done; wait
 cat ../runs/rows_[0-9].jsonl > ../runs/rows.jsonl
-for k in 0 1 2 3 4; do python within_train.py --dir <nwb folder> --sessions $IDS --out ../runs/within_train_rows_$k.jsonl --worker $k --of 5 & done; wait
+for k in 0 1 2 3 4; do python within_train.py --dir "<nwb folder>" --sessions $IDS --out ../runs/within_train_rows_$k.jsonl --worker $k --of 5 & done; wait
 cat ../runs/within_train_rows_[0-9].jsonl > ../runs/within_train_rows.jsonl
+)
 ```
 
 The earlier mouse analysis itself (Supplementary Note 1) is shipped as its code and its outputs (`trackA-std/results/`, `trackA-std/first-run/results/`); its run rows are not shipped except `runs/extra.jsonl`, so its tables are not rebuilt in §2.
@@ -207,12 +214,14 @@ Then §2 (step 1). The summaries report the compute used: 8.6 core-hours for `de
 ### step 2 (simulation grid, mouse cells, toolboxes)
 
 ```bash
+(
 : "${RERUN:?run the set-up line of section 3 first}"
 cd "$RERUN/analyses"
 cd step2-comparison && find runs -name '*.jsonl' -delete && rm -rf runs_allen runs_add3/*.jsonl runs_add3/tools
-PY=$(which python) WORKERS=<n> bash code/cloud_chain.sh       # Linux; every cell, the power pilot, the δ choice, the power cells
-cd code && python allen_cells.py --dir <nwb folder> --out ../runs_allen/rows.w0.jsonl --worker 0 --of 1   # <nwb folder>: the Allen download of the step 1 block
-PY312=<python 3.12> PY39=<python 3.9 with PyMVPA 2.6.5> COSMO=<CoSMoMVPA checkout at fe5acaf> W=<n> bash add3_run.sh   # the toolbox and further simulation cells; Linux with GNU Octave
+PY=$(which python) WORKERS="<n>" bash code/cloud_chain.sh       # Linux; every cell, the power pilot, the δ choice, the power cells
+cd code && for k in 0 1 2 3 4 5; do python allen_cells.py --dir "<nwb folder>" --out ../runs_allen/rows.w$k.jsonl --worker $k --of 6 & done; wait   # six workers, as in the reported run; <nwb folder>: the Allen download of the step 1 block
+PY312="<python 3.12>" PY39="<python 3.9 with PyMVPA 2.6.5>" COSMO="<CoSMoMVPA checkout at fe5acaf>" W="<n>" bash add3_run.sh   # the toolbox and further simulation cells; Linux with GNU Octave
+)
 ```
 
 The reported grid ran on one 56-vCPU cloud machine from 2026-10-22 14:40 to 10-23 03:58 UTC (`runs/run.log` in `runs_cloud.tgz`), with the versions of `requirements/step2-cloud.txt`. The toolbox and further simulation cells took about 5 h on a second machine, set up by `gcp/vm_add3_setup.sh` (Octave 8.4, CoSMoMVPA fe5acaf, PyMVPA 2.6.5 under Python 3.9; versions in `requirements/step2-add3-py312.txt` and `requirements/pymvpa-py39.txt`) and run by `gcp/vm_add3_go.sh`. The mouse cells (`allen_cells.py`) ran on the arm64 laptop. Cells with 24 equal blocks held out by `GroupKFold` give the same folds only on the same processor family. Rerun them on x86 to match the cloud rows, and the mouse cells on arm64 to match the shipped mouse rows, or pass the recorded folds explicitly (`analyses/foldmap/`, `ENVIRONMENT.md`). The cloud rows are the result; the laptop rows (`runs_laptop.tgz`) are those of the equivalence check of the two platforms (Supplementary Note 4; compared in §2).
@@ -222,26 +231,30 @@ The reported grid ran on one 56-vCPU cloud machine from 2026-10-22 14:40 to 10-2
 Needs MNE 1.13.2 (`pip install -r requirements/step2b-cloud.txt`). The download script rewrites `eligibility/EEG-MANIFEST.sha256` in the copy; compare it with the shipped one.
 
 ```bash
+(
 : "${RERUN:?run the set-up line of section 3 first}"; : "${REPO:?run the set-up line of section 3 first}"
 cd "$RERUN/analyses/step2b-eeg/code"
 rm -f ../runs/rows*.jsonl                                       # the shipped rows unpacked in §2; the runner skips jobs already in its output file
-LEMON_DIR=<raw folder> bash download_eeg.sh                     # participants of ../eligibility/SUBJECTS.txt
-cmp ../eligibility/EEG-MANIFEST.sha256 $REPO/analyses/step2b-eeg/eligibility/EEG-MANIFEST.sha256 && echo "data as in the manifest"
-for k in $(seq 0 <n-1>); do LEMON_DIR=<raw folder> python preprocess.py --subjects ../eligibility/SUBJECTS.txt --out <features dir> --worker $k --of <n> & done; wait
-mkdir -p ../runs-example && python run_2b.py --features <features dir> --subjects ../eligibility/SUBJECTS.txt --arms balanced --out ../runs-example/rows.w0.jsonl   # a small example, kept apart from ../runs
+LEMON_DIR="<raw folder>" bash download_eeg.sh                     # participants of ../eligibility/SUBJECTS.txt
+cmp ../eligibility/EEG-MANIFEST.sha256 "$REPO/analyses/step2b-eeg/eligibility/EEG-MANIFEST.sha256" && echo "data as in the manifest"
+for k in $(seq 0 "<n-1>"); do LEMON_DIR="<raw folder>" python preprocess.py --subjects ../eligibility/SUBJECTS.txt --out "<features dir>" --worker $k --of "<n>" & done; wait
+mkdir -p ../runs-example && python run_2b.py --features "<features dir>" --subjects ../eligibility/SUBJECTS.txt --arms balanced --out ../runs-example/rows.w0.jsonl   # a small example, kept apart from ../runs
+)
 ```
 
 The last command above runs the balanced arm only, into its own folder. The reported cloud run (56 workers on one machine set up by `gcp/vm_setup.sh` with `requirements/step2b-cloud.txt`; machine record by `gcp/vm_machine.sh`) ran:
 
 ```bash
+(
 : "${RERUN:?run the set-up line of section 3 first}"
 cd "$RERUN/analyses/step2b-eeg/code"
-for k in $(seq 0 55); do python run_2b.py --features <features dir> --subjects ../eligibility/SUBJECTS.txt --out ../runs/rows.w$k.jsonl --worker $k --of 56 & done; wait   # all arms, splits main, tool, block
-for k in $(seq 0 55); do python run_2b.py --features <features dir> --subjects ../eligibility/SUBJECTS.txt --sensitivity --out ../runs/rows_sens.w$k.jsonl --worker $k --of 56 & done; wait
-LEMON_DIR=<raw folder> bash download_pilot2.sh && LEMON_DIR=<raw folder> python preprocess.py --subjects ../eligibility/PILOT2-SUBJECTS.txt --out <features dir>   # the 5 subjects of the second graded-control pilot
-python graded_pilot2.py --features <features dir> --subjects ../eligibility/PILOT2-SUBJECTS.txt --out ../runs/graded_pilot2.json   # pilot of the graded control (post hoc); chose rule N5
-for k in $(seq 0 55); do python run_graded2.py --features <features dir> --subjects ../eligibility/SUBJECTS.txt --arms pos_graded,balanced_graded --splits main --graded-rule N5 --out ../runs/rows_graded2.w$k.jsonl --worker $k --of 56 & done; wait
-python posthoc_alpha_slope.py --features <features dir> --rows ../runs --out <scratch>/alpha_slope.json   # Supplementary Note 3 (post hoc)
+for k in $(seq 0 55); do python run_2b.py --features "<features dir>" --subjects ../eligibility/SUBJECTS.txt --out ../runs/rows.w$k.jsonl --worker $k --of 56 & done; wait   # all arms, splits main, tool, block
+for k in $(seq 0 55); do python run_2b.py --features "<features dir>" --subjects ../eligibility/SUBJECTS.txt --sensitivity --out ../runs/rows_sens.w$k.jsonl --worker $k --of 56 & done; wait
+LEMON_DIR="<raw folder>" bash download_pilot2.sh && LEMON_DIR="<raw folder>" python preprocess.py --subjects ../eligibility/PILOT2-SUBJECTS.txt --out "<features dir>"   # the 5 subjects of the second graded-control pilot
+python graded_pilot2.py --features "<features dir>" --subjects ../eligibility/PILOT2-SUBJECTS.txt --out ../runs/graded_pilot2.json   # pilot of the graded control (post hoc); chose rule N5
+for k in $(seq 0 55); do python run_graded2.py --features "<features dir>" --subjects ../eligibility/SUBJECTS.txt --arms pos_graded,balanced_graded --splits main --graded-rule N5 --out ../runs/rows_graded2.w$k.jsonl --worker $k --of 56 & done; wait
+python posthoc_alpha_slope.py --features "<features dir>" --rows ../runs --out "<scratch>"/alpha_slope.json   # Supplementary Note 3 (post hoc)
+)
 ```
 
 Then rebuild the step 2b summary as in §2.
@@ -253,40 +266,44 @@ The analyses are those of the Methods (Labels with no information); the graded c
 Needs ONE-api 3.6.1, ibllib 4.1.0, scikit-learn 1.9.1 and the `brainwidemap` package at commit 118fc36 (github.com/int-brain-lab/paper-brain-wide-map; all pinned in `requirements/step3-ibl.txt`). The cloud machine was set up by `gcp/vm_ibl_setup.sh`.
 
 ```bash
+(
 : "${RERUN:?run the set-up line of section 3 first}"; : "${REPO:?run the set-up line of section 3 first}"
 cd "$RERUN/analyses/step3-ibl/code"
 rm -rf ../runs/rows.w*.jsonl ../runs/claims ../runs/SUMMARY.md           # the shipped rows unpacked in §2
 python -c "from one.api import ONE; ONE(base_url='https://openalyx.internationalbrainlab.org', username='intbrainlab', password='international', silent=True)"   # the public IBL login, as in the scripts
-python prep_ibl.py order --out ../runs/ORDER.json && cmp ../runs/ORDER.json $REPO/analyses/step3-ibl/runs/ORDER.json
+python prep_ibl.py order --out ../runs/ORDER.json && cmp ../runs/ORDER.json "$REPO/analyses/step3-ibl/runs/ORDER.json"
 python prep_ibl.py regions --region-info ../meta/region_info.csv --out ../runs/STIM-REGIONS.json
 python prep_ibl.py budget-meta --order ../runs/ORDER.json --out ../runs/BUDGET-META.json
 python prep_ibl.py realism --order ../runs/ORDER.json --out ../runs/REALISM.json
-for k in $(seq 0 46); do python run_ibl.py --order ../runs/ORDER.json --n-sessions 459 --out ../runs/rows.w$k.jsonl --cache <cache folder>/$k --claims ../runs/claims & done; wait   # 47 workers, one ONE cache each
+for k in $(seq 0 46); do python run_ibl.py --order ../runs/ORDER.json --n-sessions 459 --out ../runs/rows.w$k.jsonl --cache "<cache folder>"/$k --claims ../runs/claims & done; wait   # 47 workers, one ONE cache each
 python summarize_ibl.py --rows ../runs --order ../runs/ORDER.json --stim ../runs/STIM-REGIONS.json --realism ../runs/REALISM.json --region-info ../meta/region_info.csv > ../runs/SUMMARY.md
-cmp ../runs/SUMMARY.md $REPO/analyses/step3-ibl/runs/SUMMARY.md   # identical only if the public server returns the same data
+cmp ../runs/SUMMARY.md "$REPO/analyses/step3-ibl/runs/SUMMARY.md"   # identical only if the public server returns the same data
+)
 ```
 
 `meta/region_info.csv` is the pinned copy of the `brainwidemap` file. The main run used 47 workers on one 56-vCPU machine for 6 h 8 min (`runs/run.log` in `runs_ibl.tgz`).
 
-### steps 4 and 5 (post hoc; block-design fMRI and body-worn sensors)
+### steps 4 and 5 (post hoc; block-design fMRI and wearable sensors)
 
 Use the quick-path environment with nibabel 5.3.2 added (`pip install -r requirements/step4-5-laptop.txt`; nibabel is needed only by `prepare_haxby.py`). The runners stop if numpy or scikit-learn has another version.
 
 ```bash
+(
 export OMP_NUM_THREADS=1
 : "${RERUN:?run the set-up line of section 3 first}"
 cd "$RERUN/analyses/step4-fmri-haxby/code"
-python fetch_haxby.py --dir <data>/haxby                                   # MD5 against the server's MD5SUMS; writes MANIFEST.sha256
-diff <data>/haxby/MANIFEST.sha256 ../runs/MANIFEST-haxby.sha256 && echo "data as in the manifest"
-for i in 1 2 3 4 5 6; do python prepare_haxby.py --subject-dir <data>/haxby/subj$i --subject subj$i --out <data>/haxby/features; done
-for i in 1 2 3 4 5 6; do python run_haxby.py --features <data>/haxby/features --subject subj$i --out-dir <rows> & done; wait
-python summarize.py --step 4 --rows <rows> --features <data>/haxby/features --out <out>
+python fetch_haxby.py --dir "<data>"/haxby                                   # MD5 against the server's MD5SUMS; writes MANIFEST.sha256
+diff "<data>"/haxby/MANIFEST.sha256 ../runs/MANIFEST-haxby.sha256 && echo "data as in the manifest"
+for i in 1 2 3 4 5 6; do python prepare_haxby.py --subject-dir "<data>"/haxby/subj$i --subject subj$i --out "<data>"/haxby/features; done
+for i in 1 2 3 4 5 6; do python run_haxby.py --features "<data>"/haxby/features --subject subj$i --out-dir "<rows>" & done; wait
+python summarize.py --step 4 --rows "<rows>" --features "<data>"/haxby/features --out "<out>"
 cd ../../step5-pamap2/code
-python fetch_pamap2.py --dir <data>/pamap2
-diff <(grep Protocol <data>/pamap2/MANIFEST.sha256) <(grep Protocol ../runs/MANIFEST-pamap2.sha256) && echo "data as in the manifest"   # the archive hash can change if UCI repackages it
-for i in $(seq 101 109); do python prepare_pamap2.py --file <data>/pamap2/Protocol/subject$i.dat --subject subject$i --out <data>/pamap2/features; done
-for i in $(seq 101 108); do python run_pamap2.py --features <data>/pamap2/features --subject subject$i --out-dir <rows5> & done; wait   # subject109 is excluded by the preparation
-python ../../step4-fmri-haxby/code/summarize.py --step 5 --rows <rows5> --features <data>/pamap2/features --out <out5>
+python fetch_pamap2.py --dir "<data>"/pamap2
+diff <(grep Protocol "<data>"/pamap2/MANIFEST.sha256) <(grep Protocol ../runs/MANIFEST-pamap2.sha256) && echo "data as in the manifest"   # the archive hash can change if UCI repackages it
+for i in $(seq 101 109); do python prepare_pamap2.py --file "<data>"/pamap2/Protocol/subject$i.dat --subject subject$i --out "<data>"/pamap2/features; done
+for i in $(seq 101 108); do python run_pamap2.py --features "<data>"/pamap2/features --subject subject$i --out-dir "<rows5>" & done; wait   # subject109 is excluded by the preparation
+python ../../step4-fmri-haxby/code/summarize.py --step 5 --rows "<rows5>" --features "<data>"/pamap2/features --out "<out5>"
+)
 ```
 
 The synthetic checks of both steps are in §2.
@@ -298,16 +315,18 @@ The authors' code and data are not redistributed. Each folder lists the members 
 Step 6 ran on a Google Compute Engine c2d-highcpu-56 (Ubuntu 24.04, Python 3.12.3, `pip install -r requirements/step6-cell.txt`); every data stage refuses any platform other than "Linux x86_64". About 4.5 h on 56 vCPUs, 0.8 GB of data.
 
 ```bash
+(
 : "${RERUN:?run the set-up line of section 3 first}"
 cd "$RERUN/analyses/step6-reanalysis-cell"
-python -I code/fetch_data.py <root>                                  # 460 listed members by range requests; each checked by CRC-32
-python -I code/run_cell_a2.py fetch-gate --extract-root <root>       # the gate file
-python -I code/run_cell_a2.py inspect --extract-root <root> --out out --cache
-python -I code/run_cell_a2.py gate --extract-root <root> --out out --cache --workers 56
+python -I code/fetch_data.py "<root>"                                  # 460 listed members by range requests; each checked by CRC-32
+python -I code/run_cell_a2.py fetch-gate --extract-root "<root>"       # the gate file
+python -I code/run_cell_a2.py inspect --extract-root "<root>" --out out --cache
+python -I code/run_cell_a2.py gate --extract-root "<root>" --out out --cache --workers 56
 python -I code/run_cell_a2.py select --out out
-for t in primary trial win600 adjacent estimated; do python -I code/run_cell_a2.py test --name $t --extract-root <root> --out out --cache --workers 56; done
+for t in primary trial win600 adjacent estimated; do python -I code/run_cell_a2.py test --name $t --extract-root "<root>" --out out --cache --workers 56; done
 python -I code/summarize_cell.py --out out                           # compare with vm-out-a2/summary.md
-python -I code/run_cell_a3.py fill --extract-root <root> --prior out --out out-a3 --workers 56   # design counts and the true-template z-test
+python -I code/run_cell_a3.py fill --extract-root "<root>" --prior out --out out-a3 --workers 56   # design counts and the true-template z-test
+)
 ```
 
 Zenodo can answer range requests with HTTP 500; `code/fetch_data_retry.py <root>` resumes with the same allow-list. To check the shipped outputs only (the quick-path environment is enough; from `analyses/step6-reanalysis-cell/`), unpack `vm-out-a2/a2-out.tgz` into a new folder, run `python -I code/summarize_cell.py --out <folder>/out-a2`, and compare `<folder>/out-a2/summary.md` with `vm-out-a2/summary.md`. The further tables that `summarize_cell.py` does not print: `python -I note_tables.py <folder>/out-a2 > <folder>/note_tables.out`, compared with `vm-out-a2/note_tables.out`. For the qualifying sessions and the true-template z-test, unpack `vm-out-a3/a3-out.tgz` into a second folder and run `python -I note_tables.py <folder>/out-a2 <second folder>/out-a3/a3_fill.json > <second folder>/note_tables.out`, compared with `vm-out-a3/note_tables.out`. The synthetic checks of the two reanalyses are `python -I code/test_synthetic.py` (step 6), `python code/test_synthetic.py` (step 6b) and `python -I code/test_run_cell_a2.py`, `python -I code/test_run_cell_a3.py` (step 6); `test_run_cell_a3.out` is the shipped output of the last. The two `test_run_cell` checks run in the quick-path environment in under a minute and end with "all checks passed". The step 6 `test_synthetic.py` needs `pip install -r requirements/step6-cell.txt` (in the quick-path environment its two version checks and one platform check fail), takes about 35 min on a laptop and ends with "79 checks, 0 failed".
@@ -315,39 +334,28 @@ Zenodo can answer range requests with HTTP 500; `code/fetch_data_retry.py <root>
 Step 6b ran on the laptop with 6 workers (about 7 h 20 min; `pip install -r requirements/step6b-sciadv.txt`).
 
 ```bash
+(
 : "${RERUN:?run the set-up line of section 3 first}"
 cd "$RERUN/analyses/step6b-reanalysis-sciadv"
 curl -L -o Klee.zip "https://zenodo.org/records/16333867/files/Klee_ScienceAdv_data_code.zip?download=1"   # 3,572,288,274 bytes, md5 18c4429be98ed9595009292caf478ded
-unzip Klee.zip "Data Structures/Switching_2p_Struc_Main.mat" "Data Structures/Switching_Behav_Struc.mat" "Data Structures/clusters_fig2.mat" -d <data>   # CRC-32 in manifest-zenodo-16333867.tsv
-python code/run_reanalysis.py inspect --data-dir <data> --out out-new
-python code/run_reanalysis.py gate --data-dir <data> --out out-new --n-jobs 6
-python code/run_reanalysis.py tests --data-dir <data> --out out-new --n-jobs 6
+unzip Klee.zip "Data Structures/Switching_2p_Struc_Main.mat" "Data Structures/Switching_Behav_Struc.mat" "Data Structures/clusters_fig2.mat" -d "<data>"   # CRC-32 in manifest-zenodo-16333867.tsv
+python code/run_reanalysis.py inspect --data-dir "<data>" --out out-new
+python code/run_reanalysis.py gate --data-dir "<data>" --out out-new --n-jobs 6
+python code/run_reanalysis.py tests --data-dir "<data>" --out out-new --n-jobs 6
 python code/summarize.py --out out-new                               # compare with out/SUMMARY.md
+)
 ```
 
-To check the shipped outputs only (the quick-path environment is enough; from `analyses/step6b-reanalysis-sciadv/`), copy `out` to a new folder so that the shipped files are not overwritten, run `python code/summarize.py --out <copy>`, and compare `<copy>/SUMMARY.md` with `out/SUMMARY.md`. The step 6b `code/decode.py` imports `blockperm` from `code-package/blockperm` beside `analyses/`; before `code/run_reanalysis.py` or `code/test_synthetic.py`, make that link: in the repository itself run `mkdir -p code-package && ln -s ../blockperm code-package/blockperm` at the root; in the copy of §3 run `mkdir -p "$RERUN/code-package" && ln -s "$REPO/blockperm" "$RERUN/code-package/blockperm"`. The step 6b `test_synthetic.py` needs `pip install -r requirements/step6b-sciadv.txt`, takes about 35 to 40 min on a laptop and ends with "failures: 0 []".
+To check the shipped outputs only (the quick-path environment is enough; from `analyses/step6b-reanalysis-sciadv/`), copy `out` to a new folder so that the shipped files are not overwritten, run `python code/summarize.py --out <copy>`, and compare `<copy>/SUMMARY.md` with `out/SUMMARY.md`. The step 6b `code/decode.py` imports `blockperm` from `code-package/blockperm` beside `analyses/`; before `code/run_reanalysis.py` or `code/test_synthetic.py`, make that link in the copy of §3: `mkdir -p "$RERUN/code-package" && ln -s "$REPO/blockperm" "$RERUN/code-package/blockperm"`. The step 6b `test_synthetic.py` needs `pip install -r requirements/step6b-sciadv.txt`, takes about 35 to 40 min on a laptop and ends with "failures: 0 []".
 
 ### practice survey: quote check
 
 ```bash
+(
 : "${RERUN:?run the set-up line of section 3 first}"
 cd "$RERUN/analyses/practice-survey"
 python fetch_fulltext.py        # the 14 full texts from Europe PMC into fulltext/; compared with fulltext-MANIFEST.sha256 (records can be updated)
 python check_quotes.py          # strict pass: 107 of 140 quotes found (the others differ only in formatting); rewrites quote_check.md and quote_check.csv
 python check_quotes_alnum.py    # second pass, spaces and punctuation ignored: 140 of 140; rewrites its line in quote_check.md
-```
-
-### yaron-panel (Extended Data Fig. 4a; Zenodo 10.5281/zenodo.15531781, 19 files)
-
-Needs h5py (`ENVIRONMENT.md`). The download checks each file against the Zenodo md5 and writes `MANIFEST.local.sha256`; compare it with the shipped manifest.
-
-```bash
-: "${RERUN:?run the set-up line of section 3 first}"
-cd "$RERUN/analyses/yaron-panel/data"
-python fetch_yaron.py                                           # into raw/; files already present and matching are skipped
-diff MANIFEST.sha256 MANIFEST.local.sha256 && echo "data as in the manifest"
-cd ../code
-python fixed_vs_repeated.py --raw ../data/raw --cache <file.npz> --worker 0 --of 1 --parts <dir>
-python fixed_vs_repeated.py --raw ../data/raw --cache <file.npz> --collect --parts <dir> --out <dir>
-cmp <dir>/fixed_vs_repeated.json ../results/fixed_vs_repeated.json && cmp <dir>/null_draws.csv ../results/null_draws.csv
+)
 ```
