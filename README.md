@@ -53,7 +53,7 @@ Install with `pip install ./blockperm` (Python 3.10 or later), or `pip install b
 | Fig. 2b: IBL, real block structure | 884 of 1,359 verdicts differ (65%) | as above | §2 |
 | Post hoc: block-design fMRI (Haxby et al. 2001) | shared blocks: trial-level permutation 90%, training-label permutation 91%, block permutation test 8% (detrended) | `analyses/step4-fmri-haxby/results/summary.md` | §2 |
 | Post hoc: wearable sensors (PAMAP2) | shared blocks: 100%, 100%, 5% | `analyses/step5-pamap2/results/summary.md` | §2 |
-| GroupKFold fold map differs between platforms (post hoc) | 800 of 800 p values match with the x86 map | `analyses/foldmap/REPLICATE-CHECK.md` | §2 |
+| GroupKFold fold map differs between platforms (post hoc) | fold maps of the two processors (Supplementary Table 3) | `analyses/foldmap/RESULT.md`, `analyses/foldmap/REPLICATE-CHECK.md` | §2 |
 
 Every number in the paper is traced to a file and key in `NUMBERS.md`.
 
@@ -85,7 +85,7 @@ Every number in the paper is traced to a file and key in `NUMBERS.md`.
 | Supplementary Note 5, Table 4 | predicted false-positive rate of the binomial test | `step1-decomposition/results/results.md` (block-number sweep) |
 | Supplementary Note 6, Table 5 | the tests against established methods | the cells above |
 | Supplementary Note 7, Table 6 | block-design fMRI and wearable sensors (post hoc) | `step4-fmri-haxby/results/summary.md`, `step5-pamap2/results/summary.md` |
-| Supplementary Table 1 | changes made during the analyses, with dates | run logs inside the run archives; `trackA-std/RERUN.md`; `step6-reanalysis-cell/gate-run1.log`; `step6b-reanalysis-sciadv/out/gate-fixes/` |
+| Supplementary Table 1 | post hoc analyses and the changes that altered a result | run logs inside the run archives; `trackA-std/RERUN.md`; `step6b-reanalysis-sciadv/out/gate-fixes/` |
 
 ### Names used in the files
 

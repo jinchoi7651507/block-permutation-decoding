@@ -47,7 +47,7 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 | fixed block order 31–70% | L2: CoSMoMVPA 30.6 / 58.6, PyMVPA 48.6 / 70.2 | same |
 | PyMVPA chunk-level permutation 4–5% in L1–L3, 11.8% in L4 (Extended Data Fig. 5; not quoted in the text) | 5.4 / 4.0 / 5.0 (L1–L3); 11.8 (L4) | same |
 | `groups` permutes within blocks | scikit-learn `_shuffle` | `step2-comparison/TOOLBOX-DEFAULTS.md`; `step2-comparison/toolbox-src/sk_validation.py` |
-| group level: t-test 100%; group null 4–7% | EEG t 100%, group null 4%; mouse t 100% (S-main, S-tool), group null 4–7% | `step2b-eeg/results/summary_2b.md` (last line); `step2-comparison/results/allen_summary.md` (last column, shared24 and dg_shared24); `group_null_ci95` in `summary_2b.json` is not a valid interval and is not used |
+| group level: t-test 100%; group null 4–7% (the `group_null_ci95` interval in `summary_2b.json` is not valid and is not used) | EEG t 100%, group null 4%; mouse t 100% (S-main, S-tool), group null 4–7% | `step2b-eeg/results/summary_2b.md` (last line); `step2-comparison/results/allen_summary.md` (last column, shared24 and dg_shared24); `group_null_ci95` in `summary_2b.json` is not a valid interval and is not used |
 
 ## Fig. 2b and the IBL
 | Number | Value | Source |
@@ -90,14 +90,14 @@ Paths are relative to `analyses/`. Rule names: P1 binomial test of held-out accu
 | Number | Value in the source | Source |
 |---|---|---|
 | SN 1: 16.5 (14.8–18.0), 12.5 (10.8–14.2), 43%, 28.9, 6.3 (5.5–7.3), 96%, 26.5% (20.6–32.7), 3.8% (0.8–7.2) | the rerun: `P1/good/new/std6` (`g_null`, `d`, `m3_branch`, `g_const`), `P2/std6/delta`, `P3/std6/p_lt05`, `C/std6` (`random_blocks/q2_p`, `random_blocks/block_p`) | `trackA-std/results/results.json` |
-| Supplementary Table 1 (10-18): first run 15.7 and 6.0 | `P1/good/new/std6/g_null`, `P2/std6/delta` | `trackA-std/first-run/results/results.json` |
+| Supplementary Table 1 (rerun of the earlier mouse analysis): first run 15.7 and 6.0 | `P1/good/new/std6/g_null`, `P2/std6/delta` | `trackA-std/first-run/results/results.json` |
 | SN 3: slope median +0.0045 (range −0.059 to +0.084; 14 of 38 negative), −0.0016 and +0.0101 within states, Spearman 0.10 (−0.23 to 0.41) and −0.07 (−0.39 to 0.26) | `summary` | `step2b-eeg/results/alpha_slope.json`, computed by `step2b-eeg/code/posthoc_alpha_slope.py` |
 | SN 4: 47% of balanced assignments leave a run with one class | 438 of 924 (47.4%) | arithmetic over the 924 balanced assignments of 12 blocks in four runs of three |
 | SN 4: 461 of 1,000 failed; 97% of the other 539; 52% counting failures; 0.6% for the block permutation test on the same 539 | P3 error share 46.1, 97.2, 52.4; P5 0.6 | `step2-comparison/results/sim_summary.json` (cell c000, `P3`, `P5_on_same_reps`) |
 | SN 4: CoSMoMVPA stopped in 238 of 500; 16–18% over the 262 others | L1 | `step2-comparison/runs_add3/tools/SUMMARY-TOOLS.md` |
 | SN 4: EEG runs lacking a class 28%; 70%; 50% counting failures | P3 error share 28.3, 70.4, 50.2 | `step2b-eeg/results/summary_2b.json` (balanced/main/main/cleaned_s5) |
 | SN 4: 38,431 simulations in 76 cells; identical p 58–93% | equivalence check (identical p 57.8–93.4% by test) | `step2-comparison/equiv/EQUIV-PLATFORM.txt` |
-| SN 4: 800 of 800 (x86 and laptop with the x86 map) against 116 of 800; Supplementary Table 3 | replicate check; fold maps | `foldmap/REPLICATE-CHECK.md`, `foldmap/RESULT.md` |
+| Supplementary Table 3 | fold maps | `foldmap/RESULT.md` |
 | SN 4: on the two platforms the rates agreed within 2.6 points | largest difference 2.6 points over the 76 shared cells (38,431 simulations) | `step2-comparison/runs_laptop.tgz` against `runs_cloud.tgz` (`REPRODUCE.md` §2) |
 | SN 5 and the main text: Supplementary Table 4 (all rows); ρ 0.77 against 0.48 | block-number sweep (ρ cross-fit 0.774, held-out 0.480) | `step1-decomposition/results/results.md` |
 
